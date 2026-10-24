@@ -151,7 +151,9 @@ class Why(BaseModel):
 
 class Question(BaseModel):
     question_id: str
-    kind: Literal["claim", "act", "meet_again"]
+    version: int = Field(1, description="bumps if the question is regenerated; answers carry no version yet")
+    kind: Literal["met", "claim", "act", "meet_again"]
+    required: bool = True
     topic_id: str | None = None
     claim: Literal["partner_taught", "self_taught"] | None = None
     text: str
@@ -160,12 +162,16 @@ class Question(BaseModel):
 
 
 class QuestionSet(BaseModel):
+    meeting_id: str = Field(description="stable id for this rater's survey, e.g. s3-d1-PE27-00001-PE27-00288")
     rater_id: str
     partner: PersonRef
     context: Literal["date", "checkin"]
     phrased_by: Literal["claude", "template"]
-    complete: bool
-    questions: list[Question]
+    graph_revision: int = Field(description="tick of the graph state the questions were chosen from")
+    survey_revision: int = Field(description="increments whenever a saved answer changes")
+    complete: bool = Field(description="all required questions answered, or the rater said they didn't meet")
+    current_question_id: str | None = Field(description="first unanswered question in order; null when complete")
+    questions: list[Question] = Field(description="full ordered list; already-answered ones included")
     answers: dict[str, str] = Field(default_factory=dict, description="question_id -> value so far")
 
 
@@ -175,12 +181,7 @@ class Answer(BaseModel):
 
 
 class AnswerSubmission(BaseModel):
-    answers: list[Answer]
-
-
-class AnswerResult(BaseModel):
-    accepted: int
-    complete: bool
+    answers: list[Answer] = Field(min_length=1, description="one answer (save on tap) or several at once")
 
 
 # --- Check-ins ---------------------------------------------------------------
@@ -266,6 +267,32 @@ class TieEdge(BaseModel):
 class TieGraph(BaseModel):
     nodes: list[TieNode]
     edges: list[TieEdge]
+
+
+# --- Topic expert ranking ----------------------------------------------------
+
+
+class Evidence(BaseModel):
+    label: str
+    kind: Literal["peer_votes", "speaker", "exhibitor", "profile", "prior"]
+
+
+class RankedExpert(BaseModel):
+    rank: int = Field(description="contiguous, 1-based, in server order")
+    person: PersonRef
+    comp: float
+    comp_unc: float
+    m: int = Field(description="distinct partners compared with on this topic")
+    reason: str = Field(description="display-safe; never reveals an individual's private answer")
+    evidence: list[Evidence]
+
+
+class TopicRanking(BaseModel):
+    topic: Topic
+    limit: int
+    graph_revision: int = Field(description="tick the ranking was computed from")
+    status: Literal["ready", "updating"]
+    items: list[RankedExpert]
 
 
 # --- Micro-influencers -------------------------------------------------------

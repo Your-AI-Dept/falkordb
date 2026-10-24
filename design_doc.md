@@ -359,8 +359,9 @@ This sets `reach`. It is approximate (HyperLogLog) and treats edges as directed.
 
 ### 4.1 Agentic questions, per rater per date
 
-Each rater gets **6–8 questions** after a date:
+Each rater gets an attendance check, then **6–8 questions** after a date:
 
+0. **"Did you meet {partner}?"** Yes, we met / We didn't meet. "We didn't meet" completes the survey immediately and writes nothing to the graph: no edges, no interest, likability, reliability or tie evidence. A no-show is not a judgment of either person.
 1. **4–6 generated true/false questions** on 2–3 topics, chosen by the algorithm below and phrased by Claude.
 2. **Two fixed questions**, asked last to limit spillover from liking:
    1. "Would you act on {partner}'s recommendation?" Yes / Maybe / No, stored as `act`.
@@ -396,6 +397,8 @@ Take topics in score order, skipping a topic if a `RELATED` neighbor was already
 Claude returns JSON `[{question_id, topic_id, claim, text}]`, one entry per target, phrasing each claim as a natural statement specific to the pair (e.g. "Maria showed me a dough fermentation trick I'd actually try in my shop"). The server validates that the targets match exactly what was requested. On a timeout, error or mismatch, it falls back to template text ("{partner} taught me something about {topic}"). Answers are mapped through the requested `claim`, never the generated text, so phrasing can't corrupt the graph.
 
 Questions are generated when a date opens (all pairs are known then), concurrently for all ~200 raters, while the 15-minute date runs. They are stored on the rater's `SPEED_DATE` edge in `questions`.
+
+**Survey lifecycle** (`app/surveys.py`, shared by dates and check-ins). The question set is fixed once generated. Answers can be saved one at a time (save on tap) or in a batch; each save returns the updated survey. Answers are keyed by `question_id`, so re-sending an identical answer is a no-op (safe retries) and a changed answer bumps `survey_revision`. `current_question_id` is the first unanswered question in order; `complete` is true once every required question is answered or the rater said they didn't meet. Both participants' surveys share one `meeting_id`.
 
 **"Didn't come up" is always an option** on every generated question, so the answers are always True / False / Didn't come up. Without it, "False" can't separate "they didn't teach me" from "we never discussed it". Each question carries a `why` object (`score`, `ig`, `plausibility`) that drives the hero visual.
 
@@ -520,14 +523,15 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | GET | `/sessions` | All 15 sessions with slot times, headcounts and state |
 | POST | `/sessions/{s}/open` | Plan the session's 4 dates and open date 0 |
 | GET | `/sessions/{s}` | The 4-date plan with pair values, completion status |
-| GET | `/sessions/{s}/dates/{d}/meetings/{rater_id}/questions` | This rater's question set |
-| POST | `/sessions/{s}/dates/{d}/meetings/{rater_id}/answers` | Submit answers (all at once, or incrementally) |
+| GET | `/sessions/{s}/dates/{d}/meetings/{rater_id}/questions` | This rater's survey: questions, saved answers, current question, revisions |
+| POST | `/sessions/{s}/dates/{d}/meetings/{rater_id}/answers` | Save one or more answers; returns the updated survey |
 | POST | `/sessions/{s}/dates/{d}/close` | Run the date pipeline; returns metrics |
 | POST | `/checkins` | QR check-in `{scanner_id, scanned_id}`: creates or bumps `ADHOC`, returns both people's question sets |
 | GET | `/checkins/{rater_id}/{partner_id}/questions` | This rater's check-in questions |
 | POST | `/checkins/{rater_id}/{partner_id}/answers` | Submit check-in answers |
 | GET | `/graph/topics/{topic_id}` | Nodes (`comp_k`, `comp_unc_k`, `tribe`, `like`) and `LEARNED_FROM_T{k}` edges, for the visual |
 | GET | `/graph/ties` | `POS_TIE` edges and tribes |
+| GET | `/topics/{topic_id}/experts?limit=5` | Top people for a topic by estimated competence (`comp`), with a display-safe reason and evidence each |
 | GET | `/topics/{topic_id}/influencers` | Micro-influencers for a topic event, with explanations |
 | GET | `/vendors/{id}/influencers` | Micro-influencers for a vendor's event, with explanations |
 | GET | `/metrics` | Per-date learning and matching-quality metrics |
@@ -535,14 +539,28 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 
 Payload sketches:
 
+Authoritative schema: `backend/openapi.json` (or `GET /openapi.json` on a running backend).
+
 ```json
 {
+  "meeting_id": "s3-d1-PE27-00001-PE27-00288",
   "rater_id": "PE27-00001",
-  "partner": {"id": "PE27-00288", "name": "Maria Lopez", "company": "Lopez Pizzeria"},
+  "partner": {"id": "PE27-00288", "name": "Maria Lopez", "company": "Lopez Pizzeria", "title": "Owner"},
+  "context": "date",
+  "phrased_by": "claude",
+  "graph_revision": 13,
+  "survey_revision": 1,
+  "complete": false,
+  "current_question_id": "q1",
+  "answers": {"met": "yes"},
   "questions": [
+    {"question_id": "met", "version": 1, "kind": "met", "required": true, "text": "Did you meet Maria?",
+     "options": [{"value": "yes", "label": "Yes, we met"}, {"value": "no", "label": "We didn't meet"}]},
     {
       "question_id": "q1",
+      "version": 1,
       "kind": "claim",
+      "required": true,
       "topic_id": "dough-flour",
       "claim": "partner_taught",
       "text": "Maria showed me a dough fermentation trick I'd actually try in my shop.",
@@ -562,7 +580,7 @@ Payload sketches:
 ```
 
 ```json
-{"answers": [{"question_id": "q1", "value": "true"}, {"question_id": "act", "value": "yes"}]}
+{"answers": [{"question_id": "q1", "value": "true"}]}
 ```
 
 ---

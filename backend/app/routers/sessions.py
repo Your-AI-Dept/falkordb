@@ -1,17 +1,17 @@
 """Speed-dating sessions, dates, questions and answers (design doc 4.1, 4.2, 5)."""
 
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, Depends, Path
 
 from app import stubs
 from app.config import DATES_PER_SESSION, N_SESSIONS
 from app.models import (
-    AnswerResult,
     AnswerSubmission,
     DateCloseResult,
     QuestionSet,
     SessionPlan,
     SessionSummary,
 )
+from app.surveys import apply_answers
 
 router = APIRouter(prefix="/sessions", tags=["sessions"], dependencies=[Depends(stubs.mark_stub)])
 
@@ -39,14 +39,10 @@ def get_questions(rater_id: str, s: int = SessionNo, d: int = DateNo):
     return stubs.date_questions(s, d, rater_id)
 
 
-@router.post("/{s}/dates/{d}/meetings/{rater_id}/answers", response_model=AnswerResult)
+@router.post("/{s}/dates/{d}/meetings/{rater_id}/answers", response_model=QuestionSet)
 def submit_answers(body: AnswerSubmission, rater_id: str, s: int = SessionNo, d: int = DateNo):
-    qs = stubs.date_questions(s, d, rater_id)
-    known = {q.question_id for q in qs.questions}
-    unknown = [a.question_id for a in body.answers if a.question_id not in known]
-    if unknown:
-        raise HTTPException(422, f"unknown question ids: {unknown}")
-    return AnswerResult(accepted=len(body.answers), complete=len(body.answers) == len(known))
+    """Save one or more answers; returns the updated survey."""
+    return apply_answers(stubs.date_questions(s, d, rater_id), body.answers)
 
 
 @router.post("/{s}/dates/{d}/close", response_model=DateCloseResult)

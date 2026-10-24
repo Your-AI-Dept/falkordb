@@ -3,7 +3,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 from app import stubs
-from app.models import AnswerResult, AnswerSubmission, CheckinRequest, CheckinResult, QuestionSet
+from app.models import AnswerSubmission, CheckinRequest, CheckinResult, QuestionSet
+from app.surveys import apply_answers
 
 router = APIRouter(prefix="/checkins", tags=["checkins"], dependencies=[Depends(stubs.mark_stub)])
 
@@ -24,11 +25,7 @@ def get_checkin_questions(rater_id: str, partner_id: str):
     return stubs.checkin_questions(rater_id, partner_id)
 
 
-@router.post("/{rater_id}/{partner_id}/answers", response_model=AnswerResult)
+@router.post("/{rater_id}/{partner_id}/answers", response_model=QuestionSet)
 def submit_checkin_answers(rater_id: str, partner_id: str, body: AnswerSubmission):
-    qs = stubs.checkin_questions(rater_id, partner_id)
-    known = {q.question_id for q in qs.questions}
-    unknown = [a.question_id for a in body.answers if a.question_id not in known]
-    if unknown:
-        raise HTTPException(422, f"unknown question ids: {unknown}")
-    return AnswerResult(accepted=len(body.answers), complete=len(body.answers) == len(known))
+    """Save one or more answers; returns the updated survey."""
+    return apply_answers(stubs.checkin_questions(rater_id, partner_id), body.answers)

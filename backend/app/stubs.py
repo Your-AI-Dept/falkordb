@@ -16,6 +16,7 @@ from app.models import (
     AttendeeDetail,
     AttendeeSummary,
     DatePlan,
+    Evidence,
     Influencer,
     InfluencerEvent,
     InfluencerResult,
@@ -26,6 +27,7 @@ from app.models import (
     PersonRef,
     Question,
     QuestionSet,
+    RankedExpert,
     SessionPlan,
     SessionSummary,
     Talk,
@@ -38,10 +40,12 @@ from app.models import (
     TopicGraph,
     TopicGraphEdge,
     TopicGraphNode,
+    TopicRanking,
     TopicWeight,
     Vendor,
     Why,
 )
+from app.surveys import MET_QUESTION_ID, refresh
 
 N_STUB_PEOPLE = 40
 SESSION_HOURS = ["10:00", "11:00", "13:00", "14:00", "15:00"]
@@ -237,40 +241,67 @@ def session_plan(s: int) -> SessionPlan:
     return SessionPlan(session=s, state="open", dates=dates)
 
 
+MET_OPTIONS = [Option(value="yes", label="Yes, we met"), Option(value="no", label="We didn't meet")]
+
+# In-memory survey state so the stubbed answer flow behaves like the real one.
+_surveys: dict[str, QuestionSet] = {}
+
+
+def meeting_id(prefix: str, a: str, b: str) -> str:
+    """One id per meeting, shared by both participants' surveys."""
+    lo, hi = sorted((a, b))
+    return f"{prefix}-{lo}-{hi}"
+
+
 def date_questions(s: int, d: int, rater_id: str) -> QuestionSet:
     plan = session_plan(s).dates[d]
     partner = next(
         (p.b if p.a.id == rater_id else p.a for p in plan.pairs if rater_id in (p.a.id, p.b.id)),
         people()[1],
     )
-    rng = _rng("questions", s, d, rater_id)
-    names = _topic_names()
-    first = partner.name.split()[0]
-    chosen = rng.sample(list(names), 3)
-    qs: list[Question] = []
-    for i, topic_id in enumerate(chosen):
-        why = Why(score=round(rng.uniform(0.05, 0.3), 3), ig=round(rng.uniform(0.2, 0.6), 3), plausibility=round(rng.uniform(0.3, 0.8), 3))
-        topic = names[topic_id]
-        qs.append(Question(question_id=f"t{i}a", kind="claim", topic_id=topic_id, claim="partner_taught",
-                           text=f"{first} taught me something about {topic}.", options=CLAIM_OPTIONS, why=why))
-        qs.append(Question(question_id=f"t{i}b", kind="claim", topic_id=topic_id, claim="self_taught",
-                           text=f"I taught {first} something about {topic}.", options=CLAIM_OPTIONS, why=why))
-    qs += _fixed_questions(first)
-    return QuestionSet(rater_id=rater_id, partner=partner, context="date", phrased_by="template", complete=False, questions=qs)
+    mid = meeting_id(f"s{s}-d{d}", rater_id, partner.id)
+    key = f"{mid}|{rater_id}"
+    if key not in _surveys:
+        rng = _rng("questions", s, d, rater_id)
+        names = _topic_names()
+        first = partner.name.split()[0]
+        qs: list[Question] = [
+            Question(question_id=MET_QUESTION_ID, kind="met", text=f"Did you meet {first}?", options=MET_OPTIONS)
+        ]
+        for i, topic_id in enumerate(rng.sample(list(names), 3)):
+            why = Why(score=round(rng.uniform(0.05, 0.3), 3), ig=round(rng.uniform(0.2, 0.6), 3), plausibility=round(rng.uniform(0.3, 0.8), 3))
+            topic = names[topic_id]
+            qs.append(Question(question_id=f"t{i}a", kind="claim", topic_id=topic_id, claim="partner_taught",
+                               text=f"{first} taught me something about {topic}.", options=CLAIM_OPTIONS, why=why))
+            qs.append(Question(question_id=f"t{i}b", kind="claim", topic_id=topic_id, claim="self_taught",
+                               text=f"I taught {first} something about {topic}.", options=CLAIM_OPTIONS, why=why))
+        qs += _fixed_questions(first)
+        _surveys[key] = refresh(QuestionSet(
+            meeting_id=mid, rater_id=rater_id, partner=partner, context="date", phrased_by="template",
+            graph_revision=DATES_PER_SESSION * s + d, survey_revision=0, complete=False,
+            current_question_id=None, questions=qs,
+        ))
+    return _surveys[key]
 
 
 def checkin_questions(rater_id: str, partner_id: str) -> QuestionSet:
-    partner = person(partner_id)
-    first = partner.name.split()[0]
-    rng = _rng("checkin", rater_id, partner_id)
-    topic = rng.choice(topics())
-    why = Why(score=0.12, ig=0.4, plausibility=0.5)
-    qs = [
-        Question(question_id="t0a", kind="claim", topic_id=topic.id, claim="partner_taught",
-                 text=f"{first} taught me something about {topic.name}.", options=CLAIM_OPTIONS, why=why),
-        *_fixed_questions(first),
-    ]
-    return QuestionSet(rater_id=rater_id, partner=partner, context="checkin", phrased_by="template", complete=False, questions=qs)
+    mid = meeting_id("c", rater_id, partner_id)
+    key = f"{mid}|{rater_id}"
+    if key not in _surveys:
+        partner = person(partner_id)
+        first = partner.name.split()[0]
+        topic = _rng("checkin", rater_id, partner_id).choice(topics())
+        why = Why(score=0.12, ig=0.4, plausibility=0.5)
+        qs = [
+            Question(question_id="t0a", kind="claim", topic_id=topic.id, claim="partner_taught",
+                     text=f"{first} taught me something about {topic.name}.", options=CLAIM_OPTIONS, why=why),
+            *_fixed_questions(first),
+        ]
+        _surveys[key] = refresh(QuestionSet(
+            meeting_id=mid, rater_id=rater_id, partner=partner, context="checkin", phrased_by="template",
+            graph_revision=7, survey_revision=0, complete=False, current_question_id=None, questions=qs,
+        ))
+    return _surveys[key]
 
 
 def _fixed_questions(first: str) -> list[Question]:
@@ -278,6 +309,28 @@ def _fixed_questions(first: str) -> list[Question]:
         Question(question_id="act", kind="act", text=f"Would you act on {first}'s recommendation?", options=ACT_OPTIONS),
         Question(question_id="meet_again", kind="meet_again", text=f"Would you like to meet {first} again?", options=MEET_OPTIONS),
     ]
+
+
+def topic_ranking(topic_id: str, limit: int) -> TopicRanking:
+    topic = next(t for t in topics() if t.id == topic_id)
+    rng = _rng("ranking", topic_id)
+    scored = sorted(((round(rng.uniform(0.4, 0.95), 3), p) for p in people()), key=lambda x: -x[0])[:limit]
+    items = []
+    for rank, (comp, p) in enumerate(scored, start=1):
+        m = rng.randrange(0, 6)
+        evidence = []
+        if m:
+            evidence.append(Evidence(label=f"{m} partners compared notes on {topic.name}", kind="peer_votes"))
+        if rng.random() < 0.3:
+            evidence.append(Evidence(label=f"Speaking on {topic.name}", kind="speaker"))
+        if not evidence:
+            evidence.append(Evidence(label=f"Registered interest in {topic.name}", kind="prior"))
+        people_word = "person" if m == 1 else "people"
+        reason = (f"{m} {people_word} they met said they learned from them about {topic.name}" if m
+                  else f"Background suggests expertise in {topic.name}; not yet confirmed by peers")
+        items.append(RankedExpert(rank=rank, person=p, comp=comp, comp_unc=round(2 / (2 + m), 3), m=m,
+                                  reason=reason, evidence=evidence))
+    return TopicRanking(topic=topic, limit=limit, graph_revision=7, status="ready", items=items)
 
 
 def metrics_points(n_ticks: int = 8) -> list[MetricsPoint]:

@@ -1,9 +1,9 @@
 """Graph views, metrics and micro-influencers (design doc 4.3, 7, 8.3)."""
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app import stubs
-from app.models import InfluencerResult, Metrics, TieGraph, TopicGraph
+from app.models import InfluencerResult, Metrics, TieGraph, TopicGraph, TopicRanking
 
 router = APIRouter(tags=["insights"], dependencies=[Depends(stubs.mark_stub)])
 
@@ -22,6 +22,12 @@ def topic_graph(topic_id: str):
 @router.get("/graph/ties", response_model=TieGraph)
 def tie_graph():
     return stubs.tie_graph()
+
+
+@router.get("/topics/{topic_id}/experts", response_model=TopicRanking)
+def topic_experts(topic_id: str, limit: int = Query(5, ge=1, le=50)):
+    """Top people for a topic, ranked by estimated competence (comp), with reasons."""
+    return stubs.topic_ranking(_known_topic(topic_id), limit)
 
 
 @router.get("/topics/{topic_id}/influencers", response_model=InfluencerResult)

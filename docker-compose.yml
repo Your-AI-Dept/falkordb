@@ -21,6 +21,7 @@ services:
       FALKORDB_HOST: falkordb
       FALKORDB_PORT: "6379"
       DATA_DIR: /data
+      WATCHFILES_FORCE_POLLING: "true"  # --reload on Colima/VM bind mounts
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     volumes:
       - ./backend:/app
