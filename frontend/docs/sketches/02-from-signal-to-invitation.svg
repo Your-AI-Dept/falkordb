@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2142" viewBox="0 0 1600 2142">
+<title>02 / From connection signals to a relevant invitation</title>
+<rect width="1600" height="2142" fill="#fafafa"/>
+<text x="48" y="60.730000000000004" font-family="Arial,sans-serif" font-size="31" font-weight="700" fill="#242424">02 / From connection signals to a relevant invitation</text>
+<text x="48" y="96.94" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#656565">The app uses evidence from the shared graph, checks one missing constraint, then lets both parties choose.</text>
+<text x="48" y="154.77" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#242424">ATTENDEE · Alex</text>
+<text x="824" y="154.77" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#242424">EXHIBITOR · RefillWorks</text>
+<rect x="48" y="182" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="70" y="210.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">A4 · ARRANGED MEETUP FEEDBACK</text>
+<text x="70" y="250.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">Was your conversation with Theo useful?</text>
+<rect x="70" y="279.75" width="79.984375" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="302.03" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] Yes</text>
+<rect x="158.984375" y="279.75" width="104.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="172.984375" y="302.03" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Somewhat</text>
+<rect x="271.984375" y="279.75" width="49.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="285.984375" y="302.03" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">No</text>
+<rect x="329.984375" y="279.75" width="134.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="343.984375" y="302.03" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">We didn’t meet</text>
+<polyline points="70,327.75 754,327.75" fill="none" stroke="#ddd" stroke-width="1"/>
+<text x="70" y="349.71" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">OPTIONAL FOLLOW-UP · SHOWN AFTER “YES”</text>
+<text x="70" y="378.69" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#242424">What should your next introduction help with?</text>
+<rect x="70" y="399.05" width="183.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="421.33" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] Refillable formats</text>
+<rect x="262.0" y="399.05" width="144.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="276.0" y="421.33" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Material choices</text>
+<rect x="415.0" y="399.05" width="146.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="429.0" y="421.33" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Production costs</text>
+<rect x="70" y="447.05" width="65.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="469.33" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Save</text>
+<rect x="144.0" y="447.05" width="60.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="158.0" y="469.33" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Skip</text>
+<rect x="49" y="552" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="70" y="572.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="70" y="593.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Alex reports a useful meeting and explicitly refines the need to refillable formats. No transcript.</text>
+<rect x="824" y="182" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="846" y="210.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">E4 · POTENTIAL FIT</text>
+<text x="846" y="250.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">Alex may be a fit for your offer.</text>
+<text x="846" y="294.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Skincare founder</text>
+<text x="846" y="318.99" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Looking for packaging suppliers</text>
+<text x="846" y="343.29" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Exploring refillable formats</text>
+<rect x="846" y="363.65000000000003" width="684" height="73" rx="4" fill="#f5f5f5" stroke="#d4d4d4" stroke-width="1"/>
+<text x="858" y="385.61" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">ONE IMPORTANT DETAIL IS MISSING</text>
+<text x="858" y="412.76000000000005" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">Order size has not been confirmed.</text>
+<text x="846" y="462.1" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">Status: clarification pending. No invitation has been sent.</text>
+<rect x="825" y="552" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="846" y="572.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="846" y="593.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Maya’s useful booth visit helps surface the candidate. Only appropriate profile/goal details are shown.</text>
+<polyline points="412,627 412,653" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="407.21537912477646,643.0950818741205 412,653 416.78462087522354,643.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1188,627 1188,653" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1183.2153791247765,643.0950818741205 1188,653 1192.7846208752235,643.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<rect x="48" y="660" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="70" y="688.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">A5 · DYNAMIC FIT CHECK</text>
+<text x="70" y="728.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">One detail before we suggest a visit.</text>
+<text x="70" y="772.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">A relevant refillable-packaging supplier starts at 500 units.</text>
+<text x="70" y="807.99" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#242424">Would that work for the project you’re exploring?</text>
+<rect x="70" y="828.3499999999999" width="79.984375" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="850.6299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] Yes</text>
+<rect x="158.984375" y="828.3499999999999" width="49.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="172.984375" y="850.6299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">No</text>
+<rect x="216.984375" y="828.3499999999999" width="113.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="230.984375" y="850.6299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Not sure yet</text>
+<rect x="70" y="876.3499999999999" width="93.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="898.6299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Continue</text>
+<rect x="49" y="1030" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="70" y="1050.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="70" y="1071.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">A decisive constraint is now confirmed. “No” filters this offer; “not sure” stays unresolved.</text>
+<rect x="824" y="660" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="846" y="688.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">E5 · REVIEW → INVITE</text>
+<text x="846" y="728.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">Invite Alex to compare samples.</text>
+<text x="846" y="772.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Why this fits: skincare brand + refillable interest + compatible order size.</text>
+<rect x="846" y="793.05" width="684" height="97" rx="4" fill="#f5f5f5" stroke="#d4d4d4" stroke-width="1"/>
+<text x="858" y="815.01" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">INVITATION PREVIEW</text>
+<text x="858" y="842.16" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">Compare refillable samples with our specialist. 15 minutes at Booth 24; formats start at</text>
+<text x="858" y="865.11" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">500 units.</text>
+<rect x="846" y="903.05" width="134.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="860" y="925.3299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Send invitation</text>
+<rect x="989.0" y="903.05" width="56.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="1003.0" y="925.3299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Edit</text>
+<rect x="825" y="1030" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="846" y="1050.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="846" y="1071.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Exhibitor authorizes a specific invitation. Private connection histories and meetup ratings stay internal.</text>
+<polyline points="412,1105 412,1131" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="407.21537912477646,1121.0950818741205 412,1131 416.78462087522354,1121.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1188,1105 1188,1131" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1183.2153791247765,1121.0950818741205 1188,1131 1192.7846208752235,1121.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<rect x="48" y="1138" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="70" y="1166.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">A6 · RECEIVED INVITATION</text>
+<text x="70" y="1206.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">RefillWorks invites you to Booth 24.</text>
+<text x="70" y="1250.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Compare refillable samples and discuss fit with a packaging specialist.</text>
+<text x="70" y="1283.5" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">Why this fits: you’re exploring refillable skincare packaging, and a 500-unit minimum works for you.</text>
+<text x="70" y="1317.24" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#242424">Choose a 15-minute visit</text>
+<rect x="70" y="1337.6" width="111.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="1359.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] 3:00 PM</text>
+<rect x="190.0" y="1337.6" width="87.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="204.0" y="1359.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">3:15 PM</text>
+<rect x="286.0" y="1337.6" width="87.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="300.0" y="1359.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">3:30 PM</text>
+<rect x="382.0" y="1337.6" width="87.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="396.0" y="1359.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">3:45 PM</text>
+<rect x="70" y="1385.6" width="140.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="1407.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Accept 3:00 PM</text>
+<rect x="219.0" y="1385.6" width="87.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="233.0" y="1407.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Not now</text>
+<rect x="315.0" y="1385.6" width="114.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="329.0" y="1407.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Not relevant</text>
+<rect x="49" y="1508" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="70" y="1528.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="70" y="1549.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Accepted invitation + reserved slot. “Not now” is a timing response; acceptance is not attendance.</text>
+<rect x="824" y="1138" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="846" y="1166.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">E6 · ACCEPTED INVITATION</text>
+<text x="846" y="1206.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">Alex chose 3:00 PM.</text>
+<rect x="846" y="1235.75" width="684" height="97" rx="4" fill="#f5f5f5" stroke="#d4d4d4" stroke-width="1"/>
+<text x="858" y="1257.71" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">PLANNED VISIT</text>
+<text x="858" y="1284.86" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">Alex Morgan · Oak &amp; Fern</text>
+<text x="858" y="1307.81" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">15-minute sample consultation · Booth 24</text>
+<text x="846" y="1360.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">One appointment reserved.</text>
+<text x="846" y="1384.99" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Awaiting check-in.</text>
+<rect x="846" y="1405.35" width="156.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="860" y="1427.6299999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">View appointment</text>
+<rect x="825" y="1508" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="846" y="1528.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="846" y="1549.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">The offer now has an accepted booking. The graph has no completed-visit evidence yet.</text>
+<polyline points="412,1583 412,1609" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="407.21537912477646,1599.0950818741205 412,1609 416.78462087522354,1599.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1188,1583 1188,1609" fill="none" stroke="#999" stroke-width="1"/>
+<polyline points="1183.2153791247765,1599.0950818741205 1188,1609 1192.7846208752235,1599.0950818741205" fill="none" stroke="#999" stroke-width="1"/>
+<rect x="48" y="1616" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="70" y="1644.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">A7 · AFTER THE BOOTH VISIT</text>
+<text x="70" y="1684.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">Did you find what you needed?</text>
+<text x="70" y="1726.2" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">Visit checked in · Booth 24</text>
+<text x="70" y="1759.94" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#242424">Was the visit useful?</text>
+<rect x="70" y="1780.3" width="79.984375" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="1802.58" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] Yes</text>
+<rect x="158.984375" y="1780.3" width="104.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="172.984375" y="1802.58" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Somewhat</text>
+<rect x="271.984375" y="1780.3" width="49.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="285.984375" y="1802.58" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">No</text>
+<text x="70" y="1843.24" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#242424">Would you like to share a next step with RefillWorks?</text>
+<rect x="70" y="1863.6" width="226.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="1885.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">[x] Ask for a sample quote</text>
+<rect x="305.0" y="1863.6" width="109.0" height="35" rx="4" fill="white" stroke="#bbb" stroke-width="1"/>
+<text x="319.0" y="1885.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Nothing yet</text>
+<rect x="70" y="1911.6" width="65.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="84" y="1933.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">Save</text>
+<rect x="49" y="1986" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="70" y="2006.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="70" y="2027.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Visit + private usefulness + an explicitly shared next-step request. No sale is inferred.</text>
+<rect x="824" y="1616" width="728" height="440" rx="8" fill="white" stroke="#aaa" stroke-width="1"/>
+<text x="846" y="1644.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">E7 · OUTCOME</text>
+<text x="846" y="1684.75" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#242424">A useful next step to follow up.</text>
+<text x="846" y="1728.69" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">1 invitation sent → 1 accepted → 1 visit checked in</text>
+<rect x="846" y="1749.05" width="684" height="73" rx="4" fill="#f5f5f5" stroke="#d4d4d4" stroke-width="1"/>
+<text x="858" y="1771.01" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">ALEX SHARED A NEXT STEP</text>
+<text x="858" y="1798.1599999999999" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#242424">Would like a sample quote.</text>
+<text x="846" y="1847.5" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">The request is visible to your team. A quote has not been sent.</text>
+<rect x="846" y="1866.3" width="121.0" height="35" rx="4" fill="#e7e7e7" stroke="#777" stroke-width="1"/>
+<text x="860" y="1888.58" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#242424">View request</text>
+<rect x="825" y="1986" width="726" height="69" rx="0" fill="#f0f0f0" stroke="none" stroke-width="1"/>
+<text x="846" y="2006.3" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#656565">GRAPH NOTE · OUTSIDE THE SCREEN</text>
+<text x="846" y="2027.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Track accepted visits and shared follow-ups. A person’s private feedback is not an exhibitor rating feed.</text>
+<text x="48" y="2126.79" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#656565">DISCUSSION SKETCH · fictional example · successive states may be grouped · no working UI</text>
+</svg>

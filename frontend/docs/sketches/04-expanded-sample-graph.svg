@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1480" viewBox="0 0 1600 1480">
+<title>04 / One sample graph, two useful outcomes</title>
+<rect width="1600" height="1480" fill="#fafafa"/>
+<text x="48" y="60.730000000000004" font-family="Arial,sans-serif" font-size="31" font-weight="700" fill="#242424">04 / One sample graph, two useful outcomes</text>
+<text x="48" y="96.94" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#656565">Illustrative evidence for discussion. Existing relationships, chosen connections, scheduled exposure, and feedback keep their own meanings.</text>
+<rect x="230" y="190" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="246" y="212.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">PERSON</text>
+<text x="246" y="245.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">Maya</text>
+<text x="246" y="273.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Peer Alex chose to stay connected with</text>
+<rect x="980" y="190" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="996" y="212.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">PERSON · ADDED FOR THE PEER BRANCH</text>
+<text x="996" y="245.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">Nia</text>
+<text x="996" y="273.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Refillable-launch experience; open to</text>
+<text x="996" y="294.88" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">help</text>
+<rect x="230" y="480" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="246" y="502.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">PERSON</text>
+<text x="246" y="535.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">Alex</text>
+<text x="246" y="563.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Skincare founder; looking for suppliers</text>
+<rect x="980" y="480" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="996" y="502.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">PERSON</text>
+<text x="996" y="535.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">Theo</text>
+<text x="996" y="563.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Sustainable-packaging advisor</text>
+<rect x="230" y="790" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="246" y="812.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">EXPLICIT ANSWERS</text>
+<text x="246" y="845.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">Alex’s current need</text>
+<text x="246" y="873.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Refillable packaging; 500 units works</text>
+<rect x="980" y="790" width="330" height="112" rx="8" fill="white" stroke="#888" stroke-width="1"/>
+<text x="996" y="812.13" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#656565">EXHIBITOR CAPABILITY</text>
+<text x="996" y="845.09" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#242424">RefillWorks</text>
+<text x="996" y="873.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Refillable packaging; minimum 500 units</text>
+<polyline points="395,480 395,302" fill="none" stroke="#242424" stroke-width="2"/>
+<polyline points="399.78462087522354,311.9049181258794 395,302 390.21537912477646,311.9049181258794" fill="none" stroke="#242424" stroke-width="2"/>
+<text x="48" y="377.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#242424">CHOSEN QR CONNECTION</text>
+<text x="48" y="404.45" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">Alex saved Maya after an organic encounter.</text>
+<polyline points="560,240 980,240" fill="none" stroke="#777" stroke-width="2"/>
+<text x="611" y="216.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#242424">EXISTING PROFESSIONAL TIE*</text>
+<text x="621" y="276.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Maya ↔ Nia</text>
+<polyline points="560,493 980,493" fill="none" stroke="#777" stroke-width="1" stroke-dasharray="7 7"/>
+<polyline points="970.0950818741205,497.78462087522354 980,493 970.0950818741205,488.21537912477646" fill="none" stroke="#777" stroke-width="1"/>
+<rect x="636" y="480" width="283" height="25" rx="0" fill="#fafafa" stroke="none" stroke-width="1"/>
+<text x="644" y="494.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">ARRANGED PAIRING</text>
+<polyline points="560,534 980,534" fill="none" stroke="#777" stroke-width="1"/>
+<polyline points="970.0950818741205,538.7846208752235 980,534 970.0950818741205,529.2153791247765" fill="none" stroke="#777" stroke-width="1"/>
+<rect x="636" y="521" width="283" height="25" rx="0" fill="#fafafa" stroke="none" stroke-width="1"/>
+<text x="644" y="535.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">ATTENDED</text>
+<polyline points="560,575 980,575" fill="none" stroke="#777" stroke-width="1"/>
+<polyline points="970.0950818741205,579.7846208752235 980,575 970.0950818741205,570.2153791247765" fill="none" stroke="#777" stroke-width="1"/>
+<rect x="636" y="562" width="283" height="25" rx="0" fill="#fafafa" stroke="none" stroke-width="1"/>
+<text x="644" y="576.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">USEFUL, ACCORDING TO ALEX</text>
+<polyline points="500,302 500,350 1450,350 1450,846 1310,846" fill="none" stroke="#777" stroke-width="2"/>
+<polyline points="1319.9049181258795,841.2153791247765 1310,846 1319.9049181258795,850.7846208752235" fill="none" stroke="#777" stroke-width="2"/>
+<text x="790" y="335.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">MAYA VISITED THIS BOOTH AND REPORTED IT USEFUL</text>
+<text x="1110" y="645.62" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">Booth feedback is an internal signal, not</text>
+<text x="1110" y="664.52" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#656565">public endorsement.</text>
+<polyline points="395,592 395,790" fill="none" stroke="#242424" stroke-width="2"/>
+<polyline points="390.21537912477646,780.0950818741205 395,790 399.78462087522354,780.0950818741205" fill="none" stroke="#242424" stroke-width="2"/>
+<text x="435" y="681.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#242424">GOAL → TARGETED QUESTIONS</text>
+<text x="435" y="710.45" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#656565">Packaging → refillable formats → compatible order size</text>
+<polyline points="560,846 980,846" fill="none" stroke="#777" stroke-width="2" stroke-dasharray="7 7"/>
+<polyline points="970.0950818741205,850.7846208752235 980,846 970.0950818741205,841.2153791247765" fill="none" stroke="#777" stroke-width="2"/>
+<rect x="650" y="824" width="244" height="41" rx="0" fill="#fafafa" stroke="none" stroke-width="1"/>
+<text x="662" y="845.96" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#656565">POTENTIAL PRACTICAL FIT</text>
+<text x="48" y="976.62" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#656565">TWO OUTPUTS · DASHED = PLANNED OR PROPOSED; SOLID = RECORDED EVIDENCE</text>
+<rect x="48" y="1008" width="728" height="296" rx="8" fill="#f4f4f4" stroke="#aaa" stroke-width="1"/>
+<rect x="824" y="1008" width="728" height="296" rx="8" fill="#f4f4f4" stroke="#aaa" stroke-width="1"/>
+<text x="70" y="1044.28" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">PEER INTRODUCTION · NIA</text>
+<text x="70" y="1086.6" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#242424">Alex → chosen connection with Maya → existing tie to Nia</text>
+<text x="70" y="1147.94" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Add Nia’s relevant launch experience and willingness to help. Ask Alex which topic</text>
+<text x="70" y="1172.24" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">would make the conversation useful.</text>
+<text x="70" y="1232.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Next: Alex requests → Nia accepts → they meet → each can respond and choose to stay</text>
+<text x="70" y="1253.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">connected.</text>
+<text x="846" y="1044.28" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#242424">BOOTH INVITATION · REFILLWORKS</text>
+<text x="846" y="1086.6" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#242424">Alex → chosen connection with Maya → useful booth visit</text>
+<text x="846" y="1147.94" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">Combine with Alex’s stated need, compatible order size, and a specific sample</text>
+<text x="846" y="1172.24" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#242424">consultation offered by RefillWorks.</text>
+<text x="846" y="1232.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">Next: exhibitor invites → Alex accepts → checks in → reports usefulness and optionally shares</text>
+<text x="846" y="1253.8799999999999" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">a follow-up.</text>
+<text x="48" y="1347.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">* The Maya–Nia professional connection is an assumed sample edge, not a verified LinkedIn import. All people, companies, capacities, and outcomes on these boards are fictional.</text>
+<text x="48" y="1406.28" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#656565">The social paths help discover candidates. Explicit needs, capabilities, willingness, and availability determine whether an invitation makes sense. Their predictive value still needs testing.</text>
+</svg>

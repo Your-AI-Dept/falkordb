@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820">
+<title>Four-step attendee journey: discussion sketch</title>
+<desc>Join, scan an organic encounter, attend an arranged meetup and give feedback, then receive one next suggestion. Graph inputs and outputs appear below each screen.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#222} .title{font-size:28px;font-weight:700}.step{font-size:18px;font-weight:700}.heading{font-size:20px;font-weight:700}.body{font-size:15px}.note{font-size:13px;fill:#666}.label{font-size:12px;font-weight:700;letter-spacing:1px}.frame{fill:white;stroke:#888;stroke-width:1.5}.control{fill:#f4f4f4;stroke:#bbb}.button{fill:#e8e8e8;stroke:#888}.divider{stroke:#ddd}.signal{fill:#f3f3f3}</style>
+<rect width="1280" height="820" fill="#fafafa"/>
+<text x="34" y="44" class="title">One attendee journey</text><text x="34" y="73" class="body">Paper sketch for discussion • wording and feedback choices are provisional</text>
+<g transform="translate(34 112)">
+<text class="step" x="0" y="0">1. Join the event</text>
+<rect class="frame" x="0" y="23" width="280" height="480" rx="9"/>
+<text class="label" x="20" y="57">EVENT NAME</text><text class="heading" x="20" y="102">Welcome.</text>
+<text class="body" x="20" y="142">Confirm your basic profile.</text>
+<rect class="control" x="20" y="161" width="240" height="44" rx="4"/><text class="body" x="31" y="189">Name · role · organization</text>
+<text class="body" x="20" y="248">What would make this</text><text class="body" x="20" y="270">event worthwhile for you?</text>
+<rect class="control" x="20" y="290" width="240" height="74" rx="4"/><text class="note" x="31" y="321">A short intention…</text>
+<rect class="button" x="20" y="422" width="240" height="48" rx="4"/><text class="body" x="94" y="452">Join event</text>
+<rect class="signal" x="0" y="525" width="280" height="143" rx="4"/><text class="label" x="14" y="551">INTO THE GRAPH</text><text class="body" x="14" y="578">Attendee + event membership</text><text class="body" x="14" y="601">Stated intention</text><text class="note" x="14" y="637">Reuse existing registration context.</text>
+</g>
+<g transform="translate(345 112)">
+<text class="step" x="0" y="0">2. Record an encounter</text>
+<rect class="frame" x="0" y="23" width="280" height="480" rx="9"/>
+<text class="label" x="20" y="57">AFTER AN ORGANIC HELLO</text><text class="heading" x="20" y="102">Scan their badge.</text>
+<rect x="65" y="137" width="150" height="150" fill="none" stroke="#999" stroke-dasharray="6 4"/><text class="note" x="96" y="217">QR scanner</text>
+<line class="divider" x1="20" y1="323" x2="260" y2="323"/><text class="label" x="20" y="355">CONFIRMATION</text><text class="heading" x="20" y="390">You met Maya.</text><text class="body" x="20" y="419">Connection saved.</text><text class="note" x="20" y="465">No feedback prompt.</text>
+<rect class="signal" x="0" y="525" width="280" height="143" rx="4"/><text class="label" x="14" y="551">INTO THE GRAPH</text><text class="body" x="14" y="578">An encounter was recorded</text><text class="body" x="14" y="601">Who · event · time</text><text class="note" x="14" y="637">Usefulness remains unknown.</text>
+</g>
+<g transform="translate(656 112)">
+<text class="step" x="0" y="0">3. Meetup + feedback</text>
+<rect class="frame" x="0" y="23" width="280" height="480" rx="9"/>
+<text class="label" x="20" y="57">ORGANIZER-ARRANGED</text><text class="heading" x="20" y="102">15 minutes with Theo</text><text class="body" x="20" y="136">2:00 PM · Table 4</text><text class="note" x="20" y="168">Why this pairing: [short reason]</text>
+<line class="divider" x1="20" y1="200" x2="260" y2="200"/><text class="label" x="20" y="230">AFTER THE MEETING</text>
+<text class="body" x="20" y="265">Did this help with what</text><text class="body" x="20" y="287">you came here to do?</text>
+<rect class="control" x="20" y="308" width="240" height="43" rx="4"/><text class="body" x="34" y="335">Yes / Somewhat / No</text>
+<text class="body" x="20" y="385">We didn’t meet</text><text class="note" x="20" y="428">Optional: one follow-up question</text><text class="note" x="20" y="451">chosen for this response.</text><text class="note" x="20" y="478">Skip for now</text>
+<rect class="signal" x="0" y="525" width="280" height="143" rx="4"/><text class="label" x="14" y="551">OUT: PAIRING + REASON</text><text class="body" x="14" y="578">In: attendance / usefulness</text><text class="body" x="14" y="601">Optional preference evidence</text><text class="note" x="14" y="637">Missed ≠ unhelpful. Skip = unknown.</text>
+</g>
+<g transform="translate(967 112)">
+<text class="step" x="0" y="0">4. One next suggestion</text>
+<rect class="frame" x="0" y="23" width="280" height="480" rx="9"/>
+<text class="label" x="20" y="57">WHAT NEXT?</text><text class="heading" x="20" y="102">[Person or room]</text>
+<rect class="control" x="20" y="133" width="240" height="143" rx="4"/><text class="body" x="34" y="168">Who / what</text><text class="body" x="34" y="198">When and where</text><text class="body" x="34" y="238">Why this may be useful</text>
+<text class="note" x="20" y="316">Show one recommendation.</text><text class="note" x="20" y="339">Explain the relevant evidence.</text>
+<rect class="button" x="20" y="389" width="240" height="45" rx="4"/><text class="body" x="113" y="418">Accept</text><text class="body" x="112" y="469">Not now</text>
+<rect class="signal" x="0" y="525" width="280" height="143" rx="4"/><text class="label" x="14" y="551">OUT OF THE GRAPH</text><text class="body" x="14" y="578">Suggested next interaction</text><text class="body" x="14" y="601">In: accept / defer</text><text class="note" x="14" y="637">Acceptance ≠ attendance or value.</text>
+</g>
+<path d="M318 355h21m-6-6 6 6-6 6M629 355h21m-6-6 6 6-6 6M940 355h21m-6-6 6 6-6 6" fill="none" stroke="#777" stroke-width="1.5"/>
+<text x="34" y="805" class="note">The arranged meetup may already be scheduled. The scan and feedback inform the next suggestion; their benefit is still a hypothesis.</text>
+</svg>
