@@ -20,7 +20,24 @@ test('connection evidence appears only after the chosen connection exists',()=>{
   const initial=recommendations(supplier())[0];assert.equal(initial.person.id,'luca');assert.deepEqual(initial.path,[]);
   const next=recordEncounter(supplier(),'PIZZA-MAYA').state;const after=recommendations(next)[0];
   assert.deepEqual(after.path.map(n=>n.id),['you','maya','luca']);
+  assert.match(after.reason,/saved Maya’s badge/);
+  assert.match(after.reason,/professional connection/);
+  assert.ok(!after.reason.includes(after.person.offering.toLowerCase()));
   assert.ok(recommendations(next).every(r=>r.person.id!=='maya'));
+});
+test('recommendation reasons require a matching signal, not just any goal or feedback',()=>{
+  const empty=freshState();
+  const broad=completeProfile(empty,{...empty.profile,goals:['peers']});
+  assert.ok(recommendations(broad).every(item=>!item.reason&&!item.source));
+  const focused=completeProfile(broad,{...broad.profile,goalFocus:{peers:'tomatoes'}});
+  const maya=recommendations(focused).find(item=>item.person.id==='maya');
+  assert.equal(maya.source,'Shared topic');
+  assert.match(maya.reason,/Ingredient sourcing/);
+  assert.ok(!recommendations(focused).find(item=>item.person.id==='elena').reason);
+  const updated=recommendations(applyFeedback(focused,{usefulness:'yes',next:'flour'}));
+  assert.equal(updated.find(item=>item.person.id==='elena').source,'Matches your latest feedback');
+  assert.equal(updated.find(item=>item.person.id==='maya').source,'Shared topic');
+  assert.ok(!updated.find(item=>item.person.id==='nia').reason);
 });
 test('missed meetings and optional feedback cannot masquerade as useful encounters',()=>{
   const initial=supplier();const missed=applyFeedback(initial,{usefulness:'didnt_meet',next:'flour'});
