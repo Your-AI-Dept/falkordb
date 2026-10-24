@@ -1,0 +1,28 @@
+name: Report a conference problem
+description: Something at the show isn't working. The patch bot turns it into a small fix, and Qodo reviews it before anyone merges.
+title: "Patch: "
+labels: ["patch-request"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's broken
+      description: What happened, and who it affects (attendee, speaker, exhibitor or organizer).
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where
+      options:
+        - Attendee app (Rally)
+        - Exhibitor app
+        - Event HQ and graph view
+        - Matching, questions and the graph (backend)
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen instead

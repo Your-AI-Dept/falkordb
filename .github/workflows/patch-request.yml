@@ -1,0 +1,94 @@
+name: Patch request
+
+# Turns a "Report a conference problem" issue into a small pull request that says "Fixes #N", so
+# Qodo reviews both the code and whether it fixes the reported problem. The Qodo autofix workflow
+# then resolves Qodo's findings. A person still merges.
+# Needs the ANTHROPIC_API_KEY (or CLAUDE_CODE_OAUTH_TOKEN) secret.
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: patch-request-${{ github.event.issue.number }}
+
+jobs:
+  patch:
+    if: contains(github.event.issue.labels.*.name, 'patch-request') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+      BRANCH: patch/issue-${{ github.event.issue.number }}
+    steps:
+      - name: Skip issues that already have a patch branch
+        id: gate
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/branches/$BRANCH" --silent 2>/dev/null; then
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.gate.outputs.go == 'true'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - if: steps.gate.outputs.go == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - if: steps.gate.outputs.go == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - if: steps.gate.outputs.go == 'true'
+        run: |
+          pip install -q -r backend/requirements-dev.txt
+          git config user.name "patch-bot"
+          git config user.email "patch-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+
+      - if: steps.gate.outputs.go == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: >-
+            --model sonnet --max-turns 80
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(gh issue view:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git add:*),Bash(git commit:*),Bash(cd:*),Bash(ls:*),Bash(pytest:*),Bash(python:*),Bash(npm:*),Bash(npx:*)"
+          prompt: |
+            Someone at the conference reported a problem in issue #${{ env.ISSUE }} of ${{ github.repository }}.
+            Read it with `gh issue view ${{ env.ISSUE }}`. You are on a fresh branch from main.
+            design_doc.md is the spec; frontend/README.md and graph-view/README.md describe the two apps.
+
+            1. Find the smallest change that fixes the reported problem. If the report is unclear, too big for one
+               small PR, or needs a product decision, change nothing: write patch-summary.md saying what you need
+               from a person, and stop.
+            2. Make the change in as few files as possible, in the style of the surrounding code. No unrelated edits.
+            3. Run the checks for what you changed: backend `cd backend && pytest -q`; frontend
+               `cd frontend && npm ci && npm test && npm run build`; graph view `cd graph-view && npm ci && npm run lint && npm run build`.
+            4. Commit with a short, clear message. Do not push; the workflow pushes and opens the PR.
+            5. Write patch-summary.md at the repo root (do not commit it): two to four plain sentences for the PR
+               description saying what was broken, what you changed and how you checked it.
+
+      - name: Open the pull request
+        if: steps.gate.outputs.go == 'true'
+        run: |
+          summary=$(cat patch-summary.md 2>/dev/null || echo "The patch bot didn't write a summary.")
+          if [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
+            printf '%s\n' "$summary" | gh issue comment "$ISSUE" --body-file -
+            exit 0
+          fi
+          git push origin "HEAD:$BRANCH"
+          pr=$(printf '%s\n\nFixes #%s\n' "$summary" "$ISSUE" \
+            | gh pr create --base main --head "$BRANCH" --title "$(git log -1 --format=%s)" --body-file -)
+          gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
+          gh issue comment "$ISSUE" --body "Opened $pr. Qodo reviews it next, and the autofix bot resolves what Qodo finds."

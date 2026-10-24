@@ -3,6 +3,8 @@
 
 [github_app]
 pr_commands = ["/agentic_describe", "/agentic_review"]
+# The patch bot opens PRs as github-actions[bot]; review those too
+ignore_bot_pr = false
 
 [review_agent]
 comments_location_policy = "both"
