@@ -1,0 +1,6803 @@
+[
+ {
+  "id": "PE27-00001",
+  "name": "Jessica Watson",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.23,
+   0.02,
+   0.07,
+   0.1,
+   0.26,
+   0.03,
+   0.15,
+   0.07,
+   0.2,
+   0.76
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.089,
+    0.104,
+    0.08,
+    0.236,
+    0.102,
+    0.096,
+    0.073,
+    0.108,
+    0.224,
+    0.73
+   ],
+   "interest": [
+    0.001,
+    0.0001,
+    0.0009,
+    0.0255,
+    0.0001,
+    0.0459,
+    0.0014,
+    0.3684,
+    0.0524,
+    0.5043
+   ],
+   "talkativeness": 0.544,
+   "modesty": 0.151
+  },
+  "company": "ChowNow",
+  "title": "Solutions Engineer",
+  "business_type": "Technology / software",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00002",
+  "name": "Diego Jimenez",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   1.0,
+   0.03,
+   0.0,
+   0.14,
+   0.21,
+   0.1,
+   0.09,
+   0.62,
+   0.0,
+   0.17
+  ],
+  "signups": [
+   "S-102",
+   "S-107",
+   "S-116",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.923,
+    0.157,
+    0.025,
+    0.045,
+    0.138,
+    0.211,
+    0.195,
+    0.791,
+    0.081,
+    0.086
+   ],
+   "interest": [
+    0.0301,
+    0.1489,
+    0.1035,
+    0.0227,
+    0.0757,
+    0.5742,
+    0.0214,
+    0.018,
+    0.0055,
+    0.0001
+   ],
+   "talkativeness": 0.445,
+   "modesty": 0.086
+  },
+  "company": "Westside Pizza Co.",
+  "title": "Assistant Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Miami",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00009",
+  "name": "Sunil Desai",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   7
+  ],
+  "resume_tags": [
+   0.05,
+   0.13,
+   0.41,
+   0.22,
+   0.03,
+   0.0,
+   0.43,
+   0.77,
+   0.06,
+   0.18
+  ],
+  "signups": [
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.042,
+    0.097,
+    0.124,
+    0.183,
+    0.03,
+    0.106,
+    0.212,
+    0.709,
+    0.06,
+    0.136
+   ],
+   "interest": [
+    0.0066,
+    0.0,
+    0.0289,
+    0.2849,
+    0.0008,
+    0.0233,
+    0.3794,
+    0.1648,
+    0.0882,
+    0.023
+   ],
+   "talkativeness": 0.354,
+   "modesty": 0.17
+  },
+  "company": "Crust Consulting Group",
+  "title": "Restaurant Consultant",
+  "business_type": "Media / consulting / other",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00010",
+  "name": "Emily Kennedy",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.02,
+   0.17,
+   0.27,
+   0.27,
+   0.0,
+   0.11,
+   0.16,
+   0.8,
+   0.14,
+   0.17
+  ],
+  "signups": [
+   "S-102",
+   "S-108",
+   "S-112",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.137,
+    0.152,
+    0.145,
+    0.22,
+    0.059,
+    0.054,
+    0.196,
+    0.74,
+    0.109,
+    0.148
+   ],
+   "interest": [
+    0.3224,
+    0.0017,
+    0.3378,
+    0.2088,
+    0.0007,
+    0.0556,
+    0.0006,
+    0.067,
+    0.0052,
+    0.0003
+   ],
+   "talkativeness": 0.074,
+   "modesty": 0.632
+  },
+  "company": "Slice & Dice Media",
+  "title": "Staff Writer",
+  "business_type": "Media / consulting / other",
+  "city": "Providence",
+  "state": "RI",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00014",
+  "name": "Alexandra Economou",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.76,
+   0.22,
+   0.13,
+   0.08,
+   0.15,
+   0.0,
+   0.16,
+   0.95,
+   0.15,
+   0.25
+  ],
+  "signups": [
+   "S-101",
+   "S-104",
+   "S-107",
+   "S-123",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.771,
+    0.157,
+    0.068,
+    0.059,
+    0.176,
+    0.066,
+    0.167,
+    0.79,
+    0.05,
+    0.155
+   ],
+   "interest": [
+    0.411,
+    0.1306,
+    0.0007,
+    0.0478,
+    0.0009,
+    0.0861,
+    0.0444,
+    0.0168,
+    0.1957,
+    0.066
+   ],
+   "talkativeness": 0.131,
+   "modesty": 0.084
+  },
+  "company": "Famous James's",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Raleigh",
+  "state": "NC",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00025",
+  "name": "Kunal Mehta",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.05,
+   0.0,
+   1.0,
+   0.0,
+   0.06,
+   0.23,
+   0.18,
+   0.69,
+   0.26,
+   0.23
+  ],
+  "signups": [
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.246,
+    0.092,
+    0.915,
+    0.03,
+    0.249,
+    0.169,
+    0.032,
+    0.938,
+    0.128,
+    0.242
+   ],
+   "interest": [
+    0.0182,
+    0.0203,
+    0.2067,
+    0.0013,
+    0.0206,
+    0.0001,
+    0.0014,
+    0.4904,
+    0.1647,
+    0.0764
+   ],
+   "talkativeness": 0.47,
+   "modesty": 0.192
+  },
+  "company": "Upper Slice",
+  "title": "Area Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Oakland",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00026",
+  "name": "Joseph Hill",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.05,
+   0.22,
+   0.15,
+   0.23,
+   0.05,
+   0.0,
+   0.0,
+   0.91,
+   0.22,
+   0.0
+  ],
+  "signups": [
+   "S-102",
+   "S-111"
+  ],
+  "truth": {
+   "expertise": [
+    0.058,
+    0.076,
+    0.13,
+    0.026,
+    0.14,
+    0.06,
+    0.087,
+    0.908,
+    0.139,
+    0.033
+   ],
+   "interest": [
+    0.1396,
+    0.0054,
+    0.1155,
+    0.3388,
+    0.0,
+    0.1798,
+    0.0065,
+    0.1824,
+    0.0321,
+    0.0
+   ],
+   "talkativeness": 0.573,
+   "modesty": 0.414
+  },
+  "company": "Casey's",
+  "title": "Director of Operations",
+  "business_type": "Chain headquarters",
+  "city": "Ankeny",
+  "state": "IA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00041",
+  "name": "John Powell",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   9
+  ],
+  "resume_tags": [
+   0.44,
+   0.23,
+   0.81,
+   0.3,
+   0.35,
+   0.18,
+   0.12,
+   0.06,
+   0.23,
+   0.63
+  ],
+  "signups": [
+   "S-127",
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.217,
+    0.233,
+    0.727,
+    0.177,
+    0.201,
+    0.155,
+    0.129,
+    0.167,
+    0.184,
+    0.671
+   ],
+   "interest": [
+    0.0056,
+    0.0314,
+    0.0611,
+    0.0569,
+    0.0509,
+    0.0276,
+    0.0056,
+    0.0009,
+    0.0385,
+    0.7216
+   ],
+   "talkativeness": 0.301,
+   "modesty": 0.005
+  },
+  "company": "DoughFlow",
+  "title": "Founding Engineer",
+  "business_type": "Technology / software",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00047",
+  "name": "Neha Joshi",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.19,
+   0.0,
+   0.18,
+   0.0,
+   0.0,
+   0.2,
+   0.17,
+   0.35,
+   0.22,
+   0.77
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.186,
+    0.025,
+    0.141,
+    0.134,
+    0.059,
+    0.03,
+    0.13,
+    0.113,
+    0.24,
+    0.869
+   ],
+   "interest": [
+    0.0,
+    0.0172,
+    0.0814,
+    0.0205,
+    0.2889,
+    0.0051,
+    0.1319,
+    0.3376,
+    0.0521,
+    0.0654
+   ],
+   "talkativeness": 0.367,
+   "modesty": 0.143
+  },
+  "company": "Uber",
+  "title": "Enterprise Account Executive",
+  "business_type": "Technology / software",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00054",
+  "name": "Mei Park",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.27,
+   0.24,
+   0.27,
+   0.14,
+   0.21,
+   0.06,
+   0.24,
+   0.66,
+   0.03,
+   0.28
+  ],
+  "signups": [
+   "S-117",
+   "S-121",
+   "S-122",
+   "S-130",
+   "S-131"
+  ],
+  "truth": {
+   "expertise": [
+    0.164,
+    0.172,
+    0.186,
+    0.188,
+    0.116,
+    0.181,
+    0.032,
+    0.886,
+    0.116,
+    0.223
+   ],
+   "interest": [
+    0.1038,
+    0.0205,
+    0.0006,
+    0.0097,
+    0.0331,
+    0.0108,
+    0.3506,
+    0.3169,
+    0.1538,
+    0.0002
+   ],
+   "talkativeness": 0.297,
+   "modesty": 0.258
+  },
+  "company": "Bianchi Restaurant Group",
+  "title": "Franchisee",
+  "business_type": "Franchisee",
+  "city": "Sacramento",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00064",
+  "name": "Kavya Kumar",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.06,
+   0.0,
+   0.0,
+   0.0,
+   0.33,
+   0.18,
+   0.8,
+   0.3,
+   0.13,
+   0.18
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.216,
+    0.045,
+    0.087,
+    0.101,
+    0.248,
+    0.022,
+    0.733,
+    0.157,
+    0.085,
+    0.221
+   ],
+   "interest": [
+    0.0,
+    0.0087,
+    0.026,
+    0.1618,
+    0.1027,
+    0.0281,
+    0.1048,
+    0.398,
+    0.0003,
+    0.1696
+   ],
+   "talkativeness": 0.138,
+   "modesty": 0.212
+  },
+  "company": "PFG",
+  "title": "Distributor Sales Representative",
+  "business_type": "Distributor",
+  "city": "Pittsburgh",
+  "state": "PA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00074",
+  "name": "Nick Economou",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.17,
+   0.25,
+   0.31,
+   0.19,
+   0.72,
+   0.19,
+   0.94,
+   0.29,
+   0.1
+  ],
+  "signups": [
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.128,
+    0.159,
+    0.176,
+    0.081,
+    0.114,
+    0.734,
+    0.147,
+    0.787,
+    0.142,
+    0.158
+   ],
+   "interest": [
+    0.2057,
+    0.0723,
+    0.0369,
+    0.0439,
+    0.0037,
+    0.2216,
+    0.0008,
+    0.2308,
+    0.0003,
+    0.184
+   ],
+   "talkativeness": 0.321,
+   "modesty": 0.217
+  },
+  "company": "Campbell Pizza Co.",
+  "title": "General Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Austin",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00076",
+  "name": "Dustin Bailey",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.25,
+   0.22,
+   0.01,
+   0.51,
+   0.0,
+   0.33,
+   0.99,
+   0.19,
+   0.28
+  ],
+  "signups": [
+   "S-102",
+   "S-131"
+  ],
+  "truth": {
+   "expertise": [
+    0.114,
+    0.243,
+    0.206,
+    0.038,
+    0.116,
+    0.031,
+    0.245,
+    0.933,
+    0.173,
+    0.136
+   ],
+   "interest": [
+    0.2621,
+    0.0548,
+    0.0043,
+    0.0026,
+    0.0969,
+    0.0013,
+    0.2369,
+    0.3177,
+    0.013,
+    0.0103
+   ],
+   "talkativeness": 0.777,
+   "modesty": 0.112
+  },
+  "company": "Summit Pizza Partners",
+  "title": "Franchisee",
+  "business_type": "Franchisee",
+  "city": "San Diego",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00084",
+  "name": "Vincent Greco",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.0,
+   0.71,
+   0.06,
+   0.0,
+   0.12,
+   0.15,
+   0.63,
+   0.38,
+   0.19
+  ],
+  "signups": [
+   "S-101",
+   "S-102",
+   "S-126"
+  ],
+  "truth": {
+   "expertise": [
+    0.023,
+    0.035,
+    0.884,
+    0.223,
+    0.07,
+    0.081,
+    0.084,
+    0.711,
+    0.249,
+    0.151
+   ],
+   "interest": [
+    0.0065,
+    0.1891,
+    0.2853,
+    0.0033,
+    0.0172,
+    0.0034,
+    0.0,
+    0.2289,
+    0.0005,
+    0.2658
+   ],
+   "talkativeness": 0.875,
+   "modesty": 0.553
+  },
+  "company": "Proper Dough Co.",
+  "title": "General Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Minneapolis",
+  "state": "MN",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00086",
+  "name": "Manuel Fuentes",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.0,
+   0.94,
+   0.23,
+   0.0,
+   0.24,
+   0.37,
+   0.14,
+   0.99,
+   0.12
+  ],
+  "signups": [
+   "S-101",
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.142,
+    0.04,
+    0.792,
+    0.237,
+    0.042,
+    0.19,
+    0.224,
+    0.098,
+    0.943,
+    0.241
+   ],
+   "interest": [
+    0.0011,
+    0.0081,
+    0.4201,
+    0.001,
+    0.0654,
+    0.0087,
+    0.1405,
+    0.0143,
+    0.1218,
+    0.219
+   ],
+   "talkativeness": 0.878,
+   "modesty": 0.49
+  },
+  "company": "Ballard Pizza Co.",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Phoenix",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00087",
+  "name": "Rocco Donati",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.31,
+   0.2,
+   0.21,
+   0.23,
+   0.27,
+   0.84,
+   0.09,
+   0.59,
+   0.26,
+   0.06
+  ],
+  "signups": [
+   "S-104",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.212,
+    0.094,
+    0.21,
+    0.249,
+    0.237,
+    0.888,
+    0.126,
+    0.804,
+    0.212,
+    0.175
+   ],
+   "interest": [
+    0.1562,
+    0.1249,
+    0.056,
+    0.0009,
+    0.0003,
+    0.0429,
+    0.0001,
+    0.1702,
+    0.3559,
+    0.0926
+   ],
+   "talkativeness": 0.521,
+   "modesty": 0.311
+  },
+  "company": "Salerno Pizza Co.",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Columbus",
+  "state": "OH",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00119",
+  "name": "Chloe Morris",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.09,
+   0.0,
+   0.27,
+   0.1,
+   0.0,
+   0.0,
+   0.03,
+   0.94,
+   0.01,
+   0.12
+  ],
+  "signups": [
+   "S-102",
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.082,
+    0.093,
+    0.137,
+    0.138,
+    0.127,
+    0.092,
+    0.081,
+    0.873,
+    0.127,
+    0.054
+   ],
+   "interest": [
+    0.0009,
+    0.0178,
+    0.0108,
+    0.2376,
+    0.0047,
+    0.0717,
+    0.4204,
+    0.0763,
+    0.018,
+    0.1418
+   ],
+   "talkativeness": 0.567,
+   "modesty": 0.127
+  },
+  "company": "Heritage Hospitality Capital",
+  "title": "Associate",
+  "business_type": "Media / consulting / other",
+  "city": "Trenton",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00129",
+  "name": "Matthew Green",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.17,
+   0.03,
+   0.11,
+   0.2,
+   0.0,
+   0.82,
+   0.12,
+   0.5,
+   0.02,
+   0.0
+  ],
+  "signups": [
+   "S-118",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.154,
+    0.028,
+    0.14,
+    0.22,
+    0.214,
+    0.811,
+    0.134,
+    0.721,
+    0.034,
+    0.021
+   ],
+   "interest": [
+    0.0312,
+    0.0009,
+    0.1529,
+    0.0029,
+    0.002,
+    0.2318,
+    0.2137,
+    0.1066,
+    0.001,
+    0.257
+   ],
+   "talkativeness": 0.506,
+   "modesty": 0.371
+  },
+  "company": "Valley Restaurant Supply",
+  "title": "Owner",
+  "business_type": "Manufacturer / supplier",
+  "city": "Cincinnati",
+  "state": "OH",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00138",
+  "name": "Miguel Vega",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   7,
+   8
+  ],
+  "resume_tags": [
+   0.15,
+   0.0,
+   0.01,
+   0.29,
+   0.12,
+   0.28,
+   0.21,
+   0.66,
+   0.3,
+   0.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.12,
+    0.036,
+    0.192,
+    0.159,
+    0.104,
+    0.82,
+    0.128,
+    0.863,
+    0.793,
+    0.051
+   ],
+   "interest": [
+    0.0354,
+    0.0005,
+    0.0041,
+    0.127,
+    0.001,
+    0.0961,
+    0.0637,
+    0.1693,
+    0.1592,
+    0.3437
+   ],
+   "talkativeness": 0.609,
+   "modesty": 0.311
+  },
+  "company": "Lazy Bear Pizza",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Bronx",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00147",
+  "name": "Samantha Owens",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.2,
+   0.07,
+   0.09,
+   0.21,
+   0.0,
+   0.15,
+   0.7,
+   0.21,
+   0.37
+  ],
+  "signups": [
+   "S-101",
+   "S-102",
+   "S-103",
+   "S-104"
+  ],
+  "truth": {
+   "expertise": [
+    0.211,
+    0.08,
+    0.108,
+    0.179,
+    0.21,
+    0.121,
+    0.129,
+    0.822,
+    0.09,
+    0.238
+   ],
+   "interest": [
+    0.2192,
+    0.0239,
+    0.0014,
+    0.1364,
+    0.0003,
+    0.0104,
+    0.3716,
+    0.1276,
+    0.0654,
+    0.044
+   ],
+   "talkativeness": 0.236,
+   "modesty": 0.316
+  },
+  "company": "Sysco",
+  "title": "Business Development Manager",
+  "business_type": "Distributor",
+  "city": "Denver",
+  "state": "CO",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00156",
+  "name": "Carla Amato",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.24,
+   0.19,
+   0.3,
+   0.19,
+   0.09,
+   0.11,
+   0.01,
+   0.86,
+   0.0,
+   0.07
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.236,
+    0.196,
+    0.23,
+    0.144,
+    0.034,
+    0.042,
+    0.172,
+    0.806,
+    0.236,
+    0.05
+   ],
+   "interest": [
+    0.0001,
+    0.0308,
+    0.0003,
+    0.6095,
+    0.0,
+    0.0699,
+    0.2147,
+    0.0635,
+    0.0111,
+    0.0001
+   ],
+   "talkativeness": 0.906,
+   "modesty": 0.215
+  },
+  "company": "Roma Foodservice (PFG)",
+  "title": "District Sales Manager",
+  "business_type": "Distributor",
+  "city": "Richmond",
+  "state": "VA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00160",
+  "name": "Chase O'Connor",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   6,
+   7
+  ],
+  "resume_tags": [
+   0.16,
+   0.07,
+   0.02,
+   0.0,
+   0.16,
+   0.14,
+   0.67,
+   0.73,
+   0.13,
+   0.07
+  ],
+  "signups": [
+   "S-121",
+   "S-122",
+   "S-124",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.221,
+    0.197,
+    0.05,
+    0.088,
+    0.062,
+    0.048,
+    0.861,
+    0.764,
+    0.198,
+    0.124
+   ],
+   "interest": [
+    0.0061,
+    0.0087,
+    0.0089,
+    0.0002,
+    0.001,
+    0.0047,
+    0.0773,
+    0.3562,
+    0.1936,
+    0.3433
+   ],
+   "talkativeness": 0.932,
+   "modesty": 0.222
+  },
+  "company": "Ledo",
+  "title": "Vice President of Operations",
+  "business_type": "Chain headquarters",
+  "city": "Boston",
+  "state": "MA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00168",
+  "name": "Chase Morris",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   6
+  ],
+  "resume_tags": [
+   0.0,
+   0.19,
+   0.27,
+   0.0,
+   0.0,
+   0.23,
+   0.75,
+   0.21,
+   0.21,
+   0.14
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.1,
+    0.23,
+    0.088,
+    0.064,
+    0.071,
+    0.19,
+    0.746,
+    0.059,
+    0.245,
+    0.091
+   ],
+   "interest": [
+    0.139,
+    0.0268,
+    0.0002,
+    0.2466,
+    0.0108,
+    0.0011,
+    0.4791,
+    0.0055,
+    0.0846,
+    0.0063
+   ],
+   "talkativeness": 0.881,
+   "modesty": 0.014
+  },
+  "company": "Sysco",
+  "title": "Distributor Sales Representative",
+  "business_type": "Distributor",
+  "city": "Houston",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00170",
+  "name": "Patricia Aguilar",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.28,
+   0.5,
+   0.12,
+   0.34,
+   0.14,
+   0.16,
+   0.28,
+   0.06,
+   0.0,
+   0.81
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.215,
+    0.25,
+    0.109,
+    0.221,
+    0.177,
+    0.11,
+    0.108,
+    0.08,
+    0.028,
+    0.819
+   ],
+   "interest": [
+    0.0164,
+    0.2507,
+    0.0002,
+    0.0712,
+    0.2666,
+    0.0066,
+    0.0111,
+    0.0755,
+    0.1062,
+    0.1954
+   ],
+   "talkativeness": 0.902,
+   "modesty": 0.115
+  },
+  "company": "Clover",
+  "title": "Solutions Engineer",
+  "business_type": "Technology / software",
+  "city": "Sacramento",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00192",
+  "name": "Kevin Robinson",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.35,
+   0.03,
+   0.06,
+   0.06,
+   0.02,
+   0.28,
+   0.0,
+   0.57,
+   0.17,
+   0.2
+  ],
+  "signups": [
+   "S-101",
+   "S-102",
+   "S-117",
+   "S-123",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.168,
+    0.113,
+    0.045,
+    0.075,
+    0.216,
+    0.229,
+    0.143,
+    0.689,
+    0.15,
+    0.238
+   ],
+   "interest": [
+    0.0164,
+    0.002,
+    0.0891,
+    0.0064,
+    0.007,
+    0.0035,
+    0.2732,
+    0.0616,
+    0.5378,
+    0.003
+   ],
+   "talkativeness": 0.486,
+   "modesty": 0.145
+  },
+  "company": "True Manufacturing",
+  "title": "Regional Sales Manager",
+  "business_type": "Manufacturer / supplier",
+  "city": "O'Fallon",
+  "state": "MO",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00209",
+  "name": "Sophia Vlahos",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.25,
+   0.18,
+   0.08,
+   0.35,
+   0.16,
+   0.0,
+   0.09,
+   0.71,
+   0.22,
+   0.37
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.155,
+    0.188,
+    0.073,
+    0.219,
+    0.248,
+    0.099,
+    0.066,
+    0.684,
+    0.127,
+    0.221
+   ],
+   "interest": [
+    0.0448,
+    0.3915,
+    0.2809,
+    0.0791,
+    0.0101,
+    0.005,
+    0.0537,
+    0.1188,
+    0.0057,
+    0.0105
+   ],
+   "talkativeness": 0.565,
+   "modesty": 0.413
+  },
+  "company": "Slice & Dice Media",
+  "title": "Staff Writer",
+  "business_type": "Media / consulting / other",
+  "city": "Buffalo",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00221",
+  "name": "Sofia Flores",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.23,
+   0.24,
+   0.3,
+   0.26,
+   0.0,
+   0.15,
+   0.0,
+   0.98,
+   0.22,
+   0.23
+  ],
+  "signups": [
+   "S-101",
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.204,
+    0.037,
+    0.116,
+    0.071,
+    0.183,
+    0.192,
+    0.027,
+    0.937,
+    0.189,
+    0.116
+   ],
+   "interest": [
+    0.0006,
+    0.0056,
+    0.0006,
+    0.0215,
+    0.0798,
+    0.002,
+    0.0094,
+    0.7323,
+    0.1237,
+    0.0246
+   ],
+   "talkativeness": 0.729,
+   "modesty": 0.123
+  },
+  "company": "Nelson Restaurant Group",
+  "title": "Multi-Unit Franchisee",
+  "business_type": "Franchisee",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00229",
+  "name": "Sal Cuomo",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   2
+  ],
+  "resume_tags": [
+   0.34,
+   0.14,
+   0.69,
+   0.29,
+   0.13,
+   0.0,
+   0.39,
+   0.09,
+   0.93,
+   0.08
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.182,
+    0.149,
+    0.787,
+    0.172,
+    0.099,
+    0.073,
+    0.206,
+    0.152,
+    0.784,
+    0.052
+   ],
+   "interest": [
+    0.0112,
+    0.104,
+    0.3123,
+    0.0,
+    0.0252,
+    0.0136,
+    0.033,
+    0.0562,
+    0.3794,
+    0.0651
+   ],
+   "talkativeness": 0.549,
+   "modesty": 0.017
+  },
+  "company": "Summit Slice House",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Henderson",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00243",
+  "name": "Sarah Ellis",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.15,
+   0.86,
+   0.22,
+   0.18,
+   0.22,
+   0.21,
+   0.74,
+   0.17,
+   0.0
+  ],
+  "signups": [
+   "S-101",
+   "S-104"
+  ],
+  "truth": {
+   "expertise": [
+    0.029,
+    0.184,
+    0.91,
+    0.064,
+    0.238,
+    0.076,
+    0.193,
+    0.715,
+    0.185,
+    0.054
+   ],
+   "interest": [
+    0.4691,
+    0.0061,
+    0.025,
+    0.0398,
+    0.0114,
+    0.154,
+    0.0091,
+    0.2854,
+    0.0,
+    0.0002
+   ],
+   "talkativeness": 0.759,
+   "modesty": 0.016
+  },
+  "company": "Paul's NY Pizza",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Astoria",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00244",
+  "name": "James Brooks",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.14,
+   0.0,
+   0.0,
+   0.13,
+   0.0,
+   0.27,
+   0.2,
+   0.08,
+   0.13,
+   0.77
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.221,
+    0.073,
+    0.033,
+    0.228,
+    0.198,
+    0.076,
+    0.136,
+    0.131,
+    0.088,
+    0.743
+   ],
+   "interest": [
+    0.0006,
+    0.0366,
+    0.0039,
+    0.1675,
+    0.1396,
+    0.0177,
+    0.0006,
+    0.0854,
+    0.0121,
+    0.5361
+   ],
+   "talkativeness": 0.774,
+   "modesty": 0.027
+  },
+  "company": "Crustly",
+  "title": "Head of Growth",
+  "business_type": "Technology / software",
+  "city": "Denver",
+  "state": "CO",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00245",
+  "name": "Sami Najjar",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.0,
+   0.25,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.18,
+   0.34,
+   0.45
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.126,
+    0.067,
+    0.19,
+    0.064,
+    0.177,
+    0.047,
+    0.851,
+    0.02,
+    0.189,
+    0.205
+   ],
+   "interest": [
+    0.0635,
+    0.1274,
+    0.0849,
+    0.0611,
+    0.1294,
+    0.1089,
+    0.305,
+    0.1099,
+    0.0049,
+    0.005
+   ],
+   "talkativeness": 0.134,
+   "modesty": 0.087
+  },
+  "company": "Gordon Food Service",
+  "title": "Pizza Segment Specialist",
+  "business_type": "Distributor",
+  "city": "Hoboken",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00266",
+  "name": "Daniel Kennedy",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.0,
+   0.04,
+   0.09,
+   0.23,
+   0.09,
+   0.14,
+   0.0,
+   0.23,
+   0.79
+  ],
+  "signups": [
+   "S-101",
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.037,
+    0.092,
+    0.141,
+    0.076,
+    0.099,
+    0.172,
+    0.218,
+    0.056,
+    0.101,
+    0.752
+   ],
+   "interest": [
+    0.4109,
+    0.0003,
+    0.0059,
+    0.0003,
+    0.2002,
+    0.0461,
+    0.244,
+    0.0861,
+    0.0013,
+    0.0051
+   ],
+   "talkativeness": 0.593,
+   "modesty": 0.242
+  },
+  "company": "proper pie co.",
+  "title": "Director of Marketing",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Orlando",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00269",
+  "name": "John Kostopoulos",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.39,
+   0.12,
+   0.1,
+   0.03,
+   0.1,
+   0.37,
+   1.0,
+   0.14,
+   0.23
+  ],
+  "signups": [
+   "S-127",
+   "S-128"
+  ],
+  "truth": {
+   "expertise": [
+    0.083,
+    0.192,
+    0.069,
+    0.116,
+    0.113,
+    0.08,
+    0.234,
+    0.872,
+    0.143,
+    0.108
+   ],
+   "interest": [
+    0.0407,
+    0.0421,
+    0.078,
+    0.004,
+    0.4717,
+    0.0775,
+    0.0131,
+    0.1397,
+    0.0002,
+    0.133
+   ],
+   "talkativeness": 0.939,
+   "modesty": 0.3
+  },
+  "company": "Clark's Pizza & Pasta",
+  "title": "General Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Henderson",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00279",
+  "name": "Paolo Pellegrini",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.19,
+   0.0,
+   0.0,
+   0.18,
+   0.13,
+   0.18,
+   0.27,
+   0.89,
+   0.04,
+   0.3
+  ],
+  "signups": [
+   "S-125",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.159,
+    0.036,
+    0.058,
+    0.228,
+    0.241,
+    0.149,
+    0.182,
+    0.881,
+    0.054,
+    0.222
+   ],
+   "interest": [
+    0.0021,
+    0.1272,
+    0.0604,
+    0.0002,
+    0.0002,
+    0.0584,
+    0.0068,
+    0.3753,
+    0.367,
+    0.0025
+   ],
+   "talkativeness": 0.17,
+   "modesty": 0.398
+  },
+  "company": "Jamess Pizza",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Toronto",
+  "state": "ON",
+  "country": "CA"
+ },
+ {
+  "id": "PE27-00288",
+  "name": "Pooja Kumar",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   6,
+   7,
+   8,
+   9
+  ],
+  "resume_tags": [
+   0.0,
+   0.47,
+   0.37,
+   0.26,
+   0.32,
+   0.2,
+   1.0,
+   0.19,
+   0.07,
+   0.0
+  ],
+  "signups": [
+   "S-112",
+   "S-118"
+  ],
+  "truth": {
+   "expertise": [
+    0.045,
+    0.197,
+    0.211,
+    0.225,
+    0.222,
+    0.045,
+    0.923,
+    0.188,
+    0.227,
+    0.142
+   ],
+   "interest": [
+    0.0755,
+    0.0042,
+    0.0004,
+    0.2106,
+    0.0069,
+    0.0348,
+    0.5187,
+    0.0278,
+    0.0002,
+    0.121
+   ],
+   "talkativeness": 0.651,
+   "modesty": 0.044
+  },
+  "company": "Marco's Franchising",
+  "title": "Culinary Manager",
+  "business_type": "Chain headquarters",
+  "city": "Philadelphia",
+  "state": "PA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00289",
+  "name": "Dritan Ahmeti",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.12,
+   0.48,
+   0.1,
+   0.12,
+   0.0,
+   0.0,
+   0.2,
+   1.0,
+   0.18,
+   0.08
+  ],
+  "signups": [
+   "S-120",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.1,
+    0.672,
+    0.188,
+    0.075,
+    0.063,
+    0.056,
+    0.168,
+    0.874,
+    0.195,
+    0.101
+   ],
+   "interest": [
+    0.0409,
+    0.0302,
+    0.0012,
+    0.0773,
+    0.1634,
+    0.0,
+    0.0124,
+    0.6577,
+    0.0131,
+    0.0037
+   ],
+   "talkativeness": 0.512,
+   "modesty": 0.008
+  },
+  "company": "Serra Pizza Co.",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00290",
+  "name": "Paolo Leone",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.15,
+   0.0,
+   0.88,
+   0.0,
+   0.42,
+   0.22,
+   0.16,
+   0.23,
+   0.52,
+   0.4
+  ],
+  "signups": [
+   "S-102",
+   "S-107",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.216,
+    0.04,
+    0.726,
+    0.223,
+    0.166,
+    0.139,
+    0.105,
+    0.242,
+    0.671,
+    0.106
+   ],
+   "interest": [
+    0.003,
+    0.435,
+    0.1142,
+    0.002,
+    0.0005,
+    0.004,
+    0.0024,
+    0.1735,
+    0.2056,
+    0.0598
+   ],
+   "talkativeness": 0.601,
+   "modesty": 0.394
+  },
+  "company": "Nicholas's Pizza",
+  "title": "Pizzaiolo",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Astoria",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00293",
+  "name": "Ahmed Darwish",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   6,
+   7,
+   9
+  ],
+  "resume_tags": [
+   0.29,
+   0.0,
+   0.21,
+   0.32,
+   0.24,
+   0.08,
+   0.73,
+   0.95,
+   0.06,
+   0.69
+  ],
+  "signups": [
+   "S-127",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.19,
+    0.046,
+    0.129,
+    0.219,
+    0.078,
+    0.083,
+    0.822,
+    0.847,
+    0.036,
+    0.682
+   ],
+   "interest": [
+    0.1926,
+    0.0013,
+    0.0583,
+    0.029,
+    0.0117,
+    0.1413,
+    0.3342,
+    0.0168,
+    0.0,
+    0.2148
+   ],
+   "talkativeness": 0.691,
+   "modesty": 0.097
+  },
+  "company": "Westside Franchise Group LLC",
+  "title": "Multi-Unit Franchisee",
+  "business_type": "Franchisee",
+  "city": "Scottsdale",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00295",
+  "name": "Joseph Conti",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.1,
+   0.0,
+   0.26,
+   0.23,
+   0.29,
+   0.3,
+   0.33,
+   0.03,
+   0.96,
+   0.11
+  ],
+  "signups": [
+   "S-102",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.228,
+    0.099,
+    0.234,
+    0.127,
+    0.169,
+    0.153,
+    0.142,
+    0.096,
+    0.896,
+    0.094
+   ],
+   "interest": [
+    0.0297,
+    0.0241,
+    0.004,
+    0.0231,
+    0.1403,
+    0.0027,
+    0.0337,
+    0.1664,
+    0.2565,
+    0.3195
+   ],
+   "talkativeness": 0.368,
+   "modesty": 0.079
+  },
+  "company": "Pacific Culinary Academy",
+  "title": "Pizza Instructor",
+  "business_type": "Media / consulting / other",
+  "city": "Rochester",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00306",
+  "name": "Courtney Becker",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.3,
+   0.06,
+   0.3,
+   0.16,
+   0.14,
+   0.0,
+   0.24,
+   0.88,
+   0.26
+  ],
+  "signups": [
+   "S-102",
+   "S-117"
+  ],
+  "truth": {
+   "expertise": [
+    0.034,
+    0.141,
+    0.075,
+    0.22,
+    0.099,
+    0.179,
+    0.194,
+    0.021,
+    0.936,
+    0.183
+   ],
+   "interest": [
+    0.0963,
+    0.0022,
+    0.0108,
+    0.0014,
+    0.0,
+    0.2431,
+    0.2655,
+    0.0,
+    0.3771,
+    0.0035
+   ],
+   "talkativeness": 0.239,
+   "modesty": 0.312
+  },
+  "company": "True Refrigeration",
+  "title": "Culinary Specialist",
+  "business_type": "Manufacturer / supplier",
+  "city": "Reno",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00336",
+  "name": "Adrian Castro",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.08,
+   0.0,
+   0.0,
+   0.14,
+   0.02,
+   0.19,
+   0.16,
+   0.87,
+   0.06,
+   0.0
+  ],
+  "signups": [
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.163,
+    0.029,
+    0.073,
+    0.19,
+    0.148,
+    0.112,
+    0.097,
+    0.758,
+    0.063,
+    0.048
+   ],
+   "interest": [
+    0.0188,
+    0.0005,
+    0.2812,
+    0.336,
+    0.0031,
+    0.0016,
+    0.1381,
+    0.184,
+    0.0077,
+    0.0292
+   ],
+   "talkativeness": 0.509,
+   "modesty": 0.361
+  },
+  "company": "Pieology",
+  "title": "Regional Operations Manager",
+  "business_type": "Chain headquarters",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00343",
+  "name": "Paul Hayes",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.03,
+   0.21,
+   0.19,
+   0.08,
+   0.06,
+   0.34,
+   0.81,
+   0.25,
+   0.13
+  ],
+  "signups": [
+   "S-117",
+   "S-126",
+   "S-128",
+   "S-133",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.205,
+    0.066,
+    0.113,
+    0.107,
+    0.115,
+    0.149,
+    0.115,
+    0.726,
+    0.248,
+    0.216
+   ],
+   "interest": [
+    0.0753,
+    0.0016,
+    0.0468,
+    0.1,
+    0.0067,
+    0.0291,
+    0.2436,
+    0.3105,
+    0.0843,
+    0.102
+   ],
+   "talkativeness": 0.335,
+   "modesty": 0.009
+  },
+  "company": "Cuomo Family Restaurants",
+  "title": "General Manager",
+  "business_type": "Franchisee",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00357",
+  "name": "Raj Gupta",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.02,
+   0.02,
+   0.76,
+   0.22,
+   0.12,
+   0.24,
+   0.68,
+   0.21,
+   0.0
+  ],
+  "signups": [
+   "S-102",
+   "S-123"
+  ],
+  "truth": {
+   "expertise": [
+    0.079,
+    0.06,
+    0.033,
+    0.743,
+    0.202,
+    0.24,
+    0.082,
+    0.763,
+    0.124,
+    0.047
+   ],
+   "interest": [
+    0.0621,
+    0.0111,
+    0.001,
+    0.4834,
+    0.0025,
+    0.0712,
+    0.0406,
+    0.0247,
+    0.2985,
+    0.0051
+   ],
+   "talkativeness": 0.42,
+   "modesty": 0.153
+  },
+  "company": "Heartland Pepperoni Co.",
+  "title": "Founder",
+  "business_type": "Manufacturer / supplier",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00382",
+  "name": "Simran Mehta",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.66,
+   0.18,
+   0.97,
+   0.28,
+   0.39,
+   0.0,
+   0.19,
+   0.21,
+   0.93,
+   0.02
+  ],
+  "signups": [
+   "S-129",
+   "S-130",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.772,
+    0.196,
+    0.919,
+    0.192,
+    0.087,
+    0.135,
+    0.215,
+    0.107,
+    0.809,
+    0.117
+   ],
+   "interest": [
+    0.0485,
+    0.2629,
+    0.0068,
+    0.005,
+    0.0885,
+    0.0009,
+    0.0055,
+    0.1739,
+    0.0427,
+    0.3653
+   ],
+   "talkativeness": 0.886,
+   "modesty": 0.108
+  },
+  "company": "Stubborn Dough Co.",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "San Francisco",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00397",
+  "name": "Dominic Costa",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.0,
+   0.23,
+   0.0,
+   0.11,
+   0.22,
+   0.19,
+   0.54,
+   0.14,
+   0.01
+  ],
+  "signups": [
+   "S-101",
+   "S-117",
+   "S-119"
+  ],
+  "truth": {
+   "expertise": [
+    0.134,
+    0.065,
+    0.063,
+    0.116,
+    0.048,
+    0.135,
+    0.046,
+    0.701,
+    0.111,
+    0.106
+   ],
+   "interest": [
+    0.0344,
+    0.0025,
+    0.0023,
+    0.0122,
+    0.0046,
+    0.015,
+    0.2209,
+    0.1179,
+    0.5621,
+    0.0281
+   ],
+   "talkativeness": 0.718,
+   "modesty": 0.238
+  },
+  "company": "Northbridge Restaurant Advisors",
+  "title": "Restaurant Consultant",
+  "business_type": "Media / consulting / other",
+  "city": "San Jose",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00400",
+  "name": "Sean Kowalski",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   9
+  ],
+  "resume_tags": [
+   0.02,
+   0.0,
+   0.19,
+   0.08,
+   0.25,
+   0.0,
+   0.03,
+   0.03,
+   0.04,
+   0.12
+  ],
+  "signups": [
+   "S-105"
+  ],
+  "truth": {
+   "expertise": [
+    0.032,
+    0.224,
+    0.137,
+    0.154,
+    0.067,
+    0.061,
+    0.148,
+    0.028,
+    0.199,
+    0.848
+   ],
+   "interest": [
+    0.3615,
+    0.0009,
+    0.0045,
+    0.0016,
+    0.1992,
+    0.003,
+    0.0319,
+    0.0348,
+    0.0113,
+    0.3513
+   ],
+   "talkativeness": 0.498,
+   "modesty": 0.375
+  },
+  "company": "Northside Pizza Co.",
+  "title": "IT Director",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00414",
+  "name": "Corey Foster",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.89,
+   0.25,
+   0.74,
+   0.0,
+   0.22,
+   0.19,
+   0.02,
+   0.23,
+   0.63,
+   0.25
+  ],
+  "signups": [
+   "S-129",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.829,
+    0.151,
+    0.924,
+    0.139,
+    0.194,
+    0.211,
+    0.152,
+    0.213,
+    0.758,
+    0.202
+   ],
+   "interest": [
+    0.1331,
+    0.0564,
+    0.1674,
+    0.0033,
+    0.0369,
+    0.1402,
+    0.0121,
+    0.0939,
+    0.1259,
+    0.2308
+   ],
+   "talkativeness": 0.679,
+   "modesty": 0.281
+  },
+  "company": "Joseph's Pizzeria",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Jacksonville",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00420",
+  "name": "Cesar Ortiz",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.06,
+   0.01,
+   0.18,
+   0.04,
+   0.2,
+   0.37,
+   0.09,
+   0.88,
+   0.04,
+   0.16
+  ],
+  "signups": [
+   "S-101",
+   "S-127",
+   "S-128",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.119,
+    0.037,
+    0.108,
+    0.045,
+    0.064,
+    0.227,
+    0.213,
+    0.868,
+    0.153,
+    0.179
+   ],
+   "interest": [
+    0.0149,
+    0.0806,
+    0.011,
+    0.0103,
+    0.0075,
+    0.0268,
+    0.0322,
+    0.5644,
+    0.011,
+    0.2414
+   ],
+   "talkativeness": 0.225,
+   "modesty": 0.273
+  },
+  "company": "Papa Murphys",
+  "title": "Area Supervisor",
+  "business_type": "Chain headquarters",
+  "city": "Vancouver",
+  "state": "WA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00429",
+  "name": "Megan Parker",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.42,
+   0.06,
+   0.12,
+   0.13,
+   0.11,
+   0.11,
+   0.1,
+   0.06,
+   0.04,
+   0.8
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.215,
+    0.113,
+    0.241,
+    0.18,
+    0.123,
+    0.177,
+    0.067,
+    0.188,
+    0.208,
+    0.741
+   ],
+   "interest": [
+    0.0428,
+    0.0203,
+    0.1637,
+    0.0094,
+    0.0602,
+    0.0291,
+    0.0068,
+    0.1419,
+    0.0042,
+    0.5217
+   ],
+   "talkativeness": 0.654,
+   "modesty": 0.143
+  },
+  "company": "Yelp for Restaurants",
+  "title": "Solutions Engineer",
+  "business_type": "Technology / software",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00432",
+  "name": "Samantha Hill",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.29,
+   0.25,
+   0.21,
+   0.07,
+   0.31,
+   0.19,
+   0.0,
+   0.24,
+   0.21,
+   0.69
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.23,
+    0.159,
+    0.135,
+    0.122,
+    0.199,
+    0.023,
+    0.054,
+    0.197,
+    0.107,
+    0.852
+   ],
+   "interest": [
+    0.0003,
+    0.043,
+    0.084,
+    0.0018,
+    0.0381,
+    0.0542,
+    0.1654,
+    0.0096,
+    0.0319,
+    0.5716
+   ],
+   "talkativeness": 0.371,
+   "modesty": 0.043
+  },
+  "company": "Olo",
+  "title": "Account Executive",
+  "business_type": "Technology / software",
+  "city": "New York",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00446",
+  "name": "Francesca Colombo",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.52,
+   0.19,
+   0.04,
+   0.0,
+   0.0,
+   0.01,
+   0.12,
+   0.97,
+   0.86,
+   0.35
+  ],
+  "signups": [
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.198,
+    0.169,
+    0.088,
+    0.028,
+    0.029,
+    0.213,
+    0.184,
+    0.906,
+    0.8,
+    0.145
+   ],
+   "interest": [
+    0.063,
+    0.0002,
+    0.1708,
+    0.0,
+    0.0145,
+    0.0,
+    0.0162,
+    0.3349,
+    0.0093,
+    0.391
+   ],
+   "talkativeness": 0.439,
+   "modesty": 0.05
+  },
+  "company": "Pizzeria Strada",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Charlotte",
+  "state": "NC",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00469",
+  "name": "Elizabeth Hamilton",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.21,
+   0.0,
+   0.35,
+   0.24,
+   0.22,
+   0.06,
+   0.93,
+   1.0,
+   0.23,
+   0.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.021,
+    0.063,
+    0.18,
+    0.249,
+    0.206,
+    0.175,
+    0.858,
+    0.757,
+    0.139,
+    0.034
+   ],
+   "interest": [
+    0.3151,
+    0.0181,
+    0.0051,
+    0.0059,
+    0.1712,
+    0.0016,
+    0.2653,
+    0.1259,
+    0.01,
+    0.0818
+   ],
+   "talkativeness": 0.747,
+   "modesty": 0.166
+  },
+  "company": "Roma Foodservice (PFG)",
+  "title": "Business Development Manager",
+  "business_type": "Distributor",
+  "city": "Richmond",
+  "state": "VA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00472",
+  "name": "Emma Schmidt",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.45,
+   0.0,
+   0.81,
+   0.13,
+   0.25,
+   0.18,
+   0.29,
+   0.35,
+   0.13,
+   0.28
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.246,
+    0.024,
+    0.729,
+    0.155,
+    0.123,
+    0.178,
+    0.136,
+    0.125,
+    0.181,
+    0.06
+   ],
+   "interest": [
+    0.1408,
+    0.002,
+    0.3426,
+    0.0894,
+    0.0239,
+    0.0009,
+    0.0924,
+    0.2611,
+    0.0368,
+    0.0101
+   ],
+   "talkativeness": 0.279,
+   "modesty": 0.299
+  },
+  "company": "Rich Products",
+  "title": "Technical Sales Specialist",
+  "business_type": "Manufacturer / supplier",
+  "city": "Naperville",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00477",
+  "name": "Keisha Baker",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.38,
+   0.14,
+   0.16,
+   0.14,
+   0.08,
+   0.1,
+   0.21,
+   0.85,
+   0.27,
+   0.47
+  ],
+  "signups": [
+   "S-101",
+   "S-108",
+   "S-110",
+   "S-127",
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.221,
+    0.177,
+    0.091,
+    0.051,
+    0.109,
+    0.158,
+    0.175,
+    0.911,
+    0.123,
+    0.229
+   ],
+   "interest": [
+    0.0261,
+    0.0001,
+    0.2738,
+    0.1332,
+    0.0001,
+    0.0175,
+    0.0022,
+    0.0245,
+    0.0007,
+    0.5218
+   ],
+   "talkativeness": 0.5,
+   "modesty": 0.345
+  },
+  "company": "Heritage Hospitality Capital",
+  "title": "Principal",
+  "business_type": "Media / consulting / other",
+  "city": "Trenton",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00503",
+  "name": "Lamar Sullivan",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.09,
+   0.13,
+   0.13,
+   0.06,
+   0.19,
+   0.37,
+   0.96,
+   0.3,
+   0.2,
+   0.08
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.092,
+    0.238,
+    0.042,
+    0.177,
+    0.123,
+    0.119,
+    0.879,
+    0.052,
+    0.154,
+    0.121
+   ],
+   "interest": [
+    0.0201,
+    0.0063,
+    0.0229,
+    0.237,
+    0.0035,
+    0.0129,
+    0.4544,
+    0.0067,
+    0.0037,
+    0.2325
+   ],
+   "talkativeness": 0.775,
+   "modesty": 0.113
+  },
+  "company": "Chuck E. Cheese",
+  "title": "Senior Purchasing Manager",
+  "business_type": "Chain headquarters",
+  "city": "Scottsdale",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00515",
+  "name": "Danielle Wallace",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   0,
+   1,
+   2,
+   6,
+   7,
+   9
+  ],
+  "resume_tags": [
+   0.77,
+   0.78,
+   0.91,
+   0.27,
+   0.1,
+   0.01,
+   0.31,
+   0.16,
+   0.29,
+   0.19
+  ],
+  "signups": [
+   "S-127",
+   "S-128",
+   "S-129"
+  ],
+  "truth": {
+   "expertise": [
+    0.687,
+    0.76,
+    0.852,
+    0.228,
+    0.159,
+    0.113,
+    0.147,
+    0.088,
+    0.217,
+    0.052
+   ],
+   "interest": [
+    0.1917,
+    0.0549,
+    0.1757,
+    0.0036,
+    0.1098,
+    0.0015,
+    0.0036,
+    0.1545,
+    0.0144,
+    0.2903
+   ],
+   "talkativeness": 0.665,
+   "modesty": 0.046
+  },
+  "company": "Northbridge Restaurant Advisors",
+  "title": "Restaurant Consultant",
+  "business_type": "Media / consulting / other",
+  "city": "Tucson",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00516",
+  "name": "Artan Gashi",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.27,
+   0.01,
+   0.17,
+   0.16,
+   0.08,
+   0.2,
+   0.06,
+   0.91,
+   0.0,
+   0.02
+  ],
+  "signups": [
+   "S-102",
+   "S-125"
+  ],
+  "truth": {
+   "expertise": [
+    0.25,
+    0.245,
+    0.047,
+    0.022,
+    0.118,
+    0.135,
+    0.199,
+    0.871,
+    0.08,
+    0.076
+   ],
+   "interest": [
+    0.0001,
+    0.0191,
+    0.0022,
+    0.084,
+    0.0002,
+    0.0012,
+    0.0002,
+    0.3447,
+    0.2995,
+    0.2489
+   ],
+   "talkativeness": 0.207,
+   "modesty": 0.185
+  },
+  "company": "Barbieri's Pizza & Pasta LLC",
+  "title": "General Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Las Vegas",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00527",
+  "name": "Matthew Turner",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.13,
+   0.0,
+   0.77,
+   0.34,
+   0.26,
+   1.0,
+   0.31,
+   0.0,
+   0.74,
+   0.24
+  ],
+  "signups": [
+   "S-101",
+   "S-102",
+   "S-114"
+  ],
+  "truth": {
+   "expertise": [
+    0.085,
+    0.16,
+    0.802,
+    0.167,
+    0.216,
+    0.942,
+    0.183,
+    0.063,
+    0.839,
+    0.213
+   ],
+   "interest": [
+    0.0419,
+    0.0075,
+    0.1673,
+    0.0,
+    0.2941,
+    0.0799,
+    0.009,
+    0.166,
+    0.0855,
+    0.1487
+   ],
+   "talkativeness": 0.252,
+   "modesty": 0.133
+  },
+  "company": "Bayview Pie Shop",
+  "title": "Pizzaiolo",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Atlanta",
+  "state": "GA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00541",
+  "name": "Daniel Coleman",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   0
+  ],
+  "resume_tags": [
+   0.69,
+   0.24,
+   0.17,
+   0.29,
+   0.27,
+   0.0,
+   0.0,
+   0.29,
+   0.04,
+   0.62
+  ],
+  "signups": [
+   "S-102",
+   "S-121",
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.744,
+    0.18,
+    0.128,
+    0.184,
+    0.228,
+    0.041,
+    0.026,
+    0.063,
+    0.111,
+    0.73
+   ],
+   "interest": [
+    0.1798,
+    0.0246,
+    0.0021,
+    0.0788,
+    0.01,
+    0.0,
+    0.3639,
+    0.2549,
+    0.0035,
+    0.0823
+   ],
+   "talkativeness": 0.466,
+   "modesty": 0.089
+  },
+  "company": "Grande Cheese",
+  "title": "Marketing Manager",
+  "business_type": "Manufacturer / supplier",
+  "city": "Chicago",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00549",
+  "name": "Eric Le",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.13,
+   0.03,
+   0.77,
+   0.13,
+   0.12,
+   0.0,
+   0.17,
+   0.04,
+   1.0,
+   0.35
+  ],
+  "signups": [
+   "S-106"
+  ],
+  "truth": {
+   "expertise": [
+    0.182,
+    0.174,
+    0.677,
+    0.128,
+    0.139,
+    0.038,
+    0.215,
+    0.029,
+    0.888,
+    0.241
+   ],
+   "interest": [
+    0.0586,
+    0.2131,
+    0.0741,
+    0.0012,
+    0.0337,
+    0.037,
+    0.0626,
+    0.384,
+    0.128,
+    0.0077
+   ],
+   "talkativeness": 0.791,
+   "modesty": 0.028
+  },
+  "company": "Miller Pizza Co.",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Minneapolis",
+  "state": "MN",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00555",
+  "name": "Roberto Cruz",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.2,
+   0.13,
+   0.23,
+   0.0,
+   0.3,
+   0.03,
+   0.07,
+   0.78,
+   0.48,
+   0.4
+  ],
+  "signups": [
+   "S-118",
+   "S-124",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.092,
+    0.114,
+    0.246,
+    0.038,
+    0.126,
+    0.149,
+    0.173,
+    0.664,
+    0.154,
+    0.149
+   ],
+   "interest": [
+    0.0031,
+    0.1495,
+    0.04,
+    0.0,
+    0.0446,
+    0.0648,
+    0.2469,
+    0.255,
+    0.1961,
+    0.0
+   ],
+   "talkativeness": 0.309,
+   "modesty": 0.395
+  },
+  "company": "andpizza",
+  "title": "Regional Operations Manager",
+  "business_type": "Chain headquarters",
+  "city": "Washington",
+  "state": "DC",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00559",
+  "name": "Bassam Khoury",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.16,
+   0.96,
+   0.26,
+   0.14,
+   0.26,
+   0.54,
+   0.02,
+   0.0,
+   0.0,
+   0.16
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.156,
+    0.78,
+    0.21,
+    0.248,
+    0.202,
+    0.205,
+    0.112,
+    0.029,
+    0.175,
+    0.071
+   ],
+   "interest": [
+    0.0039,
+    0.3131,
+    0.1073,
+    0.1123,
+    0.034,
+    0.0005,
+    0.0012,
+    0.3871,
+    0.0,
+    0.0406
+   ],
+   "talkativeness": 0.592,
+   "modesty": 0.207
+  },
+  "company": "Mutti",
+  "title": "Technical Sales Specialist",
+  "business_type": "Manufacturer / supplier",
+  "city": "Chicago",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00566",
+  "name": "Seo-yeon Nguyen",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   0
+  ],
+  "resume_tags": [
+   0.72,
+   0.18,
+   0.0,
+   0.4,
+   0.0,
+   0.0,
+   0.0,
+   0.27,
+   0.18,
+   0.14
+  ],
+  "signups": [
+   "S-121",
+   "S-131"
+  ],
+  "truth": {
+   "expertise": [
+    0.759,
+    0.104,
+    0.063,
+    0.241,
+    0.184,
+    0.145,
+    0.042,
+    0.204,
+    0.022,
+    0.174
+   ],
+   "interest": [
+    0.1589,
+    0.0001,
+    0.101,
+    0.0088,
+    0.0002,
+    0.0104,
+    0.3533,
+    0.3324,
+    0.0275,
+    0.0074
+   ],
+   "talkativeness": 0.35,
+   "modesty": 0.379
+  },
+  "company": "Sargento Foods",
+  "title": "Director of Foodservice Sales",
+  "business_type": "Manufacturer / supplier",
+  "city": "Las Vegas",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00568",
+  "name": "Paul Lee",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.23,
+   0.33,
+   0.0,
+   0.21,
+   0.1,
+   0.25,
+   0.0,
+   0.5,
+   0.08,
+   0.09
+  ],
+  "signups": [
+   "S-102"
+  ],
+  "truth": {
+   "expertise": [
+    0.199,
+    0.234,
+    0.209,
+    0.043,
+    0.245,
+    0.156,
+    0.063,
+    0.68,
+    0.079,
+    0.176
+   ],
+   "interest": [
+    0.3013,
+    0.0061,
+    0.0038,
+    0.0185,
+    0.0007,
+    0.0779,
+    0.0,
+    0.4699,
+    0.1056,
+    0.016
+   ],
+   "talkativeness": 0.356,
+   "modesty": 0.274
+  },
+  "company": "Leprino Foods",
+  "title": "Vice President of Sales",
+  "business_type": "Manufacturer / supplier",
+  "city": "St. Louis",
+  "state": "MO",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00570",
+  "name": "Luis Herrera",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.31,
+   0.09,
+   0.22,
+   0.35,
+   0.25,
+   0.0,
+   0.17,
+   0.83,
+   0.2
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.184,
+    0.128,
+    0.059,
+    0.167,
+    0.203,
+    0.102,
+    0.224,
+    0.085,
+    0.836,
+    0.114
+   ],
+   "interest": [
+    0.0077,
+    0.0195,
+    0.0089,
+    0.0248,
+    0.0201,
+    0.7823,
+    0.0158,
+    0.0022,
+    0.1183,
+    0.0002
+   ],
+   "talkativeness": 0.243,
+   "modesty": 0.398
+  },
+  "company": "Pizza Business Institute",
+  "title": "Culinary Instructor",
+  "business_type": "Media / consulting / other",
+  "city": "Calgary",
+  "state": "AB",
+  "country": "CA"
+ },
+ {
+  "id": "PE27-00572",
+  "name": "Vivek Shah",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.04,
+   0.12,
+   0.33,
+   0.11,
+   0.34,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.11
+  ],
+  "signups": [
+   "S-102",
+   "S-118"
+  ],
+  "truth": {
+   "expertise": [
+    0.12,
+    0.028,
+    0.22,
+    0.192,
+    0.177,
+    0.025,
+    0.082,
+    0.04,
+    0.908,
+    0.039
+   ],
+   "interest": [
+    0.0047,
+    0.0019,
+    0.0419,
+    0.0846,
+    0.0001,
+    0.0,
+    0.4173,
+    0.0007,
+    0.296,
+    0.1528
+   ],
+   "talkativeness": 0.547,
+   "modesty": 0.263
+  },
+  "company": "Graphic Packaging",
+  "title": "Corporate Chef",
+  "business_type": "Manufacturer / supplier",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00586",
+  "name": "Alyssa Novak",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.16,
+   0.13,
+   0.21,
+   0.32,
+   0.13,
+   0.06,
+   0.26,
+   0.44,
+   0.03,
+   1.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.066,
+    0.188,
+    0.042,
+    0.119,
+    0.132,
+    0.077,
+    0.197,
+    0.171,
+    0.107,
+    0.777
+   ],
+   "interest": [
+    0.0479,
+    0.1094,
+    0.0835,
+    0.0427,
+    0.0302,
+    0.0094,
+    0.1401,
+    0.0028,
+    0.0187,
+    0.5155
+   ],
+   "talkativeness": 0.596,
+   "modesty": 0.062
+  },
+  "company": "PAR Technology",
+  "title": "Solutions Engineer",
+  "business_type": "Technology / software",
+  "city": "Boston",
+  "state": "MA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00587",
+  "name": "Chloe O'Brien",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.14,
+   0.0,
+   0.27,
+   0.02,
+   0.22,
+   0.26,
+   0.53,
+   0.0,
+   0.0,
+   0.19
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.212,
+    0.075,
+    0.169,
+    0.112,
+    0.199,
+    0.191,
+    0.727,
+    0.09,
+    0.108,
+    0.191
+   ],
+   "interest": [
+    0.0393,
+    0.0116,
+    0.0027,
+    0.051,
+    0.0758,
+    0.0001,
+    0.0995,
+    0.2702,
+    0.4495,
+    0.0003
+   ],
+   "talkativeness": 0.815,
+   "modesty": 0.082
+  },
+  "company": "Ballard Slice",
+  "title": "Purchasing Director",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Staten Island",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00594",
+  "name": "Teresa Donati",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   2,
+   5,
+   8
+  ],
+  "resume_tags": [
+   0.15,
+   0.31,
+   0.58,
+   0.25,
+   0.1,
+   0.04,
+   0.0,
+   0.04,
+   0.15,
+   0.16
+  ],
+  "signups": [
+   "S-109"
+  ],
+  "truth": {
+   "expertise": [
+    0.176,
+    0.18,
+    0.771,
+    0.17,
+    0.24,
+    0.111,
+    0.039,
+    0.112,
+    0.079,
+    0.205
+   ],
+   "interest": [
+    0.1366,
+    0.001,
+    0.1944,
+    0.0185,
+    0.0068,
+    0.0125,
+    0.01,
+    0.0689,
+    0.5105,
+    0.0408
+   ],
+   "talkativeness": 0.276,
+   "modesty": 0.012
+  },
+  "company": "Desert Valley Pie Shop",
+  "title": "Owner, Chef",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Trenton",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00605",
+  "name": "Pooja Patel",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.81,
+   0.1,
+   0.24,
+   0.43,
+   0.0,
+   0.0,
+   0.14,
+   0.74,
+   0.04,
+   0.05
+  ],
+  "signups": [
+   "S-103",
+   "S-104",
+   "S-105"
+  ],
+  "truth": {
+   "expertise": [
+    0.67,
+    0.059,
+    0.177,
+    0.126,
+    0.032,
+    0.078,
+    0.198,
+    0.667,
+    0.1,
+    0.161
+   ],
+   "interest": [
+    0.2925,
+    0.0043,
+    0.4883,
+    0.035,
+    0.0203,
+    0.0287,
+    0.0,
+    0.0671,
+    0.0616,
+    0.0022
+   ],
+   "talkativeness": 0.091,
+   "modesty": 0.283
+  },
+  "company": "Old Town Slice House",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Chicago",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00615",
+  "name": "Michelle Lewis",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.17,
+   0.11,
+   0.1,
+   0.19,
+   0.19,
+   0.25,
+   0.01,
+   0.28,
+   1.0,
+   0.08
+  ],
+  "signups": [
+   "S-102",
+   "S-124",
+   "S-125",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.118,
+    0.078,
+    0.156,
+    0.157,
+    0.229,
+    0.16,
+    0.208,
+    0.176,
+    0.892,
+    0.054
+   ],
+   "interest": [
+    0.0036,
+    0.1395,
+    0.1476,
+    0.0582,
+    0.0032,
+    0.0002,
+    0.0,
+    0.3721,
+    0.2539,
+    0.0217
+   ],
+   "talkativeness": 0.817,
+   "modesty": 0.231
+  },
+  "company": "Slice of Southtown",
+  "title": "Pizzaiolo",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Ann Arbor",
+  "state": "MI",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00618",
+  "name": "Kevin Smith",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.08,
+   1.0,
+   0.16,
+   0.23,
+   0.17,
+   0.07,
+   0.0,
+   0.77,
+   0.09
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.137,
+    0.14,
+    0.948,
+    0.203,
+    0.201,
+    0.174,
+    0.02,
+    0.135,
+    0.666,
+    0.104
+   ],
+   "interest": [
+    0.0097,
+    0.0047,
+    0.1932,
+    0.326,
+    0.0384,
+    0.0203,
+    0.0163,
+    0.0,
+    0.3298,
+    0.0616
+   ],
+   "talkativeness": 0.231,
+   "modesty": 0.127
+  },
+  "company": "Shamrock Foods",
+  "title": "Culinary Specialist",
+  "business_type": "Distributor",
+  "city": "Phoenix",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00634",
+  "name": "Manuel Navarro",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.44,
+   0.77,
+   0.32,
+   0.22,
+   0.22,
+   0.13,
+   0.0,
+   0.84,
+   0.0,
+   0.45
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.243,
+    0.798,
+    0.231,
+    0.162,
+    0.077,
+    0.134,
+    0.085,
+    0.713,
+    0.088,
+    0.199
+   ],
+   "interest": [
+    0.0062,
+    0.1567,
+    0.0062,
+    0.0026,
+    0.1054,
+    0.0002,
+    0.0,
+    0.3983,
+    0.1967,
+    0.1277
+   ],
+   "talkativeness": 0.595,
+   "modesty": 0.131
+  },
+  "company": "Ironbound Pizza Co.",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Dallas",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00641",
+  "name": "Gina Grasso",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.64,
+   0.2,
+   0.08,
+   0.33,
+   0.3,
+   0.17,
+   0.06,
+   1.0,
+   0.0,
+   0.21
+  ],
+  "signups": [
+   "S-110"
+  ],
+  "truth": {
+   "expertise": [
+    0.757,
+    0.141,
+    0.232,
+    0.163,
+    0.23,
+    0.103,
+    0.148,
+    0.919,
+    0.024,
+    0.064
+   ],
+   "interest": [
+    0.0234,
+    0.0642,
+    0.268,
+    0.0356,
+    0.0003,
+    0.2136,
+    0.0029,
+    0.3845,
+    0.0008,
+    0.0068
+   ],
+   "talkativeness": 0.841,
+   "modesty": 0.071
+  },
+  "company": "Famous Alessandro's LLC",
+  "title": "Operations Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Austin",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00671",
+  "name": "Andrew Rogers",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.48,
+   0.24,
+   0.44,
+   0.0,
+   0.23,
+   0.02,
+   0.15,
+   0.89,
+   0.02,
+   0.29
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.214,
+    0.215,
+    0.148,
+    0.172,
+    0.247,
+    0.194,
+    0.12,
+    0.799,
+    0.042,
+    0.191
+   ],
+   "interest": [
+    0.2126,
+    0.0168,
+    0.0012,
+    0.0015,
+    0.0487,
+    0.0079,
+    0.3231,
+    0.2135,
+    0.0065,
+    0.1681
+   ],
+   "talkativeness": 0.776,
+   "modesty": 0.105
+  },
+  "company": "Ballard Slice",
+  "title": "President",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Fort Lauderdale",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00673",
+  "name": "Travis Nielsen",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.2,
+   0.28,
+   0.12,
+   0.0,
+   0.26,
+   0.03,
+   0.18,
+   0.92,
+   0.05,
+   0.98
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.126,
+    0.237,
+    0.229,
+    0.109,
+    0.14,
+    0.105,
+    0.129,
+    0.878,
+    0.035,
+    0.801
+   ],
+   "interest": [
+    0.0015,
+    0.0002,
+    0.0007,
+    0.0499,
+    0.0079,
+    0.0,
+    0.0,
+    0.6313,
+    0.0246,
+    0.2838
+   ],
+   "talkativeness": 0.126,
+   "modesty": 0.427
+  },
+  "company": "Square",
+  "title": "Customer Success Manager",
+  "business_type": "Technology / software",
+  "city": "Oakland",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00679",
+  "name": "Andres Romero",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.15,
+   0.15,
+   0.71,
+   0.14,
+   0.0,
+   0.29,
+   0.12,
+   0.21,
+   0.83,
+   0.09
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.045,
+    0.091,
+    0.841,
+    0.193,
+    0.04,
+    0.181,
+    0.133,
+    0.191,
+    0.774,
+    0.124
+   ],
+   "interest": [
+    0.1786,
+    0.0053,
+    0.1678,
+    0.018,
+    0.088,
+    0.0018,
+    0.1306,
+    0.2158,
+    0.1795,
+    0.0146
+   ],
+   "talkativeness": 0.194,
+   "modesty": 0.286
+  },
+  "company": "Brian & Sons Pizzeria",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Huntington",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00680",
+  "name": "Olivia Hansen",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.19,
+   0.19,
+   0.01,
+   0.16,
+   0.09,
+   0.16,
+   0.15,
+   0.65,
+   0.23,
+   0.0
+  ],
+  "signups": [
+   "S-104",
+   "S-105",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.069,
+    0.219,
+    0.078,
+    0.072,
+    0.067,
+    0.11,
+    0.121,
+    0.716,
+    0.187,
+    0.105
+   ],
+   "interest": [
+    0.377,
+    0.0255,
+    0.1768,
+    0.1614,
+    0.0205,
+    0.0323,
+    0.0,
+    0.0145,
+    0.1036,
+    0.0884
+   ],
+   "talkativeness": 0.574,
+   "modesty": 0.078
+  },
+  "company": "Strada Pizza Napoletana",
+  "title": "Kitchen Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Cleveland",
+  "state": "OH",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00684",
+  "name": "Joshua O'Brien",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.21,
+   0.1,
+   0.22,
+   0.02,
+   0.07,
+   0.0,
+   0.81,
+   0.24,
+   0.21
+  ],
+  "signups": [
+   "S-109"
+  ],
+  "truth": {
+   "expertise": [
+    0.076,
+    0.244,
+    0.231,
+    0.161,
+    0.104,
+    0.097,
+    0.023,
+    0.77,
+    0.239,
+    0.184
+   ],
+   "interest": [
+    0.1199,
+    0.0091,
+    0.4023,
+    0.2887,
+    0.0257,
+    0.0001,
+    0.0918,
+    0.0308,
+    0.0161,
+    0.0155
+   ],
+   "talkativeness": 0.197,
+   "modesty": 0.08
+  },
+  "company": "CPK",
+  "title": "Senior Director, Franchise Development",
+  "business_type": "Chain headquarters",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00692",
+  "name": "Gabriela Cabrera",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   2,
+   5,
+   8
+  ],
+  "resume_tags": [
+   0.0,
+   0.25,
+   0.22,
+   0.24,
+   0.08,
+   0.17,
+   0.0,
+   0.12,
+   0.33,
+   0.05
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.035,
+    0.074,
+    0.848,
+    0.221,
+    0.138,
+    0.209,
+    0.155,
+    0.061,
+    0.098,
+    0.172
+   ],
+   "interest": [
+    0.2641,
+    0.2591,
+    0.2722,
+    0.0198,
+    0.0416,
+    0.0087,
+    0.0278,
+    0.0076,
+    0.0922,
+    0.0068
+   ],
+   "talkativeness": 0.646,
+   "modesty": 0.133
+  },
+  "company": "Mancini Pizza Co.",
+  "title": "Owner/Operator",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Fresno",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00697",
+  "name": "David Chen",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.17,
+   0.0,
+   0.23,
+   0.0,
+   0.01,
+   0.15,
+   0.0,
+   0.68,
+   0.01,
+   0.14
+  ],
+  "signups": [
+   "S-101",
+   "S-121",
+   "S-129",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.138,
+    0.041,
+    0.097,
+    0.078,
+    0.111,
+    0.072,
+    0.083,
+    0.784,
+    0.049,
+    0.066
+   ],
+   "interest": [
+    0.0012,
+    0.0675,
+    0.0346,
+    0.0073,
+    0.031,
+    0.0004,
+    0.0708,
+    0.3074,
+    0.0007,
+    0.479
+   ],
+   "talkativeness": 0.835,
+   "modesty": 0.351
+  },
+  "company": "Pizza Ranch",
+  "title": "Director of Operations",
+  "business_type": "Chain headquarters",
+  "city": "Orange City",
+  "state": "IA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00700",
+  "name": "Neha Kapoor",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.15,
+   0.25,
+   0.23,
+   0.15,
+   0.38,
+   0.31,
+   0.08,
+   0.59,
+   0.29,
+   0.42
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.054,
+    0.211,
+    0.138,
+    0.119,
+    0.222,
+    0.15,
+    0.137,
+    0.677,
+    0.174,
+    0.179
+   ],
+   "interest": [
+    0.0011,
+    0.0052,
+    0.0664,
+    0.0145,
+    0.0191,
+    0.1843,
+    0.1805,
+    0.0334,
+    0.1486,
+    0.347
+   ],
+   "talkativeness": 0.499,
+   "modesty": 0.102
+  },
+  "company": "Southtown Pizza Partners",
+  "title": "District Manager",
+  "business_type": "Franchisee",
+  "city": "Phoenix",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00705",
+  "name": "Sanjay Malhotra",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.34,
+   0.26,
+   0.09,
+   0.24,
+   0.0,
+   0.04,
+   0.21,
+   0.14,
+   1.0
+  ],
+  "signups": [
+   "S-131"
+  ],
+  "truth": {
+   "expertise": [
+    0.06,
+    0.225,
+    0.209,
+    0.218,
+    0.242,
+    0.154,
+    0.121,
+    0.116,
+    0.158,
+    0.95
+   ],
+   "interest": [
+    0.0009,
+    0.0023,
+    0.0009,
+    0.0025,
+    0.0509,
+    0.0,
+    0.1225,
+    0.2532,
+    0.1536,
+    0.4131
+   ],
+   "talkativeness": 0.408,
+   "modesty": 0.224
+  },
+  "company": "Slice Life",
+  "title": "Software Engineer",
+  "business_type": "Technology / software",
+  "city": "New York",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00715",
+  "name": "Haley Price",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.17,
+   0.19,
+   0.42,
+   0.18,
+   0.21,
+   0.05,
+   0.08,
+   0.08,
+   0.26,
+   1.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.202,
+    0.049,
+    0.131,
+    0.086,
+    0.246,
+    0.127,
+    0.035,
+    0.105,
+    0.039,
+    0.907
+   ],
+   "interest": [
+    0.0001,
+    0.0054,
+    0.02,
+    0.2815,
+    0.0279,
+    0.0535,
+    0.3817,
+    0.0078,
+    0.0007,
+    0.2213
+   ],
+   "talkativeness": 0.626,
+   "modesty": 0.104
+  },
+  "company": "SpotOn",
+  "title": "Senior Product Manager",
+  "business_type": "Technology / software",
+  "city": "Houston",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00724",
+  "name": "Vjosa Ahmeti",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.97,
+   0.17,
+   0.0,
+   0.13,
+   0.14,
+   0.07,
+   0.29,
+   0.91,
+   0.35,
+   0.05
+  ],
+  "signups": [
+   "S-122",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.797,
+    0.21,
+    0.08,
+    0.137,
+    0.036,
+    0.22,
+    0.246,
+    0.819,
+    0.173,
+    0.112
+   ],
+   "interest": [
+    0.0166,
+    0.0279,
+    0.0002,
+    0.0034,
+    0.0426,
+    0.0794,
+    0.1214,
+    0.6911,
+    0.0121,
+    0.0052
+   ],
+   "talkativeness": 0.488,
+   "modesty": 0.078
+  },
+  "company": "copper ember pizzeria",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Stamford",
+  "state": "CT",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00734",
+  "name": "Lucia Gomez",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.14,
+   0.33,
+   0.0,
+   0.2,
+   0.09,
+   0.01,
+   0.0,
+   0.46,
+   0.03,
+   0.02
+  ],
+  "signups": [
+   "S-101",
+   "S-102"
+  ],
+  "truth": {
+   "expertise": [
+    0.243,
+    0.127,
+    0.073,
+    0.189,
+    0.179,
+    0.049,
+    0.053,
+    0.704,
+    0.109,
+    0.086
+   ],
+   "interest": [
+    0.0574,
+    0.2092,
+    0.026,
+    0.0523,
+    0.0995,
+    0.0138,
+    0.4158,
+    0.0283,
+    0.0248,
+    0.073
+   ],
+   "talkativeness": 0.332,
+   "modesty": 0.108
+  },
+  "company": "acw holdings llc",
+  "title": "District Manager",
+  "business_type": "Franchisee",
+  "city": "Tampa",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00746",
+  "name": "Grant King",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.42,
+   0.0,
+   0.03,
+   0.0,
+   0.17,
+   0.13,
+   0.04,
+   0.75,
+   0.15,
+   0.03
+  ],
+  "signups": [
+   "S-120"
+  ],
+  "truth": {
+   "expertise": [
+    0.22,
+    0.173,
+    0.061,
+    0.022,
+    0.24,
+    0.088,
+    0.111,
+    0.797,
+    0.185,
+    0.23
+   ],
+   "interest": [
+    0.0416,
+    0.0269,
+    0.0401,
+    0.071,
+    0.0432,
+    0.1155,
+    0.1004,
+    0.2784,
+    0.028,
+    0.2548
+   ],
+   "talkativeness": 0.552,
+   "modesty": 0.221
+  },
+  "company": "Oak Park Pizza Co.",
+  "title": "President",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Cleveland",
+  "state": "OH",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00753",
+  "name": "Despina Dimitriou",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.01,
+   0.23,
+   0.78,
+   0.15,
+   0.17,
+   0.0,
+   0.0,
+   0.3,
+   0.49,
+   0.19
+  ],
+  "signups": [
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.182,
+    0.125,
+    0.824,
+    0.204,
+    0.228,
+    0.106,
+    0.046,
+    0.243,
+    0.684,
+    0.14
+   ],
+   "interest": [
+    0.0064,
+    0.0637,
+    0.2072,
+    0.1183,
+    0.0175,
+    0.0,
+    0.02,
+    0.4532,
+    0.1068,
+    0.007
+   ],
+   "talkativeness": 0.67,
+   "modesty": 0.141
+  },
+  "company": "Neighborly Dough Co.",
+  "title": "Pizzaiolo",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Jersey City",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00763",
+  "name": "Wes Jordan",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.04,
+   0.03,
+   0.19,
+   0.16,
+   0.89,
+   0.0,
+   0.07,
+   0.2,
+   0.38
+  ],
+  "signups": [
+   "S-101",
+   "S-102",
+   "S-116",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.225,
+    0.079,
+    0.153,
+    0.046,
+    0.213,
+    0.88,
+    0.088,
+    0.161,
+    0.155,
+    0.189
+   ],
+   "interest": [
+    0.0068,
+    0.14,
+    0.0055,
+    0.0094,
+    0.1068,
+    0.5712,
+    0.1327,
+    0.0006,
+    0.0261,
+    0.0009
+   ],
+   "talkativeness": 0.498,
+   "modesty": 0.109
+  },
+  "company": "True Manufacturing",
+  "title": "Regional Sales Manager",
+  "business_type": "Manufacturer / supplier",
+  "city": "Reno",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00780",
+  "name": "Sal Ferraro",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.02,
+   0.99,
+   0.19,
+   0.31,
+   0.22,
+   0.35,
+   0.82,
+   0.0,
+   0.07
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.069,
+    0.032,
+    0.946,
+    0.138,
+    0.19,
+    0.107,
+    0.078,
+    0.806,
+    0.049,
+    0.033
+   ],
+   "interest": [
+    0.092,
+    0.0134,
+    0.3556,
+    0.1195,
+    0.0184,
+    0.0041,
+    0.0152,
+    0.0058,
+    0.0364,
+    0.3398
+   ],
+   "talkativeness": 0.953,
+   "modesty": 0.444
+  },
+  "company": "Famous Ryan's",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Miami",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00792",
+  "name": "Nabil Khoury",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.02,
+   0.26,
+   0.15,
+   0.25,
+   0.17,
+   0.0,
+   0.0,
+   0.75,
+   0.14,
+   0.07
+  ],
+  "signups": [
+   "S-101"
+  ],
+  "truth": {
+   "expertise": [
+    0.038,
+    0.186,
+    0.071,
+    0.219,
+    0.194,
+    0.151,
+    0.162,
+    0.717,
+    0.047,
+    0.034
+   ],
+   "interest": [
+    0.0106,
+    0.3506,
+    0.0405,
+    0.046,
+    0.1257,
+    0.0788,
+    0.0228,
+    0.2321,
+    0.0911,
+    0.0017
+   ],
+   "talkativeness": 0.744,
+   "modesty": 0.065
+  },
+  "company": "bearded slice enterprises",
+  "title": "President",
+  "business_type": "Franchisee",
+  "city": "New Orleans",
+  "state": "LA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00794",
+  "name": "Jennifer Wallace",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.08,
+   0.14,
+   0.0,
+   0.28,
+   0.06,
+   0.0,
+   0.09,
+   0.71,
+   0.21,
+   0.12
+  ],
+  "signups": [
+   "S-133",
+   "S-134"
+  ],
+  "truth": {
+   "expertise": [
+    0.186,
+    0.218,
+    0.025,
+    0.13,
+    0.115,
+    0.079,
+    0.073,
+    0.878,
+    0.165,
+    0.065
+   ],
+   "interest": [
+    0.0127,
+    0.0044,
+    0.1399,
+    0.0548,
+    0.0306,
+    0.0574,
+    0.0,
+    0.4752,
+    0.2179,
+    0.007
+   ],
+   "talkativeness": 0.874,
+   "modesty": 0.251
+  },
+  "company": "ProPress Dough Systems",
+  "title": "Founder",
+  "business_type": "Manufacturer / supplier",
+  "city": "Portland",
+  "state": "OR",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00798",
+  "name": "Teresa Guerra",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.07,
+   0.67,
+   0.02,
+   0.11,
+   0.72,
+   0.43,
+   0.03,
+   0.8,
+   0.25
+  ],
+  "signups": [
+   "S-120",
+   "S-126"
+  ],
+  "truth": {
+   "expertise": [
+    0.09,
+    0.086,
+    0.683,
+    0.104,
+    0.16,
+    0.738,
+    0.194,
+    0.113,
+    0.894,
+    0.211
+   ],
+   "interest": [
+    0.3061,
+    0.0,
+    0.0143,
+    0.0275,
+    0.0114,
+    0.031,
+    0.1126,
+    0.2755,
+    0.1204,
+    0.1011
+   ],
+   "talkativeness": 0.433,
+   "modesty": 0.272
+  },
+  "company": "Mark's NY Pizza",
+  "title": "Chef & Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Fort Worth",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00800",
+  "name": "Patricia Campos",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.28,
+   0.17,
+   0.33,
+   0.14,
+   0.05,
+   0.12,
+   0.88,
+   0.3,
+   0.36
+  ],
+  "signups": [
+   "S-106",
+   "S-107",
+   "S-122",
+   "S-133"
+  ],
+  "truth": {
+   "expertise": [
+    0.033,
+    0.244,
+    0.105,
+    0.23,
+    0.148,
+    0.119,
+    0.1,
+    0.93,
+    0.077,
+    0.214
+   ],
+   "interest": [
+    0.0002,
+    0.0873,
+    0.0186,
+    0.002,
+    0.0025,
+    0.0819,
+    0.033,
+    0.4144,
+    0.018,
+    0.3421
+   ],
+   "talkativeness": 0.422,
+   "modesty": 0.137
+  },
+  "company": "Pizza Nonna",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Atlanta",
+  "state": "GA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00801",
+  "name": "Ashley Martin",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   4
+  ],
+  "resume_tags": [
+   0.01,
+   0.18,
+   0.21,
+   0.16,
+   0.31,
+   0.11,
+   0.04,
+   0.0,
+   0.0,
+   0.06
+  ],
+  "signups": [
+   "S-128"
+  ],
+  "truth": {
+   "expertise": [
+    0.105,
+    0.174,
+    0.11,
+    0.171,
+    0.816,
+    0.056,
+    0.152,
+    0.116,
+    0.095,
+    0.177
+   ],
+   "interest": [
+    0.0506,
+    0.1278,
+    0.0056,
+    0.0024,
+    0.288,
+    0.1737,
+    0.0928,
+    0.0003,
+    0.0402,
+    0.2187
+   ],
+   "talkativeness": 0.376,
+   "modesty": 0.021
+  },
+  "company": "Wandering Dough Co.",
+  "title": "Dir. of Operations",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Kansas City",
+  "state": "MO",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00807",
+  "name": "Lisa Cole",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.08,
+   0.3,
+   0.09,
+   0.56,
+   0.11,
+   0.17,
+   0.0,
+   0.25,
+   0.24,
+   0.01
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.052,
+    0.051,
+    0.043,
+    0.677,
+    0.063,
+    0.128,
+    0.201,
+    0.163,
+    0.071,
+    0.087
+   ],
+   "interest": [
+    0.0018,
+    0.3959,
+    0.001,
+    0.2783,
+    0.0228,
+    0.0131,
+    0.0002,
+    0.0954,
+    0.1273,
+    0.0642
+   ],
+   "talkativeness": 0.306,
+   "modesty": 0.235
+  },
+  "company": "Hormel Foods",
+  "title": "Territory Sales Manager",
+  "business_type": "Manufacturer / supplier",
+  "city": "Pittsburgh",
+  "state": "PA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00817",
+  "name": "Tiffany O'Brien",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.35,
+   0.97,
+   0.06,
+   0.3,
+   0.0,
+   0.08,
+   0.0,
+   1.0,
+   0.0,
+   0.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.229,
+    0.946,
+    0.181,
+    0.214,
+    0.051,
+    0.21,
+    0.075,
+    0.798,
+    0.069,
+    0.05
+   ],
+   "interest": [
+    0.0085,
+    0.4169,
+    0.0001,
+    0.0,
+    0.0017,
+    0.0176,
+    0.3176,
+    0.2129,
+    0.0027,
+    0.022
+   ],
+   "talkativeness": 0.312,
+   "modesty": 0.262
+  },
+  "company": "Stanislaus Tomatoes",
+  "title": "Business Development Manager",
+  "business_type": "Manufacturer / supplier",
+  "city": "Tucson",
+  "state": "AZ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00830",
+  "name": "Ruben Torres",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.0,
+   0.17,
+   0.18,
+   0.29,
+   0.13,
+   0.77,
+   0.03,
+   0.0,
+   0.0
+  ],
+  "signups": [
+   "S-101",
+   "S-102"
+  ],
+  "truth": {
+   "expertise": [
+    0.165,
+    0.075,
+    0.133,
+    0.101,
+    0.051,
+    0.083,
+    0.691,
+    0.09,
+    0.066,
+    0.029
+   ],
+   "interest": [
+    0.3216,
+    0.0373,
+    0.0054,
+    0.0138,
+    0.2834,
+    0.0283,
+    0.2488,
+    0.0126,
+    0.0069,
+    0.042
+   ],
+   "talkativeness": 0.468,
+   "modesty": 0.435
+  },
+  "company": "Sysco",
+  "title": "Distributor Sales Representative",
+  "business_type": "Distributor",
+  "city": "Houston",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00833",
+  "name": "Sofia Ferraro",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.12,
+   0.35,
+   0.25,
+   0.09,
+   0.28,
+   1.0,
+   0.34,
+   0.26,
+   0.0,
+   0.06
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.125,
+    0.219,
+    0.157,
+    0.231,
+    0.128,
+    0.93,
+    0.153,
+    0.131,
+    0.241,
+    0.163
+   ],
+   "interest": [
+    0.1771,
+    0.0,
+    0.0109,
+    0.0174,
+    0.2148,
+    0.1725,
+    0.2928,
+    0.088,
+    0.0033,
+    0.0234
+   ],
+   "talkativeness": 0.407,
+   "modesty": 0.027
+  },
+  "company": "The Middleby Corporation",
+  "title": "Vice President of Sales",
+  "business_type": "Manufacturer / supplier",
+  "city": "Austin",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00839",
+  "name": "Vivian Pham",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.01,
+   0.08,
+   0.14,
+   0.26,
+   0.17,
+   0.4,
+   0.26,
+   0.88,
+   0.0,
+   0.28
+  ],
+  "signups": [
+   "S-117",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.051,
+    0.075,
+    0.036,
+    0.235,
+    0.231,
+    0.217,
+    0.245,
+    0.731,
+    0.038,
+    0.127
+   ],
+   "interest": [
+    0.0312,
+    0.01,
+    0.0005,
+    0.0002,
+    0.0153,
+    0.0376,
+    0.3817,
+    0.4307,
+    0.0,
+    0.0928
+   ],
+   "talkativeness": 0.521,
+   "modesty": 0.18
+  },
+  "company": "Oak Park Pizza Co.",
+  "title": "Founder & CEO",
+  "business_type": "Multi-unit operator (4+ locations)",
+  "city": "Cleveland",
+  "state": "OH",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00844",
+  "name": "Ji-ho Cho",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.27,
+   0.22,
+   0.08,
+   0.02,
+   0.04,
+   0.17,
+   0.05,
+   0.75,
+   0.12,
+   0.0
+  ],
+  "signups": [
+   "S-102"
+  ],
+  "truth": {
+   "expertise": [
+    0.118,
+    0.217,
+    0.19,
+    0.159,
+    0.047,
+    0.032,
+    0.07,
+    0.885,
+    0.162,
+    0.055
+   ],
+   "interest": [
+    0.0005,
+    0.0134,
+    0.0584,
+    0.1303,
+    0.0026,
+    0.0741,
+    0.0003,
+    0.6721,
+    0.0459,
+    0.0025
+   ],
+   "talkativeness": 0.329,
+   "modesty": 0.094
+  },
+  "company": "Johnson Pizza Co. LLC",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Seoul",
+  "state": "",
+  "country": "KR"
+ },
+ {
+  "id": "PE27-00851",
+  "name": "Kostas Georgiou",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.17,
+   0.03,
+   0.24,
+   0.29,
+   0.44,
+   0.15,
+   0.08,
+   0.8,
+   0.12,
+   0.32
+  ],
+  "signups": [
+   "S-123",
+   "S-124",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.137,
+    0.045,
+    0.115,
+    0.14,
+    0.187,
+    0.117,
+    0.167,
+    0.847,
+    0.079,
+    0.088
+   ],
+   "interest": [
+    0.1075,
+    0.1563,
+    0.2544,
+    0.0118,
+    0.0264,
+    0.006,
+    0.0001,
+    0.2916,
+    0.1459,
+    0.0
+   ],
+   "talkativeness": 0.575,
+   "modesty": 0.168
+  },
+  "company": "pacific culinary academy",
+  "title": "Program Director",
+  "business_type": "Media / consulting / other",
+  "city": "Rochester",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00855",
+  "name": "Nancy Bailey",
+  "side": "A",
+  "is_speaker": true,
+  "speaker_topics": [
+   3
+  ],
+  "resume_tags": [
+   0.0,
+   0.39,
+   0.0,
+   0.47,
+   0.25,
+   0.14,
+   0.24,
+   0.61,
+   0.06,
+   0.31
+  ],
+  "signups": [
+   "S-108",
+   "S-110"
+  ],
+  "truth": {
+   "expertise": [
+    0.122,
+    0.236,
+    0.045,
+    0.653,
+    0.03,
+    0.093,
+    0.193,
+    0.714,
+    0.183,
+    0.218
+   ],
+   "interest": [
+    0.0044,
+    0.0096,
+    0.24,
+    0.3596,
+    0.1815,
+    0.0018,
+    0.0003,
+    0.0673,
+    0.0545,
+    0.0809
+   ],
+   "talkativeness": 0.705,
+   "modesty": 0.533
+  },
+  "company": "Lakeside Slice House",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Brooklyn",
+  "state": "NY",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00857",
+  "name": "Olivia Wright",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   9
+  ],
+  "resume_tags": [
+   0.14,
+   0.19,
+   0.04,
+   0.05,
+   0.29,
+   0.05,
+   0.05,
+   0.0,
+   0.13,
+   0.94
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.213,
+    0.187,
+    0.192,
+    0.173,
+    0.178,
+    0.184,
+    0.165,
+    0.023,
+    0.072,
+    0.919
+   ],
+   "interest": [
+    0.0024,
+    0.0227,
+    0.061,
+    0.3065,
+    0.0088,
+    0.0012,
+    0.0035,
+    0.0416,
+    0.018,
+    0.5344
+   ],
+   "talkativeness": 0.686,
+   "modesty": 0.314
+  },
+  "company": "Toast",
+  "title": "Sales Development Representative",
+  "business_type": "Technology / software",
+  "city": "Boston",
+  "state": "MA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00859",
+  "name": "Brian Zhao",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.15,
+   0.38,
+   0.12,
+   0.09,
+   0.3,
+   0.16,
+   0.25,
+   0.76,
+   0.34,
+   0.0
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.036,
+    0.242,
+    0.1,
+    0.102,
+    0.24,
+    0.228,
+    0.092,
+    0.863,
+    0.103,
+    0.033
+   ],
+   "interest": [
+    0.0092,
+    0.0059,
+    0.0069,
+    0.0303,
+    0.0386,
+    0.2744,
+    0.0059,
+    0.6187,
+    0.0,
+    0.0101
+   ],
+   "talkativeness": 0.305,
+   "modesty": 0.155
+  },
+  "company": "independent pizzeria alliance",
+  "title": "Membership Manager",
+  "business_type": "Media / consulting / other",
+  "city": "San Diego",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00864",
+  "name": "Besnik Selimi",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.09,
+   0.0,
+   0.0,
+   0.12,
+   0.21,
+   0.18,
+   0.12,
+   0.87,
+   0.22,
+   0.0
+  ],
+  "signups": [
+   "S-112"
+  ],
+  "truth": {
+   "expertise": [
+    0.218,
+    0.049,
+    0.137,
+    0.173,
+    0.201,
+    0.243,
+    0.091,
+    0.658,
+    0.119,
+    0.216
+   ],
+   "interest": [
+    0.0363,
+    0.031,
+    0.0784,
+    0.266,
+    0.0,
+    0.4867,
+    0.0244,
+    0.0416,
+    0.0346,
+    0.0009
+   ],
+   "talkativeness": 0.631,
+   "modesty": 0.114
+  },
+  "company": "Franco's NY Pizza",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Toms River",
+  "state": "NJ",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00871",
+  "name": "Franco Caruso",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.22,
+   0.29,
+   0.0,
+   0.0,
+   0.0,
+   0.05,
+   0.08,
+   0.69,
+   0.25,
+   0.1
+  ],
+  "signups": [
+   "S-120",
+   "S-122",
+   "S-130",
+   "S-133",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.207,
+    0.203,
+    0.047,
+    0.036,
+    0.072,
+    0.204,
+    0.055,
+    0.785,
+    0.234,
+    0.123
+   ],
+   "interest": [
+    0.1468,
+    0.001,
+    0.0283,
+    0.0033,
+    0.0206,
+    0.1146,
+    0.078,
+    0.5861,
+    0.0212,
+    0.0001
+   ],
+   "talkativeness": 0.629,
+   "modesty": 0.104
+  },
+  "company": "Pizza Forno",
+  "title": "General Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "San Francisco",
+  "state": "CA",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00876",
+  "name": "Mary Becker",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.06,
+   0.46,
+   0.35,
+   0.28,
+   0.0,
+   0.23,
+   0.7,
+   0.05,
+   0.0
+  ],
+  "signups": [
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.054,
+    0.182,
+    0.17,
+    0.226,
+    0.18,
+    0.068,
+    0.222,
+    0.66,
+    0.19,
+    0.159
+   ],
+   "interest": [
+    0.0001,
+    0.0626,
+    0.0001,
+    0.0001,
+    0.0,
+    0.0001,
+    0.4716,
+    0.3356,
+    0.0986,
+    0.0313
+   ],
+   "talkativeness": 0.547,
+   "modesty": 0.085
+  },
+  "company": "The Dough Daily",
+  "title": "Content Creator",
+  "business_type": "Media / consulting / other",
+  "city": "Albuquerque",
+  "state": "NM",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00878",
+  "name": "Giulia Ferraro",
+  "side": "B",
+  "is_speaker": true,
+  "speaker_topics": [
+   4
+  ],
+  "resume_tags": [
+   0.0,
+   0.04,
+   0.24,
+   0.13,
+   0.47,
+   0.13,
+   0.13,
+   0.13,
+   0.15,
+   0.0
+  ],
+  "signups": [
+   "S-107",
+   "S-114"
+  ],
+  "truth": {
+   "expertise": [
+    0.151,
+    0.157,
+    0.096,
+    0.153,
+    0.852,
+    0.17,
+    0.156,
+    0.057,
+    0.127,
+    0.074
+   ],
+   "interest": [
+    0.0002,
+    0.0718,
+    0.5567,
+    0.0953,
+    0.2216,
+    0.0035,
+    0.0105,
+    0.0,
+    0.0014,
+    0.0391
+   ],
+   "talkativeness": 0.144,
+   "modesty": 0.065
+  },
+  "company": "Famous Nathan's",
+  "title": "owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Tampa",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00886",
+  "name": "Sofia Galli",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.95,
+   0.4,
+   0.27,
+   0.0,
+   0.3,
+   0.0,
+   0.32,
+   0.99,
+   0.24,
+   0.43
+  ],
+  "signups": [
+   "S-114",
+   "S-131",
+   "S-132"
+  ],
+  "truth": {
+   "expertise": [
+    0.886,
+    0.098,
+    0.139,
+    0.029,
+    0.206,
+    0.176,
+    0.132,
+    0.82,
+    0.113,
+    0.198
+   ],
+   "interest": [
+    0.3191,
+    0.0006,
+    0.0738,
+    0.0092,
+    0.1607,
+    0.0214,
+    0.0772,
+    0.3023,
+    0.0338,
+    0.0017
+   ],
+   "talkativeness": 0.494,
+   "modesty": 0.258
+  },
+  "company": "Northside Wood Fired",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Detroit",
+  "state": "MI",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00904",
+  "name": "Layla Khoury",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.12,
+   0.17,
+   0.0,
+   0.02,
+   0.21,
+   0.27,
+   0.2,
+   0.12,
+   0.86
+  ],
+  "signups": [
+   "S-105"
+  ],
+  "truth": {
+   "expertise": [
+    0.176,
+    0.112,
+    0.246,
+    0.028,
+    0.1,
+    0.101,
+    0.086,
+    0.095,
+    0.085,
+    0.801
+   ],
+   "interest": [
+    0.1882,
+    0.0001,
+    0.0,
+    0.0583,
+    0.0003,
+    0.0596,
+    0.0031,
+    0.0615,
+    0.0207,
+    0.6082
+   ],
+   "talkativeness": 0.411,
+   "modesty": 0.211
+  },
+  "company": "The Hearth Pizza Kitchen",
+  "title": "Marketing Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Orlando",
+  "state": "FL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00906",
+  "name": "David Murray",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.19,
+   0.12,
+   0.15,
+   0.13,
+   0.2,
+   0.21,
+   0.22,
+   0.39,
+   0.1,
+   0.77
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.169,
+    0.126,
+    0.119,
+    0.069,
+    0.203,
+    0.191,
+    0.076,
+    0.192,
+    0.055,
+    0.749
+   ],
+   "interest": [
+    0.0064,
+    0.0037,
+    0.0037,
+    0.0032,
+    0.0004,
+    0.0039,
+    0.0005,
+    0.1551,
+    0.4554,
+    0.3677
+   ],
+   "talkativeness": 0.533,
+   "modesty": 0.105
+  },
+  "company": "SpotOn",
+  "title": "Senior Account Executive",
+  "business_type": "Technology / software",
+  "city": "Chicago",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00927",
+  "name": "Dustin Price",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.42,
+   0.08,
+   0.38,
+   0.0,
+   0.22,
+   0.35,
+   0.0,
+   0.04,
+   0.81
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.112,
+    0.207,
+    0.105,
+    0.228,
+    0.025,
+    0.194,
+    0.097,
+    0.026,
+    0.047,
+    0.934
+   ],
+   "interest": [
+    0.008,
+    0.0081,
+    0.003,
+    0.0446,
+    0.0473,
+    0.0546,
+    0.4591,
+    0.0101,
+    0.0191,
+    0.3462
+   ],
+   "talkativeness": 0.601,
+   "modesty": 0.26
+  },
+  "company": "Grubhub",
+  "title": "Account Executive",
+  "business_type": "Technology / software",
+  "city": "Reno",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00931",
+  "name": "Danielle West",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.21,
+   0.37,
+   0.0,
+   0.27,
+   0.01,
+   0.31,
+   0.05,
+   0.59,
+   0.35,
+   0.89
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.112,
+    0.082,
+    0.024,
+    0.205,
+    0.083,
+    0.204,
+    0.231,
+    0.237,
+    0.189,
+    0.753
+   ],
+   "interest": [
+    0.0224,
+    0.0002,
+    0.0031,
+    0.0038,
+    0.0113,
+    0.0,
+    0.2986,
+    0.3109,
+    0.0686,
+    0.2812
+   ],
+   "talkativeness": 0.162,
+   "modesty": 0.208
+  },
+  "company": "SpotOn",
+  "title": "Senior Software Engineer",
+  "business_type": "Technology / software",
+  "city": "Charlotte",
+  "state": "NC",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00938",
+  "name": "Vikram Iyer",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.74,
+   0.15,
+   0.05,
+   0.14,
+   0.0,
+   0.29,
+   0.44,
+   1.0,
+   0.32,
+   0.34
+  ],
+  "signups": [
+   "S-121",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.736,
+    0.162,
+    0.129,
+    0.178,
+    0.145,
+    0.131,
+    0.218,
+    0.68,
+    0.206,
+    0.097
+   ],
+   "interest": [
+    0.1537,
+    0.0022,
+    0.0355,
+    0.0015,
+    0.149,
+    0.0201,
+    0.0002,
+    0.412,
+    0.0819,
+    0.1439
+   ],
+   "talkativeness": 0.857,
+   "modesty": 0.222
+  },
+  "company": "Pizza Bella",
+  "title": "Operations Manager",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Albuquerque",
+  "state": "NM",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00940",
+  "name": "Madison Price",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.13,
+   0.14,
+   0.1,
+   0.21,
+   0.0,
+   0.13,
+   0.1,
+   0.12,
+   0.1,
+   0.76
+  ],
+  "signups": [
+   "S-130"
+  ],
+  "truth": {
+   "expertise": [
+    0.206,
+    0.161,
+    0.059,
+    0.153,
+    0.146,
+    0.069,
+    0.056,
+    0.04,
+    0.093,
+    0.917
+   ],
+   "interest": [
+    0.001,
+    0.0081,
+    0.1016,
+    0.0,
+    0.0007,
+    0.0024,
+    0.0348,
+    0.4116,
+    0.0029,
+    0.4368
+   ],
+   "talkativeness": 0.841,
+   "modesty": 0.07
+  },
+  "company": "SpotOn",
+  "title": "Implementation Specialist",
+  "business_type": "Technology / software",
+  "city": "Chicago",
+  "state": "IL",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00946",
+  "name": "Steven Rogers",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.0,
+   0.17,
+   0.09,
+   0.02,
+   0.06,
+   0.06,
+   0.07,
+   0.69,
+   0.1,
+   0.38
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.128,
+    0.043,
+    0.192,
+    0.144,
+    0.204,
+    0.195,
+    0.194,
+    0.676,
+    0.219,
+    0.243
+   ],
+   "interest": [
+    0.0006,
+    0.1399,
+    0.1217,
+    0.1578,
+    0.0002,
+    0.0191,
+    0.1737,
+    0.0692,
+    0.0553,
+    0.2627
+   ],
+   "talkativeness": 0.559,
+   "modesty": 0.085
+  },
+  "company": "Papa Gino's",
+  "title": "Training Manager",
+  "business_type": "Chain headquarters",
+  "city": "Henderson",
+  "state": "NV",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00947",
+  "name": "Maria Bruno",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.74,
+   0.3,
+   0.06,
+   0.22,
+   0.29,
+   0.03,
+   0.08,
+   0.68,
+   0.18,
+   0.29
+  ],
+  "signups": [
+   "S-131",
+   "S-135"
+  ],
+  "truth": {
+   "expertise": [
+    0.684,
+    0.161,
+    0.104,
+    0.226,
+    0.154,
+    0.06,
+    0.172,
+    0.699,
+    0.226,
+    0.203
+   ],
+   "interest": [
+    0.2323,
+    0.2258,
+    0.0321,
+    0.0009,
+    0.0029,
+    0.0304,
+    0.0001,
+    0.3221,
+    0.0321,
+    0.1212
+   ],
+   "talkativeness": 0.086,
+   "modesty": 0.083
+  },
+  "company": "Famous Scott's",
+  "title": "Co-Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Dallas",
+  "state": "TX",
+  "country": "US"
+ },
+ {
+  "id": "PE27-00967",
+  "name": "Matthew Russell",
+  "side": "A",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.94,
+   0.17,
+   0.08,
+   0.06,
+   0.0,
+   0.31,
+   0.05,
+   0.26,
+   0.08,
+   0.26
+  ],
+  "signups": [],
+  "truth": {
+   "expertise": [
+    0.825,
+    0.109,
+    0.116,
+    0.029,
+    0.02,
+    0.098,
+    0.051,
+    0.223,
+    0.095,
+    0.239
+   ],
+   "interest": [
+    0.1759,
+    0.1651,
+    0.007,
+    0.0034,
+    0.0031,
+    0.0288,
+    0.1028,
+    0.4658,
+    0.0459,
+    0.0021
+   ],
+   "talkativeness": 0.867,
+   "modesty": 0.354
+  },
+  "company": "Saputo",
+  "title": "Inside Sales Representative",
+  "business_type": "Manufacturer / supplier",
+  "city": "Montreal",
+  "state": "QC",
+  "country": "CA"
+ },
+ {
+  "id": "PE27-00979",
+  "name": "Rosa Silvestri",
+  "side": "B",
+  "is_speaker": false,
+  "speaker_topics": [],
+  "resume_tags": [
+   0.27,
+   0.15,
+   0.04,
+   0.0,
+   0.2,
+   0.2,
+   0.02,
+   0.89,
+   0.29,
+   0.05
+  ],
+  "signups": [
+   "S-101"
+  ],
+  "truth": {
+   "expertise": [
+    0.041,
+    0.149,
+    0.175,
+    0.142,
+    0.038,
+    0.146,
+    0.127,
+    0.755,
+    0.244,
+    0.172
+   ],
+   "interest": [
+    0.098,
+    0.0369,
+    0.0,
+    0.3493,
+    0.0,
+    0.0368,
+    0.0016,
+    0.329,
+    0.1482,
+    0.0001
+   ],
+   "talkativeness": 0.815,
+   "modesty": 0.059
+  },
+  "company": "Eric & Sons Pizzeria LLC",
+  "title": "Owner",
+  "business_type": "Independent pizzeria (1-3 locations)",
+  "city": "Pittsburgh",
+  "state": "PA",
+  "country": "US"
+ }
+]

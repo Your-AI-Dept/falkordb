@@ -1,0 +1,52 @@
+[
+ {
+  "idx": 0,
+  "name": "Cheese & Dairy",
+  "topic_id": "cheese-dairy"
+ },
+ {
+  "idx": 1,
+  "name": "Tomatoes & Sauce",
+  "topic_id": "tomatoes-sauce"
+ },
+ {
+  "idx": 2,
+  "name": "Dough & Flour",
+  "topic_id": "dough-flour"
+ },
+ {
+  "idx": 3,
+  "name": "Meats & Toppings",
+  "topic_id": "meats-toppings"
+ },
+ {
+  "idx": 4,
+  "name": "Spices & Seasonings",
+  "topic_id": "spices-seasonings"
+ },
+ {
+  "idx": 5,
+  "name": "Ovens & Equipment",
+  "topic_id": "ovens-equipment"
+ },
+ {
+  "idx": 6,
+  "name": "Supply Chain & Packaging",
+  "topic_id": "supply-chain-packaging"
+ },
+ {
+  "idx": 7,
+  "name": "Brick & Mortar Operations",
+  "topic_id": "brick-and-mortar"
+ },
+ {
+  "idx": 8,
+  "name": "Chefs & Culinary",
+  "topic_id": "chefs-culinary"
+ },
+ {
+  "idx": 9,
+  "name": "Tech, Ordering & Delivery",
+  "topic_id": "tech-ordering-delivery"
+ }
+]
