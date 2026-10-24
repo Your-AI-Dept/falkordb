@@ -27,5 +27,6 @@ For the backend and FalkorDB, use `docker compose up --build`. The compose front
 - [Demo walkthrough](frontend/docs/DEMO-WALKTHROUGH.md)
 - [Graph design](design_doc.md)
 - [Dataset provenance](data/README.md)
+- [Graph view](graph-view/README.md): Event HQ, topic and overview graphs on port 5174, with a recorded show until the backend's events are live
 
 The backend, dataset, and frontend are separate areas so team members can work concurrently. Endpoint sketches are changing; update the frontend adapter when the backend responses settle.
