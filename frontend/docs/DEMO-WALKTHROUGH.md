@@ -32,7 +32,7 @@ The current local demo uses a generic usefulness question and branching fixtures
 
 ### 1:10–2:00 — Show learning across the event
 
-Switch to the teammate's graph visualization. First show the directional evidence from that one meeting. Then simulate many conversations over the Pizza Expo dataset. Show a topic layer changing and, if implemented, convergence against the simulator's hidden truth.
+Once both surveys are complete, choose **Open visualization** in the feedback modal to open the teammate's graph UI in a new tab. Configure `VITE_VISUALIZATION_URL` before rehearsing; until the URL is supplied, this action is disabled. First show the directional evidence from that one meeting. Then simulate many conversations over the Pizza Expo dataset. Show a topic layer changing and, if implemented, convergence against the simulator's hidden truth.
 
 “Now repeat that across the event. The graph combines many small, topic-specific observations. It can update which people appear knowledgeable without requiring everyone to write an essay after each conversation.”
 
@@ -40,7 +40,7 @@ Label simulated interactions and explain that much of the attendee data is synth
 
 ### 2:00–2:35 — Answer a useful question
 
-Return to Top people. Ask: “Who are the top three people for ovens and equipment?” Use the same query before and after the simulation. Show what changed and one defensible reason from the backend.
+Return to the feedback tab and choose **Continue to top people**. Ask: “Who are the top three people for ovens and equipment?” Use the same query before and after the simulation. Show what changed and one defensible reason from the backend.
 
 A person's name is the way to find them, not the proof. Their relevant expertise and evidence should carry the explanation. Do not use “you met Maya” as a claim of trusted access to somebody else.
 

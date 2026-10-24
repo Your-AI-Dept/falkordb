@@ -3,6 +3,7 @@ import {api,isDemo} from '../api.js';
 import {reconcileSurvey,validateSurvey} from '../graph-contract.js';
 import {observeResource} from '../observe-resource.js';
 import {Avatar,Button,Icon,Logo,Modal} from './ui.jsx';
+import {VisualizationHandoff} from './VisualizationHandoff.jsx';
 
 export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved=()=>{}}) {
   const [survey,setSurvey]=useState(null),[error,setError]=useState(''),[pending,setPending]=useState(false);
@@ -39,7 +40,7 @@ export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved
       {current?<section className="meeting-feedback"><span className="eyebrow">{survey.respondent.name.split(' ')[0].toUpperCase()}’S FEEDBACK</span><h3 className="survey-question" key={current.id+':'+current.version}>{current.prompt}</h3><div className="feedback-choices" aria-busy={pending}>{current.choices.map(choice=><button type="button" key={choice.id} className="feedback-choice" disabled={pending} onClick={()=>answer(choice.id)}>{choice.label}<Icon name="arrow" size={16}/></button>)}</div>{pending&&<span className="feedback-saved" role="status">Saving…</span>}{survey.queuedQuestions[0]&&<p className="survey-next"><span>Up next</span>{survey.queuedQuestions[0].prompt}</p>}</section>:<>
         <div className="request-status" role="status"><Icon name="check"/><strong>Feedback saved</strong></div>
         {survey.answers.length>0&&<dl className="survey-receipt">{survey.answers.map(item=><div key={item.questionId+':'+item.questionVersion}><dt>{item.prompt}</dt><dd>{item.answerLabel}</dd></div>)}</dl>}
-        <div className="modal-actions"><a className="text-button" href="?view=rankings">Top people<Icon name="arrow" size={16}/></a><Button onClick={close}>Done<Icon name="check" size={16}/></Button></div>
+        {completed&&!pending&&<VisualizationHandoff/>}
       </>}
     </>}
   </Modal>;

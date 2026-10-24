@@ -17,7 +17,7 @@ At integration time, update `src/api.js`, `src/graph-api.js`, `src/rest.js`, and
 | Post-meeting questions | Same modal, one question at a time, save on tap, completion required | Meeting/round identity; server questions and completion; map topic-learning and tie answers without changing their meaning |
 | Two participants | Separate local Paul/Theo responses | Independent live rater identity, durable answers, safe retry/duplicate handling |
 | Dynamic follow-ups | Generic prompts/options, queued refresh, active-question stability | Actual graph-driven selection and agreed revision/update semantics |
-| Graph simulation and visualization | Outside this frontend's current scope | Teammate-owned graph UI, seed/simulation controls, convergence view |
+| Graph simulation and visualization | Completed-feedback modal links to `VITE_VISUALIZATION_URL` in a new tab, then offers Top people; disabled until URL supplied | Teammate-owned graph UI, seed/simulation controls, convergence view; handoff only, no data synchronization added |
 | Top X people for Y topic | Topic/count controls; server-order renderer | Agreed ranked-result response with identities, reason, applied revision, and definition of the ranking |
 | Peer requests | Request, recipient acceptance/decline, confirmed status | Persistence and scheduling endpoints |
 | Booth activation | One contact, preset slot, invite acceptance updates agenda, check-in and private feedback | Shared invitation/attendance records; exhibitor remains local-only |
