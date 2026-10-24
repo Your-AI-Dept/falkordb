@@ -12,7 +12,7 @@ from app import db
 from app.config import settings
 from app.events import bus
 from app.models import Health
-from app.routers import admin, catalog, checkins, insights, sessions
+from app.routers import admin, catalog, checkins, insights, sessions, visualization
 
 
 @asynccontextmanager
@@ -30,7 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for module in (admin, catalog, sessions, checkins, insights):
+for module in (admin, catalog, sessions, checkins, insights, visualization):
     app.include_router(module.router)
 
 

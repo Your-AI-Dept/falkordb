@@ -55,13 +55,13 @@ export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved
       <section className="meeting-feedback">
         <div className="survey-progress"><span className="eyebrow">{survey.respondent.name.split(' ')[0].toUpperCase()}’S FEEDBACK</span>{current&&<span>Question {index+1}</span>}</div>
         {current?<><h3 className="survey-question">{current.prompt}</h3>
-          {(!saved||(isDemo&&survey.canRevise))?<AnswerChoices key={current.id+':'+current.version+':'+(saved?.id||'new')} question={current} saved={saved} pending={pending} answer={answer} topic={survey.meetingTopic}/>:<p className="saved-answer">{saved.answerLabel}</p>}
+          {(!saved||survey.canRevise)?<AnswerChoices key={current.id+':'+current.version+':'+(saved?.id||'new')} question={current} saved={saved} pending={pending} answer={answer} topic={survey.meetingTopic}/>:<p className="saved-answer">{saved.answerLabel}</p>}
           {pending&&<span className="feedback-saved" role="status">Saving…</span>}
           <div className="survey-navigation"><Button variant="text" disabled={pending||index===0} onClick={previous}><Icon name="back" size={16}/>Back</Button><Button variant="text" disabled={pending||!saved} onClick={forward}>{saved&&index===questions.length-1?'Review answers':'Next'}<Icon name="arrow" size={16}/></Button></div>
           {!saved&&survey.queuedQuestions[0]&&<p className="survey-next"><span>Up next</span>{survey.queuedQuestions[0].prompt}</p>}
         </>:<>
           <div className="request-status" role="status"><Icon name="check"/><strong>Feedback saved</strong></div>
-          {survey.answers.length>0&&<dl className="survey-receipt">{survey.answers.map(item=><div key={item.questionId+':'+item.questionVersion}><dt>{item.prompt}</dt><dd>{item.answerLabel}<button className="text-button" onClick={()=>setReviewId(item.questionId)} aria-label={'Review answer: '+item.prompt}>{isDemo?'Change':'Review'}<Icon name="edit" size={14}/></button></dd></div>)}</dl>}
+          {survey.answers.length>0&&<dl className="survey-receipt">{survey.answers.map(item=><div key={item.questionId+':'+item.questionVersion}><dt>{item.prompt}</dt><dd>{item.answerLabel}<button className="text-button" onClick={()=>setReviewId(item.questionId)} aria-label={'Review answer: '+item.prompt}>{survey.canRevise?'Change':'Review'}<Icon name="edit" size={14}/></button></dd></div>)}</dl>}
           {survey.preferences?.length>0&&<p className="preference-confirmation">Paused: {survey.preferences.map(item=>item.topicLabel.toLowerCase()+' meetups').join(', ')}. You can turn them back on in your profile.</p>}
           <Button variant="text" disabled={!questions.length||pending} onClick={previous}><Icon name="back" size={16}/>Back to answers</Button>
           {completed&&!pending&&<VisualizationHandoff onContinue={onContinue} participant={survey.respondent.id}/>}
@@ -73,7 +73,7 @@ export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved
 export function SurveyPage(){
   const params=new URLSearchParams(window.location.search);
   const meetingId=params.get('meeting')||'meet-theo';
-  const respondentId=isDemo?(params.get('participant')||'paul'):undefined;
+  const respondentId=params.get('participant')||(isDemo?'paul':null);
   const home=attendeeLink('attendee',respondentId);
   const [open,setOpen]=useState(true);
   return <div className="attendee-app"><header className="app-header"><Logo href={home}/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><a className="text-button header-actions" href={home}>My day<Icon name="arrow" size={16}/></a></header><main className="survey-page"><h1>Meetup feedback</h1>{isDemo&&<nav className="participant-tabs" aria-label="Attendee preview"><a aria-current={respondentId==='paul'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=paul'}>Paul</a><a aria-current={respondentId==='theo'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=theo'}>Theo</a></nav>}<Button onClick={()=>setOpen(true)}>View meetup</Button><a className="persona-link" href={attendeeLink('rankings',respondentId)}>Top people<Icon name="arrow" size={16}/></a></main>{open&&<MeetingSurveyDialog meetingId={meetingId} respondentId={respondentId} close={()=>setOpen(false)} onContinue={()=>window.location.assign(home)}/>}</div>;

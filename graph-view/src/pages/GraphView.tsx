@@ -29,11 +29,12 @@ function phase(state: FeedState) {
 
 export default function GraphView() {
   const { store, state, status, player, controls } = useGraphFeed()
-  const [tab, setTab] = useState<Tab>('hq')
+  const [focus] = useState(() => new URLSearchParams(window.location.search).get('attendee'))
+  const [tab, setTab] = useState<Tab>(focus?'topic':'hq')
   const [topic, setTopic] = useState(0)
   const [everyone, setEveryone] = useState(false)
   const [dimension, setDimension] = useState<'2d' | '3d'>('2d')
-  const [selected, setSelected] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string | null>(focus)
   const [, redraw] = useState(0)
   const [ids] = useState(() => ({
     hqNodes: new IdMap(), hqLinks: new IdMap(), topicNodes: new IdMap(), topicLinks: new IdMap(), overviewNodes: new IdMap(), overviewLinks: new IdMap(),
@@ -61,8 +62,8 @@ export default function GraphView() {
   // The topic view only changes when a date opens or closes; rebuilding it on every answer kept its layout churning
   const { structure } = state
   const topicGraph = useMemo(
-    () => (tab === 'topic' && structure ? topicData(store.getState(), topic, everyone, ids.topicNodes, ids.topicLinks) : null),
-    [tab, structure, store, topic, everyone, ids])
+    () => (tab === 'topic' && structure ? topicData(store.getState(), topic, everyone, ids.topicNodes, ids.topicLinks, focus) : null),
+    [tab, structure, store, topic, everyone, ids, focus])
   const overviewGraph = useMemo(() => (tab === 'overview' ? overviewData(state, ids.overviewNodes, ids.overviewLinks) : null), [tab, state, ids])
 
   const control = (change: () => void) => () => {
@@ -100,7 +101,7 @@ export default function GraphView() {
         {controls && <LiveButtons state={state} controls={controls} />}
       </header>
 
-      <div className="gv-toolbar">
+      <div className="gv-toolbar">{focus && <Badge variant="outline">{state.attendees.get(focus)?.name || focus} · direct connections</Badge>}
         <Tabs value={tab} onValueChange={(v) => setTab(v as Tab)}>
           <TabsList>
             <TabsTrigger value="hq">Event HQ</TabsTrigger>

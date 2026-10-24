@@ -1,12 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import {promotions} from '../promotion-store.js';
 import {Button,Icon,Modal} from './ui.jsx';
-import {isDemo} from '../api.js';
 
 export default function PromotionInbox({participant='paul'}){
   const [invitations,setInvitations]=useState([]),[open,setOpen]=useState(null),[error,setError]=useState('');
   useEffect(()=>{
-    if(!isDemo)return;
     const refresh=()=>{try{const next=promotions.invitations(participant);setInvitations(next);const due=next.find(item=>item.status==='feedback_due');if(due)setOpen(due.campaignId);}catch(failure){setError(failure.message);}};
     const unsubscribe=promotions.subscribe(refresh);refresh();return unsubscribe;
   },[participant]);

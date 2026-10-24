@@ -29,15 +29,19 @@ const favorite = (values: number[]) => values.indexOf(Math.max(...values))
  * One topic's LEARNED_FROM layer: an arrow from learner to expert, and dashes for the date under
  * way. Only people with evidence on the topic are shown, unless `everyone` is on or nobody has any yet.
  */
-export function topicData(state: FeedState, k: number, everyone: boolean, ids: IdMap, links: IdMap): Data {
+export function topicData(state: FeedState, k: number, everyone: boolean, ids: IdMap, links: IdMap, focus: string | null = null): Data {
   const learned = new Map<string, { source: string; target: string; tick: number }>()
   for (const e of state.edges) {
     const key = `${e.source}|${e.target}`
-    if (state.topicIdx.get(e.topic_id) === k && e.tick >= (learned.get(key)?.tick ?? -1)) learned.set(key, e)
+    if ((!focus || e.source === focus || e.target === focus) && state.topicIdx.get(e.topic_id) === k && e.tick >= (learned.get(key)?.tick ?? -1)) learned.set(key, e)
   }
   const involved = new Set<string>()
   for (const e of learned.values()) involved.add(e.source).add(e.target)
-  const people = [...state.attendees.values()].filter((a) => everyone || involved.size === 0 || involved.has(a.id))
+  if (focus) {
+    involved.add(focus)
+    for (const date of state.session?.dates ?? []) for (const pair of date) if(pair.a===focus||pair.b===focus) involved.add(pair.a).add(pair.b)
+  }
+  const people = [...state.attendees.values()].filter((a) => focus ? involved.has(a.id) : everyone || involved.size === 0 || involved.has(a.id))
   const shown = new Set(people.map((a) => a.id))
   const nodes: Node[] = people.map((a) => ({
     id: ids.get(a.id),
