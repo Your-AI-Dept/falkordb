@@ -1,5 +1,5 @@
 import { people, boothInvitation } from '../data/pizza-expo.js';
-import { freshState as freshAttendeeState, invitationFor } from '../demo.js';
+import { freshState as freshAttendeeState, agendaFor } from '../demo.js';
 
 export const EXHIBITOR_STORAGE_KEY = 'rally.pizza-exhibitor.v2';
 export const ATTENDEE_STORAGE_KEY = 'rally-pizza-attendee-v2';
@@ -59,23 +59,23 @@ function attendeeGuest() {
       hasSavedAttendee = true;
     }
   } catch { /* Standalone sample when browser storage is unavailable. */ }
-  // Once an attendee journey exists, use its actual invitation eligibility and response.
-  // The standalone exhibitor preview retains a pending Paul fixture before that journey.
-  if (hasSavedAttendee && !invitationFor(attendee)) return null;
+  // Show the shared assignment without requiring an invitation or RSVP.
+  const assignment=hasSavedAttendee?agendaFor(attendee).find(stop=>stop.id===boothInvitation.id):null;
+  if (hasSavedAttendee && !assignment) return null;
   const profile = attendee.profile;
   const name = profile.name.trim() || fallback.profile.name;
   const company = profile.company.trim() || fallback.profile.company;
-  const status = ['accepted', 'declined'].includes(attendee.boothInvitationStatus) ? attendee.boothInvitationStatus : 'pending';
+  const status = assignment?.status==='missed'?'unavailable':'assigned';
   return { id: 'paul', name, company, initials: name.split(/\s+/).map(part => part[0]).slice(0, 2).join(''), status, need: typeof profile.intention === 'string' && profile.intention.trim() ? profile.intention.trim() : `Looking for dependable tomato supply for ${company}`, color: 'blue', checkedInAt: attendee.boothVisit?.invitationId === boothInvitation.id ? attendee.boothVisit.checkedInAt : null, invitationId: boothInvitation.id, appointment: boothInvitation.time };
 }
 
 function guestsForFocus(focusId, includeSharedInvitation) {
-  if (focusId === 'tomatoes') return [guest('maya', 'accepted', 'Trade practical ideas on ingredient suppliers'), guest('samir', 'accepted'), includeSharedInvitation ? attendeeGuest() : null].filter(Boolean);
-  if (focusId === 'dough') return [guest('elena', 'accepted')];
-  if (focusId === 'cheese') return [guest('maya', 'accepted', 'Trade practical ideas on ingredient suppliers'), guest('theo', 'pending')];
-  if (['ovens', 'mixers', 'cold-storage'].includes(focusId)) return [guest('nia', 'accepted', 'Compare equipment choices while growing a pizzeria')];
-  if (focusId === 'staffing') return [guest('maya', 'accepted', 'Compare ideas for keeping a great pizzeria team')];
-  if (focusId === 'margins') return [guest('maya', 'accepted', 'Compare practical approaches to pizzeria margins')];
+  if (focusId === 'tomatoes') return [guest('maya', 'assigned', 'Trade practical ideas on ingredient suppliers'), guest('samir', 'assigned'), includeSharedInvitation ? attendeeGuest() : null].filter(Boolean);
+  if (focusId === 'dough') return [guest('elena', 'assigned')];
+  if (focusId === 'cheese') return [guest('maya', 'assigned', 'Trade practical ideas on ingredient suppliers'), guest('theo', 'assigned')];
+  if (['ovens', 'mixers', 'cold-storage'].includes(focusId)) return [guest('nia', 'assigned', 'Compare equipment choices while growing a pizzeria')];
+  if (focusId === 'staffing') return [guest('maya', 'assigned', 'Compare ideas for keeping a great pizzeria team')];
+  if (focusId === 'margins') return [guest('maya', 'assigned', 'Compare practical approaches to pizzeria margins')];
   return [];
 }
 

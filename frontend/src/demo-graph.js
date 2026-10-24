@@ -1,4 +1,5 @@
 import {people,meeting} from './data/pizza-expo.js';
+import {plannedStops} from './demo-agenda.js';
 
 export const demoTopics=[{id:'tomatoes',label:'Tomato sourcing'},{id:'flour',label:'Flour & fermentation'},{id:'equipment',label:'Kitchen equipment'},{id:'distribution',label:'Distribution'},{id:'growth',label:'Growing a pizzeria'}];
 const usefulness={id:'usefulness',version:1,prompt:'Was this meetup useful?',required:true,choices:[{id:'yes',label:'Yes, useful'},{id:'somewhat',label:'Somewhat'},{id:'no',label:'Not really'},{id:'didnt_meet',label:'We didn’t meet'}]};
@@ -11,14 +12,15 @@ function followup(value,respondentId) {
   return {id:'next-priority',version:1,prompt:'Which topic should your next connection help with?',required:true,choices:demoTopics.map(topic=>({id:topic.id,label:topic.label}))};
 }
 function pair(state,meetingId,respondentId) {
-  if(meetingId!==meeting.id||!['paul','theo'].includes(respondentId))throw new Error('This meeting is not available for this attendee.');
+  const stop=plannedStops(state).find(stop=>stop.kind==='meeting'&&stop.id===meetingId);
+  if(!stop||!['paul',stop.personId].includes(respondentId))throw new Error('This meeting is not available for this attendee.');
   const paul={id:'paul',name:state.profile.name,company:state.profile.company,role:state.profile.role,color:'peach'};
-  const theo=people.find(person=>person.id==='theo');
-  return respondentId==='paul'?{respondent:paul,subject:theo}:{respondent:theo,subject:paul};
+  const peer=people.find(person=>person.id===stop.personId);
+  return {...(respondentId==='paul'?{respondent:paul,subject:peer}:{respondent:peer,subject:paul}),time:stop.time,location:stop.location};
 }
 function allAnswers(state) {
   const saved=state.surveyAnswers||[];
-  if(saved.some(answer=>answer.respondentId==='paul')||!state.feedback)return saved;
+  if(saved.some(answer=>answer.respondentId==='paul'&&answer.meetingId===meeting.id)||!state.feedback||state.feedback.meetingId!==meeting.id)return saved;
   const base={meetingId:meeting.id,respondentId:'paul',subjectId:'theo',submittedAt:state.feedback.submittedAt};
   const legacy=[{...base,id:'legacy-usefulness',questionId:'usefulness',questionVersion:1,prompt:usefulness.prompt,answerKey:state.feedback.usefulness,answerLabel:usefulness.choices.find(choice=>choice.id===state.feedback.usefulness)?.label||state.feedback.usefulness}];
   const next=followup(state.feedback.usefulness,'paul');
@@ -32,7 +34,7 @@ export function demoSurvey(state,meetingId,respondentId='paul') {
   const value=answers.find(answer=>answer.questionId==='usefulness')?.answerKey;
   const next=value?followup(value,respondentId):null;
   const currentQuestion=!value?usefulness:next&&!answers.some(answer=>answer.questionId===next.id)?next:null;
-  return {meetingId,...actors,time:meeting.time,location:meeting.location,graphRevision:state.graphRevision||0,surveyRevision:state.graphRevision||0,complete:!currentQuestion,currentQuestion,queuedQuestions:[],answers};
+  return {meetingId,...actors,graphRevision:state.graphRevision||0,surveyRevision:state.graphRevision||0,complete:!currentQuestion,currentQuestion,queuedQuestions:[],answers};
 }
 export function answerDemoSurvey(state,meetingId,respondentId,body) {
   if(!Number.isSafeInteger(body.surveyRevision)||body.surveyRevision<0)throw new Error('The survey version is missing. Please refresh.');
@@ -44,11 +46,12 @@ export function answerDemoSurvey(state,meetingId,respondentId,body) {
   const choice=current.choices.find(choice=>choice.id===body.answerKey);
   if(!choice)throw new Error('Choose one of the available answers.');
   const answer={id:crypto.randomUUID(),meetingId,respondentId,subjectId:survey.subject.id,questionId:current.id,questionVersion:current.version,prompt:current.prompt,answerKey:choice.id,answerLabel:choice.label,submittedAt:new Date().toISOString()};
-  let next={...state,graphRevision:(state.graphRevision||0)+1,surveyAnswers:[...allAnswers(state),answer]};
+  const stop=plannedStops(state).find(stop=>stop.id===meetingId);
+  let next={...state,graphRevision:(state.graphRevision||0)+1,surveyAnswers:[...allAnswers(state),answer],agendaProgress:{...state.agendaProgress,[meetingId]:{...state.agendaProgress?.[meetingId],stop,status:'feedback_due'}}};
   if(respondentId==='paul'){
-    const usefulnessAnswer=next.surveyAnswers.find(answer=>answer.respondentId==='paul'&&answer.questionId==='usefulness');
+    const usefulnessAnswer=next.surveyAnswers.find(answer=>answer.respondentId==='paul'&&answer.meetingId===meetingId&&answer.questionId==='usefulness');
     const interest=demoTopics.some(topic=>topic.id===choice.id)?choice.id:'';
-    next={...next,meetingFeedbackDue:!demoSurvey(next,meetingId,respondentId).complete,feedback:{meetingId,usefulness:usefulnessAnswer.answerKey,next:interest,attendance:usefulnessAnswer.answerKey==='didnt_meet'?'not_met':'reported_attended',submittedAt:answer.submittedAt}};
+    next={...next,meetingFeedbackDue:meetingId===meeting.id?!demoSurvey(next,meetingId,respondentId).complete:next.meetingFeedbackDue,feedback:{meetingId,usefulness:usefulnessAnswer.answerKey,next:interest,attendance:usefulnessAnswer.answerKey==='didnt_meet'?'not_met':'reported_attended',submittedAt:answer.submittedAt}};
   }
   return next;
 }

@@ -1,0 +1,21 @@
+.guided-event{margin-top:30px}.guided-home{grid-template-columns:minmax(0,1.9fr) minmax(230px,1fr)}
+.next-stop{border:1px solid #e5dfd1;border-radius:20px;background:#faf8f2;padding:24px}
+.next-stop-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.next-stop-top>span:last-child{font-size:11px;color:#837b6c}
+.next-stop h2{font-size:30px;letter-spacing:-1.2px}
+.stop-directions{display:grid;gap:12px;margin:18px 0 20px;font-size:15px;color:#615b4e}
+.stop-directions p{display:flex;align-items:center;gap:10px}
+.stop-directions strong{font-weight:550;color:var(--ink)}
+.stop-person{display:flex;gap:14px;align-items:center;border-top:1px solid #e7e1d5;padding-top:16px}
+.stop-person>div{display:grid;gap:5px}.stop-person strong{font-size:16px;font-weight:600}.stop-person span:not(.avatar){font-size:12px;color:#817868}
+.stop-topic{font-size:14px;color:#77694e;margin-top:14px}
+.next-stop-action{margin-top:18px}.next-stop-action>.button{min-width:170px}
+.agenda-list{margin-top:30px}.agenda-list h2{font-size:18px;margin-bottom:12px;letter-spacing:-.4px}
+.agenda-row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:19px 0;border-bottom:1px solid var(--border)}
+.agenda-row:hover .agenda-row-info>strong{text-decoration:underline;text-underline-offset:4px}
+.agenda-row-time{font-size:11px;color:#776e5e;width:112px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.agenda-row-info{flex:1;display:grid;gap:5px}.agenda-row-info>strong{font-size:14px;font-weight:550}.agenda-row-info>span{font-size:11px;color:#7d7364;line-height:1.6}.agenda-row-info>small{font-size:10px;color:#7b805e}
+.agenda-earlier{opacity:.8}.agenda-finished{padding:38px 28px;border:1px solid var(--border);border-radius:18px}.agenda-finished h2{font-size:24px;margin:14px 0}.agenda-finished .button{margin-top:15px}
+.stop-dialog-actions{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:24px}
+@media(max-width:760px){.guided-home{grid-template-columns:1fr}.guided-home .home-aside{display:block;margin-top:16px}.next-stop{padding:24px}.next-stop h2{font-size:30px}}
+@media(max-width:480px){.next-stop{padding:21px}.next-stop-top{gap:8px}.next-stop-top>span:last-child{font-size:10px}.next-stop h2{font-size:28px}.stop-directions{font-size:13px}.agenda-row{gap:11px;flex-wrap:wrap}.agenda-row-time{width:100%;font-size:11px}.agenda-row .avatar{width:34px;height:34px;font-size:11px}}

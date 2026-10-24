@@ -1,4 +1,4 @@
-import { freshState, snapshot, completeProfile, recordEncounter, applyFeedback, requestMeeting, respondToInvitation, respondToMeeting, peerInbox, checkInBooth, applyBoothFeedback } from './demo.js';
+import { freshState, snapshot, completeProfile, recordEncounter, applyFeedback, requestMeeting, respondToInvitation, respondToMeeting, peerInbox, checkInBooth, applyBoothFeedback, updateAssignment } from './demo.js';
 import { createRestClient } from './rest.js';
 import { createGraphClient } from './graph-api.js';
 import { validateSurvey, validateTopics, validateRanking } from './graph-contract.js';
@@ -19,6 +19,10 @@ const graph = createGraphClient(request);
 async function mutation(path, payload) { await request(path, {method:'POST',body:JSON.stringify(payload)}); return request('/me/dashboard'); }
 // No silent demo fallback when a real API origin is configured.
 export const api = {
+  assignment: async (id,action) => {
+    if(!isDemo)throw new Error('Schedule updates are not connected yet. Please try again later.');
+    return updateDemo(current=>updateAssignment(current,id,action));
+  },
   dashboard: async () => isDemo ? snapshot(readState()) : request('/me/dashboard'),
   subscribe: callback => {
     const onStorage = event => { if (isDemo && (!event.key || event.key === key)) callback(); };

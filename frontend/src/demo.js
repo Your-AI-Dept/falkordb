@@ -1,5 +1,6 @@
 import { event, goals, people, professionalEdges, meeting, boothInvitation } from './data/pizza-expo.js';
 import { demoSurvey, demoTopics } from './demo-graph.js';
+import { plannedStops } from './demo-agenda.js';
 export { goals };
 export function freshState() {
   return { version: 2, onboardingComplete: false, profile: { name: 'Paul Rossi', role: 'Owner', company: 'North Beach Pizza Co.', businessType: 'pizzeria', context: 'We run three neighborhood pizzerias in San Francisco.', linkedin: '', goals: [], focus: '', intention: '' }, encounters: [], feedback: null, requestedIds: [], dismissedIds: [] };
@@ -137,4 +138,39 @@ export function applyBoothFeedback(state, invitationId, usefulness) {
   if (state.boothVisit.feedback?.usefulness === usefulness) return state;
   return { ...state, boothVisit: { ...state.boothVisit, feedback: { usefulness, submittedAt: new Date().toISOString() } } };
 }
-export function snapshot(state) { return { event, graphRevision: state.graphRevision || 0, state, people, recommendations: recommendations(state), viewer: { badgeToken: 'PIZZA-PAUL' }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !demoSurvey(state,meeting.id,'paul').complete), surveyComplete: demoSurvey(state,meeting.id,'paul').complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }
+export function agendaFor(state){
+  return plannedStops(state).map(stop=>{
+    const progress=state.agendaProgress?.[stop.id];
+    let status=progress?.status||'scheduled';
+    if(stop.kind==='booth'){
+      if(state.boothVisit?.feedback)status='completed';
+      else if(state.boothVisit?.feedbackDue)status='feedback_due';
+      else if(state.boothVisit)status='checked_in';
+      else if(state.boothInvitationStatus==='declined')status='missed';
+    }else{
+      const survey=demoSurvey(state,stop.id,'paul');
+      if(survey.complete)status=survey.answers.some(answer=>answer.questionId==='usefulness'&&answer.answerKey==='didnt_meet')?'missed':'completed';
+      else if(stop.id===meeting.id&&state.meetingFeedbackDue)status='feedback_due';
+    }
+    return {...stop,status,person:people.find(person=>person.id===stop.personId)};
+  });
+}
+export function updateAssignment(state,id,action){
+  const stop=agendaFor(state).find(stop=>stop.id===id);
+  if(!stop)throw new Error('This stop is no longer on your schedule.');
+  if(!['check_in','finish','miss'].includes(action))throw new Error('Choose a valid schedule action.');
+  const status={check_in:'checked_in',finish:'feedback_due',miss:'missed'}[action];
+  if(stop.status===status)return state;
+  if(agendaFor(state).some(item=>item.id!==id&&item.status==='feedback_due'))throw new Error('Finish your previous feedback first.');
+  if(action==='check_in'&&agendaFor(state).some(item=>item.id!==id&&item.status==='checked_in'))throw new Error('Finish your current stop first.');
+  if(action==='finish'?stop.status!=='checked_in':stop.status!=='scheduled')throw new Error('This stop has already been updated.');
+  const timestamp=new Date().toISOString();
+  const next={...state,agendaProgress:{...state.agendaProgress,[id]:{...state.agendaProgress?.[id],stop:{id:stop.id,kind:stop.kind,personId:stop.personId,time:stop.time,location:stop.location,topic:stop.topic,reason:stop.reason},status,updatedAt:timestamp}}};
+  if(stop.kind==='booth'){
+    if(action==='check_in')next.boothVisit={invitationId:id,checkedInAt:timestamp,feedback:null};
+    if(action==='finish')next.boothVisit={...state.boothVisit,feedbackDue:true};
+    if(action==='miss')next.boothInvitationStatus='declined';
+  }else if(id===meeting.id&&action==='finish')next.meetingFeedbackDue=true;
+  return next;
+}
+export function snapshot(state) { return { event, graphRevision: state.graphRevision || 0, state, people, agenda:agendaFor(state), recommendations: recommendations(state), viewer: { badgeToken: 'PIZZA-PAUL' }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !demoSurvey(state,meeting.id,'paul').complete), surveyComplete: demoSurvey(state,meeting.id,'paul').complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }

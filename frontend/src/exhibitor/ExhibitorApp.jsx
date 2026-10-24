@@ -43,21 +43,20 @@ function Setup({ state, setState, onComplete, onCancel }) {
 }
 
 function Session({ session, booth }) {
-  const accepted = session.guests.filter(guest => guest.status === 'accepted').length;
-  const pending = session.guests.filter(guest => guest.status === 'pending').length;
-  const declined = session.guests.filter(guest => guest.status === 'declined').length;
+  const assigned = session.guests.filter(guest => guest.status === 'assigned').length;
+  const unavailable = session.guests.filter(guest => guest.status === 'unavailable').length;
   const checkedIn = session.guests.filter(guest => guest.checkedInAt).length;
-  const responseSummary = [pending ? `${pending} pending` : '', declined ? `${declined} declined` : '', checkedIn ? `${checkedIn} checked in` : 'No check-ins yet'].filter(Boolean).join(' · ');
+  const responseSummary = [unavailable ? `${unavailable} unavailable` : '', checkedIn ? `${checkedIn} checked in` : 'No check-ins yet'].filter(Boolean).join(' · ');
   return <article className="ex-session"><div className="ex-time-column"><strong>{session.window.hour}</strong><span>to {session.window.end}</span><span className="ex-time-line" /></div><div className="ex-session-card"><div className="ex-session-top"><span className="ex-location"><Icon name="pin" size={15} />Booth {booth}</span></div><h2>{session.title}</h2><div className="ex-session-host"><span className="ex-contact-avatar">{session.contact.name.trim().split(/\s+/).map(part => part[0]).slice(0, 2).join('')}</span><div><strong>{session.contact.name}</strong><span>Booth contact</span></div></div>
-      <div className="ex-attendance"><div className="ex-avatar-stack">{session.guests.slice(0, 3).map(guest => <span key={guest.id} className={`ex-guest-avatar ex-${guest.color}`}>{guest.initials}</span>)}</div><div><strong>{accepted} accepted</strong><span>{responseSummary}</span></div></div>
-      {session.guests.length>0&&<ul className="ex-visitors">{session.guests.map(guest => <li key={guest.id}><span className={`ex-guest-avatar ex-${guest.color}`}>{guest.initials}</span><div><strong>{guest.name} <span>· {guest.company}</span></strong><p>{guest.need}</p>{guest.appointment && <span className="ex-guest-appointment">{guest.appointment}</span>}</div><span className={`ex-guest-status ${guest.status === 'accepted' ? 'ex-status-accepted' : ''}`}>{guest.checkedInAt ? 'Checked in' : { accepted: 'Accepted', pending: 'Pending', declined: 'Declined' }[guest.status]}</span></li>)}</ul>}
+      <div className="ex-attendance"><div className="ex-avatar-stack">{session.guests.slice(0, 3).map(guest => <span key={guest.id} className={`ex-guest-avatar ex-${guest.color}`}>{guest.initials}</span>)}</div><div><strong>{assigned} scheduled</strong><span>{responseSummary}</span></div></div>
+      {session.guests.length>0&&<ul className="ex-visitors">{session.guests.map(guest => <li key={guest.id}><span className={`ex-guest-avatar ex-${guest.color}`}>{guest.initials}</span><div><strong>{guest.name} <span>· {guest.company}</span></strong><p>{guest.need}</p>{guest.appointment && <span className="ex-guest-appointment">{guest.appointment}</span>}</div><span className={`ex-guest-status ${guest.status === 'assigned' ? 'ex-status-accepted' : ''}`}>{guest.checkedInAt ? 'Checked in' : { assigned: 'Scheduled', unavailable: 'Unavailable' }[guest.status]}</span></li>)}</ul>}
     </div></article>;
 }
 
 function Agenda({ state }) {
   const sessions = makeBoothPlan(state);
-  const accepted = sessions.flatMap(session => session.guests).filter(guest => guest.status === 'accepted').length;
-  return <main className="ex-agenda"><div className="ex-agenda-heading"><div><p className="ex-eyebrow">{state.company} · BOOTH {state.booth}</p><h1>Booth agenda</h1></div><div className="ex-agenda-stamp"><span className="ex-stamp-icon"><Icon name="people" size={27} /></span><strong>{accepted}</strong><span>Accepted</span></div></div><div className="ex-agenda-day"><div><span className="ex-calendar-icon"><span>DAY</span><strong>01</strong></span><div><h2>{activation.day}</h2><p>Booth activation · {activation.label}</p></div></div></div><div className="ex-sessions">{sessions.map(session => <Session key={session.id} session={session} booth={state.booth} />)}</div></main>;
+  const assigned = sessions.flatMap(session => session.guests).filter(guest => guest.status === 'assigned').length;
+  return <main className="ex-agenda"><div className="ex-agenda-heading"><div><p className="ex-eyebrow">{state.company} · BOOTH {state.booth}</p><h1>Booth agenda</h1></div><div className="ex-agenda-stamp"><span className="ex-stamp-icon"><Icon name="people" size={27} /></span><strong>{assigned}</strong><span>Scheduled</span></div></div><div className="ex-agenda-day"><div><span className="ex-calendar-icon"><span>DAY</span><strong>01</strong></span><div><h2>{activation.day}</h2><p>Booth activation · {activation.label}</p></div></div></div><div className="ex-sessions">{sessions.map(session => <Session key={session.id} session={session} booth={state.booth} />)}</div></main>;
 }
 
 export default function ExhibitorApp() {
