@@ -1,0 +1,23 @@
+# Qodo review settings for this repo (https://docs.qodo.ai/configuration/configuration-file).
+# They apply to pull requests opened after this file reaches main.
+
+[github_app]
+pr_commands = ["/agentic_describe", "/agentic_review"]
+
+[review_agent]
+comments_location_policy = "both"
+# 3 = action required, 2 = remediation recommended, 1 = informational
+inline_comments_severity_threshold = 2
+issues_user_guidelines = """
+design_doc.md is the spec for this conference knowledge graph on FalkorDB. Flag code that breaks its rules:
+- LEARNED_FROM_T{k} edges point from learner to expert; "we learned evenly" writes both directions (2.3, 3.4).
+- tick = 4 * session + date_no, with session 0..14 and date_no 0..3.
+- Relationship type names come only from whitelisted integers through backend/app/cypher.py (LEARNED_FROM_T3), never from user input or string topic ids; everything else goes in as query parameters.
+- Topic vectors are indexed 0..T-1 in the order of data/program/topics.json; payloads name topics by string id.
+- The simulator's private latent profile never reaches the graph, the metrics or an API response.
+- LINKEDIN and ADHOC are stored as two directed edges.
+- Answers map through the requested claim, never through the generated question text.
+- An algorithm's subgraph must be its own relationship type (POS_TIE), since FalkorDB selects edges by type.
+frontend/ is the Rally attendee app. graph-view/ is the FalkorDB Canvas visualization; its demo mode must keep working from public/demo/feed.json.gz.
+"""
+compliance_user_guidelines = "No secrets, API keys or tokens in code, config, fixtures or logs."
