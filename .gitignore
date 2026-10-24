@@ -8,3 +8,6 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Original local demo; canonical shared app is frontend/
+/rally/
