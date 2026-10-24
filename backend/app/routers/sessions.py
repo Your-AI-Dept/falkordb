@@ -93,11 +93,7 @@ def get_questions(rater_id: str, s: int = SessionNo, d: int = DateNo):
 @router.post("/{s}/dates/{d}/meetings/{rater_id}/answers", response_model=QuestionSet)
 def submit_answers(body: AnswerSubmission, rater_id: str, s: int = SessionNo, d: int = DateNo):
     """Save one or more answers; returns the updated survey."""
-    qs = save_date_answers(s, d, rater_id, body.answers)
-    from app.events import bus
-
-    bus.publish("answer_recorded", {"session": s, "date_no": d, "rater_id": rater_id, "complete": qs.complete})
-    return qs
+    return save_date_answers(s, d, rater_id, body.answers)
 
 
 @router.post("/{s}/dates/{d}/close", response_model=DateCloseResult)

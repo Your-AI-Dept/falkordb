@@ -4,10 +4,12 @@
 
 Your docs said the frontend proposal in `frontend/docs/API.md` wasn't a contract and that route changes belong in your adapter. This note describes the backend API that now exists, maps it onto the four routes your core demo needs, and lists what we adopted from your proposal, what differs and why, and two open product questions. Please reply here on GitHub (PR or issue comments) with anything that doesn't work for your renderer.
 
+> **Status (harmonization pass, merged with PR #9):** the Rally adapter now implements the mapping below inside the original flows (`frontend/src/live.js`, `backend-adapter.js`, `graph-api.js`), fixtures use the same shapes, real PE27 attendees and the 10 canonical topic ids, and the graph view consumes the backend's event stream directly. Shared terms are defined once in `design_doc.md` §0.1. What's still browser-local is listed in `frontend/docs/INTEGRATION.md`.
+
 ## What exists right now
 
-- Run it: `docker compose up` (FalkorDB, backend on `:8000`, frontend on `:5173`). CORS allows `http://localhost:5173`.
-- Schema: `backend/openapi.json`, or `GET http://localhost:8000/openapi.json` / `/docs` on a running backend.
+- Run it: `docker compose up -d --build` (FalkorDB, backend on `:8001`, Rally on `:5173`, graph view on `:5174`). Both apps call the backend through their `/api` proxy; CORS also allows 5173 and 5174 directly.
+- Schema: `backend/openapi.json`, or `GET http://localhost:8001/openapi.json` / `/docs` on a running backend.
 - **Update: every route is now real**, backed by the FalkorDB graph (no more fixtures or `X-Stub` header). To get data: `POST /admin/seed` (about 1s), then `POST /admin/fast_forward?to_session=N` to simulate N sessions (about 7s per session), or open a session yourself with `POST /sessions/{s}/open`. The field shapes didn't change.
 - For the live two-person demo: `PUT /admin/humans {"ids": ["PE27-...", "PE27-..."]}` makes the simulator skip those raters and gives them Claude-phrased questions.
 - One event, no `/v1/events/:eventId` prefix, no auth. Identity is the attendee id in the path (`PE27-00001`), which lines up with your local participant switch.

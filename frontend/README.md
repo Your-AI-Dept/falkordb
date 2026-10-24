@@ -1,43 +1,43 @@
 # Rally · Pizza Expo demo
 
-React attendee and exhibitor frontend for the conference graph demo. This is the canonical shared app; the earlier local `rally/` directory is not part of the repository. Local UI fixtures are fictional. The team backend and dataset live in `../backend` and `../data`.
+React attendee and exhibitor frontend for the conference graph demo. It speaks the backend's vocabulary: the 10 canonical topics, real dataset attendees (PE27 ids), 4-date speed sessions, and the backend's survey and audience shapes. See [docs/INTEGRATION.md](docs/INTEGRATION.md).
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open [attendee](http://localhost:5173/) or [exhibitor](http://localhost:5173/?view=exhibitor). Nothing is published. `npm test` covers signal and response invariants; `npm run build` creates the production bundle.
+Open [attendee](http://localhost:5173/) or [exhibitor](http://localhost:5173/?view=exhibitor). Fixture mode (default) runs offline; set `VITE_DATA_MODE=live` in `.env.local` to use the backend (see `.env.example`). `npm test` covers signal and response invariants; `npm run build` creates the production bundle.
 
 ## Submission demo
 
-1. Open [Paul’s survey](http://localhost:5173/?view=survey&meeting=meet-theo&participant=paul) and [Theo’s survey](http://localhost:5173/?view=survey&meeting=meet-theo&participant=theo). These are local preview personas; live identity comes from the server.
-2. Paul chooses **Yes, useful**; Theo chooses **Not really**. They get different required follow-ups in the same modal. Every answer saves on tap, with separate respondent/subject IDs and question versions. Complete the follow-ups before leaving.
-3. After all required answers save, the same modal offers **Open visualization**. This opens the teammate’s separate graph UI in a new tab while preserving the feedback receipt. Set `VITE_VISUALIZATION_URL` to its HTTP(S) address; until supplied, the button is disabled with “Visualization link pending.” The visualization and simulation remain teammate-owned.
-4. Return to the feedback tab and choose **Continue to top people**. Select a topic and Top 3, 5, 10, or 20. Live mode displays the backend’s ordered results and reasons, refreshing every 2.5 seconds while visible.
+1. Open [Drita’s survey](http://localhost:5173/?view=survey&participant=paul) and [Sunil’s survey](http://localhost:5173/?view=survey&participant=theo): both sides of the same date (one meeting id, `s0-d0-PE27-00009-PE27-00952`).
+2. Each answers the backend survey on their own: “Did you meet?”, true/false topic statements with **Didn’t come up**, then “Would you act on their recommendation?” and “Meet again?”. Every answer saves on tap; the two directions stay separate.
+3. After the survey completes, **Open visualization** opens the graph view (`VITE_VISUALIZATION_URL`, default `http://127.0.0.1:5174/`), focused on that attendee.
+4. **Continue to topic experts**: pick a topic and Top 3, 5, 10 or 20. Live mode shows `GET /topics/{id}/experts` in server order with reasons.
 
-Without an API URL, surveys use branching fixtures and rankings use fixed sample ordering. The local revision counter synchronizes views; it is not a computed graph or evidence that rankings improved. Real data, graph-selected follow-ups, and changed ranking order must come from the teammate’s API.
+In fixture mode the surveys and rankings are sample payloads in the backend's shape; real graph-selected questions and changing rankings come from live mode.
 
 ## Guided attendee and exhibitor flows
 
-The app assigns a plan; attendees do not browse people, swipe, request meetings, or RSVP to booth invitations. The home screen leads with one next stop and shows the rest of the day underneath. Top people remains a graph-demo output accessible from the footer and completed survey, not the attendee's matchmaking interface.
+The app assigns a plan; attendees do not browse people, swipe, request meetings, or RSVP to booth invitations. The home screen leads with one next stop and shows the rest of the day underneath. Topic experts remains a graph-demo output accessible from the footer and completed survey, not the attendee's matchmaking interface.
 
 1. Complete the two-step profile and goals setup; choose **Show my day**.
 2. Open the next stop. It gives a person or booth, time, place, and topic. **I’m here** records arrival. **Can’t make it** records unavailability without an opinion about the person.
 3. **Finish meetup** opens required questions in the same modal. Answers save on tap. Close, Escape, backdrop, reload, and starting another stop cannot bypass outstanding feedback in the local app.
-4. The completed modal offers **Back to my day**, the separate visualization, and Top people. The next scheduled stop becomes the primary card.
+4. The completed modal offers **Back to my day**, the separate visualization, and topic experts. The next scheduled stop becomes the primary card.
 5. At the booth, **I’m here** updates the exhibitor's guest status without an RSVP. **Finish visit** opens required one-tap usefulness feedback. Check-in alone never asks whether the conversation was useful.
-6. Chance encounters still use QR/manual/sample saving. Saved profiles are read-only; there is no meeting-request button.
+6. Chance encounters use QR/manual/sample saving with attendee ids as badges. In live mode a scan calls `POST /checkins` and offers the 2–3 check-in questions.
 
-The scripted plan starts with Theo at 12:15. A tomato-sourcing focus adds Terra Rossa at Booth 412 at 1:00. A later peer assignment follows a fixture topic branch. Once an assignment has started, it remains stable even if later feedback changes the priority. The later assigned peers now have their own working surveys; answers stay scoped to the correct meeting and direction.
+The scripted plan is session 0: Sunil Desai, Simran Mehta, Francesca Napolitano and William Clark, one per date. A tomato focus plus a saved connection with Simran surfaces a Mutti booth invitation (booth 1128). Once an assignment has started, it remains stable even if later feedback changes the priority. The later assigned peers now have their own working surveys; answers stay scoped to the correct meeting and direction.
 
 The exhibitor has one booth contact and a preset Wednesday 1–2 PM activation. Its agenda shows scheduled, unavailable, and checked-in visitors. It contains no attendee picker, invitations, coverage confirmations, or private usefulness answers.
 
-**Integration status:** scheduling and assignment actions are local fixtures. All existing REST paths remain unchanged. The new `api.assignment` seam deliberately rejects live-mode actions until the teammate supplies scheduling endpoints; it never writes fixture state as a fallback. The attendee view expects normalized `Dashboard.agenda` entries (see `AgendaStop` in `src/contracts.d.ts`); without them, live mode shows that the schedule is unavailable. The backend owns actual matching, time/capacity constraints, counterpart coordination, and updates after feedback. Legacy request/invitation adapter methods and tests remain for compatibility but are not exposed in the attendee UX.
+**Integration status:** live mode builds `Dashboard.agenda` from the backend's session plan (`src/live.js`); see [docs/INTEGRATION.md](docs/INTEGRATION.md) for what is live and what stays local.
 
 ## Integration
 
-[Team integration handoff](docs/INTEGRATION.md) · [Earlier REST proposal](docs/API.md) · [UI types](src/contracts.d.ts) · [Hackathon priorities and demo proof](docs/HACKATHON.md)
+[Team integration handoff](docs/INTEGRATION.md) · [Backend API](docs/API.md) · [UI types](src/contracts.d.ts) · [Hackathon priorities and demo proof](docs/HACKATHON.md)
 
 Copy `.env.example` to `.env` and set `VITE_API_BASE_URL` to the backend API origin. The attendee adapter in `src/api.js` switches to REST and never silently falls back to demo data. `VITE_EVENT_ID` defaults to `pizza-expo`. These are public build variables; API credentials belong on the server.
 

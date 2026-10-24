@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from 'react';
-import {api} from '../api.js';
+import {api,viewerId} from '../api.js';
 import {Avatar,Button,Icon,Modal} from './ui.jsx';
 
-export default function ProfileSummary({profile,respondentId='paul',close,onEdit,onGoals,onBadge,onPreferencesChanged=()=>{}}){
+export default function ProfileSummary({profile,respondentId=viewerId(),close,onEdit,onGoals,onBadge,onPreferencesChanged=()=>{}}){
   const [preferences,setPreferences]=useState([]),[pending,setPending]=useState(false),[error,setError]=useState('');
   useEffect(()=>{let active=true;api.meetingPreferences(respondentId).then(items=>{if(active)setPreferences(items);}).catch(failure=>{if(active)setError(failure.message);});return()=>{active=false;};},[respondentId]);
   async function restore(topicId){

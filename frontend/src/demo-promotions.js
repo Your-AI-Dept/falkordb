@@ -1,23 +1,32 @@
-import {people} from './data/pizza-expo.js';
+import {people,persona} from './data/pizza-expo.js';
+import {topics,topicOptions} from './data/topics.js';
+import {mapAudience,AUDIENCE_TARGETS} from './backend-adapter.js';
 
 export const PROMOTION_STORAGE_KEY='rally-pizza-promotions-v1';
-export const promoTopics=[{id:'pizza-sauce',label:'Pizza sauce'},{id:'dough',label:'Dough & fermentation'},{id:'ovens',label:'Pizza ovens'}];
-// Seeded graph observations for the local demo, not scraped relationships or live scores.
-const evidence={
-  'pizza-sauce':[
-    {id:'maya',reports:6,connections:8,expertise:'Strong',reason:'Peers report learning about sauce consistency; connected to pizzeria operators.'},
-    {id:'theo',reports:5,connections:6,expertise:'Strong',reason:'Peer reports on ingredient evaluation; connects operators working on sourcing.'},
-    {id:'samir',reports:2,connections:14,expertise:'Developing',reason:'Connects producers and restaurant operators across the ingredient supply chain.'},
-  ],
-  dough:[{id:'elena',reports:7,connections:9,expertise:'Strong',reason:'Peers report learning about fermentation and dough consistency.'},{id:'maya',reports:3,connections:8,expertise:'Developing',reason:'Connected to operators comparing dough and ingredient choices.'}],
-  ovens:[{id:'nia',reports:6,connections:10,expertise:'Strong',reason:'Peers report learning about oven selection and kitchen capacity.'},{id:'theo',reports:4,connections:6,expertise:'Strong',reason:'Connects operators evaluating kitchen equipment.'}],
+// Fixture audiences exist for these canonical topics; live mode offers all 10.
+export const promoTopics=topicOptions.filter(topic=>['tomatoes-sauce','dough-flour','ovens-equipment'].includes(topic.id));
+export {AUDIENCE_TARGETS};
+// Seeded sample observations shaped like GET /topics/{id}/experts and /topics/{id}/influencers.
+const sample={
+  'tomatoes-sauce':{experts:[['maya',6,0.81],['theo',5,0.78]],influencers:[['maya',2.4,0.74],['samir',1.9,0.69]]},
+  'dough-flour':{experts:[['elena',7,0.84],['maya',3,0.66]],influencers:[['maya',1.6,0.71]]},
+  'ovens-equipment':{experts:[['nia',6,0.8],['theo',4,0.72]],influencers:[['nia',2.1,0.76]]},
 };
+const ref=person=>({id:person.id,name:person.name,company:person.company,title:person.role});
+function payloads(topicId){
+  const topic=topics.find(item=>item.id===topicId),data=sample[topicId];
+  const person=key=>people.find(item=>item.id===persona[key]);
+  const experts={topic:{id:topic.id,idx:topic.idx,name:topic.name,description:topic.description},limit:5,graph_revision:0,status:'ready',items:data.experts.map(([key,m,comp],index)=>({rank:index+1,person:ref(person(key)),comp,comp_unc:Math.round(2/(2+m)*1000)/1000,m,reason:`People they met at the show rate them highly on ${topic.name} (${m} conversations)`,evidence:[{label:`Compared notes on ${topic.name} with ${m} people at the show`,kind:'peer_votes'}]}))};
+  const influencers={event:{kind:'topic',id:topic.id,name:topic.name,profile:{[topic.id]:1}},n_targets:40,expected_reach:data.influencers.reduce((sum,[,gain])=>sum+gain,0),influencers:data.influencers.map(([key,gain,like])=>({person:ref(person(key)),marginal_reach:gain,comp_x:0.7,m:4,like,like_n:8,tribe:0,broker:0.1,reach:12,top_targets:[]}))};
+  return {experts,influencers};
+}
 export function promoAudience(topicId,target='both'){
-  if(!promoTopics.some(topic=>topic.id===topicId)||!['experts','connectors','both'].includes(target))throw new Error('Choose a topic and audience.');
-  return evidence[topicId].filter(item=>target==='experts'?item.reports>=4:target==='connectors'?item.connections>=8:true).map(item=>({...item,person:people.find(person=>person.id===item.id),topicId,source:'sample_graph'}));
+  if(!sample[topicId]||!AUDIENCE_TARGETS.some(item=>item.id===target))throw new Error('Choose a topic and audience.');
+  const {experts,influencers}=payloads(topicId);
+  return mapAudience(experts,influencers,target,'sample_graph').map(item=>({...item,person:{...people.find(person=>person.id===item.id),...item.person}}));
 }
 export function freshPromotions(){return {version:1,campaigns:[]};}
-export function inviteAudience(store,draft,recipientIds,audience){
+export function inviteAudience(store,draft,recipientIds,audience=null){
   if(!draft.campaignId||!draft.company?.trim()||!draft.booth?.trim()||!draft.contact?.name?.trim()||!draft.product?.trim()||!draft.offer?.trim())throw new Error('Complete your profile and promotion first.');
   const eligible=audience||promoAudience(draft.topicId,draft.target);
   const ids=[...new Set(recipientIds)];

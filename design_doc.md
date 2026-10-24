@@ -32,22 +32,45 @@ A live graph of who knows what, who cares about what, who people enjoy talking t
 - **FalkorDB's centrality and community algorithms ignore edge weights and select edges by relationship type.** Any subgraph an algorithm must run on is materialized as its own relationship type (that is why `POS_TIE` exists).
 - **Keep it demo-simple.** No hidden ground truth, no wall-clock scheduler: the system advances one date at a time when the operator (or simulator) closes it.
 
+### 0.1 Shared vocabulary
+
+Every app, payload and doc uses these words with these meanings. Field names are the backend's (snake_case); UIs may display them differently (e.g. 1-based).
+
+| Term | Meaning | In data |
+| --- | --- | --- |
+| **attendee** | One of the 1,000 people; the only node type in the people graph | `id` like `PE27-00042` |
+| **topic** | One of 10 shared coordinates (`cheese-dairy` … `tech-ordering-delivery`) | string `topic_id` in APIs; `idx` 0–9 for vectors |
+| **session** | One organizer-run speed-dating hour, 15 in total, about 200 attendees each | `session` 0–14 |
+| **date** | One planned 15-minute meeting slot inside a session (4 per session); "Date 2 of 4" in UIs | `date_no` 0–3 |
+| **tick** | Global date counter, `4 · session + date_no`; the graph revision a change belongs to | `tick` 0–59; `-1` before the first close |
+| **meeting** | Two attendees talking: a speed **date** (planned) or a **check-in** (QR scan, unplanned) | `kind: "date" \| "checkin"` |
+| **survey** | One rater's questions about one partner after a meeting; fixed once generated | `QuestionSet`, shared `meeting_id` for both raters |
+| **claim** | A true/false statement about who taught whom on a topic; "Didn't come up" is always offered | `kind: "claim"`, `claim: partner_taught \| self_taught`, value `true \| false \| skip` |
+| **act / meet again** | The two fixed questions: would you act on their recommendation (trust), would you meet again (likability) | `act: yes \| maybe \| no`, `meet_again: yes \| no` |
+| **competence** | Estimated expertise on a topic, prior blended with peer evidence | `comp`, uncertainty `comp_unc`, evidence count `m` (distinct partners compared with) |
+| **topic expert** | Top people for a topic by peer-confirmed competence | `GET /topics/{id}/experts` |
+| **micro-influencer** | Someone competent, well liked and well connected to people interested in an event's topic: who a sponsor gives tickets to | `GET /topics/{id}/influencers`, `/vendors/{id}/influencers`; `marginal_reach` = expected additional attendees |
+| **tribe** | Community on positive-trust ties (`POS_TIE`); -1 until someone has one | `tribe` |
+| **vendor** | An exhibitor (73) with a topic profile | `id` like `EX-024` |
+
 ---
 
 ## 1. Architecture
 
 ```
-React (Vite + TypeScript)
-   │  REST (JSON) + SSE (GET /events) for live updates
-FastAPI (Python 3.11, falkordb-py, anthropic)
+Rally frontend (React, :5173)        Graph view (React + FalkorDB Canvas, :5174)
+   │  REST via /api proxy                │  GET /graph/snapshot, then GET /events (SSE)
+   └──────────────┬──────────────────────┘
+FastAPI backend (Python 3.11, falkordb-py, anthropic, :8001 → 8000)
    │  Cypher over the Redis protocol
-FalkorDB (Docker)   graphs: content, people, match_scratch
+FalkorDB 6.0.3 (:6379, Browser :3000)   graphs: content, people, match_scratch; event state in one Redis key
 ```
 
-- **REST, not GraphQL.** The frontend needs a fixed set of views. FastAPI's OpenAPI schema generates a typed client for React (`openapi-typescript`).
-- **SSE** pushes date and session updates to the graph view. Everything else is request/response.
-- **FalkorDB:** `docker compose up falkordb`, or `docker run -p 6379:6379 -p 3000:3000 -it --rm falkordb/falkordb`. Port 3000 is the FalkorDB Browser, useful for debugging.
-- **Event state** (current session, current date, open/closed) lives in process for the hackathon. All durable data lives in FalkorDB.
+- **REST, not GraphQL.** The apps need a fixed set of views. The OpenAPI schema (`backend/openapi.json`) is the contract for Rally's adapter.
+- **One event stream.** Every state change publishes one of six events on `GET /events`: `session_opened` (with the 4-date plan), `date_opened`, `answer_recorded` (each answer with what its question asked), `date_closed` (metrics, changed attendees, new learned-from edges), `session_closed`, `checkin_recorded`. `GET /graph/snapshot` returns the same shapes in bulk. Both are built by `services/graph_events.py`; exact payloads are in `graph-view/src/graph/CONTRACT.md`.
+- **One implementation.** The graph view's demo feed is recorded from the real backend (`scripts/make_demo_feed.py`), so demo and live show the same product.
+- **Event state** (session/date lifecycle, metrics history, human raters, latest tick) lives in one Redis key on the FalkorDB instance, so it survives restarts. All graph data lives in FalkorDB.
+- **Run:** `docker compose up -d --build` starts all four services; see the root README.
 
 ### Repo layout
 
@@ -65,7 +88,7 @@ backend/
   app/snapshot.py          reads all attendees into numpy arrays
   app/state.py             event state (session/date lifecycle, metrics) in a Redis key
   app/surveys.py           survey lifecycle: answers, revisions, completion
-  app/routers/             admin, catalog, sessions, checkins, insights
+  app/routers/             admin, catalog, sessions, checkins, insights, visualization (graph snapshot)
   app/services/
     seed.py                load data, synthesize missing fields, create indexes, cold-start priors
     evidence.py            answers -> interest, reliability, likability deltas and LEARNED_FROM edges
@@ -80,12 +103,13 @@ backend/
     pipeline.py            session/date lifecycle, date-close pipeline, fast-forward
     simulator.py           mock answers for the demo
     metrics.py             learning and matching-quality metrics
+    graph_events.py        the event language: SSE payloads and the graph snapshot
   tests/
-frontend/
-  src/pages/SessionConsole.tsx
-  src/pages/MeetingFlow.tsx
-  src/pages/GraphView.tsx
-  src/pages/Influencers.tsx
+frontend/                  Rally attendee + exhibitor app (React, :5173); adapter in src/backend-adapter.js, src/graph-api.js
+graph-view/                Event HQ / topic / overview graphs (React + FalkorDB Canvas, :5174); contract in src/graph/CONTRACT.md
+scripts/
+  probe_falkordb.py        verifies every FalkorDB call the design relies on
+  make_demo_feed.py        records graph-view's demo show from the real backend
 docker-compose.yml
 ```
 
@@ -545,7 +569,8 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | GET | `/topics/{topic_id}/influencers` | Micro-influencers for a topic event, with explanations |
 | GET | `/vendors/{id}/influencers` | Micro-influencers for a vendor's event, with explanations |
 | GET | `/metrics` | Per-date learning and matching-quality metrics |
-| GET | `/events` | SSE stream: `session_opened`, `date_opened`, `answer_recorded`, `date_closed`, `session_closed`, `checkin_recorded` |
+| GET | `/graph/snapshot` | Graph view's starting state: attendees with vectors, learned-from edges, talks, vendors, metrics, past meetings, open session plan, latest tick |
+| GET | `/events` | SSE stream: `session_opened`, `date_opened`, `answer_recorded`, `date_closed`, `session_closed`, `checkin_recorded` (payloads in `graph-view/src/graph/CONTRACT.md`) |
 
 Payload sketches:
 
@@ -595,27 +620,17 @@ Authoritative schema: `backend/openapi.json` (or `GET /openapi.json` on a runnin
 
 ---
 
-## 7. Frontend
+## 7. Frontends
 
-Pages:
+**Rally (`frontend/`, port 5173)** is the attendee and exhibitor app. Attendees onboard with goals and topics, follow a guided itinerary (one session = 4 planned dates), answer the post-meeting survey one question at a time (save on tap), scan QR codes at check-ins, and browse topic experts. Exhibitors set up a promotion and pick an audience of **topic experts** or **micro-influencers**. It reads the backend through its adapter (`src/backend-adapter.js`, `src/graph-api.js`); see `frontend/docs/INTEGRATION.md` for which flows are live and which are still local.
 
-- **SessionConsole:** pick a session, open it, see the 4-date plan with pair values, run the simulator on a date, close dates.
-- **MeetingFlow:** phone-sized. Shows one question at a time for one rater, with the partner's name. Also handles check-ins: shows "my QR code" and a "scan" button (for the demo, scanning is picking an attendee from a list).
-- **GraphView:**
-  - A topic selector, and a force-directed graph of one `LEARNED_FROM_T{k}` layer.
-  - Node size is `comp_k`, ring opacity is `comp_unc_k`, and color is `tribe`.
-  - Arrows run from learner to expert, and edges added this date (latest `tick`) are highlighted.
-  - A side panel shows the metrics chart (8.3) and the last generated question with its `why`.
-- **Influencers:** pick a topic or vendor event and see who to give tickets to: each micro-influencer's competence, likability, expected reach and the targets they'd likely bring.
+**Graph view (`graph-view/`, port 5174)** is the organizer's screen, drawn with FalkorDB Canvas:
 
-Libraries:
+- **Event HQ:** every attendee seated by their top topic; dates and check-ins appear as lines while they happen and stay warm when both sides would act on each other's advice. Buttons open sessions and simulate/close dates.
+- **Topic view:** one `LEARNED_FROM_T{k}` layer. Node size is `comp`, ring is `comp_unc`, color is tribe; arrows run learner → expert, and the latest close's arrows are highlighted. Side panel: metrics over time and the last question with its `why`.
+- **Overview:** talks, vendors and topics with the top people per topic.
 
-- `react-force-graph-2d` for the graph
-- `recharts` for charts
-- `EventSource` for SSE
-- `openapi-typescript` for API types
-
-FalkorDB's Canvas web component is an alternative for the graph view if time allows.
+It loads `GET /graph/snapshot`, then applies `GET /events`; in demo mode it replays a show recorded from the real backend.
 
 ---
 

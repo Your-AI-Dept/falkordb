@@ -6,12 +6,12 @@ Use port 5173 consistently. Keep attendee, graph visualization, and exhibitor vi
 | --- | --- | --- |
 | 0:00–0:20 | Attendee profile and goal cards | “At a trade show, attendees hope to meet someone useful. Exhibitors hope the right person walks past. Both are relying on chance.” |
 | 0:20–0:40 | Attendee home: four named matches, Wednesday 12–1 | “Rally gives you four people to meet in a dedicated hour. You know who, where, and when. No swiping or meeting requests.” |
-| 0:40–1:05 | Open Theo, check in, finish, answer feedback. Show Theo's respondent survey separately. | “Each person gives their own feedback. They may have learned different things from the same conversation. Follow-up questions can target what the graph still needs to learn.” |
+| 0:40–1:05 | Open Sunil Desai (date 1), check in, finish, answer the survey: “Did you meet?”, true/false topic statements with “Didn’t come up”, then “Would you act on their recommendation?” and “Meet again?”. Show Sunil’s own survey separately (`?participant=theo`). | “Each person gives their own feedback. They may have learned different things from the same conversation. Follow-up questions can target what the graph still needs to learn.” |
 | 1:05–1:30 | Prepared end-of-session state → Continue to graph; teammate's visualization | “We’re compressing the rest of the hour here. After the round, these observations feed the next computation.” Show actual simulation and applied updates only when wired; otherwise identify the handoff as a prototype. |
 | 1:30–1:45 | Same-topic ranking before/after graph simulation | “Now we can ask who has evidence of expertise in pizza sauce, and who connects to relevant people.” Expertise and reach are separate signals. |
-| 1:45–2:15 | Exhibitor view: profile → promotion | “I'm Luca from Terra Rossa, booth 412. We're launching a pizza sauce. I want experts and well-connected people for a private tasting, with 20% off a first order.” Continue from profile, choose Both, Find my audience. |
+| 1:45–2:15 | Exhibitor view: profile → promotion | “I'm Bassam from Mutti, booth 1128. We're launching a pizza sauce. I want topic experts and micro-influencers for a private tasting, with 20% off a first order.” Continue from profile, choose Both, Find my audience. |
 | 2:15–2:35 | Audience evidence → Invite people → preview → Send invitations | “The exhibitor gets a relevant audience and a concrete offer, rather than random foot traffic.” The current audience is labeled Sample graph. |
-| 2:35–2:50 | View Maya's invitation → I'll be there; return to exhibitor response counts | “Maya accepts. The booth now knows who is coming.” Optional: check in, finish visit, required usefulness feedback. |
+| 2:35–2:50 | View Simran's invitation → I'll be there; return to exhibitor response counts | “Simran accepts. The booth now knows who is coming.” Optional: check in, finish visit, required usefulness feedback. |
 | 2:50–3:00 | Booth response view | “Organizers can sell exhibitors better access to relevant attendees, with invitations, acceptance, and actual visits they can measure.” Commercial hypothesis, not a measured revenue claim. |
 
 ## Preparation

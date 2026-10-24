@@ -44,13 +44,11 @@ export function connectApi(store: FeedStore, onStatus: (status: string) => void)
         dropped = true
         onStatus('reconnecting')
       }
-      // Backend events are notifications; reload the authoritative snapshot rather than
-      // interpreting thin payloads as the richer recorded-feed schema.
-      let refreshTimer: ReturnType<typeof setTimeout> | undefined
+      // The backend emits the same event payloads the demo feed records, so live events go
+      // through the same store.apply path; the snapshot is only reloaded after a reconnect.
       for (const name of EVENT_NAMES) {
-        events.addEventListener(name, () => {
-          clearTimeout(refreshTimer)
-          refreshTimer = setTimeout(() => {if (!closed) loadSnapshot().catch((error: Error) => onStatus(`error: ${error.message}`))}, 150)
+        events.addEventListener(name, (message) => {
+          if (!closed) store.apply({ event: name, data: JSON.parse((message as MessageEvent).data) } as GraphEvent)
         })
       }
     })
@@ -102,12 +100,12 @@ export class LiveControls {
 
   simulate() {
     const s = this.store.state.session
-    return s?.date != null ? this.post(`/admin/simulate/sessions/${s.session}/dates/${s.date}`) : Promise.resolve()
+    return s?.date_no != null ? this.post(`/admin/simulate/sessions/${s.session}/dates/${s.date_no}`) : Promise.resolve()
   }
 
   close() {
     const s = this.store.state.session
-    return s?.date != null ? this.post(`/sessions/${s.session}/dates/${s.date}/close`) : Promise.resolve()
+    return s?.date_no != null ? this.post(`/sessions/${s.session}/dates/${s.date_no}/close`) : Promise.resolve()
   }
 
   /** Opens sessions, simulates and closes dates until the show is over or you stop it. */
@@ -122,13 +120,13 @@ export class LiveControls {
         if (!session) {
           if (sessionsClosed >= SESSIONS) break
           await this.openNext()
-          await this.until((s) => s.session?.date === 0)
-        } else if (session.date !== null) {
-          const tick = 4 * session.session + session.date
+          await this.until((s) => s.session?.date_no === 0)
+        } else if (session.date_no !== null) {
+          const tick = 4 * session.session + session.date_no
           await this.simulate()
           await sleep(AUTO_PAUSE_MS)
           await this.close()
-          await this.until((s) => s.tick >= tick && (s.session === null || s.session.date !== null))
+          await this.until((s) => s.tick >= tick && (s.session === null || s.session.date_no !== null))
         } else {
           await sleep(300)  // the next date hasn't opened yet
         }

@@ -1,12 +1,16 @@
 import {mapSurvey,mapTopics,mapRanking,meetingCoordinates,mapAudience} from './backend-adapter.js';
+// Live graph routes (backend/openapi.json). Fixture mode builds the same payloads in demo-graph.js.
 export function createGraphClient(request){
   async function surveyRequest(meetingId,respondentId,options,answer){
     const coordinates=meetingCoordinates(meetingId);
     if(!coordinates.participants.includes(respondentId))throw new Error('Choose a participant in this meeting.');
-    const path=`/sessions/${coordinates.session}/dates/${coordinates.date}/meetings/${encodeURIComponent(respondentId)}`;
+    const partner=coordinates.participants.find(id=>id!==respondentId);
+    const path=coordinates.kind==='date'
+      ?`/sessions/${coordinates.session}/dates/${coordinates.date}/meetings/${encodeURIComponent(respondentId)}`
+      :`/checkins/${encodeURIComponent(respondentId)}/${encodeURIComponent(partner)}`;
     const respondent=await request('/attendees/'+encodeURIComponent(respondentId),{signal:options.signal});
     const raw=await request(path+(answer?'/answers':'/questions'),answer?{signal:options.signal,method:'POST',body:JSON.stringify({answers:[{question_id:answer.questionId,value:answer.answerKey}]})}:options);
-    if(raw.meeting_id!==meetingId)throw new Error('The API returned a different meeting.');
+    if(coordinates.kind==='date'&&raw.meeting_id!==meetingId)throw new Error('The API returned a different meeting.');
     return mapSurvey(raw,respondent);
   }
   return {
@@ -14,6 +18,10 @@ export function createGraphClient(request){
     answerSurvey:(id,respondent,answer,options={})=>surveyRequest(id,respondent,options,answer),
     topics:async(options={})=>mapTopics(await request('/topics',options)),
     rankings:async(topicId,limit,options={})=>mapRanking(await request('/topics/'+encodeURIComponent(topicId)+'/experts?limit='+limit,options)),
-    audience:async(topicId,target)=>{const [experts,influencers]=await Promise.all([request('/topics/'+encodeURIComponent(topicId)+'/experts?limit=5'),target==='experts'?Promise.resolve({influencers:[]}):request('/topics/'+encodeURIComponent(topicId)+'/influencers')]);return mapAudience(experts,influencers,target);},
+    audience:async(topicId,target)=>{
+      const topic=encodeURIComponent(topicId);
+      const [experts,influencers]=await Promise.all([request(`/topics/${topic}/experts?limit=5`),target==='experts'?Promise.resolve({influencers:[]}):request(`/topics/${topic}/influencers`)]);
+      return mapAudience(experts,influencers,target);
+    },
   };
 }

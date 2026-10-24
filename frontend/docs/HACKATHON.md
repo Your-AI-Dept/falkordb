@@ -4,10 +4,10 @@
 
 ## The agreed sequence
 
-1. **Two people meet.** Open Paul and Theo's participant-specific views of the same completed meeting. Assignment and acceptance alone are not usefulness evidence.
-2. **They give different feedback.** Paul chooses “Yes, useful”; Theo chooses “Not really.” Preserve the two directions independently. Each gets a short required follow-up in the same modal, saved on tap. The API owns question selection; the UI can refresh queued questions without replacing the active question.
+1. **Two people meet.** Open Drita’s and Sunil’s participant-specific views of the same meeting (`?view=survey&participant=paul` / `participant=theo`; both are real dataset attendees). Assignment and acceptance alone are not usefulness evidence.
+2. **They give their own feedback.** Each answers the backend’s survey (met, true/false topic statements with “Didn’t come up”, act, meet again) in the same modal, saved on tap. The two directions stay independent; one shared meeting id. The API owns question selection; the UI can refresh queued questions without replacing the active question.
 3. **Show many connections in the separate graph UI.** The teammate's visualization demonstrates a simulation over normalized real Pizza Expo data plus explicitly simulated interactions. Use the same event/entity IDs and graph revisions as the API. Graph visualization, data ingestion, and simulation controls are outside this frontend's scope.
-4. **Finish with Top X people for Y topic.** Return to Rally's Top people screen. Select a topic and count, then show the backend's ranked people with a short reason for each. Capture the same query before and after the simulation to make a ranking change assessable. The UI preserves the server's order.
+4. **Finish with topic experts.** Return to Rally's Topic experts screen (`GET /topics/{id}/experts`). Select a topic and count, then show the backend's ranked people with a short reason for each. Capture the same query before and after the simulation to make a ranking change assessable. The UI preserves the server's order.
 
 The exhibitor assigned-visit agenda is an optional commercial extension, not an extra step in the core demo. A relevant supplier, expert, or buyer discovered in the final results can explain why this becomes valuable to an exhibitor. Do not consume video time on team availability, coverage confirmation, or extra setup.
 
@@ -18,14 +18,14 @@ The exhibitor assigned-visit agenda is an optional commercial extension, not an 
 | Profile/goals, chosen QR saves, assigned day | Working local frontend demo |
 | Mandatory inline meetup survey and booth check-in/feedback | Working local frontend demo |
 | One booth contact, preset activation, assigned-guest/check-in agenda | Working local frontend demo; exhibitor REST remains out of scope |
-| Independent Paul/Theo answers and different follow-ups | Working local demo with directional records and saved question versions |
+| Independent Drita/Sunil answers on one meeting id | Working in fixture mode (backend payload shape) and live mode |
 | Generic API-rendered current/queued questions | Implemented with response validation, retries, conflict handling, and revision-aware polling |
 | Top X by topic | Implemented with server ordering, count controls, refresh, and empty/error states |
 | REST transport and contract checks | Tested with mocked HTTP responses; backend alignment note exists, adapter mapping not connected |
 | Graph/database, Bright Data ingestion, and graph visualization/simulation | Separate teammate's work, not connected or verified here |
 | Genuine graph-selected questions and improved rankings | Require backend implementation and live integration verification |
 
-Earlier frontend proposal (the team is replacing these endpoints): `GET /meetings/:id/survey`, `POST /meetings/:id/survey/answers`, `GET /topics`, and `GET /rankings`. The standalone survey/ranking pages do not require the dashboard routes. See [API.md](API.md) and [api-examples.json](api-examples.json). Update `src/graph-api.js` if the teammate chooses different route names; do not create a competing backend.
+The app now uses the backend's routes (`/sessions/{s}/dates/{d}/meetings/{rater}/questions|answers`, `/checkins/...`, `/topics`, `/topics/{id}/experts`, `/topics/{id}/influencers`); see [API.md](API.md) and [INTEGRATION.md](INTEGRATION.md).
 
 ## Demo rehearsal
 

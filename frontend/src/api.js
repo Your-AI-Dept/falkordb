@@ -3,11 +3,15 @@ import { createRestClient } from './rest.js';
 import { createGraphClient } from './graph-api.js';
 import { validateSurvey, validateTopics, validateRanking } from './graph-contract.js';
 import { demoSurvey, answerDemoSurvey, demoTopics, demoRanking } from './demo-graph.js';
-import {meetingPreferences,restoreMeetingTopic} from './meeting-preferences.js';
+import { demoMeetings } from './demo-agenda.js';
+import { persona } from './data/pizza-expo.js';
+import { meetingPreferences, restoreMeetingTopic } from './meeting-preferences.js';
+import { createLiveSource, liveIdentity } from './live.js';
+// Fixture mode by default (offline demo on real dataset people). VITE_DATA_MODE=live reads the backend
+// (backend/openapi.json) through the /api proxy (vite.config.ts) or VITE_API_BASE_URL.
 const base = import.meta.env?.VITE_DATA_MODE!=='live'?'':(import.meta.env?.VITE_API_BASE_URL || '/api').replace(/\/$/, '');
-const eventId = import.meta.env?.VITE_EVENT_ID || 'pizza-expo';
 export const isDemo = !base;
-const key = 'rally-pizza-attendee-v2';
+const key = 'rally-pizza-attendee-v3';
 let state = freshState();
 function readState() {
   try { const saved = JSON.parse(localStorage.getItem(key)); if (saved?.version === 2 && saved.profile && Array.isArray(saved.profile.goals) && Array.isArray(saved.encounters) && Array.isArray(saved.requestedIds) && Array.isArray(saved.dismissedIds)) state = saved; } catch { /* Continue in memory if storage is unavailable. */ }
@@ -15,53 +19,61 @@ function readState() {
 }
 function updateDemo(change) { return persist(change(readState())); }
 function persist(next) { state = next; try { localStorage.setItem(key, JSON.stringify(next)); } catch {} return snapshot(next); }
-export const request = createRestClient({base,eventId});
+export const request = createRestClient({base});
 export const graph = createGraphClient(request);
-async function mutation(path, payload) { await request(path, {method:'POST',body:JSON.stringify(payload)}); return request('/me/dashboard'); }
+const live = createLiveSource(request, graph);
+/** Who is using the app: the demo attendee, or the attendee chosen in live mode. */
+export const viewerId = () => isDemo ? persona.paul : liveIdentity();
+const notConnected = what => () => { throw new Error(what + ' is not connected to the backend yet.'); };
 // No silent demo fallback when a real API origin is configured.
 export const api = {
   assignment: async (id,action) => {
-    if(!isDemo)throw new Error('Schedule updates are not connected yet. Please try again later.');
+    if(!isDemo){await live.assignment(viewerId(),id,action);return live.dashboard(viewerId());}
     return updateDemo(current=>updateAssignment(current,id,action));
   },
-  dashboard: async () => isDemo ? snapshot(readState()) : request('/me/dashboard'),
+  dashboard: async () => isDemo ? snapshot(readState()) : live.dashboard(viewerId()),
   subscribe: callback => {
     const onStorage = event => { if (isDemo && (!event.key || event.key === key)) callback(); };
     window.addEventListener('storage', onStorage);
     window.addEventListener('focus', callback);
     return () => { window.removeEventListener('storage', onStorage); window.removeEventListener('focus', callback); };
   },
-  profile: async profile => { const validated = completeProfile(isDemo ? readState() : state, profile); return isDemo ? persist(validated) : mutation('/me/profile', validated.profile); },
+  profile: async profile => {
+    if (isDemo) return persist(completeProfile(readState(), profile));
+    const validated = completeProfile((await live.dashboard(viewerId())).state, profile);
+    await live.saveProfile(viewerId(), validated.profile);
+    return live.dashboard(viewerId());
+  },
   scan: async badgeToken => {
-    if (!isDemo) { const result = await request('/encounters', {method:'POST',body:JSON.stringify({badgeToken,kind:'chosen_qr_connection'})}); return {...await request('/me/dashboard'),scanResult:result}; }
+    if (!isDemo) { const scanResult = await live.scan(viewerId(), badgeToken); return {...await live.dashboard(viewerId()),scanResult}; }
     const result = recordEncounter(readState(), badgeToken); return {...persist(result.state),scanResult:{person:result.person,duplicate:result.duplicate}};
   },
-  reviewMeeting: async () => isDemo ? updateDemo(current => ({...current,meetingFeedbackDue: !demoSurvey(current,'meet-theo','paul').complete})) : request('/me/dashboard'),
-  feedback: async (meetingId, answers) => isDemo ? updateDemo(current => applyFeedback(current, answers)) : mutation('/meetings/' + encodeURIComponent(meetingId) + '/feedback', answers),
-  requestMeeting: async personId => isDemo ? updateDemo(current => requestMeeting(current, personId)) : mutation('/meeting-requests', {personId,durationMinutes:15}),
-  peerInbox: async recipientId => isDemo ? peerInbox(readState(), recipientId) : request('/me/meeting-requests'),
+  reviewMeeting: async () => isDemo ? updateDemo(current => ({...current,meetingFeedbackDue: !demoSurvey(current,demoMeetings.theo,persona.paul).complete})) : live.dashboard(viewerId()),
+  feedback: async (_meetingId, answers) => isDemo ? updateDemo(current => applyFeedback(current, answers)) : notConnected('Arranged-meetup feedback')(),
+  requestMeeting: async personId => isDemo ? updateDemo(current => requestMeeting(current, personId)) : notConnected('Meeting requests')(),
+  peerInbox: async recipientId => isDemo ? peerInbox(readState(), recipientId) : notConnected('Meeting requests')(),
   respondMeeting: async (requestId, response, recipientId) => {
-    if (isDemo) updateDemo(current => respondToMeeting(current, requestId, response, recipientId));
-    else await request('/meeting-requests/' + encodeURIComponent(requestId) + '/response', { method: 'POST', body: JSON.stringify({response}) });
+    if (!isDemo) notConnected('Meeting requests')();
+    updateDemo(current => respondToMeeting(current, requestId, response, recipientId));
     return api.peerInbox(recipientId);
   },
-  invitation: async (invitationId, response) => isDemo ? updateDemo(current => respondToInvitation(current, invitationId, response)) : mutation('/invitations/' + encodeURIComponent(invitationId) + '/response', {response}),
-  checkIn: async invitationId => isDemo ? updateDemo(current => checkInBooth(current, invitationId)) : mutation('/invitations/' + encodeURIComponent(invitationId) + '/check-in', {}),
-  boothFeedback: async (invitationId, usefulness) => isDemo ? updateDemo(current => applyBoothFeedback(current, invitationId, usefulness)) : mutation('/invitations/' + encodeURIComponent(invitationId) + '/feedback', {usefulness}),
-  dismiss: async personId => isDemo ? updateDemo(current => ({...current,dismissedIds:[...new Set([...current.dismissedIds,personId])]})) : mutation('/recommendation-feedback', {personId,action:'not_now'}),
-  survey: async (meetingId, respondentId='paul', options={}) => {
+  invitation: async (invitationId, response) => isDemo ? updateDemo(current => respondToInvitation(current, invitationId, response)) : notConnected('Booth invitations')(),
+  checkIn: async invitationId => isDemo ? updateDemo(current => checkInBooth(current, invitationId)) : notConnected('Booth check-in')(),
+  boothFeedback: async (invitationId, usefulness) => isDemo ? updateDemo(current => applyBoothFeedback(current, invitationId, usefulness)) : notConnected('Booth feedback')(),
+  dismiss: async personId => isDemo ? updateDemo(current => ({...current,dismissedIds:[...new Set([...current.dismissedIds,personId])]})) : notConnected('Recommendation feedback')(),
+  survey: async (meetingId, respondentId=viewerId(), options={}) => {
     const result=validateSurvey(isDemo?demoSurvey(readState(),meetingId,respondentId):await graph.survey(meetingId,respondentId,options));
-    if(result.meetingId!==meetingId)throw new Error('The API returned a different meeting.');
+    if(result.meetingId!==meetingId&&!(result.context==='checkin'))throw new Error('The API returned a different meeting.');
     return result;
   },
   answerSurvey: async (meetingId, respondentId, answer, options={}) => {
-    if(isDemo){updateDemo(current=>answerDemoSurvey(current,meetingId,respondentId,answer,{revise:options.revise}));return api.survey(meetingId,respondentId);}
-    if(answer.answerText!==undefined)throw new Error('Written answers are not connected yet.');
+    if(isDemo){updateDemo(current=>answerDemoSurvey(current,meetingId,respondentId,answer));return api.survey(meetingId,respondentId);}
+    if(answer.answerText!==undefined)throw new Error('Written answers are not part of the survey.');
     return graph.answerSurvey(meetingId,respondentId,answer,options);
   },
-  meetingPreferences: async (respondentId='paul') => isDemo?meetingPreferences(readState(),respondentId):[],
-  restoreMeetingTopic: async (topicId,respondentId='paul') => {
-    if(!isDemo)throw new Error('Meeting preferences are not connected yet.');
+  meetingPreferences: async (respondentId=viewerId()) => isDemo?meetingPreferences(readState(),respondentId):[],
+  restoreMeetingTopic: async (topicId,respondentId=viewerId()) => {
+    if(!isDemo)notConnected('Meeting preferences')();
     return updateDemo(current=>restoreMeetingTopic(current,respondentId,topicId));
   },
   topics: async (options={}) => validateTopics(isDemo?{topics:demoTopics}:await graph.topics(options)),
@@ -69,5 +81,10 @@ export const api = {
     if(![3,5,10,20].includes(limit))throw new Error('Choose 3, 5, 10, or 20 people.');
     return validateRanking(isDemo?demoRanking(readState(),topicId,limit):await graph.rankings(topicId,limit,options),topicId,limit);
   },
-  reset: async () => { if (!isDemo) throw new Error('Reset is only available in the demo.'); return persist(freshState()); },
+  /** Live mode: everyone at the event, for the identity picker. */
+  attendees: async () => isDemo ? [] : live.people(),
+  reset: async () => {
+    if (!isDemo) { live.reset(viewerId()); return live.dashboard(viewerId()); }
+    return persist(freshState());
+  },
 };

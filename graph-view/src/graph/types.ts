@@ -47,7 +47,7 @@ export interface Vendor {
   profile: number[]
 }
 
-/** Metrics after one date close; tick = 4 · session + date */
+/** Metrics after one date close; tick = 4 · session + date_no */
 export interface Metrics {
   tick: number
   [name: string]: number
@@ -72,8 +72,8 @@ export interface PastMeeting {
 /** The open session: who is in it and its 4-date plan */
 export interface OpenSession {
   session: number
-  /** The date running now, or null between dates */
-  date: number | null
+  /** The date running now (0-3), or null between dates */
+  date_no: number | null
   attendees: string[]
   dates: Pair[][]
 }
@@ -101,13 +101,13 @@ export interface SessionOpened {
 
 export interface DateOpened {
   session: number
-  date: number
+  date_no: number
   tick: number
 }
 
 export interface Answer {
   question_id: string
-  kind: 'claim' | 'act' | 'meet_again'
+  kind: 'met' | 'claim' | 'act' | 'meet_again'
   topic_id?: string | null
   claim?: 'partner_taught' | 'self_taught' | null
   value: string
@@ -118,16 +118,18 @@ export interface Answer {
 export interface AnswerRecorded {
   source: 'date' | 'checkin'
   session?: number
-  date?: number
+  date_no?: number
   tick: number
   rater_id: string
   partner_id: string
+  /** The rater's survey is complete after this submission */
+  complete?: boolean
   answers: Answer[]
 }
 
 export interface DateClosed {
   session: number
-  date: number
+  date_no: number
   tick: number
   metrics: Metrics
   /** Attendees whose values changed; only the changed fields need to be present */
@@ -144,6 +146,8 @@ export interface CheckinRecorded {
   scanner_id: string
   scanned_id: string
   tick: number
+  /** Times these two have checked in with each other */
+  count?: number
 }
 
 export type GraphEvent =

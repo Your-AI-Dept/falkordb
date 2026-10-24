@@ -1,6 +1,10 @@
 export type Id = string;
+/** The 10 canonical topic ids from data/program/topics.json (src/data/topics.js). */
+export type TopicId = 'cheese-dairy' | 'tomatoes-sauce' | 'dough-flour' | 'meats-toppings' | 'spices-seasonings' | 'ovens-equipment' | 'supply-chain-packaging' | 'brick-and-mortar' | 'chefs-culinary' | 'tech-ordering-delivery';
+/** Attendee ids are the dataset's PE27-xxxxx ids; badge tokens are the same ids. */
+export type AttendeeId = string;
 export type Goal = 'suppliers' | 'peers' | 'growth' | 'explore';
-export type Focus = '' | 'tomatoes' | 'flour' | 'equipment' | 'distribution' | 'growth' | 'customers' | 'other';
+export type Focus = '' | TopicId | 'other';
 export interface Profile {
   name: string; role: string; company: string;
   businessType: 'pizzeria' | 'supplier' | 'distributor' | 'other';
@@ -11,13 +15,15 @@ export interface Person {
   id: Id; name: string; role: string; company: string; initials: string;
   color: 'peach' | 'sage' | 'lavender' | 'sand' | 'rose' | 'blue';
   category: string; location: string; bio: string; offering: string; lookingFor: string;
-  topics: string[]; slot: string; place: string; badge?: string;
+  businessType?: string; topics: TopicId[]; slot: string; place: string; badge?: AttendeeId;
 }
 export interface Encounter { id: Id; personId: Id; kind: 'chosen_qr_connection'; createdAt: string }
-export type NextInterest = '' | 'tomatoes' | 'flour' | 'equipment' | 'distribution' | 'growth' | 'peers';
+export type NextInterest = '' | TopicId;
+/** Local summary of the attendee's own speed-date survey (met + topics discussed), used for local recommendations. */
 export interface Feedback {
-  meetingId: Id; usefulness: 'yes' | 'somewhat' | 'no' | 'didnt_meet'; next: NextInterest;
-  attendance: 'not_met' | 'reported_attended'; submittedAt: string;
+  meetingId: Id; next: NextInterest; topics?: TopicId[];
+  attendance: 'not_met' | 'reported_attended' | 'unknown'; submittedAt: string;
+  usefulness?: 'yes' | 'somewhat' | 'no' | 'didnt_meet'; // dormant earlier arranged-meetup feedback
 }
 export interface ConnectionPathNode { id: Id; name: string }
 export interface Recommendation { person: Person; reason: string; source: string; path: ConnectionPathNode[] }
@@ -59,10 +65,11 @@ export interface Dashboard {
   agenda?: AgendaStop[];
   session?: {id: Id; title: string; day: string; time: string; meetingIds: Id[]; resolved: number; total: number; ready: boolean};
 }
-// Frontend display shape only; the team has not finalized scheduling endpoints.
+// Frontend display shape. Meeting stops use the backend meeting id s{session}-d{date}-{a}-{b};
+// live stops come from GET /sessions/{s}, fixture stops are built the same way.
 export interface AgendaStop {
   id: Id; kind: 'meeting' | 'booth'; personId: Id; person: Person;
-  sessionId?: Id; round?: number;
+  sessionId?: Id; session?: number; date?: number; round?: number; dateState?: 'planned' | 'open' | 'closed';
   time: string; location: string; topic: string; topicId?: Id; reason?: string;
   status: 'scheduled' | 'checked_in' | 'feedback_due' | 'completed' | 'missed';
 }
@@ -70,9 +77,12 @@ export interface ScanResult { person: Person; duplicate: boolean }
 
 // Participant identity is supplied by the authenticated server in live mode.
 export interface SurveyPerson { id: Id; name: string; role?: string; company?: string; color?: string; initials?: string }
+/** Mapped from the backend Question: kind met | claim | act | meet_again. Claim choices are true / false / skip (Didn't come up). */
 export interface SurveyQuestion {
   id: Id; version: number; prompt: string; required: boolean;
   choices: { id: Id; label: string }[];
+  kind?: 'met' | 'claim' | 'act' | 'meet_again'; topicId?: TopicId | null; claim?: 'partner_taught' | 'self_taught' | null;
+  why?: { score: number; ig: number; plausibility: number } | null;
 }
 export interface SurveyAnswer {
   id?: Id; meetingId?: Id; respondentId?: Id; subjectId?: Id;
@@ -80,7 +90,7 @@ export interface SurveyAnswer {
   answerKey: Id; answerLabel: string; submittedAt?: string;
 }
 export interface MeetingSurvey {
-  meetingId: Id; respondent: SurveyPerson; subject: SurveyPerson;
+  meetingId: Id; context?: 'date' | 'checkin'; phrasedBy?: 'claude' | 'template'; respondent: SurveyPerson; subject: SurveyPerson;
   time?: string; location?: string; graphRevision: number; surveyRevision: number;
   complete: boolean; currentQuestion: SurveyQuestion | null;
   queuedQuestions: SurveyQuestion[]; answers: SurveyAnswer[];
@@ -93,14 +103,17 @@ export interface DemoSurveyQuestion extends SurveyQuestion {
   choices: {id: Id; label: string; requiresText?: boolean; requiresConfirmation?: boolean}[];
 }
 export interface DemoMeetingSurvey extends MeetingSurvey {
-  questions: DemoSurveyQuestion[]; canRevise: true; meetingTopic: Topic;
+  questions: SurveyQuestion[]; canRevise: true; meetingTopic: Topic;
   preferences: MeetingPreference[]; answers: DemoSurveyAnswer[];
 }
 export interface DemoSurveySubmission extends SurveySubmission { answerText?: string }
-// Local promotion DTOs pending the team's API mapping. These do not define routes.
+// Exhibitor audience, mapped from GET /topics/{id}/experts and /topics/{id}/influencers (backend-adapter mapAudience).
+export type AudienceTarget = 'experts' | 'influencers' | 'both';
 export interface PromotionAudienceMember {
-  id: Id; person: Person; topicId: Id; expertise: string; reports: number;
-  connections: number; reason: string; source: 'sample_graph' | 'graph';
+  id: Id; person: Person; topicId: TopicId; kinds: ('expert' | 'micro_influencer')[];
+  expertise: number; reports: number; like?: number;
+  /** Expected additional attendees this micro-influencer brings (not a count of connections). */
+  marginalReach?: number; evidenceLabels: string[]; reason: string; source: 'sample_graph' | 'backend_graph';
 }
 export interface PromotionInvitation {
   person: Person; evidence: PromotionAudienceMember;

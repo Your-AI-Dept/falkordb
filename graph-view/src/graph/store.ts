@@ -133,17 +133,17 @@ export class FeedStore {
   apply({ event, data }: GraphEvent) {
     const s = this.state
     if (event === 'session_opened') {
-      s.session = { session: data.session, date: null, attendees: data.attendees, dates: data.dates }
+      s.session = { session: data.session, date_no: null, attendees: data.attendees, dates: data.dates }
       s.inSession = new Set(data.attendees)
       this.log(`Session ${data.session + 1} opened: ${data.attendees.length} people, 4 dates planned`)
     } else if (event === 'date_opened') {
-      if (s.session) s.session = { ...s.session, date: data.date }
-      this.log(`Session ${data.session + 1}, date ${data.date + 1} started`)
+      if (s.session) s.session = { ...s.session, date_no: data.date_no }
+      this.log(`Session ${data.session + 1}, date ${data.date_no + 1} started`)
     } else if (event === 'answer_recorded') {
       const kind = data.source === 'checkin' ? 'checkin' : 'date'
       const key = `${kind}|${pairKey(data.rater_id, data.partner_id)}`
       const meeting = s.meetings.get(key) ?? { kind, a: data.rater_id, b: data.partner_id, tick: data.tick, act: {}, talking: false }
-      meeting.talking = kind === 'date' && s.session?.date === data.date
+      meeting.talking = kind === 'date' && s.session?.date_no === data.date_no
       for (const answer of data.answers) {
         if (answer.kind === 'act') meeting.act[data.rater_id] = answer.value
         if (answer.text) s.lastQuestion = { rater: data.rater_id, partner: data.partner_id, tick: data.tick, answer }
@@ -160,7 +160,7 @@ export class FeedStore {
       for (const id of [data.scanner_id, data.scanned_id]) s.glow.set(id, !s.glow.get(id))
     } else if (event === 'date_closed') {
       s.tick = data.tick
-      if (s.session) s.session = { ...s.session, date: null }
+      if (s.session) s.session = { ...s.session, date_no: null }
       for (const meeting of s.meetings.values()) meeting.talking = false
       for (const patch of data.nodes) {
         const attendee = s.attendees.get(patch.id)
@@ -171,7 +171,7 @@ export class FeedStore {
       for (const edge of data.edges) s.glow.set(edge.target, !s.glow.get(edge.target))
       s.metrics = [...s.metrics.filter((m) => m.tick !== data.tick), data.metrics]
       s.tribeSlot = assignTribeSlots(s.attendees, s.tribeSlot)
-      this.log(`Date ${data.date + 1} closed: ${data.edges.length} new learned-from votes`)
+      this.log(`Date ${data.date_no + 1} closed: ${data.edges.length} new learned-from votes`)
     } else {
       s.session = null
       s.inSession = new Set()

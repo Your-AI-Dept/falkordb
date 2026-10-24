@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Avatar,Button,Icon,Modal} from './ui.jsx';
 import {MeetingSurveyDialog} from './MeetingSurvey.jsx';
-import {api} from '../api.js';
+import {api,viewerId} from '../api.js';
 import {VisualizationHandoff} from './VisualizationHandoff.jsx';
 import './agenda.css';
 
@@ -13,7 +13,7 @@ export function Agenda({stops,openStop,session,compact=false}){
   if(session){
     const lineup=session.meetingIds.map(id=>stops.find(stop=>stop.id===id)).filter(Boolean);
     const other=stops.filter(stop=>!session.meetingIds.includes(stop.id));
-    return <div className="guided-agenda"><section className="speed-session"><div className="speed-heading"><div><span className="eyebrow">YOUR FOUR MATCHES</span><h2>{session.title}</h2><p><Icon name="clock" size={17}/>{session.day} · {session.time}</p></div><span className="session-count">{session.resolved}/4<span>finished</span></span></div><div className="session-lineup">{lineup.map((stop,index)=><button className="session-match" key={stop.id} onClick={()=>openStop(stop.id)}><span className="round-number">{index+1}</span><Avatar person={stop.person}/><span className="session-person"><strong>{stop.person.name}</strong><span>{stop.person.company} · {stop.topic}</span><small>{stop.time.replace('Wednesday · ','')} · {stop.location}</small></span><span className="session-status">{stop.status==='scheduled'?'View meetup':labels[stop.status]}<Icon name="arrow" size={15}/></span></button>)}</div><div className="session-next"><Icon name="spark" size={19}/><span>{session.ready?'Feedback ready for the graph update':'Your next matches update after this hour.'}</span>{session.ready&&<Button variant="text" onClick={()=>setGraphOpen(true)}>Continue to graph<Icon name="arrow" size={16}/></Button>}</div></section>{other.length>0&&<Agenda stops={other} openStop={openStop} compact/>} {graphOpen&&<Modal title="Round complete" close={()=>setGraphOpen(false)}><VisualizationHandoff/></Modal>}</div>;
+    return <div className="guided-agenda"><section className="speed-session"><div className="speed-heading"><div><span className="eyebrow">YOUR FOUR MATCHES</span><h2>{session.title}</h2><p><Icon name="clock" size={17}/>{session.day} · {session.time}</p></div><span className="session-count">{session.resolved}/4<span>finished</span></span></div><div className="session-lineup">{lineup.map((stop,index)=><button className="session-match" key={stop.id} onClick={()=>openStop(stop.id)}><span className="round-number">{index+1}</span><Avatar person={stop.person}/><span className="session-person"><strong>{stop.person.name}</strong><span>{stop.person.company} · {stop.topic}</span><small>Date {index+1} of 4 · {stop.time.replace('Wednesday · ','')} · {stop.location}</small></span><span className="session-status">{stop.status==='scheduled'?'View meetup':labels[stop.status]}<Icon name="arrow" size={15}/></span></button>)}</div><div className="session-next"><Icon name="spark" size={19}/><span>{session.ready?'Feedback ready for the graph update':'Your next matches update after this hour.'}</span>{session.ready&&<Button variant="text" onClick={()=>setGraphOpen(true)}>Continue to graph<Icon name="arrow" size={16}/></Button>}</div></section>{other.length>0&&<Agenda stops={other} openStop={openStop} compact/>} {graphOpen&&<Modal title="Session complete" close={()=>setGraphOpen(false)}><VisualizationHandoff participant={viewerId()}/></Modal>}</div>;
   }
   const next=stops.find(stop=>stop.status==='feedback_due')||stops.find(stop=>stop.status==='checked_in')||stops.find(stop=>stop.status==='scheduled');
   const later=stops.filter(stop=>stop.id!==next?.id&&['scheduled','checked_in','feedback_due'].includes(stop.status));
@@ -27,7 +27,7 @@ export function Agenda({stops,openStop,session,compact=false}){
 }
 
 export function StopDialog({stop,visit,close,run,pending,error,refresh}){
-  if(stop.kind==='meeting'&&['feedback_due','completed'].includes(stop.status))return <MeetingSurveyDialog meetingId={stop.id} close={close} onSaved={refresh}/>;
+  if(stop.kind==='meeting'&&['feedback_due','completed'].includes(stop.status))return <MeetingSurveyDialog meetingId={stop.id} respondentId={viewerId()} close={close} onSaved={refresh}/>;
   const due=stop.status==='feedback_due';
   const done=['completed','missed'].includes(stop.status);
   const update=action=>run(()=>api.assignment(stop.id,action)).catch(()=>{});
@@ -36,7 +36,7 @@ export function StopDialog({stop,visit,close,run,pending,error,refresh}){
     <div className="meeting-facts"><span className="eyebrow">{stop.topic}</span><p><Icon name="clock"/>{stop.time}</p><p><Icon name="pin"/>{stop.location}</p></div>
     {stop.status==='scheduled'&&<div className="stop-dialog-actions"><Button variant="full" disabled={pending} onClick={()=>update('check_in')}>I’m here<Icon name="pin" size={17}/></Button><Button variant="text" disabled={pending} onClick={()=>update('miss')}>Can’t make it</Button></div>}
     {stop.status==='checked_in'&&<><div className="request-status" role="status"><Icon name="check"/><strong>Checked in</strong></div><div className="stop-dialog-actions"><Button variant="full" disabled={pending} onClick={()=>update('finish')}>{stop.kind==='booth'?'Finish visit':'Finish meetup'}<Icon name="arrow" size={17}/></Button></div></>}
-    {due&&<fieldset className="visit-feedback"><legend>Was the visit useful?</legend><div className="feedback-choices">{[['yes','Yes'],['somewhat','Somewhat'],['no','Not really']].map(([id,label])=><button className="feedback-choice" type="button" key={id} disabled={pending} onClick={()=>run(()=>api.boothFeedback(stop.id,id)).catch(()=>{})}>{label}</button>)}</div></fieldset>}
+    {due&&<fieldset className="visit-feedback"><legend>Booth feedback: was the visit useful?</legend><div className="feedback-choices">{[['yes','Yes'],['somewhat','Somewhat'],['no','Not really']].map(([id,label])=><button className="feedback-choice" type="button" key={id} disabled={pending} onClick={()=>run(()=>api.boothFeedback(stop.id,id)).catch(()=>{})}>{label}</button>)}</div></fieldset>}
     {done&&<><div className="request-status" role="status"><Icon name={stop.status==='missed'?'clock':'check'}/><strong>{stop.status==='missed'?'Marked unavailable':'Feedback saved'}</strong></div>{visit?.feedback&&<p className="feedback-saved">{ {yes:'Useful',somewhat:'Somewhat useful',no:'Not useful'}[visit.feedback.usefulness] }</p>}<div className="stop-dialog-actions"><Button variant="full" onClick={close}>Back to my day<Icon name="arrow" size={17}/></Button></div></>}
   </Modal>;
 }

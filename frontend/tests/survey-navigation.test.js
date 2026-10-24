@@ -1,99 +1,65 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {freshState,completeProfile,agendaFor,updateAssignment} from '../src/demo.js';
+import {freshState,completeProfile,agendaFor} from '../src/demo.js';
 import {demoSurvey,answerDemoSurvey} from '../src/demo-graph.js';
+import {demoMeetings} from '../src/demo-agenda.js';
+import {persona as P} from '../src/data/pizza-expo.js';
 import {meetingPreferences,restoreMeetingTopic} from '../src/meeting-preferences.js';
 import {homeLink,attendeeLink} from '../src/navigation.js';
 import {reconcileSurvey} from '../src/graph-contract.js';
-const id='meet-theo';
-function attendee(){const state=freshState();return completeProfile(state,{...state.profile,goals:['suppliers'],focus:'tomatoes'});}
+const id=demoMeetings.theo;
+function attendee(){const state=freshState();return completeProfile(state,{...state.profile,goals:['suppliers'],focus:'tomatoes-sauce'});}
 function answer(state,respondent,key,extra={}){
   const survey=demoSurvey(state,id,respondent),q=survey.currentQuestion;
   return answerDemoSurvey(state,id,respondent,{questionId:q.id,questionVersion:q.version,surveyRevision:survey.surveyRevision,answerKey:key,...extra});
 }
-function revise(state,respondent,questionId,key,extra={}){
+function revise(state,respondent,questionId,key){
   const survey=demoSurvey(state,id,respondent),q=survey.questions.find(item=>item.id===questionId);
-  return answerDemoSurvey(state,id,respondent,{questionId:q.id,questionVersion:q.version,surveyRevision:survey.surveyRevision,answerKey:key,...extra},{revise:true});
+  return answerDemoSurvey(state,id,respondent,{questionId:q.id,questionVersion:q.version,surveyRevision:survey.surveyRevision,answerKey:key},{revise:true});
 }
-test('reviewing does not mutate evidence; changing usefulness invalidates only the same respondent and meeting follow-up',()=>{
-  let state=answer(answer(attendee(),'paul','yes'),'paul','flour');
-  state=answer(answer(state,'theo','yes'),'theo','equipment');
-  const original=JSON.stringify(state),before=demoSurvey(state,id,'paul');
-  assert.equal(before.questions.length,2);assert.equal(before.complete,true);
-  assert.equal(before.questions[1].choices.find(choice=>choice.id==='flour').label,'Flour & fermentation');
+const all=(state,respondent)=>{while(!demoSurvey(state,id,respondent).complete)state=answer(state,respondent,demoSurvey(state,id,respondent).currentQuestion.choices[0].id);return state;};
+
+test('reviewing does not mutate answers; revising one answer changes only that rater’s answer',()=>{
+  let state=all(all(attendee(),P.paul),P.theo);
+  const original=JSON.stringify(state),before=demoSurvey(state,id,P.paul);
+  assert.equal(before.questions.length,7);assert.equal(before.complete,true);
+  assert.equal(before.questions[1].choices.find(choice=>choice.id==='skip').label,'Didn’t come up');
   assert.equal(JSON.stringify(state),original);
-  const otherAnswers=demoSurvey(state,id,'theo').answers;
-  const updated=revise(state,'paul','usefulness','no');
-  assert.equal(demoSurvey(updated,id,'paul').complete,false);
-  assert.equal(demoSurvey(updated,id,'paul').currentQuestion.id,'better-fit');
-  assert.deepEqual(demoSurvey(updated,id,'theo').answers,otherAnswers);
-  assert.equal(updated.feedback.next,'');
-  assert.equal(agendaFor(updated)[0].status,'feedback_due');
-  assert.equal(demoSurvey(answer(updated,'paul','stage'),id,'paul').complete,true);
+  const otherAnswers=demoSurvey(state,id,P.theo).answers;
+  const updated=revise(state,P.paul,'t0a','skip');
+  assert.equal(demoSurvey(updated,id,P.paul).answers.find(a=>a.questionId==='t0a').answerKey,'skip');
+  assert.equal(demoSurvey(updated,id,P.paul).answers.length,7);
+  assert.deepEqual(demoSurvey(updated,id,P.theo).answers,otherAnswers);
+  assert.equal(demoSurvey(updated,id,P.paul).surveyRevision,before.surveyRevision+1);
+  assert.strictEqual(revise(updated,P.paul,'t0a','skip'),updated);
 });
-test('editing a later answer preserves the revealed lineup and rejects stale edits',()=>{
-  let state=answer(answer(attendee(),'paul','yes'),'paul','flour');
-  const usefulness=demoSurvey(state,id).answers[0];
-  const revision=state.graphRevision;
-  state=revise(state,'paul','next-priority','equipment');
-  assert.equal(state.feedback.next,'equipment');
-  assert.deepEqual(agendaFor(state).map(stop=>stop.id),['meet-theo','meet-maya','meet-elena','meet-samir']);
-  assert.deepEqual(demoSurvey(state,id).answers[0],usefulness);
-  assert.equal(state.surveyAnswers.length,2);
-  assert.strictEqual(revise(state,'paul','next-priority','equipment'),state);
-  assert.throws(()=>revise(state,'paul','next-priority','flour',{surveyRevision:revision}),error=>error.status===409);
+test('switching to “We didn’t meet” completes the survey and keeps the lineup',()=>{
+  let state=answer(answer(attendee(),P.paul,'yes'),P.paul,'true');
+  assert.equal(demoSurvey(state,id,P.paul).complete,false);
+  state=revise(state,P.paul,'met','no');
+  assert.equal(demoSurvey(state,id,P.paul).complete,true);
+  assert.equal(agendaFor(state).find(stop=>stop.id===id).status,'missed');
+  assert.deepEqual(agendaFor(state).map(stop=>stop.id),[demoMeetings.theo,demoMeetings.maya,demoMeetings.elena,demoMeetings.samir]);
 });
-test('something else requires explicit text and stores it without inventing a structured topic or expertise',()=>{
-  const state=answer(attendee(),'theo','yes');
-  assert.throws(()=>answer(state,'theo','other'),/short answer/);
-  assert.throws(()=>answer(state,'theo','other',{answerText:'   '}),/short answer/);
-  assert.throws(()=>answer(state,'theo','other',{answerText:'x'.repeat(301)}),/short answer/);
-  const done=answer(state,'theo','other',{answerText:'  Hiring a kitchen manager  '});
-  assert.equal(demoSurvey(done,id,'theo').complete,true);
-  const saved=demoSurvey(done,id,'theo').answers[1];
-  assert.equal(saved.answerText,'Hiring a kitchen manager');
-  assert.equal(saved.answerLabel,saved.answerText);
-  assert.equal(done.feedback,null);
-  assert.equal(saved.preference,undefined);
-  assert.equal(agendaFor(done)[0].status,'scheduled');
+test('written answers are not part of the backend survey',()=>{
+  assert.throws(()=>answer(attendee(),P.paul,'yes',{answerText:'Hiring a kitchen manager'}),/Written answers/);
 });
-test('a topic pause is saved for future sessions without removing the revealed lineup, and can be undone',()=>{
-  const state=answer(answer(attendee(),'paul','yes'),'paul','no_similar');
-  assert.deepEqual(meetingPreferences(state).map(item=>item.topicId),['tomatoes']);
-  assert.ok(agendaFor(state).some(stop=>stop.id==='meet-maya'));
-  assert.equal(agendaFor(state).find(stop=>stop.id===id).status,'completed');
-  assert.equal(agendaFor(state).filter(stop=>stop.kind==='meeting').length,4);
-  assert.equal(state.feedback.usefulness,'yes');assert.equal(state.feedback.next,'');
-  const restored=restoreMeetingTopic(JSON.parse(JSON.stringify(state)),'paul','tomatoes');
-  assert.equal(meetingPreferences(restored).length,0);
-  assert.ok(agendaFor(restored).some(stop=>stop.id==='meet-maya'));
-  assert.equal(demoSurvey(restored,id).complete,true);
-  const pausedAgain=revise(restored,'paul','next-priority','no_similar');
-  assert.equal(meetingPreferences(pausedAgain).length,1);
-  assert.strictEqual(revise(pausedAgain,'paul','next-priority','no_similar'),pausedAgain);
-  const changed=revise(state,'paul','next-priority','flour');
-  assert.equal(meetingPreferences(changed).length,0);
-  assert.ok(agendaFor(changed).some(stop=>stop.id==='meet-elena'));
+test('topic pauses saved by earlier versions can still be turned back on',()=>{
+  const legacy={...attendee(),surveyAnswers:[{id:'old',meetingId:id,respondentId:P.paul,subjectId:P.theo,questionId:'next-priority',questionVersion:1,prompt:'Next?',answerKey:'no_similar',answerLabel:'No more meetups',preference:{kind:'avoid_topic',topicId:'tomatoes-sauce',topicLabel:'Tomatoes & Sauce'}}]};
+  assert.deepEqual(meetingPreferences(legacy).map(item=>item.topicId),['tomatoes-sauce']);
+  assert.equal(meetingPreferences(legacy,P.theo).length,0);
+  assert.equal(meetingPreferences(restoreMeetingTopic(legacy,P.paul,'tomatoes-sauce')).length,0);
 });
-test('a peer preference never changes Paul’s schedule; an already-started meeting survives a pause',()=>{
-  const peer=answer(answer(attendee(),'theo','yes'),'theo','no_similar');
-  assert.equal(meetingPreferences(peer).length,0);
-  assert.equal(meetingPreferences(peer,'theo').length,1);
-  assert.ok(agendaFor(peer).some(stop=>stop.id==='meet-maya'));
-  let state=answer(answer(attendee(),'paul','yes'),'paul','tomatoes');
-  state=updateAssignment(state,'meet-maya','check_in');
-  state=revise(state,'paul','next-priority','no_similar');
-  assert.equal(agendaFor(state).find(stop=>stop.id==='meet-maya').status,'checked_in');
+test('a revised answer from another tab replaces the displayed survey',()=>{
+  const state=answer(attendee(),P.paul,'yes');
+  const displayed=demoSurvey(state,id,P.paul);
+  const changed=demoSurvey(revise(state,P.paul,'met','no'),id,P.paul);
+  const merged=reconcileSurvey(displayed,changed);
+  assert.equal(merged.complete,true);assert.equal(merged.currentQuestion,null);
 });
-test('a revised first answer replaces an invalid follow-up on another tab',()=>{
-  const state=answer(attendee(),'paul','yes');
-  const displayed=demoSurvey(state,id,'paul');
-  const changed=demoSurvey(revise(state,'paul','usefulness','no'),id,'paul');
-  assert.equal(reconcileSurvey(displayed,changed).currentQuestion.id,'better-fit');
-});
-test('home navigation retains attendee persona and exhibitor context without carrying survey routes',()=>{
-  assert.equal(homeLink('?view=survey&meeting=meet-theo&participant=theo'),'?view=attendee&participant=theo');
+test('home navigation keeps the attendee and exhibitor context without carrying survey routes',()=>{
+  assert.equal(homeLink(`?view=survey&meeting=${id}&participant=${P.theo}`),`?view=attendee&participant=${P.theo}`);
   assert.equal(homeLink('?view=exhibitor'),'?view=exhibitor');
-  assert.equal(homeLink('?view=rankings&participant=paul'),'?view=attendee');
-  assert.equal(attendeeLink('rankings','theo'),'?view=rankings&participant=theo');
+  assert.equal(homeLink(`?view=rankings&participant=${P.paul}`),'?view=attendee');
+  assert.equal(attendeeLink('rankings',P.theo),`?view=rankings&participant=${P.theo}`);
 });

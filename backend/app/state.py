@@ -19,6 +19,7 @@ class EventState:
     sessions: list[str] = field(default_factory=lambda: ["planned"] * N_SESSIONS)
     dates: dict[str, list[str]] = field(default_factory=dict)  # str(session) -> date states
     closed_ticks: int = 0  # number of dates closed so far = graph revision
+    last_tick: int = -1  # tick of the most recently closed date
     metrics: list[dict] = field(default_factory=list)
     prev_comp: list[list[float]] | None = None  # comp matrix at the last close, for stability
     humans: list[str] = field(default_factory=list)  # raters answered by people, not the simulator
@@ -26,6 +27,12 @@ class EventState:
 
     def date_states(self, s: int) -> list[str]:
         return self.dates.get(str(s), ["planned"] * DATES_PER_SESSION)
+
+    def current_tick(self) -> int:
+        """Tick that new evidence belongs to: the open date's, else the next one
+        after the last close. Check-ins between dates count toward the next close."""
+        cur = self.current()
+        return DATES_PER_SESSION * cur[0] + cur[1] if cur else self.last_tick + 1
 
     def current(self) -> tuple[int, int] | None:
         """(session, date) currently open, if any."""

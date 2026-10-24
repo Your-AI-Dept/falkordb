@@ -4,7 +4,7 @@ import './badge.css';
 
 // Motion adapted from the Showdesks badge playground: strap tension, damping,
 // pointer capture, keyboard impulses, and an accessible front/back flip.
-export default function BadgeArt({ profile, badgeToken = 'PIZZA-PAUL' }) {
+export default function BadgeArt({ profile, badgeToken = '' }) {
   const stage = useRef(null), world = useRef(null), hang = useRef(null), strap = useRef(null), badge = useRef(null), qr = useRef(null);
   const [back, setBack] = useState(false);
   const suppressClick = useRef(false);

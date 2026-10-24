@@ -6,6 +6,7 @@ import random
 from fastapi import HTTPException
 
 from app import db, state
+from app.events import bus
 from app.config import ADHOC_PER_TICK, LLM_MODE, RNG_SEED
 from app.models import Answer
 from app.services import questions, simulator
@@ -48,6 +49,8 @@ def create_checkins(people: People, pairs: list[tuple[str, str]], tick: int, st:
     counts = []
     for i in range(0, len(rows), 200):
         counts += [r[0] for r in db.people().query(MERGE_ADHOC, {"rows": rows[i : i + 200], "tick": tick}).result_set]
+    for (a, b), count in zip(pairs, counts):
+        bus.publish("checkin_recorded", {"scanner_id": a, "scanned_id": b, "tick": tick, "count": count})
     return counts
 
 
@@ -59,7 +62,7 @@ def checkin(scanner: str, scanned: str) -> int:
         if a not in people.ix:
             raise HTTPException(404, f"attendee {a} not found")
     st = state.load()
-    return create_checkins(people, [(scanner, scanned)], st.closed_ticks, st)[0]
+    return create_checkins(people, [(scanner, scanned)], st.current_tick(), st)[0]
 
 
 APPLY = "MATCH (u:Attendee {id: $rater})-[e:ADHOC]->(v:Attendee {id: $partner}) SET e.applied = true"
@@ -77,7 +80,7 @@ def answer(rater: str, partner: str, answers) -> object:
             people = load_people()
             ev = Evidence(people)
             ev.checkin(rater, partner, [q.model_dump() for q in qs.questions], qs.answers)
-            ev.flush(None, None, state.load().closed_ticks)
+            ev.flush(None, None, state.load().current_tick())
             db.people().query(APPLY, {"rater": rater, "partner": partner})
     return qs
 

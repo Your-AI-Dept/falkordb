@@ -22,7 +22,7 @@ function holdMeetingsStill(canvas: FalkorDBCanvas) {
 
 function phase(state: FeedState) {
   const s = state.session
-  if (s) return s.date === null ? `Session ${s.session + 1}, between dates` : `Session ${s.session + 1}, date ${s.date + 1} of 4`
+  if (s) return s.date_no === null ? `Session ${s.session + 1}, between dates` : `Session ${s.session + 1}, date ${s.date_no + 1} of 4`
   if (state.sessionsClosed >= SESSIONS) return 'Show over'
   return state.sessionsClosed ? `${state.sessionsClosed} of ${SESSIONS} sessions run` : 'Before session 1'
 }
@@ -163,7 +163,7 @@ export default function GraphView() {
 /** Live mode: run the show from here instead of curl. */
 function LiveButtons({ state, controls }: { state: FeedState; controls: LiveControls }) {
   const s = state.session
-  const dateOpen = s?.date != null
+  const dateOpen = s?.date_no != null
   const over = !s && state.sessionsClosed >= SESSIONS
   const idle = controls.busy || controls.auto
   const run = (step: () => Promise<void>) => () => void step().catch(() => undefined)
@@ -190,18 +190,18 @@ function HqStats({ state }: { state: FeedState }) {
     if (m.talking) talking += 1
     if (m.kind === 'date') dates += 1
   }
-  const planned = s?.date != null ? s.dates[s.date]?.length ?? 0 : 0
+  const planned = s?.date_no != null ? s.dates[s.date_no]?.length ?? 0 : 0
   const last = state.metrics.at(-1)
   const pct = (value: number) => `${Math.round(value * 100)}%`
   const stats = [
     { label: 'Session', value: s ? `${s.session + 1} of ${SESSIONS}` : `${state.sessionsClosed} of ${SESSIONS}`,
-      sub: s ? (s.date === null ? 'Between dates' : `Date ${s.date + 1} of 4`) : state.sessionsClosed >= SESSIONS ? 'Show over' : 'Sessions run' },
+      sub: s ? (s.date_no === null ? 'Between dates' : `Date ${s.date_no + 1} of 4`) : state.sessionsClosed >= SESSIONS ? 'Show over' : 'Sessions run' },
     { label: 'Talking now', value: talking.toLocaleString(), sub: planned ? `of ${planned} dates` : 'No date running' },
     { label: 'Speed dates', value: dates.toLocaleString(), sub: 'Pairs met so far' },
     { label: 'Check-ins', value: state.checkins.toLocaleString(), sub: 'QR scans on the floor' },
     { label: 'Answers', value: state.answers.toLocaleString(), sub: 'From both sides' },
     { label: 'New votes', value: state.newVotes.toLocaleString(), sub: 'Learned-from, last close' },
-    { label: 'Meet again', value: last ? pct(last.meet_again_rate) : 'Not yet', sub: last ? `Would act ${pct(last.act_rate)}` : 'After the first date' },
+    { label: 'Meet again', value: last ? pct(last.meet_again_rate) : 'Not yet', sub: last ? `Would act ${pct(last.act_yes_rate)}` : 'After the first date' },
   ]
   return (
     <div className="gv-stats">

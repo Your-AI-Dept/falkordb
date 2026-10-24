@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react';
 import {promotions} from '../promotion-store.js';
+import {viewerId} from '../api.js';
 import {Button,Icon,Modal} from './ui.jsx';
 
-export default function PromotionInbox({participant='paul'}){
+export default function PromotionInbox({participant=viewerId()}){
   const [invitations,setInvitations]=useState([]),[open,setOpen]=useState(null),[error,setError]=useState('');
   useEffect(()=>{
     const refresh=()=>{try{const next=promotions.invitations(participant);setInvitations(next);const due=next.find(item=>item.status==='feedback_due');if(due)setOpen(due.campaignId);}catch(failure){setError(failure.message);}};
@@ -18,7 +19,7 @@ export default function PromotionInbox({participant='paul'}){
       {invitation.status==='invited'?<div className="modal-actions"><Button variant="text" onClick={()=>action('decline')}>Not this time</Button><Button onClick={()=>action('accept')}>I’ll be there<Icon name="check" size={17}/></Button></div>:<div className="request-status" role="status"><Icon name="check"/><strong>{status[invitation.status]}</strong></div>}
       {invitation.status==='accepted'&&<Button variant="full" onClick={()=>action('check_in')}>Check in at the booth<Icon name="pin" size={17}/></Button>}
       {invitation.status==='checked_in'&&<Button variant="full" onClick={()=>action('finish')}>Finish visit<Icon name="arrow" size={17}/></Button>}
-      {invitation.status==='feedback_due'&&<fieldset className="visit-feedback"><legend>Was the visit useful?</legend><div className="feedback-choices">{[['yes','Yes'],['somewhat','Somewhat'],['no','Not really']].map(([id,label])=><button className="feedback-choice" key={id} onClick={()=>feedback(id)}>{label}</button>)}</div></fieldset>}
+      {invitation.status==='feedback_due'&&<fieldset className="visit-feedback"><legend>Booth feedback: was the visit useful?</legend><div className="feedback-choices">{[['yes','Yes'],['somewhat','Somewhat'],['no','Not really']].map(([id,label])=><button className="feedback-choice" key={id} onClick={()=>feedback(id)}>{label}</button>)}</div></fieldset>}
       {['completed','declined'].includes(invitation.status)&&<Button variant="full" onClick={()=>setOpen(null)}>Back to my day<Icon name="arrow" size={17}/></Button>}
     </Modal>}
   </section>;

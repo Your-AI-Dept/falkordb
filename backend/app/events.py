@@ -7,7 +7,7 @@ FastAPI runs in a worker thread.
 
 import asyncio
 import json
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Callable
 from typing import Any
 
 EVENT_TYPES = frozenset(
@@ -26,13 +26,23 @@ class EventBus:
     def __init__(self) -> None:
         self._subscribers: set[asyncio.Queue[str]] = set()
         self._loop: asyncio.AbstractEventLoop | None = None
+        self._listeners: list[Callable[[str, Any], None]] = []
 
     def bind_loop(self, loop: asyncio.AbstractEventLoop) -> None:
         self._loop = loop
 
+    def add_listener(self, fn: Callable[[str, Any], None]) -> None:
+        """Synchronous in-process listener (e.g. the demo-feed recorder)."""
+        self._listeners.append(fn)
+
+    def remove_listener(self, fn: Callable[[str, Any], None]) -> None:
+        self._listeners.remove(fn)
+
     def publish(self, event: str, data: Any) -> None:
         if event not in EVENT_TYPES:
             raise ValueError(f"unknown event type {event!r}")
+        for fn in list(self._listeners):
+            fn(event, data)
         if self._loop is None:
             return
         message = f"event: {event}\ndata: {json.dumps(data)}\n\n"

@@ -1,15 +1,21 @@
-import { event, goals, people, professionalEdges, meeting, boothInvitation } from './data/pizza-expo.js';
-import { demoSurvey, demoTopics } from './demo-graph.js';
-import { plannedStops,sessionProgress } from './demo-agenda.js';
+import { event, goals, people, professionalEdges, boothInvitation, persona, viewer } from './data/pizza-expo.js';
+import { topicName } from './data/topics.js';
+import { demoSurvey } from './demo-graph.js';
+import { didntMeet } from './backend-adapter.js';
+import { plannedStops,sessionProgress,demoMeetings } from './demo-agenda.js';
 export { goals };
+// The arranged meetup with Sunil (persona "theo"): date 1 of the demo session.
+const meeting = { id: demoMeetings.theo, personId: persona.theo, time: 'Wednesday · 12:00–12:15 PM', location: 'Meeting table 4', reason: 'Compare approaches to ingredient sourcing and running a pizzeria.', status: 'scheduled' };
 export function freshState() {
-  return { version: 2, onboardingComplete: false, profile: { name: 'Paul Rossi', role: 'Owner', company: 'North Beach Pizza Co.', businessType: 'pizzeria', context: 'We run three neighborhood pizzerias in San Francisco.', linkedin: '', goals: [], focus: '', intention: '' }, encounters: [], feedback: null, requestedIds: [], dismissedIds: [] };
+  return { version: 2, onboardingComplete: false, profile: { name: viewer.name, role: viewer.role, company: viewer.company, businessType: viewer.businessType, context: viewer.context, linkedin: '', goals: [], focus: '', intention: '' }, encounters: [], feedback: null, requestedIds: [], dismissedIds: [] };
 }
+// Goal follow-ups offer canonical topics (src/data/topics.js), labeled with their canonical names.
+const choices=(ids,other='Something else')=>[...ids.map(id=>[id,topicName(id)]),['other',other]];
 export function focusQuestion(profile, primary = profile.goals?.[0]) {
-  if (primary === 'suppliers') return { title: 'What are you looking for?', hint: profile.businessType === 'pizzeria' ? 'A little more context for your pizzeria.' : 'Choose the area that matters most.', choices: [['tomatoes','Tomatoes & ingredients'],['flour','Flour, yeast & dough'],['equipment','Ovens & equipment'],['distribution','Distribution'],['other','Something else']] };
-  if (primary === 'peers') return { title: 'What would you like to compare notes on?', hint: 'We’ll look for people with useful experience.', choices: [['flour','Dough & fermentation'],['tomatoes','Ingredient sourcing'],['equipment','Kitchen operations'],['growth','Growing a pizzeria'],['other','Something else']] };
-  if (primary === 'growth') return { title: 'Where would a good connection help?', hint: 'One priority is enough to get started.', choices: [['growth','Opening another location'],['distribution','Distribution partners'],['customers','Finding customers'],['other','Something else']] };
-  if (primary === 'explore') return { title: 'What would you like to discover?', choices: [['tomatoes','New ingredients'],['flour','Dough techniques'],['equipment','Kitchen technology'],['other','Surprise me']] };
+  if (primary === 'suppliers') return { title: 'What are you looking for?', hint: profile.businessType === 'pizzeria' ? 'A little more context for your pizzeria.' : 'Choose the area that matters most.', choices: choices(['tomatoes-sauce','dough-flour','ovens-equipment','supply-chain-packaging']) };
+  if (primary === 'peers') return { title: 'What would you like to compare notes on?', hint: 'We’ll look for people with useful experience.', choices: choices(['dough-flour','tomatoes-sauce','brick-and-mortar','chefs-culinary']) };
+  if (primary === 'growth') return { title: 'Where would a good connection help?', hint: 'One priority is enough to get started.', choices: choices(['brick-and-mortar','supply-chain-packaging','tech-ordering-delivery']) };
+  if (primary === 'explore') return { title: 'What would you like to discover?', choices: choices(['spices-seasonings','dough-flour','tech-ordering-delivery'],'Surprise me') };
   return null;
 }
 export function goalAnswers(profile) {
@@ -38,20 +44,22 @@ export function completeProfile(state, profile) {
   }
   return { ...state, onboardingComplete: true, profile: clean, dismissedIds: [] };
 }
-export function recordEncounter(state, input) {
+/** Badge tokens are attendee ids, as in the backend's POST /checkins. */
+export function recordEncounter(state, input, viewerId = persona.paul) {
   let token = input.trim();
   if (/^https?:\/\//i.test(token)) { try { token = new URL(token).searchParams.get('badge') || ''; } catch { token = ''; } }
   token = token.toUpperCase();
-  if (token === 'PIZZA-PAUL') throw new Error('That is your own badge. Try another attendee’s badge.');
+  if (token === viewerId) throw new Error('That is your own badge. Try another attendee’s badge.');
   const person = people.find(p => p.badge === token);
   if (!person) throw new Error('Badge not found. Check the code or try the sample scan.');
   if (state.encounters.some(e => e.personId === person.id)) return { state, person, duplicate: true };
   return { state: { ...state, encounters: [...state.encounters, { id: crypto.randomUUID(), personId: person.id, kind: 'chosen_qr_connection', createdAt: new Date().toISOString() }] }, person, duplicate: false };
 }
+// Earlier arranged-meetup feedback (usefulness + next topic); dormant adapter compatibility only.
 export function applyFeedback(state, answers) {
   if (!['yes','somewhat','no','didnt_meet'].includes(answers.usefulness)) throw new Error('Choose how the meetup went.');
   const next = answers.usefulness === 'didnt_meet' ? '' : (answers.next || '');
-  if (next && !['tomatoes','flour','equipment','distribution','peers'].includes(next)) throw new Error('Choose a valid next interest.');
+  if (next && !topicName(next)) throw new Error('Choose a valid next interest.');
   return { ...state, meetingFeedbackDue: false, feedback: { meetingId: meeting.id, usefulness: answers.usefulness, next, attendance: answers.usefulness === 'didnt_meet' ? 'not_met' : 'reported_attended', submittedAt: new Date().toISOString() } };
 }
 export function requestMeeting(state, personId) {
@@ -59,14 +67,14 @@ export function requestMeeting(state, personId) {
   const requests = meetingRequestsFor(state);
   if (requests.some(request => request.toId === personId)) return state;
   const person = people.find(person => person.id === personId);
-  return { ...state, requestedIds: [...new Set([...state.requestedIds, personId])], meetingRequests: [...requests, { id: crypto.randomUUID(), fromId: 'paul', toId: personId, status: 'pending', time: person.slot, location: person.place, createdAt: new Date().toISOString() }] };
+  return { ...state, requestedIds: [...new Set([...state.requestedIds, personId])], meetingRequests: [...requests, { id: crypto.randomUUID(), fromId: persona.paul, toId: personId, status: 'pending', time: person.slot, location: person.place, createdAt: new Date().toISOString() }] };
 }
 export function meetingRequestsFor(state) {
   const requests = state.meetingRequests || [];
   // Preserve requests saved by the earlier prototype without inventing their creation time.
   const legacy = state.requestedIds.filter(id => !requests.some(request => request.toId === id)).flatMap(id => {
     const person = people.find(person => person.id === id);
-    return person ? [{ id: 'peer-' + id, fromId: 'paul', toId: id, status: 'pending', time: person.slot, location: person.place, createdAt: null }] : [];
+    return person ? [{ id: 'peer-' + id, fromId: persona.paul, toId: id, status: 'pending', time: person.slot, location: person.place, createdAt: null }] : [];
   });
   return [...requests, ...legacy];
 }
@@ -80,43 +88,48 @@ export function respondToMeeting(state, requestId, response, recipientId) {
   return { ...state, meetingRequests: requests.map(item => item.id === requestId ? { ...item, status: response, respondedAt: new Date().toISOString() } : item) };
 }
 export function peerInbox(state, recipientId) {
-  const viewer = people.find(person => person.id === recipientId);
-  if (!viewer) throw new Error('Attendee not found.');
-  return { viewer, requests: meetingRequestsFor(state).filter(request => request.toId === recipientId).map(request => ({ ...request, sender: { id: 'paul', ...state.profile } })) };
+  const viewerPerson = people.find(person => person.id === recipientId);
+  if (!viewerPerson) throw new Error('Attendee not found.');
+  return { viewer: viewerPerson, requests: meetingRequestsFor(state).filter(request => request.toId === recipientId).map(request => ({ ...request, sender: { id: persona.paul, ...state.profile } })) };
 }
 function recommendationReason(state, person, via) {
   const firstName = person.name.split(' ')[0];
   if (via) return { source: 'From a saved connection', reason: `You saved ${via.name.split(' ')[0]}’s badge. They have a professional connection to ${firstName}.` };
-  const feedbackTopic = demoTopics.find(topic => topic.id === state.feedback?.next && person.topics.includes(topic.id));
-  if (feedbackTopic) return { source: 'Matches your latest feedback', reason: `You chose “${feedbackTopic.label}” for your next conversation. ${firstName} lists this topic on their profile.` };
+  const feedbackTopic = state.feedback?.next && person.topics.includes(state.feedback.next) ? state.feedback.next : '';
+  if (feedbackTopic) return { source: 'Matches your latest feedback', reason: `Your last meetup covered “${topicName(feedbackTopic)}”. ${firstName} lists this topic on their profile.` };
   const selected = Object.entries(goalAnswers(state.profile)).find(([,topic]) => person.topics.includes(topic));
   if (selected) {
-    const [goal,topicId] = selected;
-    const label = focusQuestion(state.profile,goal).choices.find(([id]) => id === topicId)[1];
-    const topic = demoTopics.find(topic => topic.id === topicId);
-    if (topic) return { source: 'Shared topic', reason: `You picked “${label}”. ${firstName} lists ${topic.label.toLowerCase()} on their profile.` };
+    const [,topicId] = selected;
+    return { source: 'Shared topic', reason: `You picked “${topicName(topicId)}”. ${firstName} lists it on their profile.` };
   }
   // A generic goal or an unrelated answer is not evidence for this person.
   return { source: '', reason: '' };
 }
+const p = key => persona[key];
+const recommendationOrder = {
+  'tomatoes-sauce': ['luca','maya','samir'], 'dough-flour': ['elena','maya','nia'], 'ovens-equipment': ['nia','maya','elena'],
+  'supply-chain-packaging': ['samir','luca','nia'], 'brick-and-mortar': ['nia','samir','maya'], 'tech-ordering-delivery': ['maya','nia','samir'],
+  'spices-seasonings': ['elena','maya','nia'], 'chefs-culinary': ['elena','maya','nia'],
+  peers: ['maya','nia','elena'], suppliers: ['luca','samir','maya'], growth: ['nia','samir','maya'], explore: ['elena','maya','nia'],
+};
 export function recommendations(state) {
   const met = new Set(state.encounters.map(e => e.personId));
   const focus = state.feedback?.next || state.profile.focus;
   const primary = state.profile.goals[0] || 'explore';
-  const order = { tomatoes: ['luca','maya','samir'], flour: ['elena','maya','nia'], equipment: ['nia','maya','elena'], distribution: ['samir','luca','nia'], growth: ['nia','samir','maya'], customers: ['maya','nia','samir'], peers: ['maya','nia','elena'], suppliers: ['luca','samir','maya'], explore: ['elena','maya','nia'] }[focus] || { suppliers:['luca','samir','maya'], peers:['maya','nia','elena'], growth:['nia','samir','maya'], explore:['elena','maya','nia'] }[primary];
+  const order = (recommendationOrder[focus] || recommendationOrder[primary]).map(p);
   const extraFocus = Object.entries(goalAnswers(state.profile)).filter(([goal])=>goal!==primary).map(([,answer])=>answer);
-  const extraPeople = extraFocus.map(topic=>people.find(p=>p.id!=='theo'&&p.topics.includes(topic))?.id).filter(Boolean);
-  const unique = [...new Set([order[0], ...extraPeople, ...order.slice(1), ...people.filter(p => p.id !== 'theo').map(p => p.id)])];
+  const extraPeople = extraFocus.map(topic=>people.find(person=>person.id!==persona.theo&&person.topics.includes(topic))?.id).filter(Boolean);
+  const unique = [...new Set([order[0], ...extraPeople, ...order.slice(1), ...people.filter(person => person.id !== persona.theo).map(person => person.id)])];
   return unique.filter(id => !met.has(id) && !state.dismissedIds.includes(id)).map(id => {
-    const person = people.find(p => p.id === id);
+    const person = people.find(item => item.id === id);
     const edge = professionalEdges.find(e => e.to === id && met.has(e.from));
-    const via = edge && people.find(p => p.id === edge.from);
+    const via = edge && people.find(item => item.id === edge.from);
     return { person, ...recommendationReason(state,person,via), path: via ? [{id:'you',name:'You'}, {id:via.id,name:via.name.split(' ')[0]}, {id:person.id,name:person.name.split(' ')[0]}] : [] };
   });
 }
 export function invitationFor(state) {
   const interests = state.feedback?.next ? [state.feedback.next] : Object.values(goalAnswers(state.profile));
-  const eligible = interests.includes('tomatoes') && state.encounters.some(e => e.personId === 'maya');
+  const eligible = interests.includes(boothInvitation.topicId) && state.encounters.some(e => e.personId === persona.maya);
   if (!eligible && !state.boothInvitationStatus) return null;
   return { ...boothInvitation, status: state.boothInvitationStatus || 'pending', visit: state.boothVisit || null };
 }
@@ -132,6 +145,7 @@ export function checkInBooth(state, invitationId) {
   if (state.boothVisit) return state;
   return { ...state, boothVisit: { invitationId, checkedInAt: new Date().toISOString(), feedback: null } };
 }
+/** Booth-visit feedback (yes/somewhat/no). The backend has no booth-visit model yet, so this stays local. */
 export function applyBoothFeedback(state, invitationId, usefulness) {
   if (state.boothVisit?.invitationId !== invitationId) throw new Error('Check in before leaving feedback.');
   if (!['yes', 'somewhat', 'no'].includes(usefulness)) throw new Error('Choose how the booth visit went.');
@@ -148,8 +162,8 @@ export function agendaFor(state){
       else if(state.boothVisit)status='checked_in';
       else if(state.boothInvitationStatus==='declined')status='missed';
     }else{
-      const survey=demoSurvey(state,stop.id,'paul');
-      if(survey.complete)status=survey.answers.some(answer=>answer.questionId==='usefulness'&&answer.answerKey==='didnt_meet')?'missed':'completed';
+      const survey=demoSurvey(state,stop.id,persona.paul);
+      if(survey.complete)status=didntMeet(survey)?'missed':'completed';
       else if(stop.id===meeting.id&&state.meetingFeedbackDue)status='feedback_due';
     }
     return {...stop,status,person:people.find(person=>person.id===stop.personId)};
@@ -173,4 +187,4 @@ export function updateAssignment(state,id,action){
   }else if(id===meeting.id&&action==='finish')next.meetingFeedbackDue=true;
   return next;
 }
-export function snapshot(state) { return { event, graphRevision: state.graphRevision || 0, state, people, agenda:agendaFor(state), session:sessionProgress(agendaFor(state)), recommendations: recommendations(state), viewer: { badgeToken: 'PIZZA-PAUL' }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !demoSurvey(state,meeting.id,'paul').complete), surveyComplete: demoSurvey(state,meeting.id,'paul').complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }
+export function snapshot(state) { const survey=demoSurvey(state,meeting.id,persona.paul); return { event, graphRevision: state.graphRevision || 0, viewerId: persona.paul, state, people, agenda:agendaFor(state), session:sessionProgress(agendaFor(state)), recommendations: recommendations(state), viewer: { badgeToken: persona.paul }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !survey.complete), surveyComplete: survey.complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }

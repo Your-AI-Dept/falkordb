@@ -4,8 +4,7 @@ import { CHECKIN, FOREGROUND, MUTED, NEW_EDGE, tribeColor } from './colors'
 import type { FeedState } from './store'
 
 const METRIC_LABELS: Record<string, string> = {
-  uncertainty: 'Uncertainty', coverage: 'Coverage', stability: 'Stability', meet_again_rate: 'Meet again', act_rate: 'Would act',
-  act_yes_rate: 'Would act',
+  uncertainty: 'Uncertainty', coverage: 'Coverage', stability: 'Stability', meet_again_rate: 'Meet again', act_yes_rate: 'Would act',
 }
 const METRIC_COLORS = ['#ef476f', '#2ec4b6', '#7c6cff', '#f6c344', '#4cc9f0', '#90be6d']
 const NOT_METRICS = new Set(['tick', 'session', 'date', 'date_no'])

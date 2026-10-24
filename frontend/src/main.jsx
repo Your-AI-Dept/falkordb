@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import QRCode from 'qrcode';
-import { api, isDemo } from './api.js';
+import { api, isDemo, viewerId } from './api.js';
+import { persona, resolvePersona } from './data/pizza-expo.js';
+import { demoMeetings } from './demo-agenda.js';
+import { liveIdentity, setLiveIdentity, clearLiveIdentity } from './live.js';
 import { goals, focusQuestion, goalAnswers, toggleProfileGoal } from './demo.js';
 import BadgeArt from './components/BadgeArt.jsx';
 import ExhibitorApp from './exhibitor/ExhibitorApp.jsx';
 import { Icon, Avatar, Button, Logo, Modal } from './components/ui.jsx';
-import { SurveyPage } from './components/MeetingSurvey.jsx';
+import { SurveyPage, MeetingSurveyDialog } from './components/MeetingSurvey.jsx';
 import { Agenda, StopDialog } from './components/Agenda.jsx';
 import Rankings from './components/Rankings.jsx';
 import ProfileSummary from './components/ProfileSummary.jsx';
 import ParticipantHome from './components/ParticipantHome.jsx';
 import PromotionInbox from './components/PromotionInbox.jsx';
-import LiveAttendee from './components/LiveAttendee.jsx';
 import './styles.css';
 
 function Onboarding({data, save, cancel, pending, error, initialStep=1}) {
@@ -55,7 +57,7 @@ function Onboarding({data, save, cancel, pending, error, initialStep=1}) {
           <h2>What brings you here?</h2>
           <div className="goal-grid">{goals.map(g=><button type="button" key={g.id} className={'goal-card '+(draft.goals.includes(g.id)?'selected':'')} aria-pressed={draft.goals.includes(g.id)} onClick={()=>setDraft(d=>toggleProfileGoal(d,g.id))}><span className="goal-icon"><Icon name={g.icon} size={26}/></span><span className="selection-check">{draft.goals.includes(g.id)&&<Icon name="check" size={12}/>}</span><strong>{g.title}</strong></button>)}</div>
           {questions.map(question=><fieldset className="adaptive-question goal-follow-up" key={question.goal}><legend>{question.title}</legend><div className="chips">{question.choices.map(([id,label])=><button key={id} type="button" className={'chip '+(draft.goalFocus[question.goal]===id?'selected':'')} aria-pressed={draft.goalFocus[question.goal]===id} onClick={()=>answer(question.goal,id)}>{label}{draft.goalFocus[question.goal]===id&&<Icon name="check" size={13}/>}</button>)}</div></fieldset>)}
-          <label className="context-label" htmlFor="intention">Anything specific? <span className="optional-label">Optional</span></label><textarea id="intention" rows={2} maxLength={500} value={draft.intention} placeholder={draft.focus==='flour'?'Cold-weather proofing in San Francisco.':'A reliable tomato grower in Italy.'} onChange={e=>change('intention',e.target.value)}/>
+          <label className="context-label" htmlFor="intention">Anything specific? <span className="optional-label">Optional</span></label><textarea id="intention" rows={2} maxLength={500} value={draft.intention} placeholder={draft.focus==='dough-flour'?'Cold fermentation in a cool kitchen.':'A reliable Italian tomato supplier.'} onChange={e=>change('intention',e.target.value)}/>
           {error&&<p className="error" role="alert">{error}</p>}
           <div className="setup-actions"><Button variant="text" onClick={()=>data.state.onboardingComplete?cancel():setStep(1)} disabled={pending}><Icon name="back" size={17}/>Back</Button><Button type="submit" disabled={pending}>{pending?'Saving…':data.state.onboardingComplete?'Save changes':'Show my day'}<Icon name="arrow" size={18}/></Button></div>
         </form>}
@@ -65,7 +67,7 @@ function Onboarding({data, save, cancel, pending, error, initialStep=1}) {
   </div>;
 }
 function ScanDialog({close, run, error, initialCode=''}) {
-  const [code,setCode]=useState(initialCode), [busy,setBusy]=useState(false), [localError,setLocalError]=useState(''), [camera,setCamera]=useState(false), [result,setResult]=useState(null);
+  const [code,setCode]=useState(initialCode), [survey,setSurvey]=useState(false), [busy,setBusy]=useState(false), [localError,setLocalError]=useState(''), [camera,setCamera]=useState(false), [result,setResult]=useState(null);
   const video=useRef(), stream=useRef(), timer=useRef(), alive=useRef(true), reading=useRef(false);
   function stop(){clearTimeout(timer.current);stream.current?.getTracks().forEach(t=>t.stop());stream.current=null;}
   useEffect(()=>()=>{alive.current=false;stop();},[]);
@@ -82,8 +84,9 @@ function ScanDialog({close, run, error, initialCode=''}) {
     } catch(e){stop();setCamera(false);setLocalError(e.message==='Permission denied'?'Camera access was declined. You can enter a badge code below.':e.message);}
     finally{if(alive.current)setBusy(false);}
   }
-  if(result)return <Modal title={result.duplicate?'Already connected':'Connection saved'} close={close}><div className="scan-success"><span className="success-mark"><Icon name="check" size={26}/></span>{result.person&&<><Avatar person={result.person} size="large"/><h3>{result.person.name}</h3><p>{result.person.role} · {result.person.company}</p></>}</div><Button variant="full" onClick={close}>Done<Icon name="check" size={18}/></Button></Modal>;
-  return <Modal title="Save a connection" close={close} error={error||localError}><div className="scanner">{camera?<><video ref={video} playsInline muted/><Button variant="light" onClick={()=>{stop();setCamera(false);}}>Stop camera</Button></>:<><Icon name="scan" size={68}/><Button variant="secondary" disabled={busy} onClick={openCamera}>Open camera</Button></>}</div><form onSubmit={e=>{e.preventDefault();scan(code);}}><label htmlFor="badge-code">Or enter their badge code</label><div className="input-row"><input id="badge-code" value={code} autoComplete="off" placeholder="PIZZA-MAYA" onChange={e=>setCode(e.target.value)}/><Button type="submit" disabled={busy||!code.trim()}>Save</Button></div></form>{isDemo&&<div className="demo-line"><button className="text-button" disabled={busy} onClick={()=>scan('PIZZA-MAYA')}>Sample scan<Icon name="arrow" size={15}/></button></div>}</Modal>;
+  if(result&&survey)return <MeetingSurveyDialog meetingId={result.meetingId} respondentId={viewerId()} close={close} onContinue={close}/>;
+  if(result)return <Modal title={result.duplicate?'Already connected':'Connection saved'} close={close}><div className="scan-success"><span className="success-mark"><Icon name="check" size={26}/></span>{result.person&&<><Avatar person={result.person} size="large"/><h3>{result.person.name}</h3><p>{result.person.role} · {result.person.company}</p></>}</div>{result.meetingId&&<Button variant="full" onClick={()=>setSurvey(true)}>How did it go? (3 quick questions)<Icon name="arrow" size={18}/></Button>}<Button variant={result.meetingId?'text':'full'} onClick={close}>Done<Icon name="check" size={18}/></Button></Modal>;
+  return <Modal title="Save a connection" close={close} error={error||localError}><div className="scanner">{camera?<><video ref={video} playsInline muted/><Button variant="light" onClick={()=>{stop();setCamera(false);}}>Stop camera</Button></>:<><Icon name="scan" size={68}/><Button variant="secondary" disabled={busy} onClick={openCamera}>Open camera</Button></>}</div><form onSubmit={e=>{e.preventDefault();scan(code);}}><label htmlFor="badge-code">Or enter their badge code</label><div className="input-row"><input id="badge-code" value={code} autoComplete="off" placeholder={persona.maya} onChange={e=>setCode(e.target.value)}/><Button type="submit" disabled={busy||!code.trim()}>Save</Button></div></form>{isDemo&&<div className="demo-line"><button className="text-button" disabled={busy} onClick={()=>scan(persona.maya)}>Sample scan<Icon name="arrow" size={15}/></button></div>}</Modal>;
 }
 function BadgeDialog({close,data}) {
   const canvas=useRef(), [error,setError]=useState('');
@@ -115,12 +118,12 @@ function App() {
     <header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><div className="header-actions"><Button variant="text badge-trigger" onClick={()=>open({type:'badge'})}><Icon name="scan" size={18}/>My badge</Button><button className="profile-trigger" aria-label="Open your profile" onClick={()=>open({type:'profile'})}><Avatar person={{name:profile.name,color:'peach'}}/></button></div></header>
     <main className="event-main guided-event">
       <div className="welcome-row"><div><span className="eyebrow">WEDNESDAY</span><h1>Your day at Pizza Expo.</h1></div><Button variant="secondary" onClick={()=>open({type:'scan'})}><Icon name="scan" size={19}/>Save a connection</Button></div>
-      <PromotionInbox/>
+      <PromotionInbox participant={data.viewerId}/>
       <nav className="view-tabs" aria-label="Attendee views"><button className={tab==='agenda'?'active':''} aria-current={tab==='agenda'?'page':undefined} onClick={()=>setTab('agenda')}>My day</button><button className={tab==='connections'?'active':''} aria-current={tab==='connections'?'page':undefined} onClick={()=>setTab('connections')}>Saved connections<span>{connections.length}</span></button></nav>
       {error&&!modal&&<p className="error" role="alert">{error}</p>}
       {tab==='agenda'?<div className="home-grid guided-home"><div>{Array.isArray(data.agenda)?<Agenda stops={data.agenda} session={data.session} openStop={id=>open({type:'stop',id})}/>:<div className="agenda-finished"><h2>Your schedule is not available yet.</h2><Button onClick={load}>Refresh</Button></div>}</div><aside className="home-aside"><section className="goal-summary"><span className="eyebrow">WHAT YOU’RE HERE FOR</span><p>{profile.intention||selectedGoals.map(goal=>goal.title).join(' and ')||'Fresh ideas and useful connections'}</p><div className="goal-summary-tags">{Object.entries(goalAnswers(profile)).map(([goal,value])=><span className="goal-tag" key={goal}>{focusQuestion(profile,goal)?.choices.find(([id])=>id===value)?.[1]}</span>)}</div><button className="text-button" onClick={()=>editProfile(2)}>Edit your goals<Icon name="edit" size={14}/></button></section></aside></div>:<section className="connections-section">{connections.length?<div className="connection-list">{[...connections].reverse().map(({person,encounter})=><button key={encounter.id} onClick={()=>open({type:'person',person})}><Avatar person={person}/><div><strong>{person.name}</strong><span>{person.role} · {person.company}</span></div><span className="connection-status"><Icon name="check" size={14}/>Saved</span><Icon name="arrow" size={18}/></button>)}</div>:<div className="empty-state"><span className="empty-icon"><Icon name="people" size={34}/></span><h2>No connections yet</h2><Button onClick={()=>open({type:'scan'})}>Save a connection<Icon name="scan" size={18}/></Button></div>}</section>}
     </main>
-    <footer className="app-footer">{isDemo&&<div><a href="?view=survey&meeting=meet-theo&participant=paul">Paul’s survey</a><a href="?view=survey&meeting=meet-theo&participant=theo">Theo’s survey</a><a href="?view=rankings">Top people</a><a href="?view=exhibitor">Exhibitor view</a><button onClick={()=>open({type:'reset'})}>Start over</button></div>}</footer>
+    <footer className="app-footer">{isDemo?<div><a href={'?view=survey&meeting='+demoMeetings.theo+'&participant='+persona.paul}>Drita’s survey</a><a href={'?view=survey&meeting='+demoMeetings.theo+'&participant='+persona.theo}>Sunil’s survey</a><a href="?view=rankings">Topic experts</a><a href="?view=exhibitor">Exhibitor view</a><button onClick={()=>open({type:'reset'})}>Start over</button></div>:<div><a href={'?view=rankings&participant='+viewerId()}>Topic experts</a><a href="?view=exhibitor">Exhibitor view</a><button onClick={()=>{clearLiveIdentity();window.location.assign('?view=attendee');}}>Switch attendee</button><button onClick={()=>open({type:'reset'})}>Reset local profile</button></div>}</footer>
     {toast&&<div className="toast" role="status"><Icon name="check" size={18}/>{toast}<button aria-label="Dismiss notification" onClick={()=>setToast('')}><Icon name="close" size={15}/></button></div>}
     {modal?.type==='scan'&&<ScanDialog close={close} run={run} error={error} initialCode={modal.code}/>}
     {modal?.type==='profile'&&<ProfileSummary profile={profile} close={close} onEdit={()=>editProfile(1)} onGoals={()=>editProfile(2)} onBadge={()=>open({type:'badge'})} onPreferencesChanged={load}/>}
@@ -132,5 +135,13 @@ function App() {
 }
 const params=new URLSearchParams(window.location.search);
 const route=params.get('view');
-const participant=isDemo?params.get('participant'):null;
-createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:!isDemo?<LiveAttendee/>:participant&&participant!=='paul'?<ParticipantHome participant={participant}/>:<App/>);
+const participant=isDemo&&params.get('participant')?resolvePersona(params.get('participant')):null;
+// Live mode: the original attendee flow on backend data, after choosing who you are (stands in for auth).
+function LiveIdentityGate(){
+  const [identity,setIdentity]=useState(liveIdentity()),[people,setPeople]=useState(null),[query,setQuery]=useState(''),[error,setError]=useState('');
+  useEffect(()=>{if(identity)return;api.attendees().then(setPeople).catch(e=>setError(e.message));},[identity]);
+  if(identity)return <App/>;
+  const shown=(people||[]).filter(p=>!query||(p.name+' '+p.company+' '+p.id).toLowerCase().includes(query.toLowerCase())).slice(0,50);
+  return <div className="loading-shell identity-picker"><Logo/><h1>Who are you?</h1><p>Pick an attendee to see their day. This stands in for signing in.</p>{error&&<p className="error" role="alert">{error}</p>}<label htmlFor="identity-search">Search attendees<input id="identity-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Name, company or PE27 id"/></label>{!people&&!error&&<p role="status">Loading attendees…</p>}<div className="connection-list">{shown.map(p=><button key={p.id} onClick={()=>{setLiveIdentity(p.id);setIdentity(p.id);}}><Avatar person={p}/><div><strong>{p.name}</strong><span>{p.role} · {p.company}</span></div><Icon name="arrow" size={18}/></button>)}</div></div>;
+}
+createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:!isDemo?<LiveIdentityGate/>:participant&&participant!==persona.paul?<ParticipantHome participant={participant}/>:<App/>);

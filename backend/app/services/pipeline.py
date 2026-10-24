@@ -11,7 +11,7 @@ from app import db, state
 from app.config import DATES_PER_SESSION, LLM_MODE, N_SESSIONS, SESSIONS_PER_DAY
 from app.events import bus
 from app.models import Answer
-from app.services import competence, encounters, metrics, pairing, questions, seed, simulator, ties
+from app.services import competence, encounters, graph_events, metrics, pairing, questions, seed, simulator, ties
 from app.services.evidence import Evidence
 from app.services.survey_store import save_date_answers
 from app.snapshot import load_people
@@ -86,7 +86,7 @@ def open_session(s: int) -> None:
     st.dates[str(s)] = ["planned"] * DATES_PER_SESSION
     state.save(st)
     log.info("planned session %s (%d people, %d meetings) in %.1fs", s, len(ids), len(rows), time.time() - t0)
-    bus.publish("session_opened", {"session": s, "meetings": len(rows)})
+    bus.publish("session_opened", {"session": s, "attendees": ids, "dates": graph_events.plan_payload(s)})
     open_date(s, 0)
 
 
@@ -231,12 +231,18 @@ def close_date(s: int, d: int) -> dict:
     st.metrics.append(point)
     st.prev_comp = people.comp.round(4).tolist()
     st.closed_ticks += 1
+    st.last_tick = tick
     st.dates[str(s)][d] = "closed"
     state.save(st)
-    bus.publish("date_closed", {"session": s, "date_no": d, "tick": tick, "metrics": point, "new_edges": n_edges})
+    after = load_people()  # includes tribes, brokers and reach just written
+    bus.publish("date_closed", {
+        "session": s, "date_no": d, "tick": tick, "metrics": point,
+        "nodes": graph_events.changed_nodes(after),
+        "edges": graph_events.learned_edges(tick),  # this date's votes plus check-ins since the last close
+    })
 
-    # 5. Synthetic check-ins around the show floor (effects show at the next close)
-    encounters.synthetic_checkins(load_people(), tick, st)
+    # 5. Synthetic check-ins around the show floor (they count toward the next close)
+    encounters.synthetic_checkins(after, st.current_tick(), st)
 
     # 6. Next date, or close the session
     next_date = d + 1 if d + 1 < DATES_PER_SESSION else None

@@ -57,7 +57,7 @@ export function topicData(state: FeedState, k: number, everyone: boolean, ids: I
     return link(links.get(`learned|${k}|${e.source}|${e.target}`), ids.get(e.source), ids.get(e.target), fresh ? NEW_EDGE : OLD_EDGE,
       { width: fresh ? 2 : 1, arrowSize: fresh ? 5 : 3.5 }, { kind: 'LEARNED_FROM', tick: e.tick })
   })
-  const open = state.session?.date != null ? state.session.dates[state.session.date] ?? [] : []
+  const open = state.session?.date_no != null ? state.session.dates[state.session.date_no] ?? [] : []
   const meetings = open.filter((p) => shown.has(p.a) && shown.has(p.b)).map((p) =>
     link(links.get(`meeting|${pairKey(p.a, p.b)}`), ids.get(p.a), ids.get(p.b), MEETING, { arrowSize: 0 }, { kind: 'MEETING' }))
   return { nodes, links: [...arrows, ...meetings] }

@@ -4,13 +4,11 @@ Event HQ, topic and overview graphs for the Pizza Expo demo, drawn with [FalkorD
 
 ```sh
 npm install
-npm run dev
+npm run dev        # http://localhost:5174
 ```
 
-Open http://localhost:5174. By default it replays a recorded show from `public/demo/feed.json.gz` (15 speed-dating sessions over 1,000 attendees) with play, pause, speed and restart.
+**Live (default):** loads `GET /graph/snapshot`, then applies the backend's `GET /events` through the `/api` proxy (`BACKEND_PROXY_TARGET`, default `http://127.0.0.1:8001`; in docker compose it points at the backend container). The HQ header has buttons that open sessions and simulate and close dates.
 
-To run on the backend, create `.env.local` with `VITE_GRAPH_SOURCE=api`, plus `VITE_API_URL` if the backend isn't on `http://localhost:8000`. The HQ header then shows buttons that open sessions and simulate and close dates. [CONTRACT.md](src/graph/CONTRACT.md) lists the endpoint and event payloads the backend needs to serve.
+**Demo:** set `VITE_GRAPH_SOURCE=demo` in `.env.local` to replay `public/demo/feed.json.gz` with play, pause, speed and restart: 15 speed-dating sessions over 1,000 attendees, recorded from the real backend. Re-record it with `../.venv/bin/python ../scripts/make_demo_feed.py` (needs FalkorDB on localhost:6379; it reseeds the graph).
 
-Rebuild the demo feed from `../data` with `python3 ../scripts/make_demo_feed.py`. It approximates the design doc's math in plain Python; it is not the backend.
-
-Checks: `npm run lint` and `npm run build`.
+[CONTRACT.md](src/graph/CONTRACT.md) lists the snapshot and event payloads. Checks: `npm run lint` and `npm run build`.

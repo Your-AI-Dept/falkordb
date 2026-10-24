@@ -2,7 +2,6 @@
 
 from fastapi import APIRouter, Depends
 
-from app.events import bus
 from app.models import AnswerSubmission, CheckinRequest, CheckinResult, QuestionSet
 from app.routers.catalog import require_seeded
 from app.services import encounters
@@ -15,7 +14,6 @@ router = APIRouter(prefix="/checkins", tags=["checkins"], dependencies=[Depends(
 def create_checkin(body: CheckinRequest):
     """Record a QR scan: create or bump the ADHOC tie and prompt both people with 2-3 questions."""
     count = encounters.checkin(body.scanner_id, body.scanned_id)
-    bus.publish("checkin_recorded", {"scanner_id": body.scanner_id, "scanned_id": body.scanned_id, "count": count})
     return CheckinResult(
         count=count,
         scanner_questions=get_checkin_survey(body.scanner_id, body.scanned_id),
