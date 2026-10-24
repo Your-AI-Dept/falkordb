@@ -94,7 +94,7 @@ Nodes:
 
 - `Topic {idx, id, name, description}`, with `idx` in `0..T−1` and `id` the string id (e.g. `cheese-dairy`)
 - `Talk {id, title, type, day, start, end, room, topic_vec}`, from `sessions.json` (Keynote, Seminar, Panel, Demo). `topic_vec` is a list of T floats.
-- `Vendor {id, name, category, booth, booth_size, profile, budget}`, from `exhibitors.json`. `profile` is a list of T floats summing to 1.
+- `Vendor {id, name, category, booth, booth_size, profile}`, from `exhibitors.json`. `profile` is a list of T floats summing to 1.
 
 Edges:
 
@@ -444,7 +444,7 @@ After planning, create the `SPEED_DATE` edges for all 4 dates (both directions, 
 
 **The use case.** An exhibitor or sponsor is hosting a party or event for their topic, and knowing whom to invite is hard. Instead of cold invites, the host gives a bundle of tickets to a few **micro-influencers**: attendees who are **competent** in the topic, **well liked**, and **well connected to receptive people**. The micro-influencers hand the tickets to people they think should come, so invitations travel through trusted relationships and reach the right people organically.
 
-"Micro" means influential within a topic's circles, not the show's most famous names. Two mechanisms keep the picks micro: reach counts only ties to people interested in the topic, and the budget makes prominent connectors cost more, so the host gets several well-placed hosts in different circles rather than one celebrity whose audience overlaps everyone else's.
+"Micro" means influential within a topic's circles, not the show's most famous names. Reach counts only ties to people interested in the topic, and each pick is scored by the *new* targets it adds, so the host gets several well-placed people in different circles rather than a cluster of friends who would all invite the same crowd.
 
 **Event profile x** (sums to 1): either a single topic (one-hot, e.g. a "Dough & Flour" party) or a vendor's `profile`.
 
@@ -470,21 +470,16 @@ p_x(u→v)      = p_pos(u→v) · comp_x(u) · like(u) · interest_x(v)     for 
 σ(S) = Σ(v in targets) [ 1 − Π(u in S) (1 − p_x(u→v)) ]
 ```
 
-This is monotone submodular.
+This is monotone submodular: a second influencer whose friends overlap the first's adds little.
 
-**Cost and budget.** `cost(u) = COST_BASE + COST_PROMINENCE · reach_norm(u)`, where `reach_norm` is harmonic centrality on `POS_TIE` normalized to [0, 1]. A prominent connector can cost up to 5× a quiet expert, so the fixed budget buys either one big name or several well-placed micro-influencers, whichever reaches more receptive people. Every event gets `EVENT_BUDGET` (section 13); with the defaults that is 2–10 ticket holders.
-
-**Selection:**
-
-1. Run a cost-benefit greedy within the budget: repeatedly add the affordable candidate with the largest `Δσ / cost`, until no affordable candidate adds positive reach.
-2. Compare the result with the best single affordable candidate, and return whichever reaches more. This is the standard safeguard for budgeted submodular maximization.
+**Selection:** pick `N_INFLUENCERS` people greedily. Repeatedly add the candidate with the largest marginal reach `Δσ = σ(S ∪ {u}) − σ(S)`, stopping early if no candidate adds positive reach. For monotone submodular σ this greedy is within 63% (1 − 1/e) of the best possible set.
 
 **Explanation per micro-influencer** ("why invite them"):
 
 - competence: `comp_x(u)` and the evidence count `m`
 - likability: `like(u)` and the number of `meet_again` answers behind it
 - connections: marginal reach, and the top 5 targets they'd likely bring with their `p_x`
-- `tribe` and `broker` score (which circle they open up)
+- `tribe`, `broker` and `reach` (which circle they open up, and how far it extends)
 
 Off by default, for later: a discounted second hop through `POS_TIE`.
 
@@ -684,8 +679,7 @@ All values are starting guesses, kept in `config.py` and tuned during the build.
 | `DELTA` | 0.2 | 4.2 |
 | `ADHOC_PER_TICK` | 100 | 3.10 |
 | `TARGET_MIN`, `CRED_MIN`, `LIKE_MIN` | 0.4, 0.55, 0.5 | 4.3 |
-| `COST_BASE`, `COST_PROMINENCE` | 1.0, 4.0 | 4.3 |
-| `EVENT_BUDGET` | 10.0 | 4.3 |
+| `N_INFLUENCERS` | 5 | 4.3 |
 | `BACKFIRE_MAX` | 0.5 | 4.3 |
 | `VENDOR_SEES_NAMES` | false | 13 |
 
@@ -790,7 +784,7 @@ CREATE (u)-[:POS_TIE {p_pos: t.p}]->(v)
 
 ## 11. Build plan
 
-Each step is done when its check passes. About 4 hours remain.
+Each step is done when its check passes. About 4 hours remain. The detailed, owner-assignable version is `build_plan.md`.
 
 1. **Infrastructure.** docker-compose with FalkorDB, backend and frontend; `/health` pings FalkorDB. *(Scaffolded.)*
    Check: `docker compose up`, then `/health` returns `ok`.
@@ -825,8 +819,7 @@ Run in parallel where possible: the frontend can start at step 3 against mocked 
 
 These are parameters, not blockers.
 
-- **Event budget:** uniform `EVENT_BUDGET` for now. Alternatives: scale by `booth_size` (10x10 to 20x30) as a proxy for sponsor spend, or model tickets explicitly (each holder gets a fixed number of tickets, capping their reach).
-- **Influencer cost model** (`COST_BASE`, `COST_PROMINENCE`): placeholders until tuned.
+- **Tickets per influencer:** not modeled; each influencer's reach is uncapped. Could cap it later (each holder gets a fixed number of tickets).
 - **Question generation:** the algorithm picks targets and Claude only phrases them. We may later let Claude propose additional claim types (e.g. "came up but too basic for me"), as long as each maps to a defined graph update.
 - **Vendor visibility** (`VENDOR_SEES_NAMES`, default false): vendors see reach by tribe, plus only the names of attendees who opted in.
 - **Second hop for influence:** off by default.
