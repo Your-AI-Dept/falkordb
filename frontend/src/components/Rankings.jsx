@@ -2,10 +2,11 @@ import React, {useEffect,useRef,useState} from 'react';
 import {api,isDemo} from '../api.js';
 import {observeResource} from '../observe-resource.js';
 import {Avatar,Icon,Logo} from './ui.jsx';
+import {attendeeLink} from '../navigation.js';
 
 export default function Rankings(){
-  const initial=useRef(new URLSearchParams(window.location.search));
-  const [topics,setTopics]=useState([]),[topicId,setTopicId]=useState(initial.current.get('topic')||''),[limit,setLimit]=useState([3,5,10,20].includes(Number(initial.current.get('limit')))?Number(initial.current.get('limit')):5);
+  const [initial]=useState(()=>new URLSearchParams(window.location.search));
+  const [topics,setTopics]=useState([]),[topicId,setTopicId]=useState(initial.get('topic')||''),[limit,setLimit]=useState([3,5,10,20].includes(Number(initial.get('limit')))?Number(initial.get('limit')):5);
   const [result,setResult]=useState(null),[error,setError]=useState(''),[topicsReady,setTopicsReady]=useState(false),[refreshKey,setRefreshKey]=useState(0);
   const observer=useRef();
   useEffect(()=>{
@@ -23,7 +24,7 @@ export default function Rankings(){
   },[topicId,limit,topicsReady]);
   const topic=topics.find(topic=>topic.id===topicId);
   function retry(){if(!topicsReady)setRefreshKey(value=>value+1);else{setError('');observer.current?.refresh();}}
-  return <div className="attendee-app"><header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><a className="text-button header-actions" href="?view=attendee">My event<Icon name="arrow" size={16}/></a></header>
+  return <div className="attendee-app"><header className="app-header"><Logo href={attendeeLink('attendee',isDemo?initial.get('participant'):null)}/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><a className="text-button header-actions" href={attendeeLink('attendee',isDemo?initial.get('participant'):null)}>My day<Icon name="arrow" size={16}/></a></header>
     <main className="rankings-page" data-graph-revision={result?.graphRevision}><div className="rankings-heading"><span className="eyebrow">PIZZA EXPO</span><h1>Top people</h1></div>
       <div className="ranking-filters"><label htmlFor="ranking-topic">Topic<select id="ranking-topic" value={topicId} disabled={!topics.length} onChange={event=>setTopicId(event.target.value)}>{topics.length?topics.map(topic=><option key={topic.id} value={topic.id}>{topic.label}</option>):<option value="">{topicsReady?'No topics available':'Loading topics…'}</option>}</select></label><label htmlFor="ranking-limit">Show<select id="ranking-limit" value={limit} onChange={event=>setLimit(Number(event.target.value))}>{[3,5,10,20].map(value=><option key={value} value={value}>Top {value}</option>)}</select></label></div>
       <div className="ranking-title"><h2>{topic?.label||'People by topic'}</h2>{result&&<span className="ranking-live" role="status"><i/>{error?'Refresh failed':result.status==='updating'?'Updating…':isDemo?'Ready':'Live'}<span>· {result.items.length} people</span></span>}</div>

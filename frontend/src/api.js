@@ -3,6 +3,7 @@ import { createRestClient } from './rest.js';
 import { createGraphClient } from './graph-api.js';
 import { validateSurvey, validateTopics, validateRanking } from './graph-contract.js';
 import { demoSurvey, answerDemoSurvey, demoTopics, demoRanking } from './demo-graph.js';
+import {meetingPreferences,restoreMeetingTopic} from './meeting-preferences.js';
 const base = (import.meta.env?.VITE_API_BASE_URL || '').replace(/\/$/, '');
 const eventId = import.meta.env?.VITE_EVENT_ID || 'pizza-expo';
 export const isDemo = !base;
@@ -54,8 +55,15 @@ export const api = {
     return result;
   },
   answerSurvey: async (meetingId, respondentId, answer, options={}) => {
-    if(isDemo){updateDemo(current=>answerDemoSurvey(current,meetingId,respondentId,answer));return api.survey(meetingId,respondentId);}
+    if(isDemo){updateDemo(current=>answerDemoSurvey(current,meetingId,respondentId,answer,{revise:options.revise}));return api.survey(meetingId,respondentId);}
+    if(options.revise)throw new Error('Changing saved answers is not connected yet.');
+    if(answer.answerText!==undefined)throw new Error('Written answers are not connected yet.');
     return graph.answerSurvey(meetingId,answer,options);
+  },
+  meetingPreferences: async (respondentId='paul') => isDemo?meetingPreferences(readState(),respondentId):[],
+  restoreMeetingTopic: async (topicId,respondentId='paul') => {
+    if(!isDemo)throw new Error('Meeting preferences are not connected yet.');
+    return updateDemo(current=>restoreMeetingTopic(current,respondentId,topicId));
   },
   topics: async (options={}) => validateTopics(isDemo?{topics:demoTopics}:await graph.topics(options)),
   rankings: async (topicId, limit, options={}) => {

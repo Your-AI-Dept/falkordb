@@ -9,6 +9,8 @@ import { Icon, Avatar, Button, Logo, Modal } from './components/ui.jsx';
 import { SurveyPage } from './components/MeetingSurvey.jsx';
 import { Agenda, StopDialog } from './components/Agenda.jsx';
 import Rankings from './components/Rankings.jsx';
+import ProfileSummary from './components/ProfileSummary.jsx';
+import ParticipantHome from './components/ParticipantHome.jsx';
 import './styles.css';
 
 function Onboarding({data, save, cancel, pending, error, initialStep=1}) {
@@ -98,7 +100,7 @@ function App() {
   async function run(fn,message){setError('');setPending(true);try{const next=await fn();setData(next);if(message)setToast(message);return next;}catch(e){setError(e.message);throw e;}finally{setPending(false);}}
   function open(value){setError('');setModal(value);}
   function close(){if(pending||data.agenda?.some(stop=>stop.status==='feedback_due'))return;setModal(null);setError('');}
-  function editProfile(step=1){setError('');setSetupStep(step);setView('setup');}
+  function editProfile(step=1){setError('');setModal(null);setSetupStep(step);setView('setup');}
   function save(profile){run(()=>api.profile(profile)).then(()=>{setView('home');window.scrollTo({top:0,behavior:'instant'});}).catch(()=>{});}
   if(!data)return <div className="loading-shell"><Logo/><h1>{view==='error'?'Let’s try that again.':'Loading…'}</h1>{error&&<p role="alert">{error}</p>}{view==='error'&&<Button onClick={load}>Try again</Button>}</div>;
   if(view==='setup')return <Onboarding initialStep={setupStep} data={data} save={save} cancel={()=>{setView('home');setError('');}} pending={pending} error={error}/>;
@@ -108,7 +110,7 @@ function App() {
   const activeStop=modal?.type==='stop'&&data.agenda?.find(stop=>stop.id===modal.id);
   const person=modal?.type==='person'&&modal.person;
   return <div className="attendee-app">
-    <header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><div className="header-actions"><Button variant="text badge-trigger" onClick={()=>open({type:'badge'})}><Icon name="scan" size={18}/>My badge</Button><button className="profile-trigger" aria-label="Edit your profile and goals" onClick={()=>editProfile(1)}><Avatar person={{name:profile.name,color:'peach'}}/></button></div></header>
+    <header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><div className="header-actions"><Button variant="text badge-trigger" onClick={()=>open({type:'badge'})}><Icon name="scan" size={18}/>My badge</Button><button className="profile-trigger" aria-label="Open your profile" onClick={()=>open({type:'profile'})}><Avatar person={{name:profile.name,color:'peach'}}/></button></div></header>
     <main className="event-main guided-event">
       <div className="welcome-row"><div><span className="eyebrow">WEDNESDAY</span><h1>Your day at Pizza Expo.</h1></div><Button variant="secondary" onClick={()=>open({type:'scan'})}><Icon name="scan" size={19}/>Save a connection</Button></div>
       <nav className="view-tabs" aria-label="Attendee views"><button className={tab==='agenda'?'active':''} aria-current={tab==='agenda'?'page':undefined} onClick={()=>setTab('agenda')}>My day</button><button className={tab==='connections'?'active':''} aria-current={tab==='connections'?'page':undefined} onClick={()=>setTab('connections')}>Saved connections<span>{connections.length}</span></button></nav>
@@ -118,11 +120,14 @@ function App() {
     <footer className="app-footer">{isDemo&&<div><a href="?view=survey&meeting=meet-theo&participant=paul">Paul’s survey</a><a href="?view=survey&meeting=meet-theo&participant=theo">Theo’s survey</a><a href="?view=rankings">Top people</a><a href="?view=exhibitor">Exhibitor view</a><button onClick={()=>open({type:'reset'})}>Start over</button></div>}</footer>
     {toast&&<div className="toast" role="status"><Icon name="check" size={18}/>{toast}<button aria-label="Dismiss notification" onClick={()=>setToast('')}><Icon name="close" size={15}/></button></div>}
     {modal?.type==='scan'&&<ScanDialog close={close} run={run} error={error} initialCode={modal.code}/>}
+    {modal?.type==='profile'&&<ProfileSummary profile={profile} close={close} onEdit={()=>editProfile(1)} onGoals={()=>editProfile(2)} onBadge={()=>open({type:'badge'})} onPreferencesChanged={load}/>}
     {modal?.type==='badge'&&<BadgeDialog close={close} data={data}/>}
     {activeStop&&<StopDialog stop={activeStop} visit={activeStop.kind==='booth'?data.state.boothVisit:null} close={close} run={run} pending={pending} error={error} refresh={load}/>}
     {person&&<Modal title={person.name} close={close}><div className="detail-identity"><Avatar person={person} size="large"/><div><strong>{person.name}</strong><span>{person.role} · {person.company}</span></div></div><p className="bio">{person.bio}</p><div className="detail-note"><span className="eyebrow">HAPPY TO SHARE</span><p>{person.offering}</p></div><div className="modal-actions"><Button onClick={close}>Done<Icon name="check" size={17}/></Button></div></Modal>}
     {modal?.type==='reset'&&<Modal title="Start over?" close={close} error={error}><p>Reset your profile, connections, schedule, and feedback?</p><div className="modal-actions"><Button variant="text" onClick={close}>Keep my day</Button><Button disabled={pending} onClick={()=>run(()=>api.reset()).then(()=>{setModal(null);setSetupStep(1);setView('setup');setTab('agenda');}).catch(()=>{})}>Start over</Button></div></Modal>}
   </div>;
 }
-const route=new URLSearchParams(window.location.search).get('view');
-createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:<App/>);
+const params=new URLSearchParams(window.location.search);
+const route=params.get('view');
+const participant=isDemo?params.get('participant'):null;
+createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:participant&&participant!=='paul'?<ParticipantHome participant={participant}/>:<App/>);

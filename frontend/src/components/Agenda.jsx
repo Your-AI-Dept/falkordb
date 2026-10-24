@@ -24,7 +24,7 @@ export function StopDialog({stop,visit,close,run,pending,error,refresh}){
   const due=stop.status==='feedback_due';
   const done=['completed','missed'].includes(stop.status);
   const update=action=>run(()=>api.assignment(stop.id,action)).catch(()=>{});
-  return <Modal title={title(stop)} close={close} dismissible={!pending&&!due} error={error}>
+  return <Modal title={title(stop)} close={close} dismissible={!pending&&!due} blockedMessage={due?'Complete your feedback before leaving.':pending?'Your stop is updating. Please wait.':''} error={error}>
     <div className="detail-identity"><Avatar person={stop.person} size="large"/><div><strong>{stop.person.name}</strong><span>{stop.person.role} · {stop.person.company}</span></div></div>
     <div className="meeting-facts"><span className="eyebrow">{stop.topic}</span><p><Icon name="clock"/>{stop.time}</p><p><Icon name="pin"/>{stop.location}</p></div>
     {stop.status==='scheduled'&&<div className="stop-dialog-actions"><Button variant="full" disabled={pending} onClick={()=>update('check_in')}>I’m here<Icon name="pin" size={17}/></Button><Button variant="text" disabled={pending} onClick={()=>update('miss')}>Can’t make it</Button></div>}
