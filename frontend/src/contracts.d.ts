@@ -50,6 +50,7 @@ export interface AttendeeState {
   meetingRequests?: MeetingRequest[]; // local persistence; live UI reads Dashboard.meetingRequests
   boothVisit?: BoothVisit; // local persistence; live UI reads Invitation.visit
   agendaProgress?: Record<Id, {stop: Omit<AgendaStop, 'person' | 'status'>; status: AgendaStop['status']; updatedAt?: string}>;
+  restoredMeetingPreferences?: Id[]; // demo-only preference answer IDs explicitly turned back on
 }
 export interface Dashboard {
   event: { id: Id; name: string; location: string; venue: string; sourceUrl?: string };
@@ -60,7 +61,7 @@ export interface Dashboard {
 // Frontend display shape only; the team has not finalized scheduling endpoints.
 export interface AgendaStop {
   id: Id; kind: 'meeting' | 'booth'; personId: Id; person: Person;
-  time: string; location: string; topic: string; reason?: string;
+  time: string; location: string; topic: string; topicId?: Id; reason?: string;
   status: 'scheduled' | 'checked_in' | 'feedback_due' | 'completed' | 'missed';
 }
 export interface ScanResult { person: Person; duplicate: boolean }
@@ -83,6 +84,17 @@ export interface MeetingSurvey {
   queuedQuestions: SurveyQuestion[]; answers: SurveyAnswer[];
 }
 export interface SurveySubmission { questionId: Id; questionVersion: number; answerKey: Id; surveyRevision: number }
+// Local demo extensions. These do not change the current REST submission contract.
+export interface MeetingPreference { kind: 'avoid_topic'; topicId: Id; topicLabel: string; answerId?: Id }
+export interface DemoSurveyAnswer extends SurveyAnswer { answerText?: string; preference?: MeetingPreference }
+export interface DemoSurveyQuestion extends SurveyQuestion {
+  choices: {id: Id; label: string; requiresText?: boolean; requiresConfirmation?: boolean}[];
+}
+export interface DemoMeetingSurvey extends MeetingSurvey {
+  questions: DemoSurveyQuestion[]; canRevise: true; meetingTopic: Topic;
+  preferences: MeetingPreference[]; answers: DemoSurveyAnswer[];
+}
+export interface DemoSurveySubmission extends SurveySubmission { answerText?: string }
 export interface Topic { id: Id; label: string }
 export interface RankedPerson {
   rank: number; person: SurveyPerson; reason: string;

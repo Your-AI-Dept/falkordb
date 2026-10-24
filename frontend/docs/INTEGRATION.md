@@ -41,3 +41,15 @@ The product is an adaptive itinerary for a physical event: the app tells an atte
 ## Merge validation
 
 The port-5173 app, frontend tests, production build, and repository lint command are the integration checks. API tests use mocked responses; they are not proof that the evolving FastAPI routes work. Lint currently reports non-fatal React migration warnings. Backend/database behavior is owned and validated separately.
+
+## Profile, survey review, and meeting preferences
+
+The logo returns to the current role's home. Demo participant links preserve `participant=theo` through feedback, rankings, and Theo's own home; that preview reads Theo's feedback and cannot edit Paul's profile. Live identity remains server-owned.
+
+The avatar opens a profile summary. Profile/goals editing and the badge are explicit actions. Survey Back/Next is read-only navigation; choosing a different saved answer explicitly revises it. The demo requires a current revision for edits, removes dependent follow-ups when the first answer changes, and preserves other people/meetings. X, Escape, and backdrop dismissal explain that feedback is required while keeping the modal open.
+
+Two local demo follow-up options:
+- `other` requires `answerText` (1–300 trimmed characters). Store the attendee's words without inferring expertise, topic competence, or a structured goal.
+- `no_similar` requires confirming the named topic. Store a separate `{kind: 'avoid_topic', topicId, topicLabel}` preference. It suppresses unstarted future peer assignments on that topic for this event, while preserving the current meetup, already-started stops, and booth visits. The attendee can turn it back on from their profile. The other participant's schedule is unaffected.
+
+All route definitions remain unchanged. Optional `questions` metadata supports reviewing historical options in the local demo. In live mode the UI can navigate saved answer receipts, but answer revision, free text, and preference writes are deliberately not sent until their backend mappings are agreed. The new backend alignment note at `docs/api-alignment.md` is available for that next adapter task. No backend files or endpoints were changed for this UX pass.

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import {homeLink} from '../navigation.js';
 
 const shapes = {
   arrow: <path d="M4 12h16m-6-6 6 6-6 6"/>, back: <path d="M20 12H4m6-6-6 6 6 6"/>,
@@ -19,9 +20,11 @@ export function Icon({name, size=20}) { return <svg aria-hidden="true" width={si
 function initials(name) { return name.trim().split(/\s+/).map(s => s[0]).slice(0,2).join('').toUpperCase(); }
 export function Avatar({person, size=''}) { return <span className={'avatar '+(person.color || 'peach')+' '+size} aria-hidden="true">{person.initials || initials(person.name)}</span>; }
 export function Button({children, variant='', ...props}) { return <button type="button" className={'button '+variant} {...props}>{children}</button>; }
-export function Logo() { return <span className="wordmark"><span className="brand-mark"><i/><i/><i/></span>rally<span className="brand-period">.</span></span>; }
-export function Modal({title, close, children, error='', dismissible=true}) {
+export function Logo({href=homeLink(window.location.search)}) { return <a href={href} className="wordmark" aria-label="Rally home"><span className="brand-mark"><i/><i/><i/></span>rally<span className="brand-period">.</span></a>; }
+export function Modal({title, close, children, error='', dismissible=true, blockedMessage=''}) {
   const ref=useRef();
+  const [closeAttempted,setCloseAttempted]=useState(false);
+  function requestClose(){if(dismissible)close();else setCloseAttempted(true);}
   useEffect(() => { const previous=document.activeElement; ref.current.showModal(); return () => { if(previous?.isConnected) previous.focus(); }; },[]);
-  return <dialog ref={ref} className="modal" aria-labelledby="dialog-title" onCancel={e=>{e.preventDefault();if(dismissible)close();}} onClick={e=>{if(dismissible&&e.target===e.currentTarget)close();}}><div className="modal-inner"><div className="modal-top"><span className="eyebrow">PIZZA EXPO · RALLY</span><button type="button" className="icon-button" disabled={!dismissible} onClick={close} aria-label="Close dialog"><Icon name="close"/></button></div><h2 id="dialog-title">{title}</h2>{children}{error&&<p className="error" role="alert">{error}</p>}</div></dialog>;
+  return <dialog ref={ref} className="modal" aria-labelledby="dialog-title" onCancel={e=>{e.preventDefault();requestClose();}} onClick={e=>{if(e.target===e.currentTarget)requestClose();}}><div className="modal-inner"><div className="modal-top"><span className="eyebrow">PIZZA EXPO · RALLY</span><button type="button" className="icon-button" disabled={!dismissible&&!blockedMessage} onClick={requestClose} aria-label="Close dialog"><Icon name="close"/></button></div><h2 id="dialog-title">{title}</h2>{closeAttempted&&!dismissible&&blockedMessage&&<p className="feedback-required" role="alert">{blockedMessage}</p>}{children}{error&&<p className="error" role="alert">{error}</p>}</div></dialog>;
 }

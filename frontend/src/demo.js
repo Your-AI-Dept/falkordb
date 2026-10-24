@@ -165,7 +165,7 @@ export function updateAssignment(state,id,action){
   if(action==='check_in'&&agendaFor(state).some(item=>item.id!==id&&item.status==='checked_in'))throw new Error('Finish your current stop first.');
   if(action==='finish'?stop.status!=='checked_in':stop.status!=='scheduled')throw new Error('This stop has already been updated.');
   const timestamp=new Date().toISOString();
-  const next={...state,agendaProgress:{...state.agendaProgress,[id]:{...state.agendaProgress?.[id],stop:{id:stop.id,kind:stop.kind,personId:stop.personId,time:stop.time,location:stop.location,topic:stop.topic,reason:stop.reason},status,updatedAt:timestamp}}};
+  const next={...state,agendaProgress:{...state.agendaProgress,[id]:{...state.agendaProgress?.[id],stop:{id:stop.id,kind:stop.kind,personId:stop.personId,time:stop.time,location:stop.location,topic:stop.topic,topicId:stop.topicId,reason:stop.reason},status,updatedAt:timestamp}}};
   if(stop.kind==='booth'){
     if(action==='check_in')next.boothVisit={invitationId:id,checkedInAt:timestamp,feedback:null};
     if(action==='finish')next.boothVisit={...state.boothVisit,feedbackDue:true};
