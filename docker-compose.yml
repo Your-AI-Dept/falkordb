@@ -1,6 +1,6 @@
 services:
   falkordb:
-    image: falkordb/falkordb:latest
+    image: falkordb/falkordb:6.0.3  # verified by scripts/probe_falkordb.py
     ports:
       - "6379:6379"  # Redis protocol
       - "3000:3000"  # FalkorDB Browser

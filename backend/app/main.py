@@ -12,6 +12,7 @@ from app import db
 from app.config import settings
 from app.events import bus
 from app.models import Health
+from app.routers import admin, catalog, checkins, insights, sessions
 
 
 @asynccontextmanager
@@ -27,7 +28,11 @@ app.add_middleware(
     allow_origins=settings.cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["X-Stub"],
 )
+
+for module in (admin, catalog, sessions, checkins, insights):
+    app.include_router(module.router)
 
 
 @app.get("/health", response_model=Health)

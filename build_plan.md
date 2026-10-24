@@ -33,7 +33,9 @@ With 2–3 people: one on P1 → P3 → P5, one on P2 → P4 → P6/P7, one on t
 
 ---
 
-## P0: Infrastructure and de-risking (30m)
+## P0: Infrastructure and de-risking (30m) ✅ done
+
+**Status:** Docker via Colima; FalkorDB pinned to `6.0.3`; `docker compose up` brings up all three services. Probe: 13/13 checks pass, including `algo.maxFlow` (one maxFlow run plus CAP rewrite on 100×100 with 5k edges takes ~30ms, so a full 4-date plan is well under a second). API contract: all section 6 routes live with fixtures (`X-Stub: true` header), admin routes return 501, schema exported to `backend/openapi.json`, `openapi-typescript` generates cleanly.
 
 **Goal:** a running stack, proof that every FalkorDB call we rely on behaves as the doc assumes, and an API contract the frontend can build against.
 
@@ -241,8 +243,8 @@ Never cut: seed, pairing via `algo.maxFlow`, the date pipeline, GraphView, and i
 
 | Risk | Mitigation |
 | --- | --- |
-| `algo.maxFlow` missing or different in the pulled image | P0 probe; Hopcroft–Karp fallback in Python |
-| Docker not installed | Install first thing in P0 |
+| ~~`algo.maxFlow` missing or different in the pulled image~~ | Verified in P0 on 6.0.3 |
+| ~~Docker not installed~~ | Colima installed in P0 |
 | Opus latency for ~200 calls per date | `LLM_MODE` split (P4) |
 | Local venv is Python 3.15, container is 3.11 | Run the real thing in Docker; avoid 3.12+ only syntax |
 | Simulated `meet_again` rate doesn't visibly improve | Tune `ENJOY` and simulator `charm`; the metric is chosen to tell that story |
