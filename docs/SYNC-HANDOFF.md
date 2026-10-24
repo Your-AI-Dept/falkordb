@@ -1,6 +1,15 @@
 # Synchronization handoff — 24 October
 
-Branch: `codex/live-backend-alignment`. Based on main including graph-view PR #8.
+## Quick handoff
+
+Branch: **`codex/live-backend-alignment`** · [Draft PR #9](https://github.com/Your-AI-Dept/falkordb/pull/9). Not merged at handoff.
+
+- **Keep the original UI and flows.** Preserve attendee/exhibitor onboarding and the guided event journey. They remain the default. `VITE_DATA_MODE=live` enables an integration preview, not a replacement design. Reuse its adapters inside the original components.
+- **Connected:** backend adapters for attendee IDs, session matches, surveys/answers, topic rankings, and exhibitor audiences. Added a graph snapshot endpoint and attendee-specific visualization links. Live answer persistence/retries verified; 43 frontend tests and both builds pass.
+- **Left:** wire the adapters into the original flows; synchronize profiles/goals and booth invitations/responses; finish and test graph event synchronization. Full live exhibitor and graph-canvas flows remain unverified.
+- **Local ports:** app 5173, graph 5174, backend 8001. Booth invitations are still browser-local; the default original demo still uses fixtures.
+
+Based on main including graph-view PR #8.
 
 ## Preserve the approved UX
 
