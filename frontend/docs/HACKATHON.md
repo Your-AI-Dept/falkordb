@@ -52,3 +52,7 @@ Commercially, this can support more relevant attended conversations and booth ac
 ## Cut line
 
 Finish live survey → external simulation → topic ranking integration first. Defer CRM export, bulk outreach, discounts, cross-event identity, room allocation, and an organizer dashboard. Reserve the final thirty minutes for video and submission. Stop feature work before that and rehearse a reproducible run with the exact dataset and API the video will use.
+
+## Current rehearsal update
+
+The current attendee demo reveals four fixed meetings in one hour, then offers a graph handoff after all four stops resolve. The exhibitor demo now starts with profile setup and a pizza-sauce launch, followed by sample audience evidence, invitation preview, attendee acceptance, and booth response tracking. This supersedes the earlier automatic assigned-guest booth agenda below/above. Use DEMO-WALKTHROUGH.md for the current sequence. Audience selection and graph recomputation remain local fixtures/handoff pending API mapping.

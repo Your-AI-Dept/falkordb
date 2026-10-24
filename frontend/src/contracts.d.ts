@@ -57,10 +57,12 @@ export interface Dashboard {
   graphRevision?: number; state: AttendeeState; viewer: { badgeToken: string }; people: Person[];
   recommendations: Recommendation[]; meeting: Meeting | null; invitation: Invitation | null; meetingRequests: MeetingRequest[];
   agenda?: AgendaStop[];
+  session?: {id: Id; title: string; day: string; time: string; meetingIds: Id[]; resolved: number; total: number; ready: boolean};
 }
 // Frontend display shape only; the team has not finalized scheduling endpoints.
 export interface AgendaStop {
   id: Id; kind: 'meeting' | 'booth'; personId: Id; person: Person;
+  sessionId?: Id; round?: number;
   time: string; location: string; topic: string; topicId?: Id; reason?: string;
   status: 'scheduled' | 'checked_in' | 'feedback_due' | 'completed' | 'missed';
 }
@@ -95,6 +97,16 @@ export interface DemoMeetingSurvey extends MeetingSurvey {
   preferences: MeetingPreference[]; answers: DemoSurveyAnswer[];
 }
 export interface DemoSurveySubmission extends SurveySubmission { answerText?: string }
+// Local promotion DTOs pending the team's API mapping. These do not define routes.
+export interface PromotionAudienceMember {
+  id: Id; person: Person; topicId: Id; expertise: string; reports: number;
+  connections: number; reason: string; source: 'sample_graph' | 'graph';
+}
+export interface PromotionInvitation {
+  person: Person; evidence: PromotionAudienceMember;
+  status: 'invited' | 'accepted' | 'declined' | 'checked_in' | 'feedback_due' | 'completed';
+  invitedAt: string; checkedInAt?: string; updatedAt?: string;
+}
 export interface Topic { id: Id; label: string }
 export interface RankedPerson {
   rank: number; person: SurveyPerson; reason: string;

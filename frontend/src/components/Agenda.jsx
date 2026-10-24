@@ -1,19 +1,26 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Avatar,Button,Icon,Modal} from './ui.jsx';
 import {MeetingSurveyDialog} from './MeetingSurvey.jsx';
 import {api} from '../api.js';
+import {VisualizationHandoff} from './VisualizationHandoff.jsx';
 import './agenda.css';
 
 const labels={scheduled:'Scheduled',checked_in:'Checked in',feedback_due:'Feedback required',completed:'Completed',missed:'Unavailable'};
 const title=stop=>stop.kind==='booth'?'Go to '+stop.location:'Meet '+stop.person.name;
 
-export function Agenda({stops,openStop}){
+export function Agenda({stops,openStop,session,compact=false}){
+  const [graphOpen,setGraphOpen]=useState(false);
+  if(session){
+    const lineup=session.meetingIds.map(id=>stops.find(stop=>stop.id===id)).filter(Boolean);
+    const other=stops.filter(stop=>!session.meetingIds.includes(stop.id));
+    return <div className="guided-agenda"><section className="speed-session"><div className="speed-heading"><div><span className="eyebrow">YOUR FOUR MATCHES</span><h2>{session.title}</h2><p><Icon name="clock" size={17}/>{session.day} · {session.time}</p></div><span className="session-count">{session.resolved}/4<span>finished</span></span></div><div className="session-lineup">{lineup.map((stop,index)=><button className="session-match" key={stop.id} onClick={()=>openStop(stop.id)}><span className="round-number">{index+1}</span><Avatar person={stop.person}/><span className="session-person"><strong>{stop.person.name}</strong><span>{stop.person.company} · {stop.topic}</span><small>{stop.time.replace('Wednesday · ','')} · {stop.location}</small></span><span className="session-status">{stop.status==='scheduled'?'View meetup':labels[stop.status]}<Icon name="arrow" size={15}/></span></button>)}</div><div className="session-next"><Icon name="spark" size={19}/><span>{session.ready?'Feedback ready for the graph update':'Your next matches update after this hour.'}</span>{session.ready&&<Button variant="text" onClick={()=>setGraphOpen(true)}>Continue to graph<Icon name="arrow" size={16}/></Button>}</div></section>{other.length>0&&<Agenda stops={other} openStop={openStop} compact/>} {graphOpen&&<Modal title="Round complete" close={()=>setGraphOpen(false)}><VisualizationHandoff/></Modal>}</div>;
+  }
   const next=stops.find(stop=>stop.status==='feedback_due')||stops.find(stop=>stop.status==='checked_in')||stops.find(stop=>stop.status==='scheduled');
   const later=stops.filter(stop=>stop.id!==next?.id&&['scheduled','checked_in','feedback_due'].includes(stop.status));
   const earlier=stops.filter(stop=>['completed','missed'].includes(stop.status));
   function row(stop){return <button className="agenda-row" key={stop.id} onClick={()=>openStop(stop.id)}><span className="agenda-row-time">{stop.time.replace(/^Wednesday · /,'')}</span><Avatar person={stop.person}/><span className="agenda-row-info"><strong>{stop.kind==='booth'?stop.person.company:stop.person.name}</strong><span>{stop.location} · {stop.topic}</span><small>{labels[stop.status]}</small></span><Icon name="arrow" size={17}/></button>;}
   return <div className="guided-agenda">
-    {next?<article className="next-stop"><div className="next-stop-top"><span className="eyebrow">{next.status==='feedback_due'?'FINISH YOUR FEEDBACK':next.status==='checked_in'?'YOUR CURRENT STOP':'YOUR NEXT STOP'}</span><span>{next.kind==='booth'?'Booth visit':'15-minute meetup'}</span></div><h2>{title(next)}</h2><div className="stop-directions"><p><Icon name="clock" size={21}/><strong>{next.time}</strong></p><p><Icon name="pin" size={21}/>{next.location}</p></div><div className="stop-person"><Avatar person={next.person}/><div><strong>{next.kind==='booth'?next.person.name:next.person.company}</strong><span>{next.person.role}</span></div></div><p className="stop-topic">{next.topic}</p><div className="next-stop-action"><Button onClick={()=>openStop(next.id)}>{next.status==='feedback_due'?'Continue feedback':next.status==='checked_in'?'View current stop':'View stop'}<Icon name="arrow" size={18}/></Button></div></article>:<div className="agenda-finished"><Icon name="check" size={32}/><h2>No more stops scheduled</h2></div>}
+    {next?<article className="next-stop"><div className="next-stop-top"><span className="eyebrow">{next.status==='feedback_due'?'FINISH YOUR FEEDBACK':next.status==='checked_in'?'YOUR CURRENT STOP':'YOUR NEXT STOP'}</span><span>{next.kind==='booth'?'Booth visit':'15-minute meetup'}</span></div><h2>{title(next)}</h2><div className="stop-directions"><p><Icon name="clock" size={21}/><strong>{next.time}</strong></p><p><Icon name="pin" size={21}/>{next.location}</p></div><div className="stop-person"><Avatar person={next.person}/><div><strong>{next.kind==='booth'?next.person.name:next.person.company}</strong><span>{next.person.role}</span></div></div><p className="stop-topic">{next.topic}</p><div className="next-stop-action"><Button onClick={()=>openStop(next.id)}>{next.status==='feedback_due'?'Continue feedback':next.status==='checked_in'?'View current stop':'View stop'}<Icon name="arrow" size={18}/></Button></div></article>:!compact&&<div className="agenda-finished"><Icon name="check" size={32}/><h2>No more stops scheduled</h2></div>}
     {later.length>0&&<section className="agenda-list" aria-label="Coming up"><h2>Coming up</h2>{later.map(row)}</section>}
     {earlier.length>0&&<section className="agenda-list agenda-earlier" aria-label="Earlier stops"><h2>Earlier</h2>{earlier.map(row)}</section>}
   </div>;

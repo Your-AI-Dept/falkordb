@@ -5,6 +5,7 @@ import {Avatar,Button,Logo} from './ui.jsx';
 import {Agenda} from './Agenda.jsx';
 import {MeetingSurveyDialog} from './MeetingSurvey.jsx';
 import ProfileSummary from './ProfileSummary.jsx';
+import PromotionInbox from './PromotionInbox.jsx';
 import {observeResource} from '../observe-resource.js';
 
 // The second attendee's demo home uses their own survey state, never Paul's profile editor.
@@ -31,7 +32,7 @@ export default function ParticipantHome({participant}){
   },[participant]);
   const refresh=()=>observer.current?.refresh();
   return <div className="attendee-app"><header className="app-header"><Logo href={attendeeLink('attendee',participant)}/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div>{viewer&&<button className="profile-trigger header-actions" aria-label="Open your profile" onClick={()=>setModal('profile')}><Avatar person={viewer}/></button>}</header>
-    <main className="event-main guided-event"><div className="welcome-row"><div><span className="eyebrow">WEDNESDAY</span><h1>{viewer?viewer.name.split(' ')[0]+'’s day at Pizza Expo.':'Your day at Pizza Expo.'}</h1></div></div>{error?<p className="error" role="alert">{error}<Button variant="text" onClick={refresh}>Try again</Button></p>:viewer?<Agenda stops={stops} openStop={setModal}/>:<p role="status">Loading your day…</p>}</main>
+    <main className="event-main guided-event"><div className="welcome-row"><div><span className="eyebrow">WEDNESDAY</span><h1>{viewer?viewer.name.split(' ')[0]+'’s day at Pizza Expo.':'Your day at Pizza Expo.'}</h1></div></div><PromotionInbox participant={participant}/>{error?<p className="error" role="alert">{error}<Button variant="text" onClick={refresh}>Try again</Button></p>:viewer?<Agenda stops={stops} openStop={setModal}/>:<p role="status">Loading your day…</p>}</main>
     <footer className="app-footer"><div><a href={attendeeLink('rankings',participant)}>Top people</a><a href="?view=attendee">Paul’s view</a><a href="?view=exhibitor">Exhibitor view</a></div></footer>
     {modal==='profile'&&<ProfileSummary profile={viewer} respondentId={participant} close={()=>setModal(null)} onPreferencesChanged={refresh}/>}
     {modal&&modal!=='profile'&&<MeetingSurveyDialog meetingId={modal} respondentId={participant} close={()=>setModal(null)} onSaved={refresh}/>}
