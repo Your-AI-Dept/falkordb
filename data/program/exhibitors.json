@@ -1,0 +1,1419 @@
+[
+ {
+  "exhibitor_id": "EX-001",
+  "name": "Sysco",
+  "booth": "3008",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Sysco, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.sysco.com/",
+  "linkedin_company_id": "sysco",
+  "real_company": true,
+  "staff": [
+   "PE27-00035",
+   "PE27-00092",
+   "PE27-00113",
+   "PE27-00184",
+   "PE27-00223",
+   "PE27-00232",
+   "PE27-00325",
+   "PE27-00354",
+   "PE27-00389",
+   "PE27-00533",
+   "PE27-00683",
+   "PE27-00701",
+   "PE27-00788",
+   "PE27-00958"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-002",
+  "name": "Performance Food Group",
+  "booth": "3012",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Performance Food Group, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.pfgc.com/",
+  "linkedin_company_id": "performancefoodgroup",
+  "real_company": true,
+  "staff": [
+   "PE27-00064",
+   "PE27-00145",
+   "PE27-00222",
+   "PE27-00285",
+   "PE27-00318",
+   "PE27-00384",
+   "PE27-00396",
+   "PE27-00469",
+   "PE27-00534",
+   "PE27-00596",
+   "PE27-00767",
+   "PE27-00875"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-003",
+  "name": "Gordon Food Service",
+  "booth": "3020",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Gordon Food Service, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.gfs.com/",
+  "linkedin_company_id": "gordon-food-service",
+  "real_company": true,
+  "staff": [
+   "PE27-00022",
+   "PE27-00116",
+   "PE27-00212",
+   "PE27-00245",
+   "PE27-00327",
+   "PE27-00436",
+   "PE27-00448",
+   "PE27-00557",
+   "PE27-00652"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-004",
+  "name": "Shamrock Foods Company",
+  "booth": "3022",
+  "booth_size": "20x20",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Shamrock Foods Company, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.shamrockfoods.com/",
+  "linkedin_company_id": "shamrock-foods",
+  "real_company": true,
+  "staff": [
+   "PE27-00204",
+   "PE27-00301",
+   "PE27-00417",
+   "PE27-00602",
+   "PE27-00657",
+   "PE27-00762",
+   "PE27-00877",
+   "PE27-00953",
+   "PE27-00983"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-005",
+  "name": "SpotOn",
+  "booth": "4005",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "SpotOn, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.spoton.com/",
+  "linkedin_company_id": "spoton",
+  "real_company": true,
+  "staff": [
+   "PE27-00070",
+   "PE27-00122",
+   "PE27-00332",
+   "PE27-00579",
+   "PE27-00619",
+   "PE27-00715",
+   "PE27-00732",
+   "PE27-00906",
+   "PE27-00931"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-006",
+  "name": "Slice",
+  "booth": "4011",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Slice, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.slicelife.com/",
+  "linkedin_company_id": "slice",
+  "real_company": true,
+  "staff": [
+   "PE27-00057",
+   "PE27-00193",
+   "PE27-00484",
+   "PE27-00506",
+   "PE27-00631",
+   "PE27-00705",
+   "PE27-00726",
+   "PE27-00981"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-007",
+  "name": "The Middleby Corporation",
+  "booth": "2002",
+  "booth_size": "20x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "The Middleby Corporation, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.middleby.com/",
+  "linkedin_company_id": "middleby-corporation",
+  "real_company": true,
+  "staff": [
+   "PE27-00173",
+   "PE27-00174",
+   "PE27-00216",
+   "PE27-00358",
+   "PE27-00435",
+   "PE27-00588",
+   "PE27-00783",
+   "PE27-00833"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-008",
+  "name": "DoorDash",
+  "booth": "4017",
+  "booth_size": "20x30",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "DoorDash, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.doordash.com/",
+  "linkedin_company_id": "doordash",
+  "real_company": true,
+  "staff": [
+   "PE27-00236",
+   "PE27-00253",
+   "PE27-00463",
+   "PE27-00694",
+   "PE27-00850",
+   "PE27-00913"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-009",
+  "name": "Leprino Foods",
+  "booth": "1008",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Leprino Foods, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.leprinofoods.com/",
+  "linkedin_company_id": "leprino",
+  "real_company": true,
+  "staff": [
+   "PE27-00202",
+   "PE27-00367",
+   "PE27-00411",
+   "PE27-00607",
+   "PE27-00869",
+   "PE27-00956"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-010",
+  "name": "Owner.com",
+  "booth": "4023",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Owner.com, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.owner.com/",
+  "linkedin_company_id": "owner-com",
+  "real_company": true,
+  "staff": [
+   "PE27-00197",
+   "PE27-00532",
+   "PE27-00664",
+   "PE27-00846",
+   "PE27-00888",
+   "PE27-00999"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-011",
+  "name": "US Foods",
+  "booth": "3029",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "US Foods, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.usfoods.com/",
+  "linkedin_company_id": "usfoods",
+  "real_company": true,
+  "staff": [
+   "PE27-00164",
+   "PE27-00248",
+   "PE27-00487",
+   "PE27-00617",
+   "PE27-00725",
+   "PE27-00744"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-012",
+  "name": "HungerRush",
+  "booth": "4025",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "HungerRush, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.hungerrush.com/",
+  "linkedin_company_id": "hungerrush",
+  "real_company": true,
+  "staff": [
+   "PE27-00100",
+   "PE27-00424",
+   "PE27-00485",
+   "PE27-00550",
+   "PE27-00934"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-013",
+  "name": "Rich Products",
+  "booth": "1012",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "dough-flour"
+  ],
+  "description": "Rich Products, food and beverage manufacturer, showing dough & flour for pizzerias.",
+  "website": "https://www.richs.com/",
+  "linkedin_company_id": "richproducts",
+  "real_company": true,
+  "staff": [
+   "PE27-00351",
+   "PE27-00416",
+   "PE27-00472",
+   "PE27-00576",
+   "PE27-00658"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-014",
+  "name": "Uber",
+  "booth": "4029",
+  "booth_size": "20x30",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Uber, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.uber.com/",
+  "linkedin_company_id": "uber-com",
+  "real_company": true,
+  "staff": [
+   "PE27-00342",
+   "PE27-00545",
+   "PE27-00577",
+   "PE27-00636",
+   "PE27-00990"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-015",
+  "name": "Great Lakes Cheese",
+  "booth": "1014",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Great Lakes Cheese, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.greatlakescheese.com/",
+  "linkedin_company_id": "great-lakes-cheese",
+  "real_company": true,
+  "staff": [
+   "PE27-00024",
+   "PE27-00360",
+   "PE27-00447",
+   "PE27-00495"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-016",
+  "name": "Heartland Pepperoni Co.",
+  "booth": "1019",
+  "booth_size": "10x10",
+  "category": "Ingredients",
+  "topics": [
+   "meats-toppings"
+  ],
+  "description": "Heartland Pepperoni Co., craft pepperoni producer, showing meats & toppings for pizzerias.",
+  "website": "https://www.heartlandpepperonico.com/",
+  "linkedin_company_id": "heartland-pepperoni-co",
+  "real_company": false,
+  "staff": [
+   "PE27-00357",
+   "PE27-00402",
+   "PE27-00421",
+   "PE27-00980"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-017",
+  "name": "Hormel Foods",
+  "booth": "1023",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "meats-toppings"
+  ],
+  "description": "Hormel Foods, food and beverage manufacturer, showing meats & toppings for pizzerias.",
+  "website": "https://www.hormelfoods.com/",
+  "linkedin_company_id": "hormel-foods",
+  "real_company": true,
+  "staff": [
+   "PE27-00069",
+   "PE27-00078",
+   "PE27-00807",
+   "PE27-00951"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-018",
+  "name": "PepsiCo",
+  "booth": "5003",
+  "booth_size": "20x30",
+  "category": "Beverages & Services",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "description": "PepsiCo, food and beverage manufacturer, showing brick & mortar operations for pizzerias.",
+  "website": "https://www.pepsico.com/",
+  "linkedin_company_id": "pepsico",
+  "real_company": true,
+  "staff": [
+   "PE27-00109",
+   "PE27-00745",
+   "PE27-00804",
+   "PE27-00972"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-019",
+  "name": "PieLine AI",
+  "booth": "4036",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "PieLine AI, AI phone ordering for pizzerias, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.pielineai.com/",
+  "linkedin_company_id": "pieline-ai",
+  "real_company": false,
+  "staff": [
+   "PE27-00062",
+   "PE27-00106",
+   "PE27-00415",
+   "PE27-00546"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-020",
+  "name": "Popmenu",
+  "booth": "4045",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Popmenu, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.popmenu.com/",
+  "linkedin_company_id": "popmenu",
+  "real_company": true,
+  "staff": [
+   "PE27-00347",
+   "PE27-00519",
+   "PE27-00612",
+   "PE27-00968"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-021",
+  "name": "Restaurant Depot",
+  "booth": "3035",
+  "booth_size": "20x20",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Restaurant Depot, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.restaurantdepot.com/",
+  "linkedin_company_id": "jetro-restaurant-depot",
+  "real_company": true,
+  "staff": [
+   "PE27-00031",
+   "PE27-00066",
+   "PE27-00522",
+   "PE27-00941"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-022",
+  "name": "Saputo",
+  "booth": "1026",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Saputo, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.saputo.com/",
+  "linkedin_company_id": "saputo",
+  "real_company": true,
+  "staff": [
+   "PE27-00359",
+   "PE27-00595",
+   "PE27-00835",
+   "PE27-00967"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-023",
+  "name": "Stanislaus Food Products",
+  "booth": "1035",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "tomatoes-sauce"
+  ],
+  "description": "Stanislaus Food Products, food and beverage manufacturer, showing tomatoes & sauce for pizzerias.",
+  "website": "https://www.stanislaus.com/",
+  "linkedin_company_id": "stanislaus-food-products",
+  "real_company": true,
+  "staff": [
+   "PE27-00610",
+   "PE27-00702",
+   "PE27-00817",
+   "PE27-00936"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-024",
+  "name": "Toast",
+  "booth": "4053",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Toast, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.toasttab.com/",
+  "linkedin_company_id": "toast-inc",
+  "real_company": true,
+  "staff": [
+   "PE27-00110",
+   "PE27-00201",
+   "PE27-00689",
+   "PE27-00857"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-025",
+  "name": "Wood Stone Corporation",
+  "booth": "2004",
+  "booth_size": "10x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Wood Stone Corporation, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.woodstone-corp.com/",
+  "linkedin_company_id": "wood-stone-corporation",
+  "real_company": true,
+  "staff": [
+   "PE27-00060",
+   "PE27-00340",
+   "PE27-00514",
+   "PE27-00718"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-026",
+  "name": "Bianco Cheese Imports",
+  "booth": "1040",
+  "booth_size": "10x10",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Bianco Cheese Imports, Italian cheese importer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.biancocheeseimports.com/",
+  "linkedin_company_id": "bianco-cheese-imports",
+  "real_company": false,
+  "staff": [
+   "PE27-00124",
+   "PE27-00208",
+   "PE27-00834"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-027",
+  "name": "ChowNow",
+  "booth": "4061",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "ChowNow, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.chownow.com/",
+  "linkedin_company_id": "chownow",
+  "real_company": true,
+  "staff": [
+   "PE27-00001",
+   "PE27-00410",
+   "PE27-00741"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-028",
+  "name": "General Mills",
+  "booth": "1045",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "dough-flour"
+  ],
+  "description": "General Mills, food and beverage manufacturer, showing dough & flour for pizzerias.",
+  "website": "https://www.generalmills.com/",
+  "linkedin_company_id": "general-mills",
+  "real_company": true,
+  "staff": [
+   "PE27-00239",
+   "PE27-00403",
+   "PE27-00957"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-029",
+  "name": "Grande Cheese Company",
+  "booth": "1054",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Grande Cheese Company, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.grandecheese.com/",
+  "linkedin_company_id": "grande-cheese-company",
+  "real_company": true,
+  "staff": [
+   "PE27-00075",
+   "PE27-00541",
+   "PE27-00779"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-030",
+  "name": "Grubhub",
+  "booth": "4063",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Grubhub, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.grubhub.com/",
+  "linkedin_company_id": "grubhub-seamless",
+  "real_company": true,
+  "staff": [
+   "PE27-00474",
+   "PE27-00927",
+   "PE27-00928"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-031",
+  "name": "Ken's Foods",
+  "booth": "1062",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "spices-seasonings",
+   "tomatoes-sauce"
+  ],
+  "description": "Ken's Foods, food and beverage manufacturer, showing spices & seasonings and tomatoes & sauce for pizzerias.",
+  "website": "https://www.kensfoods.com/",
+  "linkedin_company_id": "ken's-foods",
+  "real_company": true,
+  "staff": [
+   "PE27-00007",
+   "PE27-00081",
+   "PE27-00412"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-032",
+  "name": "NCR Voyix",
+  "booth": "4066",
+  "booth_size": "20x30",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "NCR Voyix, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.ncrvoyix.com/",
+  "linkedin_company_id": "ncrvoyix",
+  "real_company": true,
+  "staff": [
+   "PE27-00059",
+   "PE27-00816",
+   "PE27-00841"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-033",
+  "name": "Olo",
+  "booth": "4074",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Olo, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.olo.com/",
+  "linkedin_company_id": "olo",
+  "real_company": true,
+  "staff": [
+   "PE27-00432",
+   "PE27-00565",
+   "PE27-00966"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-034",
+  "name": "Ooni",
+  "booth": "2010",
+  "booth_size": "10x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Ooni, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.ooni.com/",
+  "linkedin_company_id": "oonihq",
+  "real_company": true,
+  "staff": [
+   "PE27-00430",
+   "PE27-00937",
+   "PE27-00959"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-035",
+  "name": "Pratt Industries",
+  "booth": "3041",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Pratt Industries, packaging manufacturer, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.prattindustries.com/",
+  "linkedin_company_id": "pratt-industries",
+  "real_company": true,
+  "staff": [
+   "PE27-00038",
+   "PE27-00144",
+   "PE27-00390"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-036",
+  "name": "True Manufacturing",
+  "booth": "2012",
+  "booth_size": "20x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "True Manufacturing, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.truemfg.com/",
+  "linkedin_company_id": "true-manufacturing",
+  "real_company": true,
+  "staff": [
+   "PE27-00419",
+   "PE27-00713",
+   "PE27-00763"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-037",
+  "name": "ezCater",
+  "booth": "4078",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "ezCater, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.ezcater.com/",
+  "linkedin_company_id": "ezcater",
+  "real_company": true,
+  "staff": [
+   "PE27-00265",
+   "PE27-00322",
+   "PE27-00337"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-038",
+  "name": "7shifts",
+  "booth": "4082",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "description": "7shifts, restaurant technology company, showing tech, ordering & delivery and brick & mortar operations for pizzerias.",
+  "website": "https://www.7shifts.com/",
+  "linkedin_company_id": "7shifts",
+  "real_company": true,
+  "staff": [
+   "PE27-00305",
+   "PE27-00795"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-039",
+  "name": "Clover",
+  "booth": "4084",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Clover, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.clover.com/",
+  "linkedin_company_id": "clover-network",
+  "real_company": true,
+  "staff": [
+   "PE27-00170",
+   "PE27-00449"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-040",
+  "name": "Gozney",
+  "booth": "2016",
+  "booth_size": "10x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Gozney, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.gozney.com/",
+  "linkedin_company_id": "gozney",
+  "real_company": true,
+  "staff": [
+   "PE27-00751",
+   "PE27-00895"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-041",
+  "name": "Hot Honey Collective",
+  "booth": "1067",
+  "booth_size": "10x10",
+  "category": "Ingredients",
+  "topics": [
+   "spices-seasonings"
+  ],
+  "description": "Hot Honey Collective, condiment brand, showing spices & seasonings for pizzerias.",
+  "website": "https://www.hothoneycollective.com/",
+  "linkedin_company_id": null,
+  "real_company": false,
+  "staff": [
+   "PE27-00733",
+   "PE27-00768"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-042",
+  "name": "Land O'Lakes",
+  "booth": "1075",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Land O'Lakes, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.landolakesinc.com/",
+  "linkedin_company_id": "landolakesinc",
+  "real_company": true,
+  "staff": [
+   "PE27-00108",
+   "PE27-00962"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-043",
+  "name": "Menu Mint",
+  "booth": "4090",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "chefs-culinary"
+  ],
+  "description": "Menu Mint, menu engineering software, showing tech, ordering & delivery and chefs & culinary for pizzerias.",
+  "website": "https://www.menumint.com/",
+  "linkedin_company_id": "menu-mint",
+  "real_company": false,
+  "staff": [
+   "PE27-00373",
+   "PE27-00492"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-044",
+  "name": "Otter",
+  "booth": "4096",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Otter, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.tryotter.com/",
+  "linkedin_company_id": "tryotter",
+  "real_company": true,
+  "staff": [
+   "PE27-00061",
+   "PE27-00399"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-045",
+  "name": "OvenIQ",
+  "booth": "4099",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "ovens-equipment"
+  ],
+  "description": "OvenIQ, connected oven monitoring, showing tech, ordering & delivery and ovens & equipment for pizzerias.",
+  "website": "https://www.oveniq.com/",
+  "linkedin_company_id": "oveniq",
+  "real_company": false,
+  "staff": [
+   "PE27-00365",
+   "PE27-00647"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-046",
+  "name": "PAR Technology",
+  "booth": "4102",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "PAR Technology, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.partech.com/",
+  "linkedin_company_id": "partechnology",
+  "real_company": true,
+  "staff": [
+   "PE27-00556",
+   "PE27-00586"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-047",
+  "name": "Paytronix",
+  "booth": "4111",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Paytronix, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.paytronix.com/",
+  "linkedin_company_id": "paytronix-systems",
+  "real_company": true,
+  "staff": [
+   "PE27-00115",
+   "PE27-00207"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-048",
+  "name": "Sargento Foods",
+  "booth": "1080",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "description": "Sargento Foods, food and beverage manufacturer, showing cheese & dairy for pizzerias.",
+  "website": "https://www.sargento.com/",
+  "linkedin_company_id": "sargento",
+  "real_company": true,
+  "staff": [
+   "PE27-00566",
+   "PE27-00739"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-049",
+  "name": "SliceMetrics",
+  "booth": "4115",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "description": "SliceMetrics, analytics for multi-unit pizza operators, showing tech, ordering & delivery and brick & mortar operations for pizzerias.",
+  "website": "https://www.slicemetrics.com/",
+  "linkedin_company_id": "slicemetrics",
+  "real_company": false,
+  "staff": [
+   "PE27-00098",
+   "PE27-00601"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-050",
+  "name": "Smithfield Foods",
+  "booth": "1088",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "meats-toppings"
+  ],
+  "description": "Smithfield Foods, food and beverage manufacturer, showing meats & toppings for pizzerias.",
+  "website": "https://www.smithfieldfoods.com/",
+  "linkedin_company_id": "smithfield-foods",
+  "real_company": true,
+  "staff": [
+   "PE27-00457",
+   "PE27-00824"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-051",
+  "name": "Square",
+  "booth": "4118",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Square, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.squareup.com/",
+  "linkedin_company_id": "joinsquare",
+  "real_company": true,
+  "staff": [
+   "PE27-00673",
+   "PE27-00789"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-052",
+  "name": "The Coca-Cola Company",
+  "booth": "5008",
+  "booth_size": "20x30",
+  "category": "Beverages & Services",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "description": "The Coca-Cola Company, food and beverage manufacturer, showing brick & mortar operations for pizzerias.",
+  "website": "https://www.coca-colacompany.com/",
+  "linkedin_company_id": "the-coca-cola-company",
+  "real_company": true,
+  "staff": [
+   "PE27-00262",
+   "PE27-00812"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-053",
+  "name": "Yelp",
+  "booth": "4127",
+  "booth_size": "20x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Yelp, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.yelp.com/",
+  "linkedin_company_id": "yelp-com",
+  "real_company": true,
+  "staff": [
+   "PE27-00429",
+   "PE27-00969"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-054",
+  "name": "Ardent Mills",
+  "booth": "1097",
+  "booth_size": "20x20",
+  "category": "Ingredients",
+  "topics": [
+   "dough-flour"
+  ],
+  "description": "Ardent Mills, food and beverage manufacturer, showing dough & flour for pizzerias.",
+  "website": "https://www.ardentmills.com/",
+  "linkedin_company_id": "ardent-mills",
+  "real_company": true,
+  "staff": [
+   "PE27-00422"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-055",
+  "name": "Ben E. Keith Company",
+  "booth": "3049",
+  "booth_size": "20x20",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Ben E. Keith Company, foodservice distributor, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.benekeith.com/",
+  "linkedin_company_id": "ben-e.-keith-company",
+  "real_company": true,
+  "staff": [
+   "PE27-00740"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-056",
+  "name": "Crustly",
+  "booth": "4130",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Crustly, loyalty and text marketing for independents, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.crustly.com/",
+  "linkedin_company_id": "crustly",
+  "real_company": false,
+  "staff": [
+   "PE27-00244"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-057",
+  "name": "Desert Restaurant Equipment",
+  "booth": "2018",
+  "booth_size": "10x10",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Desert Restaurant Equipment, equipment dealer, showing ovens & equipment for pizzerias.",
+  "website": "https://www.desertrestaurantequipment.com/",
+  "linkedin_company_id": "desert-restaurant-equipment",
+  "real_company": false,
+  "staff": [
+   "PE27-00473"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-058",
+  "name": "DoughFlow",
+  "booth": "4138",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "dough-flour"
+  ],
+  "description": "DoughFlow, prep and dough forecasting, showing tech, ordering & delivery and dough & flour for pizzerias.",
+  "website": "https://www.doughflow.com/",
+  "linkedin_company_id": "doughflow",
+  "real_company": false,
+  "staff": [
+   "PE27-00041"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-059",
+  "name": "Ferment Lab Flours",
+  "booth": "1106",
+  "booth_size": "10x10",
+  "category": "Ingredients",
+  "topics": [
+   "dough-flour"
+  ],
+  "description": "Ferment Lab Flours, specialty flour miller, showing dough & flour for pizzerias.",
+  "website": "https://www.fermentlabflours.com/",
+  "linkedin_company_id": "ferment-lab-flours",
+  "real_company": false,
+  "staff": [
+   "PE27-00004"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-060",
+  "name": "Graphic Packaging International",
+  "booth": "3058",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "Graphic Packaging International, packaging manufacturer, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.graphicpkg.com/",
+  "linkedin_company_id": "graphic-packaging-international",
+  "real_company": true,
+  "staff": [
+   "PE27-00510"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-061",
+  "name": "Hobart",
+  "booth": "2026",
+  "booth_size": "20x20",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Hobart, foodservice equipment maker, showing ovens & equipment for pizzerias.",
+  "website": "https://www.hobartcorp.com/",
+  "linkedin_company_id": "hobartfoodequipment",
+  "real_company": true,
+  "staff": [
+   "PE27-00961"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-062",
+  "name": "Homebase",
+  "booth": "4145",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "description": "Homebase, restaurant technology company, showing tech, ordering & delivery and brick & mortar operations for pizzerias.",
+  "website": "https://www.joinhomebase.com/",
+  "linkedin_company_id": "homebase-app",
+  "real_company": true,
+  "staff": [
+   "PE27-00312"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-063",
+  "name": "International Paper",
+  "booth": "3064",
+  "booth_size": "20x30",
+  "category": "Distribution & Packaging",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "description": "International Paper, packaging manufacturer, showing supply chain & packaging for pizzerias.",
+  "website": "https://www.internationalpaper.com/",
+  "linkedin_company_id": "international-paper",
+  "real_company": true,
+  "staff": [
+   "PE27-00313"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-064",
+  "name": "King Arthur Baking Company",
+  "booth": "1115",
+  "booth_size": "10x20",
+  "category": "Ingredients",
+  "topics": [
+   "dough-flour"
+  ],
+  "description": "King Arthur Baking Company, food and beverage manufacturer, showing dough & flour for pizzerias.",
+  "website": "https://www.kingarthurbaking.com/",
+  "linkedin_company_id": null,
+  "real_company": true,
+  "staff": [
+   "PE27-00094"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-065",
+  "name": "MarginEdge",
+  "booth": "4149",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "description": "MarginEdge, restaurant technology company, showing tech, ordering & delivery and brick & mortar operations for pizzerias.",
+  "website": "https://www.marginedge.com/",
+  "linkedin_company_id": "marginedge",
+  "real_company": true,
+  "staff": [
+   "PE27-00296"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-066",
+  "name": "McCormick & Company",
+  "booth": "1119",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "spices-seasonings"
+  ],
+  "description": "McCormick & Company, food and beverage manufacturer, showing spices & seasonings for pizzerias.",
+  "website": "https://www.mccormick.com/",
+  "linkedin_company_id": "mccormick",
+  "real_company": true,
+  "staff": [
+   "PE27-00434"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-067",
+  "name": "Mutti",
+  "booth": "1128",
+  "booth_size": "10x20",
+  "category": "Ingredients",
+  "topics": [
+   "tomatoes-sauce"
+  ],
+  "description": "Mutti, food and beverage manufacturer, showing tomatoes & sauce for pizzerias.",
+  "website": "https://www.mutti-parma.com/",
+  "linkedin_company_id": "mutti-pomodoro",
+  "real_company": true,
+  "staff": [
+   "PE27-00559"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-068",
+  "name": "Restaurant365",
+  "booth": "4155",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "description": "Restaurant365, restaurant technology company, showing tech, ordering & delivery and brick & mortar operations for pizzerias.",
+  "website": "https://www.restaurant365.com/",
+  "linkedin_company_id": "restaurant365-cloud-erp-for-restaurants",
+  "real_company": true,
+  "staff": [
+   "PE27-00681"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-069",
+  "name": "RouteRunner",
+  "booth": "4157",
+  "booth_size": "10x10",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "RouteRunner, first-party delivery dispatch, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.routerunner.com/",
+  "linkedin_company_id": "routerunner",
+  "real_company": false,
+  "staff": [
+   "PE27-00260"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-070",
+  "name": "Stone & Steel Oven Works",
+  "booth": "2029",
+  "booth_size": "10x10",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Stone & Steel Oven Works, custom deck oven builder, showing ovens & equipment for pizzerias.",
+  "website": "https://www.stoneandsteelovenworks.com/",
+  "linkedin_company_id": "stone-and-steel-oven-works",
+  "real_company": false,
+  "staff": [
+   "PE27-00085"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-071",
+  "name": "Tillster",
+  "booth": "4164",
+  "booth_size": "10x20",
+  "category": "Technology",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "description": "Tillster, restaurant technology company, showing tech, ordering & delivery for pizzerias.",
+  "website": "https://www.tillster.com/",
+  "linkedin_company_id": "tillster",
+  "real_company": true,
+  "staff": [
+   "PE27-00978"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-072",
+  "name": "Tyson Foods",
+  "booth": "1137",
+  "booth_size": "20x30",
+  "category": "Ingredients",
+  "topics": [
+   "meats-toppings"
+  ],
+  "description": "Tyson Foods, food and beverage manufacturer, showing meats & toppings for pizzerias.",
+  "website": "https://www.tysonfoods.com/",
+  "linkedin_company_id": "tyson-foods",
+  "real_company": true,
+  "staff": [
+   "PE27-00459"
+  ]
+ },
+ {
+  "exhibitor_id": "EX-073",
+  "name": "Valley Restaurant Supply",
+  "booth": "2034",
+  "booth_size": "10x10",
+  "category": "Equipment",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "description": "Valley Restaurant Supply, regional restaurant equipment dealer, showing ovens & equipment for pizzerias.",
+  "website": "https://www.valleyrestaurantsupply.com/",
+  "linkedin_company_id": "valley-restaurant-supply",
+  "real_company": false,
+  "staff": [
+   "PE27-00129"
+  ]
+ }
+]

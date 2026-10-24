@@ -1,0 +1,52 @@
+[
+ {
+  "topic_id": "cheese-dairy",
+  "name": "Cheese & Dairy",
+  "description": "Mozzarella, provolone, blends, melt and browning, cheese costs"
+ },
+ {
+  "topic_id": "tomatoes-sauce",
+  "name": "Tomatoes & Sauce",
+  "description": "Tomato products, crop outlook, signature sauces"
+ },
+ {
+  "topic_id": "dough-flour",
+  "name": "Dough & Flour",
+  "description": "Flour specs, fermentation, dough management"
+ },
+ {
+  "topic_id": "meats-toppings",
+  "name": "Meats & Toppings",
+  "description": "Pepperoni, sausage, produce and premium toppings"
+ },
+ {
+  "topic_id": "spices-seasonings",
+  "name": "Spices & Seasonings",
+  "description": "Herbs, hot honey, finishing sauces, crust seasoning"
+ },
+ {
+  "topic_id": "ovens-equipment",
+  "name": "Ovens & Equipment",
+  "description": "Deck, conveyor and wood-fired ovens, prep and refrigeration"
+ },
+ {
+  "topic_id": "supply-chain-packaging",
+  "name": "Supply Chain & Packaging",
+  "description": "Distributors, purchasing, boxes and sustainable packaging"
+ },
+ {
+  "topic_id": "brick-and-mortar",
+  "name": "Brick & Mortar Operations",
+  "description": "Labor, food cost, store design, opening new units"
+ },
+ {
+  "topic_id": "chefs-culinary",
+  "name": "Chefs & Culinary",
+  "description": "Pizzaiolos, menu development, competitions, technique"
+ },
+ {
+  "topic_id": "tech-ordering-delivery",
+  "name": "Tech, Ordering & Delivery",
+  "description": "POS, online ordering, delivery, loyalty and AI"
+ }
+]

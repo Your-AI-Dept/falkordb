@@ -1,0 +1,1106 @@
+[
+ {
+  "session_id": "S-101",
+  "title": "The State of Pizza 2027",
+  "type": "Keynote",
+  "topics": [
+   "brick-and-mortar",
+   "supply-chain-packaging",
+   "tech-ordering-delivery"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T09:00:00-07:00",
+  "end": "2027-03-23T10:00:00-07:00",
+  "room": "Main Stage",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00288",
+    "role": "speaker"
+   },
+   {
+    "attendee_id": "PE27-00885",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Opening the day on the Main Stage: Pooja Kumar and Joseph Brown on where the pizza business is headed."
+ },
+ {
+  "session_id": "S-127",
+  "title": "AI Phone Ordering: Hype vs. Reality for Pizzerias",
+  "type": "Seminar",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T10:15:00-07:00",
+  "end": "2027-03-23T11:15:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00189",
+    "role": "speaker"
+   },
+   {
+    "attendee_id": "PE27-00098",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Rami Najjar and Brett Fisher share what's working right now in tech, ordering & delivery. Bring questions."
+ },
+ {
+  "session_id": "S-126",
+  "title": "Taking Orders Back from Third-Party Apps",
+  "type": "Seminar",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T10:15:00-07:00",
+  "end": "2027-03-23T11:15:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00999",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Ji-woo Lam share what's working right now in tech, ordering & delivery. Bring questions."
+ },
+ {
+  "session_id": "S-136",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T10:30:00-07:00",
+  "end": "2027-03-23T11:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00857",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-024",
+  "description": "Live in the Demo Kitchen: Toast on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-137",
+  "title": "Live Demo: Sweet-heat finishing sauces",
+  "type": "Demo",
+  "topics": [
+   "spices-seasonings"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T11:30:00-07:00",
+  "end": "2027-03-23T12:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00434",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-066",
+  "description": "Live in the Demo Kitchen: McCormick & Company on sweet-heat finishing sauces."
+ },
+ {
+  "session_id": "S-134",
+  "title": "New Styles on the Menu: Detroit, Tavern and Beyond",
+  "type": "Panel",
+  "topics": [
+   "chefs-culinary",
+   "dough-flour",
+   "ovens-equipment"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T11:30:00-07:00",
+  "end": "2027-03-23T12:30:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00027",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00692",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00594",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00881",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "3 operators and industry voices compare notes, moderated by Thanh Yang."
+ },
+ {
+  "session_id": "S-131",
+  "title": "Independent vs. Franchise: Two Paths to Ten Units",
+  "type": "Panel",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T11:30:00-07:00",
+  "end": "2027-03-23T12:30:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00719",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00016",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00104",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00973",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00009",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "4 operators and industry voices compare notes, moderated by Sunil Desai."
+ },
+ {
+  "session_id": "S-120",
+  "title": "Labor Math for Independent Pizzerias",
+  "type": "Seminar",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T11:30:00-07:00",
+  "end": "2027-03-23T12:30:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00973",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Chiara Santoro share what's working right now in brick & mortar operations. Bring questions."
+ },
+ {
+  "session_id": "S-105",
+  "title": "Fresh vs. Low-Moisture: A Side-by-Side Bake Test",
+  "type": "Seminar",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T13:00:00-07:00",
+  "end": "2027-03-23T14:00:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00814",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Robert James share what's working right now in cheese & dairy. Bring questions."
+ },
+ {
+  "session_id": "S-107",
+  "title": "The Tomato Crop Outlook and What It Means for Your Menu",
+  "type": "Seminar",
+  "topics": [
+   "tomatoes-sauce"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T13:00:00-07:00",
+  "end": "2027-03-23T14:00:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00135",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Cody Phillips share what's working right now in tomatoes & sauce. Bring questions."
+ },
+ {
+  "session_id": "S-138",
+  "title": "Live Demo: Getting the perfect melt and browning",
+  "type": "Demo",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T13:30:00-07:00",
+  "end": "2027-03-23T14:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00566",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-048",
+  "description": "Live in the Demo Kitchen: Sargento Foods on getting the perfect melt and browning."
+ },
+ {
+  "session_id": "S-132",
+  "title": "Sourcing in a Volatile Market: Cheese, Flour and Tomatoes",
+  "type": "Panel",
+  "topics": [
+   "cheese-dairy",
+   "dough-flour",
+   "tomatoes-sauce",
+   "supply-chain-packaging"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T14:15:00-07:00",
+  "end": "2027-03-23T15:15:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00515",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00030",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00417",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00885",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00706",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "4 operators and industry voices compare notes, moderated by Jessica Walsh."
+ },
+ {
+  "session_id": "S-115",
+  "title": "Deck, Conveyor or Wood-Fired: Picking the Oven for Your Volume",
+  "type": "Seminar",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T14:15:00-07:00",
+  "end": "2027-03-23T15:15:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00394",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Yousef Habib share what's working right now in ovens & equipment. Bring questions."
+ },
+ {
+  "session_id": "S-117",
+  "title": "Buying Smarter: Working with Your Distributor on Price",
+  "type": "Seminar",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T14:15:00-07:00",
+  "end": "2027-03-23T15:15:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00168",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Chase Morris share what's working right now in supply chain & packaging. Bring questions."
+ },
+ {
+  "session_id": "S-139",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T14:30:00-07:00",
+  "end": "2027-03-23T15:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00968",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-020",
+  "description": "Live in the Demo Kitchen: Popmenu on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-133",
+  "title": "The Tech Stack Operators Actually Use",
+  "type": "Panel",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "day": 1,
+  "date": "2027-03-23",
+  "start": "2027-03-23T15:30:00-07:00",
+  "end": "2027-03-23T16:30:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00142",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00386",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00293",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00515",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "3 operators and industry voices compare notes, moderated by Danielle Wallace."
+ },
+ {
+  "session_id": "S-102",
+  "title": "What Guests Want Next",
+  "type": "Keynote",
+  "topics": [
+   "chefs-culinary",
+   "tech-ordering-delivery"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T09:00:00-07:00",
+  "end": "2027-03-24T10:00:00-07:00",
+  "room": "Main Stage",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00288",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Opening the day on the Main Stage: Pooja Kumar on where the pizza business is headed."
+ },
+ {
+  "session_id": "S-109",
+  "title": "Flour Specs Decoded: Protein, Ash and Absorption",
+  "type": "Seminar",
+  "topics": [
+   "dough-flour"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T10:15:00-07:00",
+  "end": "2027-03-24T11:15:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00828",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Chiara Ricci share what's working right now in dough & flour. Bring questions."
+ },
+ {
+  "session_id": "S-104",
+  "title": "Cheese Costs in 2027: Locking In Prices Without Losing Quality",
+  "type": "Seminar",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T10:15:00-07:00",
+  "end": "2027-03-24T11:15:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00730",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Kunal Malhotra share what's working right now in cheese & dairy. Bring questions."
+ },
+ {
+  "session_id": "S-121",
+  "title": "Opening Your Second Location Without Losing the First",
+  "type": "Seminar",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T10:15:00-07:00",
+  "end": "2027-03-24T11:15:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00283",
+    "role": "speaker"
+   },
+   {
+    "attendee_id": "PE27-00270",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Terrence Reed and Justin Robinson share what's working right now in brick & mortar operations. Bring questions."
+ },
+ {
+  "session_id": "S-140",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery",
+   "brick-and-mortar"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T10:30:00-07:00",
+  "end": "2027-03-24T11:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00296",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-065",
+  "description": "Live in the Demo Kitchen: MarginEdge on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-141",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery",
+   "ovens-equipment"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T11:30:00-07:00",
+  "end": "2027-03-24T12:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00647",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-045",
+  "description": "Live in the Demo Kitchen: OvenIQ on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-130",
+  "title": "Operators Panel: Surviving Rising Costs",
+  "type": "Panel",
+  "topics": [
+   "brick-and-mortar",
+   "supply-chain-packaging"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T11:30:00-07:00",
+  "end": "2027-03-24T12:30:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00016",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00777",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00160",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00293",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00270",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "4 operators and industry voices compare notes, moderated by Justin Robinson."
+ },
+ {
+  "session_id": "S-118",
+  "title": "The Box Matters: Packaging That Keeps Pies Crisp",
+  "type": "Seminar",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T11:30:00-07:00",
+  "end": "2027-03-24T12:30:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00168",
+    "role": "speaker"
+   },
+   {
+    "attendee_id": "PE27-00030",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Chase Morris and Teresa Colombo share what's working right now in supply chain & packaging. Bring questions."
+ },
+ {
+  "session_id": "S-128",
+  "title": "Your POS Data Is Telling You Something",
+  "type": "Seminar",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T13:00:00-07:00",
+  "end": "2027-03-24T14:00:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00041",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "John Powell share what's working right now in tech, ordering & delivery. Bring questions."
+ },
+ {
+  "session_id": "S-142",
+  "title": "Live Demo: Getting the perfect melt and browning",
+  "type": "Demo",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T13:30:00-07:00",
+  "end": "2027-03-24T14:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00541",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-029",
+  "description": "Live in the Demo Kitchen: Grande Cheese Company on getting the perfect melt and browning."
+ },
+ {
+  "session_id": "S-116",
+  "title": "Keeping Equipment Running on a Friday Night",
+  "type": "Seminar",
+  "topics": [
+   "ovens-equipment"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T14:15:00-07:00",
+  "end": "2027-03-24T15:15:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00721",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Veronica Garcia share what's working right now in ovens & equipment. Bring questions."
+ },
+ {
+  "session_id": "S-143",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T14:30:00-07:00",
+  "end": "2027-03-24T15:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00485",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-012",
+  "description": "Live in the Demo Kitchen: HungerRush on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-119",
+  "title": "Compostable Packaging Without the Soggy Bottom",
+  "type": "Seminar",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T15:30:00-07:00",
+  "end": "2027-03-24T16:30:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00327",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Roberto Gonzalez share what's working right now in supply chain & packaging. Bring questions."
+ },
+ {
+  "session_id": "S-129",
+  "title": "First-Party Delivery Math",
+  "type": "Seminar",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T15:30:00-07:00",
+  "end": "2027-03-24T16:30:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00400",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Sean Kowalski share what's working right now in tech, ordering & delivery. Bring questions."
+ },
+ {
+  "session_id": "S-122",
+  "title": "Food Cost Under 28%: What the Best Operators Track",
+  "type": "Seminar",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "day": 2,
+  "date": "2027-03-24",
+  "start": "2027-03-24T15:30:00-07:00",
+  "end": "2027-03-24T16:30:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00283",
+    "role": "speaker"
+   },
+   {
+    "attendee_id": "PE27-00719",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Terrence Reed and Manuel Hernandez share what's working right now in brick & mortar operations. Bring questions."
+ },
+ {
+  "session_id": "S-106",
+  "title": "Building a Signature Sauce from Canned Tomatoes",
+  "type": "Seminar",
+  "topics": [
+   "tomatoes-sauce"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T09:00:00-07:00",
+  "end": "2027-03-25T10:00:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00135",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Cody Phillips share what's working right now in tomatoes & sauce. Bring questions."
+ },
+ {
+  "session_id": "S-123",
+  "title": "From Pizzaiolo to Owner: Lessons from the Line",
+  "type": "Seminar",
+  "topics": [
+   "chefs-culinary"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T10:15:00-07:00",
+  "end": "2027-03-25T11:15:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00845",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Antonella Lombardo share what's working right now in chefs & culinary. Bring questions."
+ },
+ {
+  "session_id": "S-112",
+  "title": "Seasonal Toppings That Actually Sell",
+  "type": "Seminar",
+  "topics": [
+   "meats-toppings"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T10:15:00-07:00",
+  "end": "2027-03-25T11:15:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00331",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Jennifer Jenkins share what's working right now in meats & toppings. Bring questions."
+ },
+ {
+  "session_id": "S-111",
+  "title": "Cupping Pepperoni and the Rise of Premium Proteins",
+  "type": "Seminar",
+  "topics": [
+   "meats-toppings"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T10:15:00-07:00",
+  "end": "2027-03-25T11:15:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00855",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Nancy Bailey share what's working right now in meats & toppings. Bring questions."
+ },
+ {
+  "session_id": "S-144",
+  "title": "Live Demo: Cup-and-char pepperoni, start to finish",
+  "type": "Demo",
+  "topics": [
+   "meats-toppings"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T10:30:00-07:00",
+  "end": "2027-03-25T11:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00069",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-017",
+  "description": "Live in the Demo Kitchen: Hormel Foods on cup-and-char pepperoni, start to finish."
+ },
+ {
+  "session_id": "S-145",
+  "title": "Live Demo: An online order from click to oven in 60 seconds",
+  "type": "Demo",
+  "topics": [
+   "tech-ordering-delivery"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T11:30:00-07:00",
+  "end": "2027-03-25T12:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00474",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-030",
+  "description": "Live in the Demo Kitchen: Grubhub on an online order from click to oven in 60 seconds."
+ },
+ {
+  "session_id": "S-103",
+  "title": "Melt, Stretch and Brown: Choosing the Right Mozzarella",
+  "type": "Seminar",
+  "topics": [
+   "cheese-dairy"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T11:30:00-07:00",
+  "end": "2027-03-25T12:30:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00730",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Kunal Malhotra share what's working right now in cheese & dairy. Bring questions."
+ },
+ {
+  "session_id": "S-110",
+  "title": "Same-Day Dough That Doesn't Taste Like It",
+  "type": "Seminar",
+  "topics": [
+   "dough-flour"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T13:00:00-07:00",
+  "end": "2027-03-25T14:00:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00916",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Aiko Kobayashi share what's working right now in dough & flour. Bring questions."
+ },
+ {
+  "session_id": "S-124",
+  "title": "Menu Engineering for Pizza: What to Cut and What to Feature",
+  "type": "Seminar",
+  "topics": [
+   "chefs-culinary"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T13:00:00-07:00",
+  "end": "2027-03-25T14:00:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00776",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Arjun Malhotra share what's working right now in chefs & culinary. Bring questions."
+ },
+ {
+  "session_id": "S-146",
+  "title": "Live Demo: Boxes that keep a pie crisp for 20 minutes",
+  "type": "Demo",
+  "topics": [
+   "supply-chain-packaging"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T13:30:00-07:00",
+  "end": "2027-03-25T14:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00941",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-021",
+  "description": "Live in the Demo Kitchen: Restaurant Depot on boxes that keep a pie crisp for 20 minutes."
+ },
+ {
+  "session_id": "S-113",
+  "title": "Hot Honey, Chili Crisp and the Sweet-Heat Wave",
+  "type": "Seminar",
+  "topics": [
+   "spices-seasonings"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T14:15:00-07:00",
+  "end": "2027-03-25T15:15:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00878",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Giulia Ferraro share what's working right now in spices & seasonings. Bring questions."
+ },
+ {
+  "session_id": "S-125",
+  "title": "Competition Pizza: What Judges Actually Look For",
+  "type": "Seminar",
+  "topics": [
+   "chefs-culinary"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T14:15:00-07:00",
+  "end": "2027-03-25T15:15:00-07:00",
+  "room": "Room N255",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00505",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Frank Cuomo share what's working right now in chefs & culinary. Bring questions."
+ },
+ {
+  "session_id": "S-147",
+  "title": "Live Demo: Cutting prep labor in half",
+  "type": "Demo",
+  "topics": [
+   "brick-and-mortar"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T14:30:00-07:00",
+  "end": "2027-03-25T15:00:00-07:00",
+  "room": "Demo Kitchen",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00262",
+    "role": "presenter"
+   }
+  ],
+  "exhibitor_id": "EX-052",
+  "description": "Live in the Demo Kitchen: The Coca-Cola Company on cutting prep labor in half."
+ },
+ {
+  "session_id": "S-108",
+  "title": "72 Hours: A Practical Guide to Cold Fermentation",
+  "type": "Seminar",
+  "topics": [
+   "dough-flour"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T15:30:00-07:00",
+  "end": "2027-03-25T16:30:00-07:00",
+  "room": "Room N249",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00229",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Sal Cuomo share what's working right now in dough & flour. Bring questions."
+ },
+ {
+  "session_id": "S-135",
+  "title": "Hiring and Keeping Great Pizza Makers",
+  "type": "Panel",
+  "topics": [
+   "brick-and-mortar",
+   "chefs-culinary"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T15:30:00-07:00",
+  "end": "2027-03-25T16:30:00-07:00",
+  "room": "Room N251",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00625",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00500",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00138",
+    "role": "panelist"
+   },
+   {
+    "attendee_id": "PE27-00901",
+    "role": "moderator"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "3 operators and industry voices compare notes, moderated by Jason Brown."
+ },
+ {
+  "session_id": "S-114",
+  "title": "Seasoning the Crust: Small Changes, Big Reorders",
+  "type": "Seminar",
+  "topics": [
+   "spices-seasonings"
+  ],
+  "day": 3,
+  "date": "2027-03-25",
+  "start": "2027-03-25T15:30:00-07:00",
+  "end": "2027-03-25T16:30:00-07:00",
+  "room": "Room N253",
+  "speakers": [
+   {
+    "attendee_id": "PE27-00801",
+    "role": "speaker"
+   }
+  ],
+  "exhibitor_id": null,
+  "description": "Ashley Martin share what's working right now in spices & seasonings. Bring questions."
+ }
+]
