@@ -20,8 +20,11 @@ services:
     environment:
       FALKORDB_HOST: falkordb
       FALKORDB_PORT: "6379"
+      DATA_DIR: /data
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     volumes:
       - ./backend:/app
+      - ./data:/data:ro
     depends_on:
       falkordb:
         condition: service_healthy

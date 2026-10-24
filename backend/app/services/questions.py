@@ -1,1 +1,1 @@
-"""Adaptive question selection (design doc 4.1)."""
+"""Question target selection: what to ask (design doc 4.1)."""

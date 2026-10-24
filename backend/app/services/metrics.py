@@ -1,1 +1,1 @@
-"""Convergence metrics (design doc 8.3)."""
+"""Learning and matching-quality metrics (design doc 8.3)."""

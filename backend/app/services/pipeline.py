@@ -1,1 +1,1 @@
-"""Round-close orchestration (design doc 5)."""
+"""Date-close and session-close orchestration (design doc 5)."""

@@ -1,1 +1,1 @@
-"""Mock conversation answers; the only holder of the hidden truth (design doc 8.2)."""
+"""Mock answers for dates and check-ins (design doc 8.2)."""

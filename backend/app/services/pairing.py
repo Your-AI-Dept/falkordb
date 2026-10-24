@@ -1,1 +1,1 @@
-"""Pair values, maxFlow matching, refinement (design doc 4.2)."""
+"""Pair values, per-date bipartite split, maxFlow matching, refinement (design doc 4.2)."""

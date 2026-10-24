@@ -10,7 +10,16 @@ import json
 from collections.abc import AsyncIterator
 from typing import Any
 
-EVENT_TYPES = frozenset({"round_opened", "answer_recorded", "round_closed"})
+EVENT_TYPES = frozenset(
+    {
+        "session_opened",
+        "date_opened",
+        "answer_recorded",
+        "date_closed",
+        "session_closed",
+        "checkin_recorded",
+    }
+)
 
 
 class EventBus:
