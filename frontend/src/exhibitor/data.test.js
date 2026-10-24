@@ -1,113 +1,58 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { freshState } from '../demo.js';
-import { ATTENDEE_STORAGE_KEY, freshExhibitorState, makeBoothPlan, loadExhibitorState, EXHIBITOR_STORAGE_KEY, activation } from './data.js';
+import {freshExhibitorState,loadExhibitorState} from './data.js';
+import {freshPromotions,promoAudience,inviteAudience,updatePromoResponse,savePromoFeedback,promoInvitations,exhibitorCampaign} from '../demo-promotions.js';
 
-function eligibleAttendee(response) {
-  const attendee = freshState();
-  attendee.profile.goals = ['suppliers'];
-  attendee.profile.focus = 'tomatoes';
-  attendee.encounters = [{ personId: 'maya' }];
-  if (response) attendee.boothInvitationStatus = response;
-  return attendee;
-}
-
-function browserStorage(context, attendee) {
-  const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
-  Object.defineProperty(globalThis, 'window', { configurable: true, writable: true, value: {
-    localStorage: {
-      getItem(key) { return key === ATTENDEE_STORAGE_KEY && attendee ? JSON.stringify(attendee) : null; },
-      setItem() { assert.fail('The exhibitor plan must not mutate attendee storage.'); },
-    },
-  } });
-  context.after(() => {
-    if (originalWindow) Object.defineProperty(globalThis, 'window', originalWindow);
-    else delete globalThis.window;
-  });
-}
-
-function guests(state = freshExhibitorState()) {
-  return makeBoothPlan(state).flatMap(session => session.guests);
-}
-
-for (const response of [undefined, 'accepted', 'declined']) {
-  test(`shared booth assignment preserves attendee context with legacy response ${response || 'none'}`, context => {
-    const attendee = eligibleAttendee(response);
-    attendee.profile.name = 'Paula Rossi';
-    attendee.profile.company = 'North Beach Pizza Co.';
-    attendee.profile.intention = 'Find a consistent tomato supplier for three pizzerias.';
-    browserStorage(context, attendee);
-    const paul = guests().find(person => person.id === 'paul');
-    assert.equal(paul.status, response==='declined'?'unavailable':'assigned');
-    assert.equal(paul.name, attendee.profile.name);
-    assert.equal(paul.company, attendee.profile.company);
-    assert.equal(paul.need, attendee.profile.intention);
-    assert.equal(paul.invitationId, 'tomato-table');
-    assert.equal(paul.appointment, 'Wednesday · 1:00–1:15 PM');
-  });
-}
-
-test('a relevant attendee is scheduled at the booth without a scan or RSVP', context => {
-  const attendee = eligibleAttendee();
-  attendee.encounters = [];
-  browserStorage(context, attendee);
-  assert.equal(guests().find(person => person.id === 'paul').status, 'assigned');
+test('older exhibitor identity migrates into profile setup without fabricated scheduled guests',context=>{
+  const original=Object.getOwnPropertyDescriptor(globalThis,'localStorage');
+  Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:()=>JSON.stringify({version:3,complete:true,company:'Saved Company',booth:'500',contact:{id:'luca',name:'Saved Name'}})}});
+  context.after(()=>{if(original)Object.defineProperty(globalThis,'localStorage',original);else delete globalThis.localStorage;});
+  const state=loadExhibitorState();
+  assert.equal(state.company,'Saved Company');assert.equal(state.contact.name,'Saved Name');assert.equal(state.complete,false);assert.equal(state.version,4);
+  assert.equal(state.topicId,'pizza-sauce');assert.equal('team' in state,false);
+  assert.equal(exhibitorCampaign(freshPromotions(),state.campaignId),null);
 });
-
-test('unrelated exhibitor focus excludes the shared tomato invitation', context => {
-  browserStorage(context, eligibleAttendee('accepted'));
-  const state = freshExhibitorState();
-  state.capability = 'equipment';
-  state.focus = 'ovens';
-  assert.equal(guests(state).some(person => person.id === 'paul'), false);
+test('expertise and relevant connections are separate audience filters with explicit sample provenance',()=>{
+  const experts=promoAudience('pizza-sauce','experts'),connectors=promoAudience('pizza-sauce','connectors');
+  assert.deepEqual(experts.map(item=>item.id),['maya','theo']);
+  assert.deepEqual(connectors.map(item=>item.id),['maya','samir']);
+  assert.ok(experts.every(item=>item.source==='sample_graph'&&item.reports>=4));
+  assert.throws(()=>promoAudience('unknown'),/topic/);
 });
-
-test('one contact and one fixed activation replace editable team schedules', context => {
-  browserStorage(context, eligibleAttendee('accepted'));
-  const state = freshExhibitorState();
-  const plan = makeBoothPlan(state);
-  assert.equal(plan.length, 1);
-  assert.equal(plan[0].contact.id, 'luca');
-  assert.deepEqual(plan[0].window, activation);
-  assert.equal('team' in state, false);
-  assert.equal('confirmedCoverage' in state, false);
+test('invitations are explicit, scoped, and idempotent; profile goals do not fabricate acceptance',()=>{
+  const draft=freshExhibitorState(),initial=freshPromotions();
+  assert.deepEqual(promoInvitations(initial,'maya'),[]);
+  const sent=inviteAudience(initial,draft,['maya','samir']);
+  assert.equal(sent.campaigns[0].invitations.length,2);
+  assert.equal(promoInvitations(sent,'maya')[0].status,'invited');
+  assert.equal(promoInvitations(sent,'paul').length,0);
+  assert.equal(inviteAudience(sent,draft,['maya']).campaigns[0].invitations.length,2);
+  assert.throws(()=>inviteAudience(initial,draft,['nia']),/audience/);
+  assert.throws(()=>inviteAudience(sent,{...draft,offer:'Changed offer'},['theo']),/new promotion/);
 });
-
-test('a different contact does not inherit Luca’s invitation', context => {
-  browserStorage(context, eligibleAttendee('accepted'));
-  const state = freshExhibitorState();
-  state.contact = {id: 'another-contact', name: 'Another contact'};
-  assert.equal(guests(state).some(person => person.id === 'paul'), false);
+test('acceptance, check-in, finish, and required private feedback remain distinct',()=>{
+  const draft=freshExhibitorState();let state=inviteAudience(freshPromotions(),draft,['maya']);
+  assert.throws(()=>updatePromoResponse(state,draft.campaignId,'paul','accept'),/addressed to you/);
+  assert.throws(()=>updatePromoResponse(state,draft.campaignId,'maya','check_in'),/already/);
+  state=updatePromoResponse(state,draft.campaignId,'maya','accept');
+  assert.equal(promoInvitations(state,'maya')[0].checkedInAt,undefined);
+  assert.strictEqual(updatePromoResponse(state,draft.campaignId,'maya','accept'),state);
+  state=updatePromoResponse(state,draft.campaignId,'maya','check_in');
+  assert.ok(promoInvitations(state,'maya')[0].checkedInAt);
+  assert.throws(()=>savePromoFeedback(state,draft.campaignId,'maya','yes'),/Finish/);
+  state=updatePromoResponse(state,draft.campaignId,'maya','finish');
+  assert.equal(promoInvitations(state,'maya')[0].status,'feedback_due');
+  state=savePromoFeedback(state,draft.campaignId,'maya','no');
+  assert.equal(promoInvitations(state,'maya')[0].status,'completed');
+  const publicGuest=exhibitorCampaign(state,draft.campaignId).invitations[0];
+  assert.equal('feedback' in publicGuest,false);assert.ok(publicGuest.checkedInAt);
 });
-
-test('changing company or booth excludes the fixed Terra Rossa invitation', context => {
-  browserStorage(context, eligibleAttendee('accepted'));
-  const differentCompany = { ...freshExhibitorState(), company: 'Another Company' };
-  const differentBooth = { ...freshExhibitorState(), booth: '500' };
-  assert.equal(guests(differentCompany).some(person => person.id === 'paul'), false);
-  assert.equal(guests(differentBooth).some(person => person.id === 'paul'), false);
-});
-
-test('earlier saved setup migrates its first contact and drops scheduling state', context => {
-  browserStorage(context, null);
-  window.localStorage.getItem = key => key === EXHIBITOR_STORAGE_KEY ? JSON.stringify({ version:2, complete:true, company:'Terra Rossa', booth:'412', capability:'ingredients', focus:'tomatoes', team:[{id:'luca',name:'Luca Rinaldi',expertise:'Tomatoes',window:'15'},{id:'sofia',name:'Sofia',expertise:'Dough',window:'14'}],confirmedCoverage:['luca'] }) : null;
-  const migrated=loadExhibitorState();
-  assert.deepEqual(migrated.contact,{id:'luca',name:'Luca Rinaldi'});
-  assert.equal(migrated.complete,true);
-  assert.equal(migrated.version,3);
-  assert.equal('team' in migrated,false);
-  assert.equal('confirmedCoverage' in migrated,false);
-  assert.equal(makeBoothPlan(migrated)[0].window.label,'1:00–2:00 PM');
-  window.localStorage.getItem = () => JSON.stringify(migrated);
-  assert.deepEqual(loadExhibitorState(),migrated);
-});
-
-test('booth agenda reflects check-in without exposing private usefulness feedback', context => {
-  const attendee = eligibleAttendee('accepted');
-  attendee.boothVisit = { invitationId: 'tomato-table', checkedInAt: '2026-10-24T12:00:00Z', feedback: { usefulness: 'no', submittedAt: '2026-10-24T12:15:00Z' } };
-  browserStorage(context, attendee);
-  const paul = guests().find(person => person.id === 'paul');
-  assert.equal(paul.status, 'assigned');
-  assert.equal(paul.checkedInAt, attendee.boothVisit.checkedInAt);
-  assert.equal('feedback' in paul, false);
+test('a decline does not become attendance and a new campaign keeps previous invitations intact',()=>{
+  const first=freshExhibitorState(),second=freshExhibitorState();
+  let state=inviteAudience(freshPromotions(),first,['maya']);
+  state=updatePromoResponse(state,first.campaignId,'maya','decline');
+  assert.throws(()=>updatePromoResponse(state,first.campaignId,'maya','check_in'),/already/);
+  state=inviteAudience(state,second,['theo']);
+  assert.equal(state.campaigns.length,2);assert.equal(promoInvitations(state,'maya')[0].status,'declined');
+  assert.equal(promoInvitations(state,'theo')[0].status,'invited');
 });

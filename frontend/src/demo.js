@@ -1,6 +1,6 @@
 import { event, goals, people, professionalEdges, meeting, boothInvitation } from './data/pizza-expo.js';
 import { demoSurvey, demoTopics } from './demo-graph.js';
-import { plannedStops } from './demo-agenda.js';
+import { plannedStops,sessionProgress } from './demo-agenda.js';
 export { goals };
 export function freshState() {
   return { version: 2, onboardingComplete: false, profile: { name: 'Paul Rossi', role: 'Owner', company: 'North Beach Pizza Co.', businessType: 'pizzeria', context: 'We run three neighborhood pizzerias in San Francisco.', linkedin: '', goals: [], focus: '', intention: '' }, encounters: [], feedback: null, requestedIds: [], dismissedIds: [] };
@@ -173,4 +173,4 @@ export function updateAssignment(state,id,action){
   }else if(id===meeting.id&&action==='finish')next.meetingFeedbackDue=true;
   return next;
 }
-export function snapshot(state) { return { event, graphRevision: state.graphRevision || 0, state, people, agenda:agendaFor(state), recommendations: recommendations(state), viewer: { badgeToken: 'PIZZA-PAUL' }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !demoSurvey(state,meeting.id,'paul').complete), surveyComplete: demoSurvey(state,meeting.id,'paul').complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }
+export function snapshot(state) { return { event, graphRevision: state.graphRevision || 0, state, people, agenda:agendaFor(state), session:sessionProgress(agendaFor(state)), recommendations: recommendations(state), viewer: { badgeToken: 'PIZZA-PAUL' }, meeting: {...meeting,feedbackRequired: Boolean(state.meetingFeedbackDue && !demoSurvey(state,meeting.id,'paul').complete), surveyComplete: demoSurvey(state,meeting.id,'paul').complete}, meetingRequests: meetingRequestsFor(state), invitation: invitationFor(state) }; }

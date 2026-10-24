@@ -31,13 +31,13 @@ test('reviewing does not mutate evidence; changing usefulness invalidates only t
   assert.equal(agendaFor(updated)[0].status,'feedback_due');
   assert.equal(demoSurvey(answer(updated,'paul','stage'),id,'paul').complete,true);
 });
-test('editing a later answer changes the assignment while preserving the first answer and rejecting stale edits',()=>{
+test('editing a later answer preserves the revealed lineup and rejects stale edits',()=>{
   let state=answer(answer(attendee(),'paul','yes'),'paul','flour');
   const usefulness=demoSurvey(state,id).answers[0];
   const revision=state.graphRevision;
   state=revise(state,'paul','next-priority','equipment');
   assert.equal(state.feedback.next,'equipment');
-  assert.ok(agendaFor(state).some(stop=>stop.id==='meet-nia'));
+  assert.deepEqual(agendaFor(state).map(stop=>stop.id),['meet-theo','meet-maya','meet-elena','meet-samir']);
   assert.deepEqual(demoSurvey(state,id).answers[0],usefulness);
   assert.equal(state.surveyAnswers.length,2);
   assert.strictEqual(revise(state,'paul','next-priority','equipment'),state);
@@ -57,12 +57,12 @@ test('something else requires explicit text and stores it without inventing a st
   assert.equal(saved.preference,undefined);
   assert.equal(agendaFor(done)[0].status,'scheduled');
 });
-test('no more similar meetings suppresses only unstarted peer assignments for that topic and can be undone',()=>{
+test('a topic pause is saved for future sessions without removing the revealed lineup, and can be undone',()=>{
   const state=answer(answer(attendee(),'paul','yes'),'paul','no_similar');
   assert.deepEqual(meetingPreferences(state).map(item=>item.topicId),['tomatoes']);
-  assert.ok(!agendaFor(state).some(stop=>stop.id==='meet-maya'));
+  assert.ok(agendaFor(state).some(stop=>stop.id==='meet-maya'));
   assert.equal(agendaFor(state).find(stop=>stop.id===id).status,'completed');
-  assert.ok(agendaFor(state).some(stop=>stop.kind==='booth'));
+  assert.equal(agendaFor(state).filter(stop=>stop.kind==='meeting').length,4);
   assert.equal(state.feedback.usefulness,'yes');assert.equal(state.feedback.next,'');
   const restored=restoreMeetingTopic(JSON.parse(JSON.stringify(state)),'paul','tomatoes');
   assert.equal(meetingPreferences(restored).length,0);

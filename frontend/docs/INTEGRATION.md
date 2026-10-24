@@ -19,8 +19,8 @@ At integration time, update `src/api.js`, `src/graph-api.js`, `src/rest.js`, and
 | Dynamic follow-ups | Generic prompts/options, queued refresh, active-question stability | Actual graph-driven selection and agreed revision/update semantics |
 | Graph simulation and visualization | Completed-feedback modal links to `VITE_VISUALIZATION_URL` in a new tab, then offers Top people; disabled until URL supplied | Teammate-owned graph UI, seed/simulation controls, convergence view; handoff only, no data synchronization added |
 | Top X people for Y topic | Topic/count controls; server-order renderer | Agreed ranked-result response with identities, reason, applied revision, and definition of the ranking |
-| Assigned itinerary | One next stop plus agenda; arrival, finish, and unavailability; no browse/request/RSVP UX | Server-owned assignments, availability and capacity, shared attendee/exhibitor schedule, persistence |
-| Booth activation | One contact, preset slot, scheduled visitors; arrival updates agenda, finish requires private feedback | Shared assignment/attendance records; exhibitor remains local-only |
+| Assigned itinerary | Four fixed 15-minute matches in a one-hour session; arrival, finish, and unavailability | Server-owned assignments, availability and capacity, shared attendee/exhibitor schedule, persistence |
+| Booth activation | Profile and launch setup, one contact, preset slot, explicit invitations and acceptance; finish requires private feedback | Shared assignment/attendance records; exhibitor remains local-only |
 
 The current local usefulness question is not the backend design's topic-learning signal. The shared renderer can display “I learned more,” “We learned evenly,” “They learned more,” and “It didn't come up,” followed by tie questions. Map returned question IDs/options in the adapter when the payload is finalized. An explicit “It didn't come up” answer should count as completion, not manufacture competence evidence. Do not convert a generic yes/no usefulness response into a learned-from edge.
 
@@ -30,7 +30,7 @@ The existing proposed renderer expects question versions, graph/survey revisions
 
 `Dashboard.agenda` is a frontend display shape with an ID, kind (`meeting` or `booth`), person, time, location, topic, optional reason, and status (`scheduled`, `checked_in`, `feedback_due`, `completed`, or `missed`). The server chooses the next stop; the UI displays the first active entry in the returned schedule. This is not a finalized endpoint proposal. `api.assignment(id, action)` supports `check_in`, `finish`, and `miss` only in local mode; configured live mode returns an explicit unavailable error until the team wires the settled API. No scheduling route has been invented or added.
 
-`src/demo-agenda.js` contains the clearly separated fixture plan, and `agendaFor`/`updateAssignment` in `src/demo.js` manage local progress. Check-in is attendance, finish triggers required feedback, and unavailability is neither usefulness nor expertise evidence. Active assignments are retained through topic changes. The old requests and invitation responses remain dormant adapter compatibility code; the current attendee UI does not call them. Shared booth agenda state uses scheduled/unavailable/check-in, never a fabricated RSVP.
+`src/demo-agenda.js` contains the clearly separated fixture plan, and `agendaFor`/`updateAssignment` in `src/demo.js` manage local progress. Check-in is attendance, finish triggers required feedback, and unavailability is neither usefulness nor expertise evidence. Active assignments are retained through topic changes. The old requests and invitation responses remain dormant adapter compatibility code; the current attendee UI does not call them. The new booth promotion flow uses explicit invited/accepted/declined/check-in states; acceptance requires an attendee action.
 
 ## Product meaning
 
@@ -50,6 +50,12 @@ The avatar opens a profile summary. Profile/goals editing and the badge are expl
 
 Two local demo follow-up options:
 - `other` requires `answerText` (1–300 trimmed characters). Store the attendee's words without inferring expertise, topic competence, or a structured goal.
-- `no_similar` requires confirming the named topic. Store a separate `{kind: 'avoid_topic', topicId, topicLabel}` preference. It suppresses unstarted future peer assignments on that topic for this event, while preserving the current meetup, already-started stops, and booth visits. The attendee can turn it back on from their profile. The other participant's schedule is unaffected.
+- `no_similar` requires confirming the named topic. Store a separate `{kind: 'avoid_topic', topicId, topicLabel}` preference. It records a preference for future sessions; the four already revealed matches remain fixed, as do booth visits. The attendee can turn it back on from their profile. The other participant's schedule is unaffected.
 
 All route definitions remain unchanged. Optional `questions` metadata supports reviewing historical options in the local demo. In live mode the UI can navigate saved answer receipts, but answer revision, free text, and preference writes are deliberately not sent until their backend mappings are agreed. The new backend alignment note at `docs/api-alignment.md` is available for that next adapter task. No backend files or endpoints were changed for this UX pass.
+
+## Speed session and promotion seams
+
+`Dashboard.session` lists the four meeting IDs and completion progress. The local plan stays fixed throughout the hour. Readiness opens the visualization handoff; it does not invoke a graph recomputation. Server-owned batching and next-round generation remain to be mapped.
+
+`demo-promotions.js` separates seeded topic evidence from relevant connection counts. `promotion-store.js` persists explicit campaigns and invitation responses locally and synchronizes tabs. It refuses live configuration until mappings exist. These display DTOs are not new endpoint proposals. Keep campaign invitation, acceptance, attendance, and private feedback distinct in the eventual API.
