@@ -10,6 +10,7 @@ from app.models import (
     AnswerSubmission,
     DateCloseResult,
     DatePlan,
+    MeetingWhy,
     Pair,
     PersonRef,
     QuestionSet,
@@ -17,7 +18,7 @@ from app.models import (
     SessionSummary,
 )
 from app.routers.catalog import require_seeded
-from app.services import pipeline, seed
+from app.services import explain, pipeline, seed
 from app.services.survey_store import get_date_survey, save_date_answers
 
 router = APIRouter(prefix="/sessions", tags=["sessions"], dependencies=[Depends(require_seeded)])
@@ -88,6 +89,13 @@ def get_session(s: int = SessionNo):
 @router.get("/{s}/dates/{d}/meetings/{rater_id}/questions", response_model=QuestionSet)
 def get_questions(rater_id: str, s: int = SessionNo, d: int = DateNo):
     return get_date_survey(s, d, rater_id)
+
+
+@router.get("/{s}/dates/{d}/meetings/{rater_id}/why", response_model=MeetingWhy)
+def why_we_matched(rater_id: str, s: int = SessionNo, d: int = DateNo):
+    """Why this pair was planned: the score breakdown recorded at planning time, graph evidence
+    (competence, shared interests, likability, communities, shortest social path) and the Cypher behind it."""
+    return explain.meeting_why(s, d, rater_id)
 
 
 @router.post("/{s}/dates/{d}/meetings/{rater_id}/answers", response_model=QuestionSet)

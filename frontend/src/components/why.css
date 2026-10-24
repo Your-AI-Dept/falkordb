@@ -1,0 +1,44 @@
+.why{position:relative;margin-top:10px}
+.why-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#66704e;background:#f1f4ea;border:1px solid #dfe5d4;border-radius:20px;padding:6px 11px;cursor:pointer}
+.why-toggle:hover,.why.open .why-toggle{background:#e8eedd;border-color:#c9d3b8}
+.why-toggle:focus-visible{outline:2px solid #8c9c74;outline-offset:2px}
+.why-panel{margin-top:10px;border:1px solid #e1ddd1;border-radius:14px;background:#fffdf8;padding:16px 18px;box-shadow:0 10px 30px #2a24160f;font-size:13px;line-height:1.5;color:#4d4738;text-align:left}
+.why-headline{font-size:14px;font-weight:550;margin:0 0 12px;color:#2f2b22}
+.why-reasons{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.why-reason{display:grid;gap:2px;padding-left:12px;border-left:3px solid #c9d3b8}
+.why-reason strong{font-size:13px;font-weight:550}
+.why-reason strong small{font-weight:400;color:#8a8070}
+.why-reason span{font-size:12px;color:#756c5c}
+.why-reason.already_connected{border-left-color:#e2c9a8}
+.why-reason.fair_floor,.why-reason.runner-up{border-left-color:#ddd8cb}
+.why-section{margin-top:14px}
+.why-section .eyebrow{display:block;margin-bottom:8px}
+.why-path{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.why-path li{display:flex;align-items:center;gap:6px}
+.why-chip{background:#f4f1e8;border-radius:16px;padding:4px 10px;font-size:12px}
+.why-tie{font-size:10px;color:#857a63;white-space:nowrap}
+.why-tie::before{content:'— ';}.why-tie::after{content:' →'}
+.why-facts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.why-facts span{font-size:11px;background:#ecefe4;color:#5f6a49;border-radius:6px;padding:5px 8px}
+.why-stats{display:flex;flex-wrap:wrap;gap:24px;margin-bottom:10px}
+.why-stats div{display:grid;gap:3px}
+.why-stats strong{font-size:22px;font-weight:550}
+.why-stats strong small{font-size:13px;font-weight:400;color:#8a8070}
+.why-stats span{font-size:11px;color:#7a7265}
+.why-method{font-size:12px;color:#756c5c;margin:4px 0 0}
+.why-graph-link{display:inline-flex;margin-top:12px;font-size:12px}
+.why-queries{margin-top:14px;font-size:11px;color:#857a63}
+.why-queries summary{cursor:pointer;width:fit-content}
+.why-queries div{margin-top:8px}
+.why-queries pre{margin:4px 0 0;padding:9px 11px;background:#f5f3ed;border-radius:8px;overflow-x:auto;font-size:11px;line-height:1.45;color:#3d382c;white-space:pre}
+/* Desktop: exhibitor panels float over the audience list so hovering doesn't shift it. Meeting
+   explanations expand inline (the speed-session card clips overflow). */
+@media(min-width:761px) and (hover:hover){
+  .influencer-why.open .why-panel,.audience-why.open .why-panel{position:absolute;z-index:20;left:0;top:100%;width:min(460px,80vw)}
+  .audience-why.open .why-panel{width:min(560px,80vw)}
+}
+.session-match-item{border-bottom:1px solid #eeebe2}
+.session-match-item>.session-match{border-bottom:0}
+.session-match-item>.why{margin:0 21px 16px 43px}
+.audience-item>.why{margin:8px 0 0 54px}
+@media(max-width:600px){.session-match-item>.why{margin:0 13px 14px}.audience-item>.why{margin-left:16px}}

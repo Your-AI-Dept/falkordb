@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from app import db, mathcore
-from app.config import DATES_PER_SESSION, DELTA, NEG_THRESH, RNG_SEED
+from app.config import BETA, DATES_PER_SESSION, DELTA, ENJOY, LAMBDA, MU, NEG_THRESH, RNG_SEED
 from app.snapshot import People
 from app.services.ties import TieTable
 
@@ -28,6 +28,12 @@ class DatePairs:
 
 def value_matrix(people: People, ids: list[str], ties: TieTable) -> np.ndarray:
     """V[i, j] = V_u(v) for u = ids[i], v = ids[j] (design doc 4.2)."""
+    return value_components(people, ids, ties)[0]
+
+
+def value_components(people: People, ids: list[str], ties: TieTable) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+    """(V, weighted components). Components sum to V; they explain a match:
+    learn, enjoy, new_circle, already_connected (negative), explore."""
     rows = [people.ix[a] for a in ids]
     interest = people.interest[rows]
     comp = people.comp[rows]
@@ -59,7 +65,14 @@ def value_matrix(people: People, ids: list[str], ties: TieTable) -> np.ndarray:
     top3 = np.argsort(-plaus, axis=2)[:, :, :3]
     explore = np.take_along_axis(ig, top3, axis=2).mean(axis=2)
 
-    return np.vectorize(mathcore.pair_value)(teach, enjoy, bridge, familiar, explore)
+    comps = {
+        "learn": teach,
+        "enjoy": ENJOY * enjoy,
+        "new_circle": BETA * bridge.astype(float),
+        "already_connected": -MU * familiar.astype(float),
+        "explore": LAMBDA * explore,
+    }
+    return sum(comps.values()), comps  # == mathcore.pair_value elementwise
 
 
 def _write_scratch(a_side: list[str], b_side: list[str]) -> None:
@@ -120,11 +133,13 @@ def match_date(
     return (greedy if len(greedy) >= len(best) else best), best_tau
 
 
-def plan_session(s: int, ids: list[str], people: People, ties: TieTable, sat_out: dict[str, int]) -> tuple[list[DatePairs], np.ndarray, dict[str, float]]:
-    """Plan all 4 dates of session s. Returns (dates, V matrix over ids, cum_value updates)."""
+def plan_session(
+    s: int, ids: list[str], people: People, ties: TieTable, sat_out: dict[str, int]
+) -> tuple[list[DatePairs], np.ndarray, dict[str, np.ndarray], dict[str, float]]:
+    """Plan all 4 dates of session s. Returns (dates, V over ids, V's components, cum_value updates)."""
     rng = random.Random(f"{RNG_SEED}|pairing|{s}")
     pos = {a: i for i, a in enumerate(ids)}
-    V = value_matrix(people, ids, ties)
+    V, comps = value_components(people, ids, ties)
     cum = {a: float(people.rows[people.ix[a]]["cum_value"]) for a in ids}
     met = set(ties.met)
     dates = []
@@ -157,4 +172,4 @@ def plan_session(s: int, ids: list[str], people: People, ties: TieTable, sat_out
             cum[a] += float(V[pos[a], pos[b]])
             cum[b] += float(V[pos[b], pos[a]])
         dates.append(DatePairs(date_no=d, pairs=pairs, sitting_out=out, floor=tau))
-    return dates, V, cum
+    return dates, V, comps, cum

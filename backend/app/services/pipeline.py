@@ -25,10 +25,10 @@ UNWIND $rows AS r
 MATCH (a:Attendee {id: r.a}), (b:Attendee {id: r.b})
 CREATE (a)-[:SPEED_DATE {session: $s, date_no: r.d, tick: r.tick, complete: false, questions: '[]', answers: '{}',
                          value: r.va, w: r.w, a_id: r.a, meeting_id: r.mid, survey_revision: 0, graph_revision: 0,
-                         phrased_by: 'template', didnt_meet: false}]->(b),
+                         phrased_by: 'template', didnt_meet: false, why: r.why_a, floor: r.floor}]->(b),
        (b)-[:SPEED_DATE {session: $s, date_no: r.d, tick: r.tick, complete: false, questions: '[]', answers: '{}',
                          value: r.vb, w: r.w, a_id: r.a, meeting_id: r.mid, survey_revision: 0, graph_revision: 0,
-                         phrased_by: 'template', didnt_meet: false}]->(a)
+                         phrased_by: 'template', didnt_meet: false, why: r.why_b, floor: r.floor}]->(a)
 """
 
 DATE_EDGES = """
@@ -64,15 +64,20 @@ def open_session(s: int) -> None:
     table = ties.load_tie_table()
     ids = seed.session_attendees(s)
     sat_out = {a: int(people.rows[people.ix[a]]["sat_out"]) for a in ids}
-    dates, V, cum = pairing.plan_session(s, ids, people, table, sat_out)
+    dates, V, comps, cum = pairing.plan_session(s, ids, people, table, sat_out)
     pos = {a: i for i, a in enumerate(ids)}
     rows = []
     for dp in dates:
         for a, b in dp.pairs:
             va, vb = float(V[pos[a], pos[b]]), float(V[pos[b], pos[a]])
             lo, hi = sorted((a, b))
+            i, j = pos[a], pos[b]
             rows.append({"a": a, "b": b, "d": dp.date_no, "tick": tick_of(s, dp.date_no), "va": round(va, 4),
-                         "vb": round(vb, 4), "w": round(min(va, vb), 4), "mid": f"s{s}-d{dp.date_no}-{lo}-{hi}"})
+                         "vb": round(vb, 4), "w": round(min(va, vb), 4), "mid": f"s{s}-d{dp.date_no}-{lo}-{hi}",
+                         "floor": round(dp.floor, 4) if dp.floor is not None else None,
+                         # each side's score breakdown at planning time, for "why we matched you"
+                         "why_a": json.dumps({k: round(float(c[i, j]), 4) for k, c in comps.items()}),
+                         "why_b": json.dumps({k: round(float(c[j, i]), 4) for k, c in comps.items()})})
     g = db.people()
     db.run_batched(g, CREATE_DATES, rows, params={"s": s})
     db.run_batched(
@@ -265,7 +270,6 @@ def fast_forward(to_session: int) -> list[dict]:
     _require(0 <= to_session <= N_SESSIONS, f"to_session must be in 0..{N_SESSIONS}", 422)
     if not seed.is_seeded():
         seed.seed()
-        state.reset()
     points = []
     for s in range(to_session):
         st = state.load()

@@ -144,3 +144,21 @@ def test_unseeded_catalog_is_409():
         assert "not seeded" in r.json()["detail"]
     finally:
         seed.seed()
+
+
+def test_seed_resets_the_event_state():
+    """The event state describes the graph; reseeding must not leave a stale open session."""
+    from app import state
+
+    if not _db_up():
+        pytest.skip("FalkorDB not reachable")
+    st = state.load()
+    st.sessions[0] = "open"
+    st.humans = ["PE27-00001"]
+    state.save(st)
+    seed.seed()
+    after = state.load()
+    assert after.sessions[0] == "planned" and after.current() is None
+    assert after.humans == ["PE27-00001"], "human raters survive a reseed"
+    after.humans = []
+    state.save(after)

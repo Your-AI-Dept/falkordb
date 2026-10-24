@@ -13,7 +13,7 @@ from functools import lru_cache
 
 import numpy as np
 
-from app import cypher, db
+from app import cypher, db, state
 from app.config import (
     A0,
     B0,
@@ -385,8 +385,15 @@ def reset() -> None:
 
 
 def seed() -> SeedResult:
+    """Rebuild both graphs from data/ and start a fresh event (the event state
+    describes the graph, so it resets too; the human-rater list is kept)."""
     t0 = time.time()
+    humans = state.load().humans
     reset()
+    state.reset()
+    fresh = state.load()
+    fresh.humans = humans
+    state.save(fresh)
     rng = random.Random(RNG_SEED)
     np_rng = np.random.default_rng(RNG_SEED)
     raw = load_attendees_raw()

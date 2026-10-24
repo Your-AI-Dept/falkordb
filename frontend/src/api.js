@@ -4,6 +4,8 @@ import { createGraphClient } from './graph-api.js';
 import { validateSurvey, validateTopics, validateRanking } from './graph-contract.js';
 import { demoSurvey, answerDemoSurvey, demoTopics, demoRanking } from './demo-graph.js';
 import { demoMeetings } from './demo-agenda.js';
+import { demoMeetingWhy } from './demo-explain.js';
+import { promoAudienceDetails } from './demo-promotions.js';
 import { persona } from './data/pizza-expo.js';
 import { meetingPreferences, restoreMeetingTopic } from './meeting-preferences.js';
 import { createLiveSource, liveIdentity } from './live.js';
@@ -24,6 +26,7 @@ export const graph = createGraphClient(request);
 const live = createLiveSource(request, graph);
 /** Who is using the app: the demo attendee, or the attendee chosen in live mode. */
 export const viewerId = () => isDemo ? persona.paul : liveIdentity();
+const whyCache = new Map();
 const notConnected = what => () => { throw new Error(what + ' is not connected to the backend yet.'); };
 // No silent demo fallback when a real API origin is configured.
 export const api = {
@@ -81,6 +84,18 @@ export const api = {
     if(![3,5,10,20].includes(limit))throw new Error('Choose 3, 5, 10, or 20 people.');
     return validateRanking(isDemo?demoRanking(readState(),topicId,limit):await graph.rankings(topicId,limit,options),topicId,limit);
   },
+  /**
+   * "Why we matched you" for a planned date (GET .../meetings/{rater}/why). Resolves to null when the
+   * backend has no explanation for it yet (404/409), so the UI can hide the disclosure.
+   */
+  meetingWhy: async (meetingId, respondentId=viewerId()) => {
+    if (isDemo) return demoMeetingWhy(readState(), meetingId, respondentId);
+    const key = meetingId + '|' + respondentId;
+    if (!whyCache.has(key)) whyCache.set(key, graph.meetingWhy(meetingId, respondentId).catch(error => { whyCache.delete(key); if ([404, 409].includes(error.status)) return null; throw error; }));
+    return whyCache.get(key);
+  },
+  /** Exhibitor audience plus "Why these people?" (explanation is null for topic experts only). */
+  audienceDetails: async (topicId, target) => isDemo ? promoAudienceDetails(topicId, target) : graph.audienceDetails(topicId, target),
   /** Live mode: everyone at the event, for the identity picker. */
   attendees: async () => isDemo ? [] : live.people(),
   reset: async () => {

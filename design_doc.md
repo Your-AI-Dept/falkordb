@@ -519,6 +519,24 @@ Off by default, for later: a discounted second hop through `POS_TIE`.
 
 ---
 
+### 4.4 Explainability
+
+Every decision the system makes about people can be explained from the graph, without revealing anyone's individual answers.
+
+**Why we matched you** (`GET /sessions/{s}/dates/{d}/meetings/{rater_id}/why`). When a session is planned, each `SPEED_DATE` edge stores the rater's score breakdown (`why`: `learn`, `enjoy`, `new_circle`, `already_connected`, `explore`, summing to `value`) and the date's maxFlow floor (`floor`). The explanation ranks those components and backs each with evidence:
+
+- *Learn from them:* the topic maximizing their `comp` × your `interest`, their percentile on it, and how many people reported learning from them (in-degree on `LEARNED_FROM_T{k}`).
+- *They can learn from you:* the mutual side (the pair score is the minimum of both values).
+- *Shared interests:* topics both of you rank above the population average; *well liked:* aggregate meet-again counts.
+- *A new circle:* different communities on `POS_TIE`; *already connected:* the familiarity penalty.
+- *Fills a gap:* the plausible topic where the graph is least certain who knows more.
+- *Fair for everyone:* every pair that date scored at least the floor.
+- *Social path:* FalkorDB `shortestPath` over `LINKEDIN|ADHOC|POS_TIE` (up to 4 steps).
+
+**Why these micro-influencers** (fields on the influencer responses). Per pick: the greedy pick order, competence and likability percentiles, interested attendees they reach and how many only they reach, with reasons. For the set: targets, coverage, expected attendees, number of circles, and the selection method. **Runners-up** are the strongest unpicked candidates with why they weren't chosen (overlapping circles, or less added reach than the weakest pick).
+
+Both responses include `evidence_queries`: the Cypher that reproduces each piece of evidence in FalkorDB.
+
 ## 5. Session lifecycle
 
 A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → (answers arrive) → CLOSED.
@@ -559,6 +577,7 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | GET | `/sessions/{s}` | The 4-date plan with pair values, completion status |
 | GET | `/sessions/{s}/dates/{d}/meetings/{rater_id}/questions` | This rater's survey: questions, saved answers, current question, revisions |
 | POST | `/sessions/{s}/dates/{d}/meetings/{rater_id}/answers` | Save one or more answers; returns the updated survey |
+| GET | `/sessions/{s}/dates/{d}/meetings/{rater_id}/why` | Why this pair was planned: score breakdown, graph evidence, social path, Cypher (4.4) |
 | POST | `/sessions/{s}/dates/{d}/close` | Run the date pipeline; returns metrics |
 | POST | `/checkins` | QR check-in `{scanner_id, scanned_id}`: creates or bumps `ADHOC`, returns both people's question sets |
 | GET | `/checkins/{rater_id}/{partner_id}/questions` | This rater's check-in questions |
@@ -566,7 +585,7 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | GET | `/graph/topics/{topic_id}` | Nodes (`comp_k`, `comp_unc_k`, `tribe`, `like`) and `LEARNED_FROM_T{k}` edges, for the visual |
 | GET | `/graph/ties` | `POS_TIE` edges and tribes |
 | GET | `/topics/{topic_id}/experts?limit=5` | Top people for a topic, ranked by `comp − RANK_UNC_PENALTY · comp_unc` (peer-confirmed competence outranks an unconfirmed prior), with a display-safe reason and evidence each |
-| GET | `/topics/{topic_id}/influencers` | Micro-influencers for a topic event, with explanations |
+| GET | `/topics/{topic_id}/influencers` | Micro-influencers for a topic event, with per-pick reasons, audience coverage and runners-up (4.4) |
 | GET | `/vendors/{id}/influencers` | Micro-influencers for a vendor's event, with explanations |
 | GET | `/metrics` | Per-date learning and matching-quality metrics |
 | GET | `/graph/snapshot` | Graph view's starting state: attendees with vectors, learned-from edges, talks, vendors, metrics, past meetings, open session plan, latest tick |

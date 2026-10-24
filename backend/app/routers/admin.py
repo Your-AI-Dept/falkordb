@@ -19,13 +19,7 @@ class Humans(BaseModel):
 @router.post("/seed", response_model=SeedResult)
 def seed():
     """Drop and rebuild the content and people graphs from data/ (deterministic). Resets the event."""
-    result = seed_service.seed()
-    humans = state.load().humans
-    state.reset()
-    st = state.load()
-    st.humans = humans
-    state.save(st)
-    return result
+    return seed_service.seed()
 
 
 @router.post("/reset", status_code=204)

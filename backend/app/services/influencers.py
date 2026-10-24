@@ -7,6 +7,7 @@ p_x(u->v) = p_pos(u->v) * comp_x(u) * like(u) * interest_x(v)
 import numpy as np
 
 from app import mathcore
+from app.services import explain
 from app.config import BACKFIRE_MAX, CRED_MIN, LIKE_MIN, N_INFLUENCERS, TARGET_MIN
 from app.services.evidence import like_counts
 from app.services.ties import TieTable
@@ -66,4 +67,8 @@ def select(people: People, table: TieTable, x: np.ndarray, vendor_id: str | None
             ],
         })
     expected = mathcore.sigma(P[[r for r, _ in picks]]) if picks else 0.0
-    return {"n_targets": len(target_ids), "expected_reach": round(expected, 4), "influencers": chosen}
+    why = explain.influencer_why(people, x, P, cand_rows, picks, target_ids, interest_x, comp_x)
+    for item, w in zip(chosen, why["per_pick"]):
+        item["why"] = w
+    return {"n_targets": len(target_ids), "expected_reach": round(expected, 4), "influencers": chosen,
+            "audience": why["audience"], "runners_up": why["runners_up"], "evidence_queries": why["evidence_queries"]}

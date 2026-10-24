@@ -68,6 +68,12 @@ Extra fields you can show or ignore: `kind` (`met`, `claim`, `act`, `meet_again`
 
 Response (`TopicRanking`): `{topic, limit, graph_revision, status: "ready" | "updating", items: [{rank, person, comp, comp_unc, m, reason, evidence: [{label, kind}]}]}`. Ranks are contiguous and 1-based, in server order, with no duplicate people. `limit` accepts 1–50, not only 3/5/10/20. Per your INTEGRATION.md, "top" here means one specific thing: **estimated topic competence**, learned from what meeting partners reported. Reasons are display-safe and never reveal an individual's answer.
 
+### 5. Explanations ("why we matched you", "why these people")
+
+- `GET /sessions/{s}/dates/{d}/meetings/{rater_id}/why` → `MeetingWhy`: `headline`, `score` (both sides' values, pair score, the date's fairness floor, component breakdown), ranked `reasons` (`kind`, `title`, `detail`, `weight`), `path` (shortest social path as people + tie type, or null) and `evidence_queries` (label + Cypher). 404 if the rater has no meeting that date.
+- Influencer responses add `why` per pick (`pick_order`, percentiles, `direct_targets`, `unique_targets`, `reasons`), plus `audience` (coverage summary), `runners_up` and `evidence_queries`.
+- Render `title`/`detail` as given; unknown reason kinds should still render.
+
 ## What we took from your proposal
 
 - **"We didn't meet."** Every date survey now opens with "Did you meet {partner}?" (Yes, we met / We didn't meet). "We didn't meet" completes the survey and writes nothing to the graph.

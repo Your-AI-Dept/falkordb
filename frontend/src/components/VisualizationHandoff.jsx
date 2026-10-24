@@ -2,16 +2,7 @@ import React from 'react';
 import {Button,Icon} from './ui.jsx';
 import {attendeeLink} from '../navigation.js';
 import {viewerId} from '../api.js';
-
-function configuredVisualizationUrl(participant){
-  try{
-    const url=new URL(import.meta.env.VITE_VISUALIZATION_URL?.trim()||'http://127.0.0.1:5174/');
-    if(participant?.startsWith('PE27-'))url.searchParams.set('attendee',participant);
-    return ['http:','https:'].includes(url.protocol)?url.href:null;
-  }catch{return null;}
-}
-
-
+import {configuredVisualizationUrl} from '../graph-link.js';
 
 export function VisualizationHandoff({onContinue,participant=viewerId()}){
   const visualizationUrl=configuredVisualizationUrl(participant);

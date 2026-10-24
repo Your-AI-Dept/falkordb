@@ -45,8 +45,16 @@ Persona keys still work in demo links (`?participant=theo`); the identity shown 
 | QR check-in + 2–3 questions | `POST /checkins`, `GET/POST /checkins/{rater}/{partner}/questions\|answers` |
 | Topic experts | `GET /topics`, `GET /topics/{id}/experts` |
 | Exhibitor audience | `GET /vendors`, `GET /topics/{id}/experts`, `GET /topics/{id}/influencers` |
+| "Why we matched you" | `GET /sessions/{s}/dates/{d}/meetings/{rater}/why` (loaded when opened; hidden on 404/409) |
+| "Why these people?" | `audience`, `runners_up`, `evidence_queries` and each influencer's `why` from the influencer routes |
 
 Date states drive the agenda: a planned date can't be checked into yet, an open date runs check in → finish → survey, and a closed date without answers shows as missed (answers after close no longer reach the graph). "I'm here" / "Finish" are UI lifecycle only, stored per attendee in the browser.
+
+## Explanations (graph-driven "why")
+
+- **Attendee:** every planned date (session lineup, next-stop card, stop dialog) has a **Why we matched you** disclosure: headline, ranked reasons (learn from them, they learn from you, shared interests, new circle or already connected, gaps the graph wants to fill, the date's fairness floor), the shortest social path (LinkedIn / met at the show / trusts their advice) and a collapsed list of the Cypher queries behind it. Optional **See it in the graph** link when `VITE_VISUALIZATION_URL` is set.
+- **Exhibitor:** the audience has **Why these people?** (interested attendees reached, expected additional attendees, circles, how the set was picked, runners-up and why they weren't picked, queries) and each micro-influencer has **Why them?** (competence and likability percentiles, how many interested attendees they reach and how many only they reach, pick order, reasons).
+- Components: `src/components/Why.jsx` (opens on mouse hover, pins on click or tap, Escape closes). Adapter: `mapMeetingWhy`, `mapInfluencerWhy`, `mapAudienceExplanation` in `src/backend-adapter.js`. Fixtures in the same shapes: `src/demo-explain.js` (paths come from the demo's QR check-ins and LinkedIn ties) and `src/demo-promotions.js`.
 
 ## Still local (no backend endpoint yet)
 
