@@ -33,6 +33,7 @@ export interface PeerInbox {
 export interface BoothVisit {
   invitationId: Id; checkedInAt: string;
   feedback: { usefulness: 'yes' | 'somewhat' | 'no'; submittedAt: string } | null;
+  feedbackDue?: boolean;
 }
 export interface Invitation {
   id: Id; personId: Id; company: string; title: string; topic: string;
@@ -48,11 +49,19 @@ export interface AttendeeState {
   meetingFeedbackDue?: boolean; // demo review lifecycle only
   meetingRequests?: MeetingRequest[]; // local persistence; live UI reads Dashboard.meetingRequests
   boothVisit?: BoothVisit; // local persistence; live UI reads Invitation.visit
+  agendaProgress?: Record<Id, {stop: Omit<AgendaStop, 'person' | 'status'>; status: AgendaStop['status']; updatedAt?: string}>;
 }
 export interface Dashboard {
   event: { id: Id; name: string; location: string; venue: string; sourceUrl?: string };
   graphRevision?: number; state: AttendeeState; viewer: { badgeToken: string }; people: Person[];
   recommendations: Recommendation[]; meeting: Meeting | null; invitation: Invitation | null; meetingRequests: MeetingRequest[];
+  agenda?: AgendaStop[];
+}
+// Frontend display shape only; the team has not finalized scheduling endpoints.
+export interface AgendaStop {
+  id: Id; kind: 'meeting' | 'booth'; personId: Id; person: Person;
+  time: string; location: string; topic: string; reason?: string;
+  status: 'scheduled' | 'checked_in' | 'feedback_due' | 'completed' | 'missed';
 }
 export interface ScanResult { person: Person; duplicate: boolean }
 

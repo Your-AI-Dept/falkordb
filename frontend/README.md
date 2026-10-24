@@ -18,33 +18,22 @@ Open [attendee](http://localhost:5173/) or [exhibitor](http://localhost:5173/?vi
 
 Without an API URL, surveys use branching fixtures and rankings use fixed sample ordering. The local revision counter synchronizes views; it is not a computed graph or evidence that rankings improved. Real data, graph-selected follow-ups, and changed ranking order must come from the teammate’s API.
 
-## Other attendee and exhibitor flows
+## Guided attendee and exhibitor flows
 
-1. Continue with Paul’s profile. Choose **Find better suppliers → Tomatoes & ingredients**. Optional: “A more reliable tomato grower in Italy.”
-2. Open **Save a connection → Sample scan**. Maya is now a chosen connection. There is no survey after a scan.
-3. Return home. The explanation shows **You → Maya → Luca** and a relevant booth invitation appears.
-4. Open the invitation and choose **I’ll be there**. The exhibitor’s tomato session reflects Paul’s acceptance in the same browser.
-5. In the same invitation, tap **I’m at the booth**, then **Yes**, **Somewhat**, or **Not really**. The agenda now shows Paul as checked in. Usefulness stays private.
-6. Open Theo’s meetup. Feedback is inline and saves on tap; there is no separate feedback screen or Skip action. **We didn’t meet** records a missed meeting. Choose **Yes, useful → Flour & fermentation** to see Elena become the next suggestion.
-7. Ask Elena for 15 minutes, then use **View as Elena → Accept meeting**. **Back to Paul’s view** shows the confirmed meeting. The two views also synchronize across tabs in the same browser.
+The app assigns a plan; attendees do not browse people, swipe, request meetings, or RSVP to booth invitations. The home screen leads with one next stop and shows the rest of the day underneath. Top people remains a graph-demo output accessible from the footer and completed survey, not the attendee's matchmaking interface.
 
-The booth invitation, request, attendance, and usefulness are distinct states. An accepted invitation is not a check-in. An arranged meeting is not evidence that people liked one another.
+1. Complete the two-step profile and goals setup; choose **Show my day**.
+2. Open the next stop. It gives a person or booth, time, place, and topic. **I’m here** records arrival. **Can’t make it** records unavailability without an opinion about the person.
+3. **Finish meetup** opens required questions in the same modal. Answers save on tap. Close, Escape, backdrop, reload, and starting another stop cannot bypass outstanding feedback in the local app.
+4. The completed modal offers **Back to my day**, the separate visualization, and Top people. The next scheduled stop becomes the primary card.
+5. At the booth, **I’m here** updates the exhibitor's guest status without an RSVP. **Finish visit** opens required one-tap usefulness feedback. Check-in alone never asks whether the conversation was useful.
+6. Chance encounters still use QR/manual/sample saving. Saved profiles are read-only; there is no meeting-request button.
 
-## What is implemented
+The scripted plan starts with Theo at 12:15. A tomato-sourcing focus adds Terra Rossa at Booth 412 at 1:00. A later peer assignment follows a fixture topic branch. Once an assignment has started, it remains stable even if later feedback changes the priority. The later assigned peers now have their own working surveys; answers stay scoped to the correct meeting and direction.
 
-- Two-step attendee setup with tappable goal cards and a contextual optional follow-up.
-- Editable business context and optional LinkedIn URL, without scraping or login.
-- Suggested people, a saved-connections list, a QR badge, manual entry and sample scanning.
-- Required inline arranged-meetup feedback, outgoing peer requests, recipient accept/decline, and confirmed meeting status.
-- Separate Paul/Theo surveys, API-rendered questions, required follow-ups, saved-answer receipts, and revision-aware live refresh.
-- Topic rankings with count controls, server ordering, safe reasons/evidence, and loading, updating, empty, and error states.
-- One booth invitation with accept/decline, check-in, and required one-tap visit feedback. Check-in updates the exhibitor agenda.
-- One-screen exhibitor setup with company, booth, one contact, and expertise. One preset Wednesday 1–2 PM activation, with accepted/pending/declined and checked-in visitors.
-- Browser persistence and attendee reset.
+The exhibitor has one booth contact and a preset Wednesday 1–2 PM activation. Its agenda shows scheduled, unavailable, and checked-in visitors. It contains no attendee picker, invitations, coverage confirmations, or private usefulness answers.
 
-**Integration status:** the frontend REST adapter and response validation are implemented. The team is updating the endpoints; neither the older frontend proposal nor the route sketches in `../design_doc.md` are a finalized contract. Two-sided persistence, different follow-ups, cross-tab refresh, and ranking controls work locally; API transport and failures are tested with mocked responses. No real graph/database or Bright Data feed has been connected or verified.
-
-The exhibitor prototype lives in `src/exhibitor/`. Its sample Paul RSVP and check-in read the attendee demo state; other RSVP statuses are illustrative. It is not connected to REST yet.
+**Integration status:** scheduling and assignment actions are local fixtures. All existing REST paths remain unchanged. The new `api.assignment` seam deliberately rejects live-mode actions until the teammate supplies scheduling endpoints; it never writes fixture state as a fallback. The attendee view expects normalized `Dashboard.agenda` entries (see `AgendaStop` in `src/contracts.d.ts`); without them, live mode shows that the schedule is unavailable. The backend owns actual matching, time/capacity constraints, counterpart coordination, and updates after feedback. Legacy request/invitation adapter methods and tests remain for compatibility but are not exposed in the attendee UX.
 
 ## Integration
 
@@ -60,10 +49,8 @@ Fixtures: `src/data/pizza-expo.js`. Local behavior: `src/demo.js` and `src/demo-
 
 ## Current limits
 
-Recommendations and invitation eligibility use fixture rules, not the real graph. The QR URL is real, but local personas share browser storage, not authenticated accounts. No real invitation is sent. Camera support depends on the browser and has not been tested on a physical device. These frontend flows do not yet provide authentication, scraping, notification delivery, calendar sync, or live capacity enforcement. The team backend is FastAPI, separately developed under `../backend`. Opening the arranged meetup starts a local feedback requirement; booth check-in starts the booth feedback requirement. Close, Escape, and backdrop dismissal stay blocked until all required answers save; outstanding feedback reopens on reload. For live mode, the server must set `meeting.feedbackRequired` after the actual meeting, return `surveyComplete`, and enforce completion. A client-only gate is not server enforcement.
+Assignments and next-topic branching use fictional fixtures, not a live graph. No real invitation or notification is sent. Authentication, profile enrichment, physical-device camera testing, live scheduling, server enforcement, and Bright Data integration remain teammate work. The visualization URL is still pending. Graph rankings remain fixed in local mode; local revision increments do not demonstrate improved expertise estimates.
 
-Recommendation cards separate the person's factual bio from the reason for suggesting them. Local reasons require an explicit topic match, a relevant next-topic answer, or a saved badge plus a seeded professional edge. Broad goals and unrelated feedback leave the reason box empty and hidden. These signals do not establish endorsements or expertise. In live mode, the existing dashboard `source`, `reason`, and `path` fields remain server-supplied; endpoints are unchanged. Graph-derived reasons must identify their actual evidence rather than restating the profile offering.
+The current survey measures usefulness and next-topic interest. Do not claim these answers implement the backend's topic-learning model until that payload is connected. Server-side feedback enforcement and coordinated schedules must be implemented in the backend.
 
-Earlier strategy and sketches in `docs/PRODUCT.md`, `docs/FLOW.md`, and `docs/LOOP-SKETCHES.md` are historical exploration. This README and the API contract describe the current implementation.
-
-UI copy stays limited to labels, actions, match reasons, and operational states; see `AGENTS.md`. The draggable badge adapts the pointer and spring behavior from the Showdesks badge playground, using Rally styling.
+Earlier strategy, request/invitation flows, and sketches in `docs/PRODUCT.md`, `docs/FLOW.md`, and `docs/LOOP-SKETCHES.md` are historical exploration. This README and `docs/INTEGRATION.md` describe the current guided UX. UI copy stays limited to labels, actions, match reasons, and operational states; see `AGENTS.md`.

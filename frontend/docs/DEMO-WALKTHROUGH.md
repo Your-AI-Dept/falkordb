@@ -4,7 +4,7 @@
 
 A conference directory tells you who is present and how they describe themselves. It tells you much less about who can help with a specific problem right now. Attendees spend time on conversations that go nowhere; exhibitors pay for booth traffic without knowing whether it will produce a relevant conversation.
 
-The demo asks whether the conversations already happening at the event can make the next connection more useful.
+The app turns those signals into an assigned itinerary: meet this person, at this place, at this time. Attendees follow their next stop and give feedback; they do not browse a directory or request meetings. The demo asks whether those conversations make the next assignment more useful.
 
 ## Commercial use case
 
@@ -24,7 +24,7 @@ Show one attendee's business context and a concrete event goal, such as solving 
 
 ### 0:25–1:10 — Two people meet
 
-Show the same completed meeting from each participant's perspective. Ask a topic-specific learning question: “On ovens and equipment, how did the learning go?” One person reports learning more; the other can report a different perspective. Save each answer in its own direction.
+Show the next assigned meetup with its time and location. Choose **I’m here**, then **Finish meetup** to open feedback in the same modal. Show the completed meeting from each participant's perspective. Ask a topic-specific learning question: “On ovens and equipment, how did the learning go?” One person reports learning more; the other can report a different perspective. Save each answer in its own direction.
 
 The next question comes from the backend's remaining uncertainty. It might ask about a different relevant topic or whether they could act together. Keep one question at a time in the same modal; all returned required questions must be answered. “It didn't come up” is a valid answer, not a positive or negative expertise signal.
 
@@ -50,7 +50,7 @@ The current fixture ordering is fixed. Only demonstrate ranking changes once the
 
 “An organizer can use this to place people in more useful conversations. An exhibitor can use it to bring the right audience to a specialist's booth session. We can then measure who accepted, who attended, and whether it was useful.”
 
-If time allows, accept one booth invitation and show the agenda update. This is an optional commercial extension after the graph proof. End with the useful outcome, not an additional setup screen.
+If time allows, show the assigned booth stop, check in, and show the exhibitor agenda update. No invitation or RSVP is needed. This is an optional commercial extension after the graph proof. End with the useful outcome, not an additional setup screen.
 
 ## Rehearsal cut line
 

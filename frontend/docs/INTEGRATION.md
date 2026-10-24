@@ -19,16 +19,22 @@ At integration time, update `src/api.js`, `src/graph-api.js`, `src/rest.js`, and
 | Dynamic follow-ups | Generic prompts/options, queued refresh, active-question stability | Actual graph-driven selection and agreed revision/update semantics |
 | Graph simulation and visualization | Completed-feedback modal links to `VITE_VISUALIZATION_URL` in a new tab, then offers Top people; disabled until URL supplied | Teammate-owned graph UI, seed/simulation controls, convergence view; handoff only, no data synchronization added |
 | Top X people for Y topic | Topic/count controls; server-order renderer | Agreed ranked-result response with identities, reason, applied revision, and definition of the ranking |
-| Peer requests | Request, recipient acceptance/decline, confirmed status | Persistence and scheduling endpoints |
-| Booth activation | One contact, preset slot, invite acceptance updates agenda, check-in and private feedback | Shared invitation/attendance records; exhibitor remains local-only |
+| Assigned itinerary | One next stop plus agenda; arrival, finish, and unavailability; no browse/request/RSVP UX | Server-owned assignments, availability and capacity, shared attendee/exhibitor schedule, persistence |
+| Booth activation | One contact, preset slot, scheduled visitors; arrival updates agenda, finish requires private feedback | Shared assignment/attendance records; exhibitor remains local-only |
 
 The current local usefulness question is not the backend design's topic-learning signal. The shared renderer can display “I learned more,” “We learned evenly,” “They learned more,” and “It didn't come up,” followed by tie questions. Map returned question IDs/options in the adapter when the payload is finalized. An explicit “It didn't come up” answer should count as completion, not manufacture competence evidence. Do not convert a generic yes/no usefulness response into a learned-from edge.
 
 The existing proposed renderer expects question versions, graph/survey revisions, respondent/subject display objects, and saved-answer receipts. If the settled API omits those, agree the equivalent lifecycle and duplicate protection or simplify the renderer; do not fabricate authoritative revisions or receipts locally.
 
+## Scheduling seam
+
+`Dashboard.agenda` is a frontend display shape with an ID, kind (`meeting` or `booth`), person, time, location, topic, optional reason, and status (`scheduled`, `checked_in`, `feedback_due`, `completed`, or `missed`). The server chooses the next stop; the UI displays the first active entry in the returned schedule. This is not a finalized endpoint proposal. `api.assignment(id, action)` supports `check_in`, `finish`, and `miss` only in local mode; configured live mode returns an explicit unavailable error until the team wires the settled API. No scheduling route has been invented or added.
+
+`src/demo-agenda.js` contains the clearly separated fixture plan, and `agendaFor`/`updateAssignment` in `src/demo.js` manage local progress. Check-in is attendance, finish triggers required feedback, and unavailability is neither usefulness nor expertise evidence. Active assignments are retained through topic changes. The old requests and invitation responses remain dormant adapter compatibility code; the current attendee UI does not call them. Shared booth agenda state uses scheduled/unavailable/check-in, never a fabricated RSVP.
+
 ## Product meaning
 
-Lead with the attendee's need and a counterpart's relevant experience. A name identifies the person; it does not establish relevance. One chance encounter does not make somebody a trusted intermediary. Render a connection path only when each edge is supported and its meaning is clear. A graph path is not automatically an endorsement or introduction.
+The product is an adaptive itinerary for a physical event: the app tells an attendee who to meet, where, and when. Feedback improves subsequent assignments. Lead with the attendee's need and a counterpart's relevant experience. A name identifies the person; it does not establish relevance. One chance encounter does not make somebody a trusted intermediary. Render a connection path only when each edge is supported and its meaning is clear. A graph path is not automatically an endorsement or introduction.
 
 “Top” must name what the backend ranks: topic expertise, likely usefulness to a specific person, or relevant reach for a vendor. These are different queries. For the current video, agree on topic expertise and show the same topic before and after simulated feedback. Do not call that buyer intent, broad influence, or guaranteed commercial ROI.
 

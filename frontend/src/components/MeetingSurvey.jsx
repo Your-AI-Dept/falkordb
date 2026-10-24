@@ -5,7 +5,7 @@ import {observeResource} from '../observe-resource.js';
 import {Avatar,Button,Icon,Logo,Modal} from './ui.jsx';
 import {VisualizationHandoff} from './VisualizationHandoff.jsx';
 
-export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved=()=>{}}) {
+export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved=()=>{},onContinue=close}) {
   const [survey,setSurvey]=useState(null),[error,setError]=useState(''),[pending,setPending]=useState(false);
   const observer=useRef(),alive=useRef(true),retry=useRef(null),saving=useRef(false),readError=useRef(false);
   const savedCallback=useRef(onSaved);savedCallback.current=onSaved;
@@ -40,7 +40,7 @@ export function MeetingSurveyDialog({meetingId,respondentId='paul',close,onSaved
       {current?<section className="meeting-feedback"><span className="eyebrow">{survey.respondent.name.split(' ')[0].toUpperCase()}’S FEEDBACK</span><h3 className="survey-question" key={current.id+':'+current.version}>{current.prompt}</h3><div className="feedback-choices" aria-busy={pending}>{current.choices.map(choice=><button type="button" key={choice.id} className="feedback-choice" disabled={pending} onClick={()=>answer(choice.id)}>{choice.label}<Icon name="arrow" size={16}/></button>)}</div>{pending&&<span className="feedback-saved" role="status">Saving…</span>}{survey.queuedQuestions[0]&&<p className="survey-next"><span>Up next</span>{survey.queuedQuestions[0].prompt}</p>}</section>:<>
         <div className="request-status" role="status"><Icon name="check"/><strong>Feedback saved</strong></div>
         {survey.answers.length>0&&<dl className="survey-receipt">{survey.answers.map(item=><div key={item.questionId+':'+item.questionVersion}><dt>{item.prompt}</dt><dd>{item.answerLabel}</dd></div>)}</dl>}
-        {completed&&!pending&&<VisualizationHandoff/>}
+        {completed&&!pending&&<VisualizationHandoff onContinue={onContinue}/>}
       </>}
     </>}
   </Modal>;
@@ -50,5 +50,5 @@ export function SurveyPage(){
   const meetingId=params.get('meeting')||'meet-theo';
   const respondentId=isDemo?(params.get('participant')||'paul'):undefined;
   const [open,setOpen]=useState(true);
-  return <div className="attendee-app"><header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><a className="text-button header-actions" href="?view=attendee">My event<Icon name="arrow" size={16}/></a></header><main className="survey-page"><h1>Meetup feedback</h1>{isDemo&&<nav className="participant-tabs" aria-label="Attendee preview"><a aria-current={respondentId==='paul'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=paul'}>Paul</a><a aria-current={respondentId==='theo'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=theo'}>Theo</a></nav>}<Button onClick={()=>setOpen(true)}>View meetup</Button><a className="persona-link" href="?view=rankings">Top people<Icon name="arrow" size={16}/></a></main>{open&&<MeetingSurveyDialog meetingId={meetingId} respondentId={respondentId} close={()=>setOpen(false)}/>}</div>;
+  return <div className="attendee-app"><header className="app-header"><Logo/><div className="event-brand"><span>Pizza Expo</span><small>Las Vegas</small></div><a className="text-button header-actions" href="?view=attendee">My event<Icon name="arrow" size={16}/></a></header><main className="survey-page"><h1>Meetup feedback</h1>{isDemo&&<nav className="participant-tabs" aria-label="Attendee preview"><a aria-current={respondentId==='paul'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=paul'}>Paul</a><a aria-current={respondentId==='theo'?'page':undefined} href={'?view=survey&meeting='+encodeURIComponent(meetingId)+'&participant=theo'}>Theo</a></nav>}<Button onClick={()=>setOpen(true)}>View meetup</Button><a className="persona-link" href="?view=rankings">Top people<Icon name="arrow" size={16}/></a></main>{open&&<MeetingSurveyDialog meetingId={meetingId} respondentId={respondentId} close={()=>setOpen(false)} onContinue={()=>window.location.assign('?view=attendee')}/>}</div>;
 }

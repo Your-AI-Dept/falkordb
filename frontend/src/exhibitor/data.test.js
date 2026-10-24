@@ -31,14 +31,14 @@ function guests(state = freshExhibitorState()) {
 }
 
 for (const response of [undefined, 'accepted', 'declined']) {
-  test(`shared tomato invitation mirrors ${response || 'pending'} and attendee context`, context => {
+  test(`shared booth assignment preserves attendee context with legacy response ${response || 'none'}`, context => {
     const attendee = eligibleAttendee(response);
     attendee.profile.name = 'Paula Rossi';
     attendee.profile.company = 'North Beach Pizza Co.';
     attendee.profile.intention = 'Find a consistent tomato supplier for three pizzerias.';
     browserStorage(context, attendee);
     const paul = guests().find(person => person.id === 'paul');
-    assert.equal(paul.status, response || 'pending');
+    assert.equal(paul.status, response==='declined'?'unavailable':'assigned');
     assert.equal(paul.name, attendee.profile.name);
     assert.equal(paul.company, attendee.profile.company);
     assert.equal(paul.need, attendee.profile.intention);
@@ -47,11 +47,11 @@ for (const response of [undefined, 'accepted', 'declined']) {
   });
 }
 
-test('saved attendee must have the invitation before appearing in the booth plan', context => {
+test('a relevant attendee is scheduled at the booth without a scan or RSVP', context => {
   const attendee = eligibleAttendee();
   attendee.encounters = [];
   browserStorage(context, attendee);
-  assert.equal(guests().some(person => person.id === 'paul'), false);
+  assert.equal(guests().find(person => person.id === 'paul').status, 'assigned');
 });
 
 test('unrelated exhibitor focus excludes the shared tomato invitation', context => {
@@ -107,7 +107,7 @@ test('booth agenda reflects check-in without exposing private usefulness feedbac
   attendee.boothVisit = { invitationId: 'tomato-table', checkedInAt: '2026-10-24T12:00:00Z', feedback: { usefulness: 'no', submittedAt: '2026-10-24T12:15:00Z' } };
   browserStorage(context, attendee);
   const paul = guests().find(person => person.id === 'paul');
-  assert.equal(paul.status, 'accepted');
+  assert.equal(paul.status, 'assigned');
   assert.equal(paul.checkedInAt, attendee.boothVisit.checkedInAt);
   assert.equal('feedback' in paul, false);
 });
