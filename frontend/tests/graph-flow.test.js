@@ -69,28 +69,21 @@ test('rankings accept imported identities and preserve authoritative order; neve
   assert.throws(()=>validateRanking(result,'wrong-topic',5),/unsupported/);
 });
 
-test('REST adapter encodes IDs, keeps identity server-side, sends stable retry keys, and renders returned questions',async()=>{
-  const calls=[];
-  const remoteSurvey={...demoSurvey(freshState(),meetingId),meetingId:'remote/meeting',respondent:{id:'auth-42',name:'Attendee'},subject:{id:'bd-917',name:'Imported Person'},currentQuestion:{id:'dynamic-89',version:4,prompt:'Which supplier region works for you?',required:true,choices:[{id:'west',label:'West Coast'},{id:'national',label:'National'}]},graphRevision:22,surveyRevision:4};
-  const fetcher=async(url,options)=>{calls.push({url,options});return {ok:true,status:200,json:async()=>options.method==='POST'?{answerId:'answer-99',survey:remoteSurvey}:remoteSurvey};};
-  const client=createGraphClient(createRestClient({base:'https://example.test/api',eventId:'pizza expo',fetcher}));
-  const received=await client.survey('remote/meeting');
-  assert.equal(received.currentQuestion.id,'dynamic-89');
-  const body={questionId:'dynamic-89',questionVersion:4,answerKey:'west',surveyRevision:4};
-  await client.answerSurvey('remote/meeting',body,{idempotencyKey:'retry-stable'});
-  await client.answerSurvey('remote/meeting',body,{idempotencyKey:'retry-stable'});
-  assert.equal(calls[0].url,'https://example.test/api/v1/events/pizza%20expo/meetings/remote%2Fmeeting/survey');
-  assert.ok(calls.every(call=>call.options.credentials==='include'));
-  assert.equal(calls[1].options.headers['Idempotency-Key'],calls[2].options.headers['Idempotency-Key']);
-  assert.deepEqual(JSON.parse(calls[1].options.body),body);
-  assert.equal('respondentId' in JSON.parse(calls[1].options.body),false);
+test('backend adapter uses scoped IDs and exact answer schema without the obsolete event prefix',async()=>{
+ const id='s0-d0-PE27-00001-PE27-00002',calls=[];
+ const raw={meeting_id:id,rater_id:'PE27-00001',partner:{id:'PE27-00002',name:'Partner',title:'Owner',company:'Pizza'},graph_revision:0,survey_revision:0,complete:false,current_question_id:'met',questions:[{question_id:'met',version:1,text:'Did you meet?',required:true,options:[{value:'yes',label:'Yes'},{value:'no',label:'No'}]}],answers:{}};
+ const fetcher=async(url,options)=>{calls.push({url,options});return {ok:true,status:200,json:async()=>url.includes('/attendees/')?{id:'PE27-00001',name:'Rater'}:raw};};
+ const client=createGraphClient(createRestClient({base:'https://example.test/api',fetcher}));
+ assert.equal((await client.survey(id,'PE27-00001')).currentQuestion.id,'met');
+ await client.answerSurvey(id,'PE27-00001',{questionId:'met',answerKey:'yes',questionVersion:1,surveyRevision:0});
+ assert.equal(calls[1].url,'https://example.test/api/sessions/0/dates/0/meetings/PE27-00001/questions');
+ assert.deepEqual(JSON.parse(calls[3].options.body),{answers:[{question_id:'met',value:'yes'}]});
+ await assert.rejects(client.survey(id,'PE27-99999'),/participant/);
 });
 
-test('API errors and malformed live data never fall back to fixtures',async()=>{
-  const failing=createGraphClient(createRestClient({base:'https://example.test',fetcher:async()=>({ok:false,status:503,json:async()=>({message:'Graph is unavailable'})})}));
-  await assert.rejects(failing.survey(meetingId),/Graph is unavailable/);
-  const malformed=createGraphClient(createRestClient({base:'https://example.test',fetcher:async()=>({ok:true,status:200,json:async()=>({complete:true})})}));
-  await assert.rejects(malformed.survey(meetingId),/unsupported survey/);
+test('FastAPI detail errors surface without fixture fallback',async()=>{
+ const request=createRestClient({base:'https://example.test',fetcher:async()=>({ok:false,status:409,json:async()=>({detail:'date is not open'})})});
+ await assert.rejects(request('/sessions/0'),/date is not open/);
 });
 
 test('resource observation serializes refreshes and ignores results after cleanup',async()=>{
