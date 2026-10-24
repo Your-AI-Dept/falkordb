@@ -9,25 +9,27 @@
 3. **Show many connections in the separate graph UI.** The teammate's visualization demonstrates a simulation over normalized real Pizza Expo data plus explicitly simulated interactions. Use the same event/entity IDs and graph revisions as the API. Graph visualization, data ingestion, and simulation controls are outside this frontend's scope.
 4. **Finish with Top X people for Y topic.** Return to Rally's Top people screen. Select a topic and count, then show the backend's ranked people with a short reason for each. Capture the same query before and after the simulation to make a ranking change assessable. The UI preserves the server's order.
 
-The exhibitor invitation/agenda is an optional commercial extension, not an extra step in the core demo. A relevant supplier, expert, or buyer discovered in the final results can explain why this becomes valuable to an exhibitor. Do not consume video time on team availability, coverage confirmation, or extra setup.
+The exhibitor assigned-visit agenda is an optional commercial extension, not an extra step in the core demo. A relevant supplier, expert, or buyer discovered in the final results can explain why this becomes valuable to an exhibitor. Do not consume video time on team availability, coverage confirmation, or extra setup.
 
 ## Implemented versus remaining
 
 | Capability | Current status |
 | --- | --- |
-| Profile/goals, chosen QR saves, peer request acceptance | Working local frontend demo |
+| Profile/goals, chosen QR saves, assigned day | Working local frontend demo |
 | Mandatory inline meetup survey and booth check-in/feedback | Working local frontend demo |
-| One booth contact, preset activation, RSVP/check-in agenda | Working local frontend demo; exhibitor REST remains out of scope |
+| One booth contact, preset activation, assigned-guest/check-in agenda | Working local frontend demo; exhibitor REST remains out of scope |
 | Independent Paul/Theo answers and different follow-ups | Working local demo with directional records and saved question versions |
 | Generic API-rendered current/queued questions | Implemented with response validation, retries, conflict handling, and revision-aware polling |
 | Top X by topic | Implemented with server ordering, count controls, refresh, and empty/error states |
-| REST transport and contract checks | Tested with mocked HTTP responses; no real API URL yet |
+| REST transport and contract checks | Tested with mocked HTTP responses; backend alignment note exists, adapter mapping not connected |
 | Graph/database, Bright Data ingestion, and graph visualization/simulation | Separate teammate's work, not connected or verified here |
 | Genuine graph-selected questions and improved rankings | Require backend implementation and live integration verification |
 
 Earlier frontend proposal (the team is replacing these endpoints): `GET /meetings/:id/survey`, `POST /meetings/:id/survey/answers`, `GET /topics`, and `GET /rankings`. The standalone survey/ranking pages do not require the dashboard routes. See [API.md](API.md) and [api-examples.json](api-examples.json). Update `src/graph-api.js` if the teammate chooses different route names; do not create a competing backend.
 
 ## Demo rehearsal
+
+Use [DEMO-WALKTHROUGH.md](DEMO-WALKTHROUGH.md) for the current three-minute script, exact local clicks, presenter handoff, and fallback when the graph is not connected.
 
 Use one completed meeting and two authenticated sessions in live mode. The local `participant` switch is not authentication. Verify:
 
@@ -45,7 +47,7 @@ Keep imported context, professional ties with a supported source, chosen QR conn
 
 Return a readable reason for each ranked person. Compare a before/after query with profile/goal matching alone if the backend supports it. Topic fit, availability, capacity, and consent belong in eligibility; proximity in the graph alone is not buyer intent. Missing responses stay unknown.
 
-Commercially, this can support more relevant attended conversations and booth activations. Keep the outcome trail separate: suggested → accepted → attended → useful. This demo does not establish actual ROI, revenue, retention, or measured graph uplift.
+Commercially, this can support more relevant attended conversations and booth activations. Keep the outcome trail separate: assigned → checked in → completed → feedback. Assignment alone is not consent, attendance, or usefulness evidence. This demo does not establish actual ROI, revenue, retention, or measured graph uplift.
 
 ## Cut line
 
