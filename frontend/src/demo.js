@@ -1,5 +1,5 @@
 import { event, goals, people, professionalEdges, meeting, boothInvitation } from './data/pizza-expo.js';
-import { demoSurvey } from './demo-graph.js';
+import { demoSurvey, demoTopics } from './demo-graph.js';
 export { goals };
 export function freshState() {
   return { version: 2, onboardingComplete: false, profile: { name: 'Paul Rossi', role: 'Owner', company: 'North Beach Pizza Co.', businessType: 'pizzeria', context: 'We run three neighborhood pizzerias in San Francisco.', linkedin: '', goals: [], focus: '', intention: '' }, encounters: [], feedback: null, requestedIds: [], dismissedIds: [] };
@@ -83,6 +83,21 @@ export function peerInbox(state, recipientId) {
   if (!viewer) throw new Error('Attendee not found.');
   return { viewer, requests: meetingRequestsFor(state).filter(request => request.toId === recipientId).map(request => ({ ...request, sender: { id: 'paul', ...state.profile } })) };
 }
+function recommendationReason(state, person, via) {
+  const firstName = person.name.split(' ')[0];
+  if (via) return { source: 'From a saved connection', reason: `You saved ${via.name.split(' ')[0]}’s badge. They have a professional connection to ${firstName}.` };
+  const feedbackTopic = demoTopics.find(topic => topic.id === state.feedback?.next && person.topics.includes(topic.id));
+  if (feedbackTopic) return { source: 'Matches your latest feedback', reason: `You chose “${feedbackTopic.label}” for your next conversation. ${firstName} lists this topic on their profile.` };
+  const selected = Object.entries(goalAnswers(state.profile)).find(([,topic]) => person.topics.includes(topic));
+  if (selected) {
+    const [goal,topicId] = selected;
+    const label = focusQuestion(state.profile,goal).choices.find(([id]) => id === topicId)[1];
+    const topic = demoTopics.find(topic => topic.id === topicId);
+    if (topic) return { source: 'Shared topic', reason: `You picked “${label}”. ${firstName} lists ${topic.label.toLowerCase()} on their profile.` };
+  }
+  // A generic goal or an unrelated answer is not evidence for this person.
+  return { source: '', reason: '' };
+}
 export function recommendations(state) {
   const met = new Set(state.encounters.map(e => e.personId));
   const focus = state.feedback?.next || state.profile.focus;
@@ -95,8 +110,7 @@ export function recommendations(state) {
     const person = people.find(p => p.id === id);
     const edge = professionalEdges.find(e => e.to === id && met.has(e.from));
     const via = edge && people.find(p => p.id === edge.from);
-    const reason = via ? 'You saved ' + via.name.split(' ')[0] + '. They know ' + person.name.split(' ')[0] + ', who can share ' + person.offering.toLowerCase() + '.' : 'Can help with ' + person.offering.toLowerCase() + '.';
-    return { person, reason, source: via ? 'A connection through your circle' : state.feedback?.next ? 'Based on your meetup feedback' : 'Based on your event goals', path: via ? [{id:'you',name:'You'}, {id:via.id,name:via.name.split(' ')[0]}, {id:person.id,name:person.name.split(' ')[0]}] : [] };
+    return { person, ...recommendationReason(state,person,via), path: via ? [{id:'you',name:'You'}, {id:via.id,name:via.name.split(' ')[0]}, {id:person.id,name:person.name.split(' ')[0]}] : [] };
   });
 }
 export function invitationFor(state) {
