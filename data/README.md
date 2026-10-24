@@ -56,22 +56,8 @@ The 10 topics: Cheese & Dairy, Tomatoes & Sauce, Dough & Flour, Meats & Toppings
 
 400 independent pizzeria people, 100 from chain headquarters, 70 franchisees, 30 from multi-unit operators, 125 suppliers and manufacturers, 75 distributors, 120 from tech companies, and 80 in media, consulting and other roles. Their badges: 661 attendees, 240 exhibitor staff, 43 speakers, 39 press and 17 pizza competitors. Most are from the US, with some from Canada, Mexico, Italy and elsewhere.
 
-## Seed files for the backend (`seed/`)
+## How the backend uses this data
 
-The mock data files the design doc asks for in section 8.1, built from the data above. IDs match the other files: an attendee's `id` is their `attendee_id`, a talk's `id` is its `session_id`, and a vendor's `id` is its `exhibitor_id`.
+The backend seeds the graph straight from the raw files above (`backend/app/services/seed.py`): all 1,000 attendees, the show program, sign-ups and booth scans. Fields the data doesn't have (years of experience, a LinkedIn network, speed-dating attendance) are synthesized with a fixed random seed; see `design_doc.md` §8.1. There is no hidden ground truth.
 
-| File | Rows | Fields |
-|---|---|---|
-| `topics.json` | 10 | `idx` (0 to 9), `name`, `topic_id` |
-| `talks.json` | 47 | `id`, `title`, `abstract`, `slot` (shared by talks starting at the same time), `room`, `start`, `end`, `topics` as `[{idx, w}]`, plus `type` and `speaker_ids` |
-| `vendors.json` | 5 | `id`, `name`, `profile` (10 weights summing to 1), `budget`: Toast, Grande Cheese Company, Ardent Mills, The Middleby Corporation and Sysco |
-| `attendees.json` | 120 | `id`, `name`, `side` (60 A, 60 B), `is_speaker` (18 speakers), `speaker_topics`, `resume_tags`, `signups` (talk ids), `truth` with `expertise`, `interest`, `talkativeness` and `modesty`, plus `company`, `title`, `business_type`, `city`, `state` and `country` |
-| `linkedin.json` | 513 | `{a, b}` pairs, 5 to 10 per person, clustered by company, metro, line of business and main topic |
-| `adhoc.json` | 86 | `{a, b}` pairs of people who met at the show, from booth scans and shared sessions |
-
-How the hidden truth was made:
-- **Expertise:** each person has 1 to 3 strong topics (0.65 to 0.95), taken from what they speak on, their exhibitor's topics and their job title. Every other topic is low (0.02 to 0.25).
-- **Interest:** a Dirichlet draw weighted toward the topics they ticked at registration and their strong topics.
-- **Resume tags:** expertise plus noise. They're weaker for people Bright Data found no LinkedIn profile for.
-
-As the design doc says, `truth` belongs only in the simulator.
+An earlier set of seed files for the first design (120 attendees with sides and hidden truth) is kept in [`archived/seed/`](archived/seed/); nothing reads it.

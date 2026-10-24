@@ -42,4 +42,5 @@ cd graph-view && npm run build && npm run lint
 - [Design doc](design_doc.md): the model, the math, the API and the **shared vocabulary** (section 0.1) all three apps use
 - [Backend ↔ Rally mapping](docs/api-alignment.md): routes and fields for the frontend adapter
 - [Graph view contract](graph-view/src/graph/CONTRACT.md): the snapshot and event payloads
-- [Build plan](build_plan.md) · [Frontend integration](frontend/docs/INTEGRATION.md) · [Demo walkthrough](frontend/docs/DEMO-WALKTHROUGH.md) · [Dataset provenance](data/README.md)
+- [Frontend integration](frontend/docs/INTEGRATION.md) · [Demo walkthrough](frontend/docs/DEMO-WALKTHROUGH.md) · [Dataset provenance](data/README.md)
+- Archived (development history, not current docs): [`docs/archived/`](docs/archived/) (build plan, sync handoff), [`frontend/docs/archived/`](frontend/docs/archived/) (early product sketches), [`data/archived/`](data/archived/) (first-design seed files)

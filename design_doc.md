@@ -829,7 +829,7 @@ CREATE (u)-[:POS_TIE {p_pos: t.p}]->(v)
 
 ## 11. Build plan
 
-Each step is done when its check passes. About 4 hours remain. The detailed, owner-assignable version is `build_plan.md`.
+Each step is done when its check passes. About 4 hours remain. The detailed version is archived in `docs/archived/build_plan.md`.
 
 1. **Infrastructure.** docker-compose with FalkorDB, backend and frontend; `/health` pings FalkorDB. *(Scaffolded.)*
    Check: `docker compose up`, then `/health` returns `ok`.

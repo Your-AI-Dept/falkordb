@@ -25,7 +25,7 @@ The exhibitor assigned-visit agenda is an optional commercial extension, not an 
 | Graph/database, Bright Data ingestion, and graph visualization/simulation | Separate teammate's work, not connected or verified here |
 | Genuine graph-selected questions and improved rankings | Require backend implementation and live integration verification |
 
-The app now uses the backend's routes (`/sessions/{s}/dates/{d}/meetings/{rater}/questions|answers`, `/checkins/...`, `/topics`, `/topics/{id}/experts`, `/topics/{id}/influencers`); see [API.md](API.md) and [INTEGRATION.md](INTEGRATION.md).
+The app now uses the backend's routes (`/sessions/{s}/dates/{d}/meetings/{rater}/questions|answers`, `/checkins/...`, `/topics`, `/topics/{id}/experts`, `/topics/{id}/influencers`); see [`docs/api-alignment.md`](../../docs/api-alignment.md) and [INTEGRATION.md](INTEGRATION.md).
 
 ## Demo rehearsal
 

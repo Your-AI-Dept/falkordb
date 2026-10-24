@@ -2,7 +2,7 @@
 
 **For:** @mtolaru (frontend) · **From:** backend · **Date:** 2026-10-24
 
-Your docs said the frontend proposal in `frontend/docs/API.md` wasn't a contract and that route changes belong in your adapter. This note describes the backend API that now exists, maps it onto the four routes your core demo needs, and lists what we adopted from your proposal, what differs and why, and two open product questions. Please reply here on GitHub (PR or issue comments) with anything that doesn't work for your renderer.
+Your docs said the frontend proposal (now archived in `frontend/docs/archived/API.md`) wasn't a contract and that route changes belong in your adapter. This note describes the backend API that now exists, maps it onto the four routes your core demo needs, and lists what we adopted from your proposal, what differs and why, and two open product questions. Please reply here on GitHub (PR or issue comments) with anything that doesn't work for your renderer.
 
 > **Status (harmonization pass, merged with PR #9):** the Rally adapter now implements the mapping below inside the original flows (`frontend/src/live.js`, `backend-adapter.js`, `graph-api.js`), fixtures use the same shapes, real PE27 attendees and the 10 canonical topic ids, and the graph view consumes the backend's event stream directly. Shared terms are defined once in `design_doc.md` §0.1. What's still browser-local is listed in `frontend/docs/INTEGRATION.md`.
 

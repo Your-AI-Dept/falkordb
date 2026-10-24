@@ -37,7 +37,7 @@ The exhibitor has one booth contact and a preset Wednesday 1–2 PM activation. 
 
 ## Integration
 
-[Team integration handoff](docs/INTEGRATION.md) · [Backend API](docs/API.md) · [UI types](src/contracts.d.ts) · [Hackathon priorities and demo proof](docs/HACKATHON.md)
+[Team integration handoff](docs/INTEGRATION.md) · [Backend API](../backend/openapi.json) · [API mapping](../docs/api-alignment.md) · [UI types](src/contracts.d.ts) · [Hackathon priorities and demo proof](docs/HACKATHON.md)
 
 Copy `.env.example` to `.env` and set `VITE_API_BASE_URL` to the backend API origin. The attendee adapter in `src/api.js` switches to REST and never silently falls back to demo data. `VITE_EVENT_ID` defaults to `pizza-expo`. These are public build variables; API credentials belong on the server.
 
@@ -53,4 +53,4 @@ Assignments and next-topic branching use fictional fixtures, not a live graph. N
 
 The current survey measures usefulness and next-topic interest. Do not claim these answers implement the backend's topic-learning model until that payload is connected. Server-side feedback enforcement and coordinated schedules must be implemented in the backend.
 
-Earlier strategy, request/invitation flows, and sketches in `docs/PRODUCT.md`, `docs/FLOW.md`, and `docs/LOOP-SKETCHES.md` are historical exploration. This README and `docs/INTEGRATION.md` describe the current guided UX. UI copy stays limited to labels, actions, match reasons, and operational states; see `AGENTS.md`.
+Earlier strategy, request/invitation flows, sketches and screenshots are archived in `docs/archived/` as historical exploration. This README and `docs/INTEGRATION.md` describe the current guided UX. UI copy stays limited to labels, actions, match reasons, and operational states; see `AGENTS.md`.
