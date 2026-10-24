@@ -26,3 +26,13 @@ def match_scratch() -> Graph:
 
 def ping() -> bool:
     return bool(get_db().connection.ping())
+
+
+def run_batched(graph: Graph, query: str, rows: list, key: str = "rows", size: int = 500, params: dict | None = None) -> None:
+    """Run an UNWIND query over rows in chunks of `size`, passing each chunk as $key."""
+    for i in range(0, len(rows), size):
+        graph.query(query, {**(params or {}), key: rows[i : i + size]})
+
+
+def graph_exists(name: str) -> bool:
+    return name in get_db().list_graphs()

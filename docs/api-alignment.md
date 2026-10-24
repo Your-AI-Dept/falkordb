@@ -8,7 +8,8 @@ Your docs said the frontend proposal in `frontend/docs/API.md` wasn't a contract
 
 - Run it: `docker compose up` (FalkorDB, backend on `:8000`, frontend on `:5173`). CORS allows `http://localhost:5173`.
 - Schema: `backend/openapi.json`, or `GET http://localhost:8000/openapi.json` / `/docs` on a running backend.
-- **Every route returns fixture data for now**, built from the real Pizza Expo files (real topic ids, attendee names, talk titles, exhibitors). Fixture responses carry an `X-Stub: true` header (exposed via CORS). **The shapes are stable**: as each route gets its real graph-backed implementation, the header goes away and the data becomes real, but the fields don't change.
+- **Update: every route is now real**, backed by the FalkorDB graph (no more fixtures or `X-Stub` header). To get data: `POST /admin/seed` (about 1s), then `POST /admin/fast_forward?to_session=N` to simulate N sessions (about 7s per session), or open a session yourself with `POST /sessions/{s}/open`. The field shapes didn't change.
+- For the live two-person demo: `PUT /admin/humans {"ids": ["PE27-...", "PE27-..."]}` makes the simulator skip those raters and gives them Claude-phrased questions.
 - One event, no `/v1/events/:eventId` prefix, no auth. Identity is the attendee id in the path (`PE27-00001`), which lines up with your local participant switch.
 - Design context: `design_doc.md` §4.1 (questions), §6 (API).
 

@@ -50,6 +50,7 @@ GAMMA = 1.0
 W0 = 2.0
 SPEAKER_PRIOR, EXHIBITOR_PRIOR = 0.8, 0.7
 SENIORITY_BOOST = 0.2
+RANK_UNC_PENALTY = 0.3  # expert ranking: comp - penalty * comp_unc, so peer-confirmed beats unconfirmed priors
 
 # 3.5 Rater reliability: (rel_a, rel_b)
 REL_PRIOR = (2, 1)
@@ -69,6 +70,7 @@ Q_MIN_TOPICS, Q_MAX_TOPICS = 2, 3
 ATTENTION_COST = 0.02
 W_BASE = 1.0
 LLM_MODEL = "claude-opus-5-5"
+LLM_MODE = "humans"  # who gets Claude-phrased questions: "humans" | "all" | "off" (others get templates)
 LLM_TIMEOUT_S = 20
 
 # 4.2 Pairing

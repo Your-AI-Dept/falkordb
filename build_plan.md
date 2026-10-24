@@ -56,7 +56,7 @@ With 2–3 people: one on P1 → P3 → P5, one on P2 → P4 → P6/P7, one on t
 
 ---
 
-## P1: Seed (45m)
+## P1: Seed (45m) ✅ done
 
 **Goal:** `POST /admin/seed` builds both graphs deterministically from `data/`.
 
@@ -85,7 +85,7 @@ Also `POST /admin/reset` (drop the three graph keys) and `GET /topics`, `/talks`
 
 ---
 
-## P2: `mathcore.py` (45m, parallel, no DB)
+## P2: `mathcore.py` (45m, parallel, no DB) ✅ done
 
 **Goal:** every formula from section 3 and 4 as a pure function with tests. Can start immediately.
 
@@ -106,7 +106,7 @@ Also `POST /admin/reset` (drop the three graph keys) and `GET /topics`, `/talks`
 
 ---
 
-## P3: Pairing (40m)
+## P3: Pairing (40m) ✅ done
 
 **Goal:** `POST /sessions/{s}/open` produces a valid 4-date plan.
 
@@ -129,7 +129,7 @@ File: `services/pairing.py`.
 
 ---
 
-## P4: Questions and Claude phrasing (40m)
+## P4: Questions and Claude phrasing (40m) ✅ done (Claude path untested until an API key is set)
 
 **Goal:** each rater in an open date has 6–8 questions with `why`; check-ins get 2–3.
 
@@ -148,7 +148,9 @@ Files: `services/questions.py` (what), `services/llm.py` (how).
 
 ---
 
-## P5: Date pipeline, simulator, metrics (50m)
+## P5: Date pipeline, simulator, metrics (50m) ✅ done
+
+**Status:** 15 sessions run end to end in ~2 min. Uncertainty 0.996 → 0.763, coverage 1% → 52%. Open issue: the per-date `meet_again` rate is flat (~0.5) because partner charm is zero-sum under a perfect matching; pairing does beat random pairing by ~9 points (session 0, simulator).
 
 **Goal:** a full simulated show runs end to end, and the graph visibly learns.
 
@@ -167,7 +169,7 @@ Files: `services/pipeline.py`, `competence.py`, `interests.py`, `likability.py`,
 
 ---
 
-## P6: Check-ins (20m)
+## P6: Check-ins (20m) ✅ done
 
 **Goal:** QR check-ins work live and synthetically.
 
@@ -181,7 +183,7 @@ File: `services/encounters.py`.
 
 ---
 
-## P7: Micro-influencers (25m)
+## P7: Micro-influencers (25m) ✅ done (picks currently all land in one tribe: the POS_TIE graph is one big community)
 
 **Goal:** "who should I give tickets to?" for any topic or vendor.
 
@@ -212,7 +214,7 @@ GraphView is the hero visual: prioritize it over styling the others. 1,000 nodes
 
 ---
 
-## P8: Integration and demo state (20m)
+## P8: Integration and demo state (20m) ✅ fast-forward and human raters done; rehearsal pending
 
 1. `POST /admin/fast_forward?to_session=N`: seed if needed and simulate through session N−1, so the demo can start mid-show with an interesting graph.
 2. Mark 2 attendees as "human" for the live meeting (their questions use Claude, and the simulator skips them).

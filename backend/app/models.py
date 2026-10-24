@@ -278,6 +278,8 @@ class Evidence(BaseModel):
 
 
 class RankedExpert(BaseModel):
+    """Ranked by comp - RANK_UNC_PENALTY * comp_unc (peer-confirmed beats unconfirmed priors)."""
+
     rank: int = Field(description="contiguous, 1-based, in server order")
     person: PersonRef
     comp: float

@@ -57,22 +57,27 @@ backend/
   app/main.py              FastAPI app, routers, SSE
   app/events.py            SSE broadcaster
   app/config.py            all constants (section 9)
-  app/db.py                FalkorDB client and graph handles
+  app/db.py                FalkorDB client, graph handles, batched writes
   app/cypher.py            query strings; relationship type names built from whitelists
-  app/models.py            Pydantic models
+  app/models.py            Pydantic models (the API contract)
   app/mathcore.py          pure math functions (unit-tested, no DB access)
+  app/topics.py            topic id <-> index mapping
+  app/snapshot.py          reads all attendees into numpy arrays
+  app/state.py             event state (session/date lifecycle, metrics) in a Redis key
+  app/surveys.py           survey lifecycle: answers, revisions, completion
+  app/routers/             admin, catalog, sessions, checkins, insights
   app/services/
     seed.py                load data, synthesize missing fields, create indexes, cold-start priors
-    interests.py           Beta updates for interest
-    ties.py                Dirichlet counts, POS_TIE rebuild
+    evidence.py            answers -> interest, reliability, likability deltas and LEARNED_FROM edges
+    competence.py          LEARNED_FROM_T{k} writes, PageRank, competence, expert ranking
+    ties.py                Dirichlet tie table, POS_TIE rebuild
     encounters.py          ad-hoc QR check-ins: ADHOC edges, check-in questions, synthetic encounters
-    likability.py          Beta updates for likability
-    competence.py          answer reduction and combination, LEARNED_FROM_T{k}, PageRank, competence
-    questions.py           question target selection (what to ask)
+    questions.py           question target selection (what to ask) and survey assembly
     llm.py                 Claude phrasing of questions (how to ask), with template fallback
+    survey_store.py        surveys persisted on SPEED_DATE / ADHOC edges
     pairing.py             pair values, per-date bipartite split, maxFlow matching, refinement
     influencers.py         micro-influencer selection per topic or vendor event
-    pipeline.py            date-close and session-close orchestration
+    pipeline.py            session/date lifecycle, date-close pipeline, fast-forward
     simulator.py           mock answers for the demo
     metrics.py             learning and matching-quality metrics
   tests/
@@ -305,8 +310,10 @@ Each `meet_again` answer about u, from a date or a check-in, adds 1 to `like_a` 
 ### 3.7 Predicted enjoyment of a pair
 
 ```
-enjoy(u,v) = (cos(interest_u, interest_v) + like(v)) / 2
+enjoy(u,v) = (cos(interest_u − mean, interest_v − mean) + like(v)) / 2
 ```
+
+Interests are centered on the population mean before the cosine: raw interest vectors are all positive, so their plain cosine is close to 1 for every pair and can't tell pairs apart. (Measured on session 0 with the simulator: centering lifts expected "meet again" from +1 point over random pairing to +9 points.)
 
 At cold start `like` sits at its prior for everyone, so this is driven by interest overlap. As `meet_again` answers accumulate, people others enjoy talking to rise.
 
@@ -396,7 +403,7 @@ Take topics in score order, skipping a topic if a `RELATED` neighbor was already
 
 Claude returns JSON `[{question_id, topic_id, claim, text}]`, one entry per target, phrasing each claim as a natural statement specific to the pair (e.g. "Maria showed me a dough fermentation trick I'd actually try in my shop"). The server validates that the targets match exactly what was requested. On a timeout, error or mismatch, it falls back to template text ("{partner} taught me something about {topic}"). Answers are mapped through the requested `claim`, never the generated text, so phrasing can't corrupt the graph.
 
-Questions are generated when a date opens (all pairs are known then), concurrently for all ~200 raters, while the 15-minute date runs. They are stored on the rater's `SPEED_DATE` edge in `questions`.
+Questions are generated when a date opens (all pairs are known then), while the 15-minute date runs. Claude phrases questions only for raters selected by `LLM_MODE` (default: the human raters in the live demo, concurrently, up to 20 at a time); everyone else gets template text, so fast-forwarding never waits on the API. They are stored on the rater's `SPEED_DATE` edge in `questions`.
 
 **Survey lifecycle** (`app/surveys.py`, shared by dates and check-ins). The question set is fixed once generated. Answers can be saved one at a time (save on tap) or in a batch; each save returns the updated survey. Answers are keyed by `question_id`, so re-sending an identical answer is a no-op (safe retries) and a changed answer bumps `survey_revision`. `current_question_id` is the first unanswered question in order; `complete` is true once every required question is answered or the rater said they didn't meet. Both participants' surveys share one `meeting_id`.
 
@@ -514,7 +521,10 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | GET | `/health` | FalkorDB ping |
 | POST | `/admin/seed` | Load data, synthesize missing fields, create indexes, set cold-start priors |
 | POST | `/admin/reset` | Drop and recreate the graphs |
-| POST | `/admin/simulate/sessions/{s}/dates/{d}` | Simulator answers all incomplete meetings in a date |
+| POST | `/admin/simulate/sessions/{s}/dates/{d}` | Simulator answers all incomplete, non-human meetings in a date |
+| POST | `/admin/fast_forward?to_session=N` | Seed if needed, then simulate every session before N |
+| GET/PUT | `/admin/humans` | Raters answered by people in the live demo: the simulator skips them and their questions are Claude-phrased |
+| GET | `/questions/latest` | Most recently generated question with its `why`, for the graph view's side panel |
 | GET | `/topics` | Topics |
 | GET | `/talks` | Talks with topic weights |
 | GET | `/vendors` | Vendors |
@@ -531,7 +541,7 @@ A session is OPEN → its 4 dates run in turn → CLOSED. Each date is OPEN → 
 | POST | `/checkins/{rater_id}/{partner_id}/answers` | Submit check-in answers |
 | GET | `/graph/topics/{topic_id}` | Nodes (`comp_k`, `comp_unc_k`, `tribe`, `like`) and `LEARNED_FROM_T{k}` edges, for the visual |
 | GET | `/graph/ties` | `POS_TIE` edges and tribes |
-| GET | `/topics/{topic_id}/experts?limit=5` | Top people for a topic by estimated competence (`comp`), with a display-safe reason and evidence each |
+| GET | `/topics/{topic_id}/experts?limit=5` | Top people for a topic, ranked by `comp − RANK_UNC_PENALTY · comp_unc` (peer-confirmed competence outranks an unconfirmed prior), with a display-safe reason and evidence each |
 | GET | `/topics/{topic_id}/influencers` | Micro-influencers for a topic event, with explanations |
 | GET | `/vendors/{id}/influencers` | Micro-influencers for a vendor's event, with explanations |
 | GET | `/metrics` | Per-date learning and matching-quality metrics |
@@ -633,7 +643,7 @@ Synthesized by `seed.py` with a fixed random seed (`RNG_SEED`), so every run bui
   1. coworkers (same company) are tied
   2. `people_also_viewed` links that resolve to another attendee are tied
   3. the rest is filled at random, 70% within the same primary registered topic or business type and 30% anywhere
-- **Speed-dating attendance:** each attendee gets a propensity drawn from a Gamma distribution so attendance is uneven, then each of the 15 sessions samples about `SESSION_SIZE` attendees by propensity. The mean is about 3 sessions per person.
+- **Speed-dating attendance:** each attendee gets a propensity drawn from a Gamma distribution (shape 5) so attendance is uneven, then each of the 15 sessions samples `SESSION_SIZE` attendees by propensity. Mean 3 sessions per person; most attend 2–4, about 80 attend none, the maximum is about 11.
 
 ### 8.2 Simulator
 
@@ -685,6 +695,7 @@ All values are starting guesses, kept in `config.py` and tuned during the build.
 | `W0` | 2.0 | 3.3 |
 | `SPEAKER_PRIOR`, `EXHIBITOR_PRIOR` | 0.8, 0.7 | 3.3 |
 | `SENIORITY_BOOST` | 0.2 | 3.3 |
+| `RANK_UNC_PENALTY` | 0.3 | 6: expert ranking |
 | `REL_PRIOR` | (2, 1) | 3.5 |
 | `LIKE_PRIOR` | (1, 1) | 3.6 |
 | `POS_THRESH`, `NEG_THRESH` | 0.4, 0.4 | 3.8, 4.2 |
@@ -692,6 +703,7 @@ All values are starting guesses, kept in `config.py` and tuned during the build.
 | `ATTENTION_COST` | 0.02 | 4.1 |
 | `W_BASE` | 1.0 | 4.1 |
 | `LLM_MODEL` | `claude-opus-5-5` | 4.1 |
+| `LLM_MODE` | `humans` | 4.1: who gets Claude phrasing (`humans`, `all`, `off`); everyone else gets templates |
 | `LLM_TIMEOUT_S` | 20 | 4.1 |
 | `ENJOY`, `BETA`, `MU`, `LAMBDA` | 0.5, 0.2, 0.3, 0.3 | 4.2 |
 | `DELTA` | 0.2 | 4.2 |

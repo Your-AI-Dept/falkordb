@@ -28,7 +28,6 @@ app.add_middleware(
     allow_origins=settings.cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-Stub"],
 )
 
 for module in (admin, catalog, sessions, checkins, insights):

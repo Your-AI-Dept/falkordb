@@ -1,31 +1,34 @@
 """Ad-hoc QR check-ins (design doc 3.10)."""
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
-from app import stubs
+from app.events import bus
 from app.models import AnswerSubmission, CheckinRequest, CheckinResult, QuestionSet
-from app.surveys import apply_answers
+from app.routers.catalog import require_seeded
+from app.services import encounters
+from app.services.survey_store import get_checkin_survey
 
-router = APIRouter(prefix="/checkins", tags=["checkins"], dependencies=[Depends(stubs.mark_stub)])
+router = APIRouter(prefix="/checkins", tags=["checkins"], dependencies=[Depends(require_seeded)])
 
 
 @router.post("", response_model=CheckinResult)
 def create_checkin(body: CheckinRequest):
-    if body.scanner_id == body.scanned_id:
-        raise HTTPException(422, "cannot check in with yourself")
+    """Record a QR scan: create or bump the ADHOC tie and prompt both people with 2-3 questions."""
+    count = encounters.checkin(body.scanner_id, body.scanned_id)
+    bus.publish("checkin_recorded", {"scanner_id": body.scanner_id, "scanned_id": body.scanned_id, "count": count})
     return CheckinResult(
-        count=1,
-        scanner_questions=stubs.checkin_questions(body.scanner_id, body.scanned_id),
-        scanned_questions=stubs.checkin_questions(body.scanned_id, body.scanner_id),
+        count=count,
+        scanner_questions=get_checkin_survey(body.scanner_id, body.scanned_id),
+        scanned_questions=get_checkin_survey(body.scanned_id, body.scanner_id),
     )
 
 
 @router.get("/{rater_id}/{partner_id}/questions", response_model=QuestionSet)
 def get_checkin_questions(rater_id: str, partner_id: str):
-    return stubs.checkin_questions(rater_id, partner_id)
+    return get_checkin_survey(rater_id, partner_id)
 
 
 @router.post("/{rater_id}/{partner_id}/answers", response_model=QuestionSet)
 def submit_checkin_answers(rater_id: str, partner_id: str, body: AnswerSubmission):
-    """Save one or more answers; returns the updated survey."""
-    return apply_answers(stubs.checkin_questions(rater_id, partner_id), body.answers)
+    """Save one or more answers; returns the updated survey. Applied to the graph once complete."""
+    return encounters.answer(rater_id, partner_id, body.answers)
