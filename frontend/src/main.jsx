@@ -12,6 +12,7 @@ import Rankings from './components/Rankings.jsx';
 import ProfileSummary from './components/ProfileSummary.jsx';
 import ParticipantHome from './components/ParticipantHome.jsx';
 import PromotionInbox from './components/PromotionInbox.jsx';
+import LiveAttendee from './components/LiveAttendee.jsx';
 import './styles.css';
 
 function Onboarding({data, save, cancel, pending, error, initialStep=1}) {
@@ -132,4 +133,4 @@ function App() {
 const params=new URLSearchParams(window.location.search);
 const route=params.get('view');
 const participant=isDemo?params.get('participant'):null;
-createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:participant&&participant!=='paul'?<ParticipantHome participant={participant}/>:<App/>);
+createRoot(document.getElementById('root')).render(route==='exhibitor'?<ExhibitorApp/>:route==='survey'?<SurveyPage/>:route==='rankings'?<Rankings/>:!isDemo?<LiveAttendee/>:participant&&participant!=='paul'?<ParticipantHome participant={participant}/>:<App/>);

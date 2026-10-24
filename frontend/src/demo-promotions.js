@@ -17,9 +17,9 @@ export function promoAudience(topicId,target='both'){
   return evidence[topicId].filter(item=>target==='experts'?item.reports>=4:target==='connectors'?item.connections>=8:true).map(item=>({...item,person:people.find(person=>person.id===item.id),topicId,source:'sample_graph'}));
 }
 export function freshPromotions(){return {version:1,campaigns:[]};}
-export function inviteAudience(store,draft,recipientIds){
+export function inviteAudience(store,draft,recipientIds,audience){
   if(!draft.campaignId||!draft.company?.trim()||!draft.booth?.trim()||!draft.contact?.name?.trim()||!draft.product?.trim()||!draft.offer?.trim())throw new Error('Complete your profile and promotion first.');
-  const eligible=promoAudience(draft.topicId,draft.target);
+  const eligible=audience||promoAudience(draft.topicId,draft.target);
   const ids=[...new Set(recipientIds)];
   if(!ids.length||ids.some(id=>!eligible.some(item=>item.id===id)))throw new Error('Choose at least one person from this audience.');
   const existing=store.campaigns.find(item=>item.id===draft.campaignId);

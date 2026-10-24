@@ -2,8 +2,8 @@ import type { FeedState, FeedStore } from './store'
 import type { GraphEvent, Snapshot } from './types'
 
 /** 'demo' replays public/demo/feed.json; 'api' reads the backend (VITE_GRAPH_SOURCE=api in .env.local). */
-export const SOURCE: 'demo' | 'api' = import.meta.env.VITE_GRAPH_SOURCE === 'api' ? 'api' : 'demo'
-const API_URL: string = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
+export const SOURCE: 'demo' | 'api' = import.meta.env.VITE_GRAPH_SOURCE === 'demo' ? 'demo' : 'api'
+const API_URL: string = import.meta.env.VITE_API_URL ?? '/api'
 const EVENT_NAMES = ['session_opened', 'date_opened', 'answer_recorded', 'date_closed', 'session_closed', 'checkin_recorded'] as const
 export const SESSIONS = 15
 /** In auto-run, how long the simulated answers stay on screen before the date closes */
@@ -44,9 +44,13 @@ export function connectApi(store: FeedStore, onStatus: (status: string) => void)
         dropped = true
         onStatus('reconnecting')
       }
+      // Backend events are notifications; reload the authoritative snapshot rather than
+      // interpreting thin payloads as the richer recorded-feed schema.
+      let refreshTimer: ReturnType<typeof setTimeout> | undefined
       for (const name of EVENT_NAMES) {
-        events.addEventListener(name, (message) => {
-          store.apply({ event: name, data: JSON.parse((message as MessageEvent<string>).data) } as GraphEvent)
+        events.addEventListener(name, () => {
+          clearTimeout(refreshTimer)
+          refreshTimer = setTimeout(() => {if (!closed) loadSnapshot().catch((error: Error) => onStatus(`error: ${error.message}`))}, 150)
         })
       }
     })

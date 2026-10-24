@@ -4,7 +4,7 @@ import { createGraphClient } from './graph-api.js';
 import { validateSurvey, validateTopics, validateRanking } from './graph-contract.js';
 import { demoSurvey, answerDemoSurvey, demoTopics, demoRanking } from './demo-graph.js';
 import {meetingPreferences,restoreMeetingTopic} from './meeting-preferences.js';
-const base = (import.meta.env?.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const base = import.meta.env?.VITE_DATA_MODE!=='live'?'':(import.meta.env?.VITE_API_BASE_URL || '/api').replace(/\/$/, '');
 const eventId = import.meta.env?.VITE_EVENT_ID || 'pizza-expo';
 export const isDemo = !base;
 const key = 'rally-pizza-attendee-v2';
@@ -15,8 +15,8 @@ function readState() {
 }
 function updateDemo(change) { return persist(change(readState())); }
 function persist(next) { state = next; try { localStorage.setItem(key, JSON.stringify(next)); } catch {} return snapshot(next); }
-const request = createRestClient({base,eventId});
-const graph = createGraphClient(request);
+export const request = createRestClient({base,eventId});
+export const graph = createGraphClient(request);
 async function mutation(path, payload) { await request(path, {method:'POST',body:JSON.stringify(payload)}); return request('/me/dashboard'); }
 // No silent demo fallback when a real API origin is configured.
 export const api = {
@@ -50,15 +50,14 @@ export const api = {
   boothFeedback: async (invitationId, usefulness) => isDemo ? updateDemo(current => applyBoothFeedback(current, invitationId, usefulness)) : mutation('/invitations/' + encodeURIComponent(invitationId) + '/feedback', {usefulness}),
   dismiss: async personId => isDemo ? updateDemo(current => ({...current,dismissedIds:[...new Set([...current.dismissedIds,personId])]})) : mutation('/recommendation-feedback', {personId,action:'not_now'}),
   survey: async (meetingId, respondentId='paul', options={}) => {
-    const result=validateSurvey(isDemo?demoSurvey(readState(),meetingId,respondentId):await graph.survey(meetingId,options));
+    const result=validateSurvey(isDemo?demoSurvey(readState(),meetingId,respondentId):await graph.survey(meetingId,respondentId,options));
     if(result.meetingId!==meetingId)throw new Error('The API returned a different meeting.');
     return result;
   },
   answerSurvey: async (meetingId, respondentId, answer, options={}) => {
     if(isDemo){updateDemo(current=>answerDemoSurvey(current,meetingId,respondentId,answer,{revise:options.revise}));return api.survey(meetingId,respondentId);}
-    if(options.revise)throw new Error('Changing saved answers is not connected yet.');
     if(answer.answerText!==undefined)throw new Error('Written answers are not connected yet.');
-    return graph.answerSurvey(meetingId,answer,options);
+    return graph.answerSurvey(meetingId,respondentId,answer,options);
   },
   meetingPreferences: async (respondentId='paul') => isDemo?meetingPreferences(readState(),respondentId):[],
   restoreMeetingTopic: async (topicId,respondentId='paul') => {
