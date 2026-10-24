@@ -13,8 +13,8 @@ Open [attendee](http://localhost:5173/) or [exhibitor](http://localhost:5173/?vi
 
 1. Open [Paul’s survey](http://localhost:5173/?view=survey&meeting=meet-theo&participant=paul) and [Theo’s survey](http://localhost:5173/?view=survey&meeting=meet-theo&participant=theo). These are local preview personas; live identity comes from the server.
 2. Paul chooses **Yes, useful**; Theo chooses **Not really**. They get different required follow-ups in the same modal. Every answer saves on tap, with separate respondent/subject IDs and question versions. Complete the follow-ups before leaving.
-3. Switch to the teammate’s separate graph visualization to show the simulated connections over imported Pizza Expo data. That visualization and the simulation are outside this repo.
-4. Return to [Top people](http://localhost:5173/?view=rankings&topic=tomatoes&limit=5). Select a topic and Top 3, 5, 10, or 20. Live mode displays the backend’s ordered results and reasons, refreshing every 2.5 seconds while visible.
+3. After all required answers save, the same modal offers **Open visualization**. This opens the teammate’s separate graph UI in a new tab while preserving the feedback receipt. Set `VITE_VISUALIZATION_URL` to its HTTP(S) address; until supplied, the button is disabled with “Visualization link pending.” The visualization and simulation remain teammate-owned.
+4. Return to the feedback tab and choose **Continue to top people**. Select a topic and Top 3, 5, 10, or 20. Live mode displays the backend’s ordered results and reasons, refreshing every 2.5 seconds while visible.
 
 Without an API URL, surveys use branching fixtures and rankings use fixed sample ordering. The local revision counter synchronizes views; it is not a computed graph or evidence that rankings improved. Real data, graph-selected follow-ups, and changed ranking order must come from the teammate’s API.
 
@@ -51,6 +51,8 @@ The exhibitor prototype lives in `src/exhibitor/`. Its sample Paul RSVP and chec
 [Team integration handoff](docs/INTEGRATION.md) · [Earlier REST proposal](docs/API.md) · [UI types](src/contracts.d.ts) · [Hackathon priorities and demo proof](docs/HACKATHON.md)
 
 Copy `.env.example` to `.env` and set `VITE_API_BASE_URL` to the backend API origin. The attendee adapter in `src/api.js` switches to REST and never silently falls back to demo data. `VITE_EVENT_ID` defaults to `pizza-expo`. These are public build variables; API credentials belong on the server.
+
+Set `VITE_VISUALIZATION_URL` independently of the API setting, then restart the dev server (or rebuild for deployment). The link opens only the supplied URL; no attendee IDs, feedback, or tokens are appended. This handoff does not run a simulation or connect the visualization to the database.
 
 Start the teammate handoff with [sample JSON](docs/api-examples.json). The four survey/ranking routes live in `src/graph-api.js`, response validation in `src/graph-contract.js`, and transport in `src/rest.js`. The survey and rankings pages can integrate independently of the larger dashboard. No ranking algorithm or database is implemented here.
 
