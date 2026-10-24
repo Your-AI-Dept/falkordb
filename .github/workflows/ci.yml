@@ -1,12 +1,11 @@
 name: CI
 
-# Checks every pull request and every push to main, so Qodo's review and the autofix loop have a
-# red or green signal to work against.
+# Checks every pull request and every push to main.
 on:
   pull_request:
   push:
     branches: [main]
-  workflow_dispatch:  # the Qodo autofix workflow reruns this after pushing fixes
+  workflow_dispatch:  # run it by hand from the Actions tab
 
 concurrency:
   group: ci-${{ github.ref }}
